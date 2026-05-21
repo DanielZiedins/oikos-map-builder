@@ -2,18 +2,24 @@ import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import {
   ArrowDownToLine,
+  ArrowRight,
+  BookOpen,
   Clipboard,
   CirclePlus,
   Copy,
+  Crown,
   Download,
   FileJson,
   FileText,
+  Flame,
   Globe2,
   HeartHandshake,
   Link2,
+  Mail,
   Map,
   Plus,
   RotateCcw,
+  Rocket,
   Save,
   Search,
   Share2,
@@ -29,6 +35,14 @@ const STORAGE_KEY = 'love-on-the-world-oikos-map-v1';
 const partnerLinks = [
   { label: 'Love on The World', href: 'https://www.loveontheworld.com' },
   { label: 'Thy Kingdom Network', href: 'https://www.thykingdom.net' },
+];
+
+const adLeadOptions = [
+  'Send me the Oikos starter kit',
+  'I want to start an outreach group',
+  'I want to impact culture with faith',
+  'I want to follow Jesus',
+  'I want personal growth and community',
 ];
 
 const missionStats = [
@@ -277,6 +291,188 @@ function PoweredBy() {
   );
 }
 
+function LeadCapture({ compact = false }) {
+  const [lead, setLead] = useState({
+    name: '',
+    email: '',
+    interest: adLeadOptions[0],
+  });
+  const [status, setStatus] = useState('idle');
+
+  async function submitLead(event) {
+    event.preventDefault();
+    setStatus('sending');
+    try {
+      const response = await fetch('/api/lead', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          ...lead,
+          page: window.location.pathname,
+          source: 'oikos-map-builder',
+        }),
+      });
+      const result = await response.json().catch(() => ({}));
+      if (!response.ok) throw new Error(result.error || 'Unable to send');
+      setStatus('sent');
+      setLead({ name: '', email: '', interest: adLeadOptions[0] });
+    } catch {
+      setStatus('error');
+    }
+  }
+
+  return (
+    <form className={compact ? 'lead-form compact-form' : 'lead-form'} onSubmit={submitLead}>
+      <div>
+        <p className="form-kicker">Free follow-up resources</p>
+        <h3>{compact ? 'Join the Reborn community path.' : 'Get the free Oikos starter kit.'}</h3>
+        <p>
+          Leave your email and we will send encouragement, outreach steps, and simple ways to live on mission right where
+          God has placed you.
+        </p>
+      </div>
+      <label>
+        Name
+        <input
+          value={lead.name}
+          onChange={(event) => {
+            setStatus('idle');
+            setLead((current) => ({ ...current, name: event.target.value }));
+          }}
+          placeholder="Your name"
+        />
+      </label>
+      <label>
+        Email
+        <input
+          type="email"
+          required
+          value={lead.email}
+          onChange={(event) => {
+            setStatus('idle');
+            setLead((current) => ({ ...current, email: event.target.value }));
+          }}
+          placeholder="you@example.com"
+        />
+      </label>
+      <label>
+        What are you interested in?
+        <select
+          value={lead.interest}
+          onChange={(event) => {
+            setStatus('idle');
+            setLead((current) => ({ ...current, interest: event.target.value }));
+          }}
+        >
+          {adLeadOptions.map((option) => (
+            <option key={option} value={option}>
+              {option}
+            </option>
+          ))}
+        </select>
+      </label>
+      <button type="submit" disabled={status === 'sending'}>
+        <Mail size={18} aria-hidden="true" />
+        {status === 'sending' ? 'Sending...' : 'Send me the resources'}
+      </button>
+      <div aria-live="polite">
+        {status === 'sent' && <p className="form-status success">You are in. Check your inbox soon.</p>}
+        {status === 'error' && (
+          <p className="form-status error">
+            This form is ready, but the GoHighLevel webhook still needs to be connected in Vercel.
+          </p>
+        )}
+      </div>
+    </form>
+  );
+}
+
+function GrowthPage() {
+  return (
+    <main>
+      <header className="site-header">
+        <a className="brand" href="/" aria-label="Oikos Map Builder home">
+          <span className="brand-mark">
+            <Map size={20} aria-hidden="true" />
+          </span>
+          <span>Oikos Map Builder</span>
+        </a>
+        <nav aria-label="Growth navigation">
+          <a href="/">Map Builder</a>
+          <a href="#growth-community">Community</a>
+          <a href="https://www.iamreborn.net" target="_blank" rel="noreferrer">
+            I Am Reborn
+          </a>
+        </nav>
+      </header>
+
+      <section className="growth-hero">
+        <div>
+          <p className="eyebrow">
+            <Rocket size={18} aria-hidden="true" />
+            Spirit, mind, body, purpose
+          </p>
+          <h1>
+            <span>Become the kind</span>
+            <span>of person who can</span>
+            <span>carry the mission.</span>
+          </h1>
+          <p className="hero-lede">
+            Personal growth is not self-glory. It is stewardship. As God forms your character, renews your mind,
+            strengthens your body, and clarifies your purpose, your life becomes a brighter witness for Jesus.
+          </p>
+          <div className="hero-actions">
+            <a className="primary-action" href="#growth-community">
+              <Sparkles size={18} aria-hidden="true" />
+              Join the community
+            </a>
+            <a className="secondary-action" href="https://www.iamreborn.net" target="_blank" rel="noreferrer">
+              <ArrowRight size={18} aria-hidden="true" />
+              Visit IAmReborn.net
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section className="growth-grid" aria-label="Growth areas">
+        {[
+          ['Spirit', 'Abide in Jesus, learn to hear His voice, and live from intimacy instead of striving.'],
+          ['Mind', 'Renew your thoughts, break agreement with lies, and build faith-filled focus.'],
+          ['Body', 'Treat health, energy, and discipline as stewardship for the assignment.'],
+          ['Purpose', 'Bring your gifts, work, family, and influence under the Lordship of Jesus.'],
+        ].map(([title, body]) => (
+          <article key={title}>
+            <span>{title}</span>
+            <p>{body}</p>
+          </article>
+        ))}
+      </section>
+
+      <section className="community-section" id="growth-community">
+        <div>
+          <p className="section-kicker">Do not grow alone</p>
+          <h2>Join a community of people becoming whole for God's glory.</h2>
+          <p>
+            I Am Reborn points people toward total Kingdom transformation: spirit, mind, body, and purpose. The goal is
+            not perfectionism. It is a surrendered life that bears fruit.
+          </p>
+        </div>
+        <LeadCapture compact />
+      </section>
+
+      <footer className="site-footer">
+        <span>
+          Made with ❤️ by{' '}
+          <a href="https://www.danielziedins.com" target="_blank" rel="noreferrer">
+            Daniel Ziedins
+          </a>
+        </span>
+        <span><PoweredBy /></span>
+      </footer>
+    </main>
+  );
+}
+
 function computeLayout(people) {
   const width = 1100;
   const height = 820;
@@ -513,7 +709,9 @@ function App() {
         <nav aria-label="Primary navigation">
           <a href="#vision">Vision</a>
           <a href="#mission">Why it matters</a>
+          <a href="#next-steps">Next steps</a>
           <a href="#builder">Create</a>
+          <a href="/growth">Growth</a>
           <a href="#partners">Partners</a>
         </nav>
       </header>
@@ -625,6 +823,87 @@ function App() {
             Stats via Love on Mission dashboard
           </a>
         </div>
+      </section>
+
+      <section className="next-steps" id="next-steps" aria-labelledby="next-steps-title">
+        <div className="next-steps-heading">
+          <p className="section-kicker">
+            <Flame size={18} aria-hidden="true" />
+            Take the next step
+          </p>
+          <h2 id="next-steps-title">Do not just map your oikos. Move toward them in love.</h2>
+        </div>
+        <div className="next-step-grid">
+          <article>
+            <Rocket size={28} aria-hidden="true" />
+            <h3>Start an outreach group</h3>
+            <p>
+              Love on The World exists to help believers live on mission, reach their cities, and multiply disciples.
+              Gather a few friends, pray over your map, and begin loving your city together.
+            </p>
+            <a href="https://www.loveontheworld.com" target="_blank" rel="noreferrer">
+              Start at LoveonTheWorld.com <ArrowRight size={16} aria-hidden="true" />
+            </a>
+          </article>
+          <article>
+            <Crown size={28} aria-hidden="true" />
+            <h3>Impact culture with faith</h3>
+            <p>
+              Your oikos includes workplaces, classrooms, art, media, family, business, and civic life. Seek First World
+              exists to call believers to seek the Kingdom first and help culture reflect God's glory.
+            </p>
+            <a href="https://www.seekfirst.world" target="_blank" rel="noreferrer">
+              Explore SeekFirst.World <ArrowRight size={16} aria-hidden="true" />
+            </a>
+          </article>
+          <article>
+            <BookOpen size={28} aria-hidden="true" />
+            <h3>Grow for God's glory</h3>
+            <p>
+              Personal growth strengthens the messenger. Build your spirit, mind, body, and purpose so your life carries
+              the love, discipline, and clarity of Jesus into every room you enter.
+            </p>
+            <a href="/growth">
+              Visit the growth page <ArrowRight size={16} aria-hidden="true" />
+            </a>
+          </article>
+        </div>
+      </section>
+
+      <section className="jesus-section" id="jesus" aria-labelledby="jesus-title">
+        <div>
+          <p className="section-kicker">New to Jesus?</p>
+          <h2 id="jesus-title">Following Jesus starts with surrender, trust, and a new life.</h2>
+          <p>
+            Jesus is not only a teacher or moral example. He is the Son of God, the Savior who died for our sins and
+            rose again. To follow Him means turning from sin, trusting His grace, receiving His forgiveness, and learning
+            to live with Him as Lord.
+          </p>
+          <p>
+            You can begin right now: “Jesus, I believe You died and rose again. Forgive me, lead me, and make me new. I
+            surrender my life to You.”
+          </p>
+        </div>
+        <div className="jesus-card">
+          <span>Simple next steps</span>
+          <ul>
+            <li>Talk to Jesus honestly in prayer.</li>
+            <li>Read the Gospel of John and ask Him to reveal Himself.</li>
+            <li>Tell a Jesus-following friend or pastor about your decision.</li>
+            <li>Join a healthy local church and get baptized.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section className="lead-section" id="resources" aria-labelledby="resources-title">
+        <div>
+          <p className="section-kicker">
+            <Mail size={18} aria-hidden="true" />
+            High value for the journey
+          </p>
+          <h2 id="resources-title">Get resources that help you turn the map into movement.</h2>
+        </div>
+        <LeadCapture />
       </section>
 
       <section className="builder-section" id="builder" aria-labelledby="builder-title">
@@ -968,4 +1247,4 @@ function OikosSvg({ mapData, layout, selectedId, setSelectedId, svgRef }) {
   );
 }
 
-createRoot(document.getElementById('root')).render(<App />);
+createRoot(document.getElementById('root')).render(window.location.pathname === '/growth' ? <GrowthPage /> : <App />);

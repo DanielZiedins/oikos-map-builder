@@ -14,7 +14,9 @@ Powered by [Love on The World](https://www.loveontheworld.com) and [Thy Kingdom 
 - Import a saved JSON map
 - Download a simple prayer-plan text file
 - Share/copy the live tool link
-- No backend, accounts, or paid services required
+- Collect lead emails through an optional Vercel function that forwards to a GoHighLevel workflow webhook
+- Dedicated `/growth` page connected to I Am Reborn
+- No accounts or paid services required for visitors to build, save, and download maps
 
 ## Local Development
 
@@ -38,3 +40,14 @@ Import this repository into Vercel and use the default Vite settings:
 - Framework preset: `Vite`
 - Build command: `npm run build`
 - Output directory: `dist`
+
+## GoHighLevel Automation
+
+Create a GoHighLevel workflow with an inbound webhook trigger, then add the webhook URL to Vercel:
+
+```bash
+vercel env add GHL_WEBHOOK_URL production
+vercel env add GHL_WEBHOOK_URL preview
+```
+
+The site posts leads to `/api/lead`, which forwards name, email, interest, page, source, timestamp, and tags to GoHighLevel.
