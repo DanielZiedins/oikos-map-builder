@@ -324,6 +324,7 @@ button:hover,
 }
 
 .vision,
+.mission-pulse,
 .builder-section,
 .closing-band {
   padding: clamp(54px, 8vw, 100px) clamp(18px, 4vw, 56px);
@@ -362,6 +363,74 @@ button:hover,
 .muted {
   color: #62564e;
   line-height: 1.62;
+}
+
+.compact {
+  margin: 0;
+}
+
+.mission-pulse {
+  display: grid;
+  grid-template-columns: minmax(280px, 0.78fr) minmax(0, 1.22fr);
+  gap: clamp(26px, 5vw, 70px);
+  align-items: center;
+  color: #fff8ec;
+  background: #26201c;
+}
+
+.mission-copy p:not(.section-kicker) {
+  max-width: 680px;
+  margin: 22px 0 28px;
+  color: rgba(255, 248, 236, 0.74);
+  font-size: 1.1rem;
+  line-height: 1.65;
+}
+
+.mission-copy .secondary-action {
+  color: #26201c;
+  background: #f3cf74;
+}
+
+.mission-stats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.mission-stats article {
+  min-height: 210px;
+  padding: 24px;
+  border: 1px solid rgba(255, 248, 236, 0.12);
+  border-radius: 8px;
+  background: rgba(255, 248, 236, 0.055);
+}
+
+.mission-stats strong {
+  display: block;
+  margin-bottom: 12px;
+  color: #f3cf74;
+  font-size: 4rem;
+  line-height: 0.9;
+}
+
+.mission-stats span {
+  display: block;
+  margin-bottom: 12px;
+  color: #fffdf7;
+  font-weight: 950;
+}
+
+.mission-stats p {
+  margin: 0;
+  color: rgba(255, 248, 236, 0.64);
+  line-height: 1.5;
+}
+
+.stat-source {
+  grid-column: 1 / -1;
+  color: rgba(255, 248, 236, 0.76);
+  font-size: 0.9rem;
+  font-weight: 850;
 }
 
 .builder-section {
@@ -495,6 +564,71 @@ textarea:focus {
   background: rgba(25, 21, 18, 0.56);
 }
 
+.people-list {
+  display: grid;
+  gap: 10px;
+  padding: 14px;
+  border: 1px solid rgba(255, 248, 236, 0.12);
+  border-radius: 8px;
+  background: rgba(25, 21, 18, 0.42);
+}
+
+.search-label span {
+  position: relative;
+  display: block;
+}
+
+.search-label svg {
+  position: absolute;
+  top: 50%;
+  left: 12px;
+  color: rgba(255, 248, 236, 0.45);
+  transform: translateY(-50%);
+}
+
+.search-label input {
+  padding-left: 38px;
+}
+
+.person-list-scroll {
+  display: grid;
+  max-height: 186px;
+  gap: 8px;
+  overflow: auto;
+}
+
+.person-pill {
+  display: grid;
+  grid-template-columns: 16px minmax(0, 1fr) auto;
+  min-height: 42px;
+  justify-content: stretch;
+  color: #fff8ec;
+  background: #191512;
+}
+
+.person-pill span {
+  width: 14px;
+  height: 14px;
+  border-radius: 999px;
+}
+
+.person-pill strong {
+  overflow: hidden;
+  text-align: left;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.person-pill small {
+  color: rgba(255, 248, 236, 0.58);
+  font-weight: 850;
+}
+
+.person-pill.active {
+  border-color: #f3cf74;
+  background: #37302a;
+}
+
 .panel-title {
   display: flex;
   align-items: center;
@@ -529,6 +663,28 @@ textarea:focus {
 .danger-button {
   color: #fff8ec;
   background: #9c3327;
+}
+
+.next-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 12px;
+  border: 1px solid rgba(243, 207, 116, 0.28);
+  border-radius: 8px;
+  color: #f3cf74;
+  background: rgba(243, 207, 116, 0.08);
+}
+
+.next-step p {
+  margin: 0;
+  color: rgba(255, 248, 236, 0.84);
+  font-size: 0.88rem;
+  line-height: 1.45;
+}
+
+.file-input {
+  display: none;
 }
 
 .map-stage {
@@ -579,30 +735,59 @@ textarea:focus {
   font-weight: 850;
 }
 
-.closing-band {
+.closing-band,
+.site-footer {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 24px;
+}
+
+.closing-band {
   background: #f3cf74;
 }
 
 .closing-band p {
-  max-width: 720px;
+  max-width: 980px;
   margin: 0;
   font-size: 2.35rem;
   font-weight: 950;
   line-height: 1.05;
 }
 
+.closing-band span,
 .closing-band a {
-  flex: 0 0 auto;
+  display: inline-block;
+  margin-top: 16px;
+  color: #5c5047;
   font-weight: 950;
+}
+
+.closing-band button {
+  flex: 0 0 auto;
+}
+
+.site-footer {
+  flex-wrap: wrap;
+  padding: 24px clamp(18px, 4vw, 56px);
+  color: rgba(255, 248, 236, 0.7);
+  background: #171310;
+  font-size: 0.92rem;
+  font-weight: 800;
+}
+
+.site-footer a {
+  color: #fff8ec;
+}
+
+.site-footer span:last-child {
+  flex: 0 0 auto;
 }
 
 @media (max-width: 1080px) {
   .hero,
   .vision,
+  .mission-pulse,
   .builder-shell {
     grid-template-columns: 1fr;
   }
@@ -678,6 +863,14 @@ textarea:focus {
 
   .vision-grid {
     grid-template-columns: 1fr;
+  }
+
+  .mission-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .mission-stats strong {
+    font-size: 3rem;
   }
 
   .hero-visual {

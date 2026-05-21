@@ -2,22 +2,57 @@ import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import {
   ArrowDownToLine,
+  Clipboard,
   CirclePlus,
+  Copy,
   Download,
   FileJson,
+  FileText,
+  Globe2,
   HeartHandshake,
   Link2,
   Map,
   Plus,
   RotateCcw,
   Save,
+  Search,
+  Share2,
   Sparkles,
   Trash2,
+  Upload,
   UserRound,
 } from 'lucide-react';
 import './styles.css';
 
 const STORAGE_KEY = 'love-on-the-world-oikos-map-v1';
+
+const partnerLinks = [
+  { label: 'Love on The World', href: 'https://www.loveontheworld.com' },
+  { label: 'Thy Kingdom Network', href: 'https://www.thykingdom.net' },
+];
+
+const missionStats = [
+  {
+    value: '2.3B',
+    label: 'without Gospel access',
+    note: 'Estimated unreached, according to the Love on Mission dashboard.',
+  },
+  {
+    value: '4,490',
+    label: 'unreached people groups',
+    note: '43.1% of all people groups are listed as unreached.',
+  },
+  {
+    value: '3,214',
+    label: 'frontier people groups',
+    note: 'Fewer than 1 in 1,000 follow Christ in these groups.',
+  },
+  {
+    value: '69%',
+    label: 'of Christians in the Global South',
+    note: 'The mission force is global, local, and multiplying.',
+  },
+];
 
 const groups = [
   { id: 'family', label: 'Family', color: '#f45d48' },
@@ -28,10 +63,10 @@ const groups = [
 ];
 
 const stages = [
-  { id: 'pray', label: 'Pray' },
-  { id: 'care', label: 'Care' },
-  { id: 'share', label: 'Share' },
-  { id: 'disciple', label: 'Disciple' },
+  { id: 'pray', label: 'Pray', prompt: 'Pray by name and ask God for an open door.' },
+  { id: 'care', label: 'Care', prompt: 'Send a message, serve a need, or make space to listen.' },
+  { id: 'share', label: 'Share', prompt: 'Share your testimony or a simple Gospel invitation.' },
+  { id: 'disciple', label: 'Disciple', prompt: 'Read Scripture together and help them reach their own oikos.' },
 ];
 
 const starterPeople = [
@@ -126,6 +161,28 @@ function downloadBlob(blob, fileName) {
   URL.revokeObjectURL(url);
 }
 
+async function copyText(value) {
+  try {
+    if (navigator.clipboard?.writeText) {
+      await navigator.clipboard.writeText(value);
+      return true;
+    }
+  } catch {
+    // Fall back for browsers that expose clipboard but deny writes.
+  }
+
+  const textarea = document.createElement('textarea');
+  textarea.value = value;
+  textarea.setAttribute('readonly', '');
+  textarea.style.position = 'fixed';
+  textarea.style.opacity = '0';
+  document.body.appendChild(textarea);
+  textarea.select();
+  const copied = document.execCommand('copy');
+  textarea.remove();
+  return copied;
+}
+
 function slugify(value) {
   return value
     .toLowerCase()
@@ -137,6 +194,87 @@ function slugify(value) {
 function truncateLabel(value, limit = 16) {
   if (value.length <= limit) return value;
   return `${value.slice(0, limit - 1).trim()}...`;
+}
+
+function getStage(stageId) {
+  return stages.find((stage) => stage.id === stageId) || stages[0];
+}
+
+function getDescendantIds(people, id) {
+  const descendants = new Set([id]);
+  let changed = true;
+  while (changed) {
+    changed = false;
+    people.forEach((person) => {
+      if (person.parentId && descendants.has(person.parentId) && !descendants.has(person.id)) {
+        descendants.add(person.id);
+        changed = true;
+      }
+    });
+  }
+  return descendants;
+}
+
+function createFreshMap(blank = false) {
+  return {
+    ...initialMap,
+    people: blank ? [] : initialMap.people.map((person) => ({ ...person, id: crypto.randomUUID() })),
+  };
+}
+
+function buildPrayerPlan(mapData) {
+  const roots = mapData.people.filter((person) => !person.parentId);
+  const childrenByParent = mapData.people.reduce((acc, person) => {
+    if (person.parentId) {
+      acc[person.parentId] = acc[person.parentId] || [];
+      acc[person.parentId].push(person);
+    }
+    return acc;
+  }, {});
+
+  const lines = [
+    mapData.mapTitle,
+    `Center: ${mapData.centerName}`,
+    '',
+    'Prayer plan',
+    '-----------',
+  ];
+
+  if (!mapData.people.length) {
+    lines.push('Add names to begin your Oikos Map.');
+  }
+
+  roots.forEach((person, index) => {
+    lines.push(`${index + 1}. ${person.name} | ${getGroup(person.group).label} | ${getStage(person.stage).label}`);
+    lines.push(`   Next step: ${getStage(person.stage).prompt}`);
+    if (person.notes) lines.push(`   Notes: ${person.notes}`);
+    (childrenByParent[person.id] || []).forEach((child) => {
+      lines.push(`   - ${child.name} | ${getGroup(child.group).label} | ${getStage(child.stage).label}`);
+      if (child.notes) lines.push(`     Notes: ${child.notes}`);
+    });
+    lines.push('');
+  });
+
+  lines.push('Powered by Love on The World & Thy Kingdom Network');
+  lines.push('https://www.loveontheworld.com');
+  lines.push('https://www.thykingdom.net');
+  return lines.join('\n');
+}
+
+function PoweredBy() {
+  return (
+    <>
+      Powered by:{' '}
+      {partnerLinks.map((partner, index) => (
+        <React.Fragment key={partner.href}>
+          <a href={partner.href} target="_blank" rel="noreferrer">
+            {partner.label}
+          </a>
+          {index === 0 ? ' & ' : ''}
+        </React.Fragment>
+      ))}
+    </>
+  );
 }
 
 function computeLayout(people) {
@@ -183,10 +321,19 @@ function App() {
   const [mapData, setMapData] = useState(loadSavedMap);
   const [selectedId, setSelectedId] = useState(mapData.people[0]?.id ?? null);
   const [saveState, setSaveState] = useState('Saved locally');
+  const [searchTerm, setSearchTerm] = useState('');
+  const [shareState, setShareState] = useState('Share');
+  const fileInputRef = useRef(null);
   const svgRef = useRef(null);
 
   const layout = useMemo(() => computeLayout(mapData.people), [mapData.people]);
   const selectedPerson = mapData.people.find((person) => person.id === selectedId) || null;
+  const selectedStage = selectedPerson ? getStage(selectedPerson.stage) : null;
+  const filteredPeople = mapData.people.filter((person) =>
+    `${person.name} ${getGroup(person.group).label} ${getStage(person.stage).label}`
+      .toLowerCase()
+      .includes(searchTerm.toLowerCase()),
+  );
 
   useEffect(() => {
     const timeout = window.setTimeout(() => {
@@ -204,7 +351,16 @@ function App() {
     setSaveState('Saving...');
     setMapData((current) => ({
       ...current,
-      people: current.people.map((person) => (person.id === id ? { ...person, ...updates } : person)),
+      people: current.people.map((person) => {
+        if (person.id !== id) return person;
+        const nextParentId = updates.parentId;
+        const descendants = nextParentId ? getDescendantIds(current.people, id) : null;
+        return {
+          ...person,
+          ...updates,
+          parentId: descendants?.has(nextParentId) ? null : nextParentId,
+        };
+      }),
     }));
   }
 
@@ -224,29 +380,15 @@ function App() {
   }
 
   function deletePerson(id) {
-    const descendants = new Set([id]);
-    let changed = true;
-    while (changed) {
-      changed = false;
-      mapData.people.forEach((person) => {
-        if (person.parentId && descendants.has(person.parentId) && !descendants.has(person.id)) {
-          descendants.add(person.id);
-          changed = true;
-        }
-      });
-    }
-
+    const descendants = getDescendantIds(mapData.people, id);
     const remaining = mapData.people.filter((person) => !descendants.has(person.id));
     setMapData((current) => ({ ...current, people: remaining }));
     setSelectedId(remaining[0]?.id ?? null);
     setSaveState('Saved locally');
   }
 
-  function resetMap() {
-    const fresh = {
-      ...initialMap,
-      people: initialMap.people.map((person) => ({ ...person, id: crypto.randomUUID() })),
-    };
+  function resetMap(blank = false) {
+    const fresh = createFreshMap(blank);
     setMapData(fresh);
     setSelectedId(fresh.people[0]?.id ?? null);
     setSaveState('Saved locally');
@@ -261,6 +403,63 @@ function App() {
       new Blob([JSON.stringify(mapData, null, 2)], { type: 'application/json' }),
       `${slugify(mapData.mapTitle)}.json`,
     );
+  }
+
+  function downloadPrayerPlan() {
+    downloadBlob(new Blob([buildPrayerPlan(mapData)], { type: 'text/plain;charset=utf-8' }), `${slugify(mapData.mapTitle)}-prayer-plan.txt`);
+  }
+
+  function importJson(event) {
+    const file = event.target.files?.[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = () => {
+      try {
+        const imported = JSON.parse(String(reader.result));
+        if (!Array.isArray(imported.people)) throw new Error('Invalid map file');
+        const people = imported.people.map((person) => ({
+          id: person.id || crypto.randomUUID(),
+          name: person.name || 'Unnamed person',
+          group: groups.some((group) => group.id === person.group) ? person.group : 'friends',
+          stage: stages.some((stage) => stage.id === person.stage) ? person.stage : 'pray',
+          notes: person.notes || '',
+          parentId: person.parentId || null,
+        }));
+        const importedMap = {
+          centerName: imported.centerName || 'Your Name',
+          mapTitle: imported.mapTitle || 'My Oikos Map',
+          people,
+        };
+        setMapData(importedMap);
+        setSelectedId(people[0]?.id ?? null);
+        setSaveState('Imported');
+      } catch {
+        setSaveState('Import failed');
+      } finally {
+        event.target.value = '';
+      }
+    };
+    reader.readAsText(file);
+  }
+
+  async function shareTool() {
+    const shareData = {
+      title: 'Free Oikos Map Builder',
+      text: 'Create a free Oikos Map and pray intentionally for the people God has placed around you.',
+      url: 'https://oikos-map-builder.vercel.app',
+    };
+
+    try {
+      if (navigator.share) {
+        await navigator.share(shareData);
+        setShareState('Shared');
+      } else {
+        setShareState((await copyText(shareData.url)) ? 'Copied' : 'Copy failed');
+      }
+    } catch {
+      setShareState('Share');
+    }
+    window.setTimeout(() => setShareState('Share'), 1800);
   }
 
   function getSvgMarkup() {
@@ -313,10 +512,9 @@ function App() {
         </a>
         <nav aria-label="Primary navigation">
           <a href="#vision">Vision</a>
+          <a href="#mission">Why it matters</a>
           <a href="#builder">Create</a>
-          <a href="https://loveontheworld.com" target="_blank" rel="noreferrer">
-            Love on The World
-          </a>
+          <a href="#partners">Partners</a>
         </nav>
       </header>
 
@@ -345,12 +543,7 @@ function App() {
               Read the heart
             </a>
           </div>
-          <p className="powered">
-            Powered by{' '}
-            <a href="https://loveontheworld.com" target="_blank" rel="noreferrer">
-              Love on The World
-            </a>
-          </p>
+          <p className="powered"><PoweredBy /></p>
         </div>
 
         <div className="hero-visual" aria-label="Example Oikos Map preview">
@@ -403,6 +596,37 @@ function App() {
         </div>
       </section>
 
+      <section className="mission-pulse" id="mission" aria-labelledby="mission-title">
+        <div className="mission-copy">
+          <p className="section-kicker">
+            <Globe2 size={18} aria-hidden="true" />
+            Why this matters
+          </p>
+          <h2 id="mission-title">A name on your map can become an encounter.</h2>
+          <p>
+            Love on Mission says the Gospel is spreading, but the mission is still unfinished. Jesus' heart is that no
+            one perish, and an Oikos Map helps ordinary believers turn compassion into prayer, friendship, testimony,
+            and discipleship.
+          </p>
+          <a className="secondary-action" href="https://www.loveonmission.world/" target="_blank" rel="noreferrer">
+            <ArrowDownToLine size={18} aria-hidden="true" />
+            View Love on Mission
+          </a>
+        </div>
+        <div className="mission-stats">
+          {missionStats.map((stat) => (
+            <article key={stat.label}>
+              <strong>{stat.value}</strong>
+              <span>{stat.label}</span>
+              <p>{stat.note}</p>
+            </article>
+          ))}
+          <a className="stat-source" href="https://www.loveonmission.world/" target="_blank" rel="noreferrer">
+            Stats via Love on Mission dashboard
+          </a>
+        </div>
+      </section>
+
       <section className="builder-section" id="builder" aria-labelledby="builder-title">
         <div className="builder-heading">
           <div>
@@ -437,6 +661,38 @@ function App() {
                 <CirclePlus size={18} aria-hidden="true" />
                 Add branch
               </button>
+            </div>
+
+            <div className="people-list" aria-label="People on your map">
+              <label className="search-label">
+                Find a name
+                <span>
+                  <Search size={16} aria-hidden="true" />
+                  <input
+                    value={searchTerm}
+                    onChange={(event) => setSearchTerm(event.target.value)}
+                    placeholder="Search names, groups, focus"
+                  />
+                </span>
+              </label>
+              <div className="person-list-scroll">
+                {filteredPeople.length ? (
+                  filteredPeople.map((person) => (
+                    <button
+                      type="button"
+                      className={selectedId === person.id ? 'person-pill active' : 'person-pill'}
+                      key={person.id}
+                      onClick={() => setSelectedId(person.id)}
+                    >
+                      <span style={{ backgroundColor: getGroup(person.group).color }} />
+                      <strong>{person.name}</strong>
+                      <small>{getStage(person.stage).label}</small>
+                    </button>
+                  ))
+                ) : (
+                  <p className="muted compact">No names match that search.</p>
+                )}
+              </div>
             </div>
 
             <div className="person-editor">
@@ -508,6 +764,11 @@ function App() {
                     </select>
                   </label>
 
+                  <div className="next-step">
+                    <Clipboard size={18} aria-hidden="true" />
+                    <p>{selectedStage.prompt}</p>
+                  </div>
+
                   <label>
                     Notes
                     <textarea
@@ -544,10 +805,27 @@ function App() {
                 <FileJson size={18} aria-hidden="true" />
                 JSON
               </button>
-              <button type="button" onClick={resetMap} title="Reset starter map">
+              <button type="button" onClick={downloadPrayerPlan} title="Download prayer plan">
+                <FileText size={18} aria-hidden="true" />
+                Plan
+              </button>
+              <button type="button" onClick={() => fileInputRef.current?.click()} title="Import JSON map">
+                <Upload size={18} aria-hidden="true" />
+                Import
+              </button>
+              <button type="button" onClick={shareTool} title="Copy or share this tool">
+                <Share2 size={18} aria-hidden="true" />
+                {shareState}
+              </button>
+              <button type="button" onClick={() => resetMap(false)} title="Reset starter map">
                 <RotateCcw size={18} aria-hidden="true" />
                 Reset
               </button>
+              <button type="button" onClick={() => resetMap(true)} title="Start with a blank map">
+                <Trash2 size={18} aria-hidden="true" />
+                Blank
+              </button>
+              <input ref={fileInputRef} className="file-input" type="file" accept="application/json" onChange={importJson} />
             </div>
           </aside>
 
@@ -564,11 +842,25 @@ function App() {
       </section>
 
       <section className="closing-band">
-        <p>Free to use. Easy to save. Built to help ordinary people practice extraordinary love.</p>
-        <a href="https://loveontheworld.com" target="_blank" rel="noreferrer">
-          Powered by Love on The World
-        </a>
+        <div>
+          <p>Free to use. Easy to save. Share it with everyone you know so we can change the world together, for God's glory.</p>
+          <span><PoweredBy /></span>
+        </div>
+        <button type="button" onClick={shareTool}>
+          <Copy size={18} aria-hidden="true" />
+          {shareState === 'Share' ? 'Share the tool' : shareState}
+        </button>
       </section>
+
+      <footer className="site-footer" id="partners">
+        <span>
+          Made with ❤️ by{' '}
+          <a href="https://www.danielziedins.com" target="_blank" rel="noreferrer">
+            Daniel Ziedins
+          </a>
+        </span>
+        <span><PoweredBy /></span>
+      </footer>
     </main>
   );
 }
@@ -610,7 +902,7 @@ function OikosSvg({ mapData, layout, selectedId, setSelectedId, svgRef }) {
         {mapData.mapTitle}
       </text>
       <text x="56" y="112" className="svg-subtitle">
-        Powered by Love on The World
+        Powered by Love on The World & Thy Kingdom Network
       </text>
 
       {mapData.people.map((person) => {
