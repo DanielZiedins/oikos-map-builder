@@ -37,6 +37,11 @@ const partnerLinks = [
   { label: 'Thy Kingdom Network', href: 'https://www.thykingdom.net' },
 ];
 
+const collaborationLink = {
+  label: 'e3 Canada',
+  href: 'https://e3ministry.ca/staff/katie-daniel-ziedins',
+};
+
 const adLeadOptions = [
   'Send me the Oikos starter kit',
   'I want to start an outreach group',
@@ -291,6 +296,39 @@ function PoweredBy() {
   );
 }
 
+function CollaborationCredit() {
+  return (
+    <>
+      In collaboration with{' '}
+      <a href={collaborationLink.href} target="_blank" rel="noreferrer">
+        {collaborationLink.label}
+      </a>
+    </>
+  );
+}
+
+function SiteFooter() {
+  return (
+    <footer className="site-footer" id="partners">
+      <div className="footer-links">
+        <span>
+          Made with ❤️ by{' '}
+          <a href="https://www.danielziedins.com" target="_blank" rel="noreferrer">
+            Daniel Ziedins
+          </a>
+        </span>
+        <span><PoweredBy /></span>
+        <span><CollaborationCredit /></span>
+      </div>
+      <p className="footer-disclaimer">
+        Disclaimer: Daniel did not create the original Oikos Map tool. His heart is to share this powerful resource with
+        the world, honor the ministries carrying it, and help more people use it to pray, love, and reach their oikos. We
+        pray it blesses you, and we would be grateful if you shared it with everyone you know.
+      </p>
+    </footer>
+  );
+}
+
 function LeadCapture({ compact = false }) {
   const [lead, setLead] = useState({
     name: '',
@@ -399,6 +437,7 @@ function GrowthPage() {
         </a>
         <nav aria-label="Growth navigation">
           <a href="/">Map Builder</a>
+          <a href="/connect">Connect</a>
           <a href="#growth-community">Community</a>
           <a href="https://www.iamreborn.net" target="_blank" rel="noreferrer">
             I Am Reborn
@@ -460,15 +499,136 @@ function GrowthPage() {
         <LeadCapture compact />
       </section>
 
-      <footer className="site-footer">
-        <span>
-          Made with ❤️ by{' '}
-          <a href="https://www.danielziedins.com" target="_blank" rel="noreferrer">
-            Daniel Ziedins
+      <SiteFooter />
+    </main>
+  );
+}
+
+function ConnectPage() {
+  return (
+    <main>
+      <header className="site-header">
+        <a className="brand" href="/" aria-label="Oikos Map Builder home">
+          <span className="brand-mark">
+            <Map size={20} aria-hidden="true" />
+          </span>
+          <span>Oikos Map Builder</span>
+        </a>
+        <nav aria-label="Connect navigation">
+          <a href="/">Map Builder</a>
+          <a href="/growth">Growth</a>
+          <a href="#kingdom-connect">Communities</a>
+          <a href="#founder">Founder</a>
+        </nav>
+      </header>
+
+      <section className="connect-hero">
+        <div>
+          <p className="eyebrow">
+            <HeartHandshake size={18} aria-hidden="true" />
+            Connect beyond the map
+          </p>
+          <h1>
+            <span>Find people</span>
+            <span>running toward</span>
+            <span>the Kingdom.</span>
+          </h1>
+          <p className="hero-lede">
+            The Oikos Map is a beginning. Community helps you keep going with encouragement, prayer, discipleship, and
+            people who want to see Jesus glorified in every sphere of life.
+          </p>
+          <div className="hero-actions">
+            <a className="primary-action" href="https://kingdom-connect.net/" target="_blank" rel="noreferrer">
+              <Globe2 size={18} aria-hidden="true" />
+              Join Kingdom Connect
+            </a>
+            <a className="secondary-action" href={collaborationLink.href} target="_blank" rel="noreferrer">
+              <ArrowRight size={18} aria-hidden="true" />
+              e3 Canada collaboration
+            </a>
+          </div>
+          <p className="powered"><CollaborationCredit /></p>
+        </div>
+      </section>
+
+      <section className="connect-grid" id="kingdom-connect" aria-label="Ways to connect">
+        <article>
+          <Globe2 size={28} aria-hidden="true" />
+          <h2>Kingdom Connect</h2>
+          <p>
+            Connect more deeply with online Kingdom communities, find encouragement, and keep growing with people who
+            care about prayer, mission, discipleship, culture, and Jesus.
+          </p>
+          <a href="https://kingdom-connect.net/" target="_blank" rel="noreferrer">
+            Visit Kingdom Connect <ArrowRight size={16} aria-hidden="true" />
           </a>
-        </span>
-        <span><PoweredBy /></span>
-      </footer>
+        </article>
+        <article>
+          <HeartHandshake size={28} aria-hidden="true" />
+          <h2>e3 Canada</h2>
+          <p>
+            Daniel and Katie Ziedins serve with e3 Canada, a ministry that equips God's people to evangelize and
+            establish His Church. This site is shared in collaboration with e3 Canada so more people can access a
+            practical tool for prayer, outreach, and disciple-making.
+          </p>
+          <a href={collaborationLink.href} target="_blank" rel="noreferrer">
+            Visit Daniel & Katie's e3 page <ArrowRight size={16} aria-hidden="true" />
+          </a>
+        </article>
+      </section>
+
+      <section className="founder-section" id="founder" aria-labelledby="founder-title">
+        <div className="founder-image-wrap">
+          <img
+            src="/assets/daniel-ziedins-founder.jpg"
+            alt="Daniel Ziedins"
+            width="920"
+            height="920"
+            loading="lazy"
+          />
+        </div>
+        <div>
+          <p className="section-kicker">
+            <UserRound size={18} aria-hidden="true" />
+            Connect with the founder
+          </p>
+          <h2 id="founder-title">Daniel Ziedins</h2>
+          <p>
+            Daniel's heart is simple: make helpful Kingdom tools easy to access, easy to share, and free for people who
+            want to love their world with Jesus. He does not take credit for creating the original Oikos Map. He wants to
+            honor the ministries carrying it and help this powerful tool reach as many believers, churches, youth groups,
+            and disciple-makers as possible.
+          </p>
+          <p>
+            Daniel and his wife Katie work with e3 Canada and carry a deep desire to see people encounter Jesus, grow in
+            faith, and live on mission in everyday life. Their prayer is that tools like this would serve the Church,
+            strengthen everyday believers, and make outreach feel clear, relational, and full of love.
+          </p>
+          <div className="founder-actions">
+            <a className="primary-action" href="https://www.danielziedins.com" target="_blank" rel="noreferrer">
+              <UserRound size={18} aria-hidden="true" />
+              DanielZiedins.com
+            </a>
+            <a className="secondary-action" href="https://www.kd-ziedins.com" target="_blank" rel="noreferrer">
+              <HeartHandshake size={18} aria-hidden="true" />
+              KD-Ziedins.com
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section className="lead-section connect-lead" aria-labelledby="connect-resources-title">
+        <div>
+          <p className="section-kicker">
+            <Mail size={18} aria-hidden="true" />
+            Stay connected
+          </p>
+          <h2 id="connect-resources-title">Get encouragement and next steps for mission.</h2>
+        </div>
+        <LeadCapture />
+      </section>
+
+      <SiteFooter />
     </main>
   );
 }
@@ -712,6 +872,7 @@ function App() {
           <a href="#next-steps">Next steps</a>
           <a href="#builder">Create</a>
           <a href="/growth">Growth</a>
+          <a href="/connect">Connect</a>
           <a href="#partners">Partners</a>
         </nav>
       </header>
@@ -741,7 +902,9 @@ function App() {
               Read the heart
             </a>
           </div>
-          <p className="powered"><PoweredBy /></p>
+          <p className="powered">
+            <PoweredBy /> · <CollaborationCredit />
+          </p>
         </div>
 
         <div className="hero-visual" aria-label="Example Oikos Map preview">
@@ -865,6 +1028,17 @@ function App() {
             </p>
             <a href="/growth">
               Visit the growth page <ArrowRight size={16} aria-hidden="true" />
+            </a>
+          </article>
+          <article>
+            <Globe2 size={28} aria-hidden="true" />
+            <h3>Connect in community</h3>
+            <p>
+              Mission grows stronger in community. Join Kingdom Connect to find encouragement, online community, and
+              people who want to follow Jesus with courage and love.
+            </p>
+            <a href="/connect">
+              Visit the connect page <ArrowRight size={16} aria-hidden="true" />
             </a>
           </article>
         </div>
@@ -1123,7 +1297,7 @@ function App() {
       <section className="closing-band">
         <div>
           <p>Free to use. Easy to save. Share it with everyone you know so we can change the world together, for God's glory.</p>
-          <span><PoweredBy /></span>
+          <span><PoweredBy /> · <CollaborationCredit /></span>
         </div>
         <button type="button" onClick={shareTool}>
           <Copy size={18} aria-hidden="true" />
@@ -1131,15 +1305,7 @@ function App() {
         </button>
       </section>
 
-      <footer className="site-footer" id="partners">
-        <span>
-          Made with ❤️ by{' '}
-          <a href="https://www.danielziedins.com" target="_blank" rel="noreferrer">
-            Daniel Ziedins
-          </a>
-        </span>
-        <span><PoweredBy /></span>
-      </footer>
+      <SiteFooter />
     </main>
   );
 }
@@ -1247,4 +1413,9 @@ function OikosSvg({ mapData, layout, selectedId, setSelectedId, svgRef }) {
   );
 }
 
-createRoot(document.getElementById('root')).render(window.location.pathname === '/growth' ? <GrowthPage /> : <App />);
+const routes = {
+  '/connect': <ConnectPage />,
+  '/growth': <GrowthPage />,
+};
+
+createRoot(document.getElementById('root')).render(routes[window.location.pathname] || <App />);

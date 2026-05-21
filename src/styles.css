@@ -340,6 +340,9 @@ button:hover,
 .growth-hero,
 .growth-grid,
 .community-section,
+.connect-hero,
+.connect-grid,
+.founder-section,
 .builder-section,
 .closing-band {
   padding: clamp(54px, 8vw, 100px) clamp(18px, 4vw, 56px);
@@ -467,12 +470,13 @@ button:hover,
 .next-step-grid,
 .growth-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 14px;
 }
 
 .next-step-grid article,
 .growth-grid article,
+.connect-grid article,
 .jesus-card {
   position: relative;
   overflow: hidden;
@@ -490,6 +494,7 @@ button:hover,
 
 .next-step-grid article:hover,
 .growth-grid article:hover,
+.connect-grid article:hover,
 .jesus-card:hover,
 .lead-form:hover {
   transform: translateY(-3px);
@@ -499,6 +504,7 @@ button:hover,
 
 .next-step-grid article,
 .growth-grid article,
+.connect-grid article,
 .jesus-card,
 .lead-form {
   transition:
@@ -515,19 +521,26 @@ button:hover,
   animation-delay: 240ms;
 }
 
+.next-step-grid article:nth-child(4) {
+  animation-delay: 360ms;
+}
+
 .next-step-grid svg {
   color: #b33624;
   margin-bottom: 22px;
 }
 
 .next-step-grid p,
+.connect-grid p,
+.founder-section p,
 .jesus-section p,
 .community-section p {
   color: #62564e;
   line-height: 1.62;
 }
 
-.next-step-grid a {
+.next-step-grid a,
+.connect-grid a {
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -672,6 +685,90 @@ button:hover,
 
 .community-section p {
   color: rgba(255, 248, 236, 0.74);
+}
+
+.connect-hero {
+  min-height: calc(100vh - 78px);
+  color: #fff8ec;
+  background:
+    linear-gradient(122deg, rgba(12, 19, 21, 0.96), rgba(31, 26, 23, 0.84)),
+    radial-gradient(circle at 78% 22%, rgba(20, 184, 166, 0.26), transparent 30%),
+    radial-gradient(circle at 18% 82%, rgba(244, 93, 72, 0.2), transparent 32%),
+    #0c1315;
+}
+
+.connect-hero .hero-lede {
+  color: rgba(255, 248, 236, 0.76);
+}
+
+.connect-hero .secondary-action {
+  color: #26201c;
+  background: #f3cf74;
+}
+
+.connect-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  background: #fff8ec;
+}
+
+.connect-grid article {
+  min-height: 300px;
+}
+
+.connect-grid svg {
+  margin-bottom: 22px;
+  color: #14b8a6;
+}
+
+.founder-section {
+  display: grid;
+  grid-template-columns: minmax(280px, 0.78fr) minmax(320px, 1fr);
+  gap: clamp(28px, 5vw, 76px);
+  align-items: center;
+  color: #fff8ec;
+  background: #171310;
+}
+
+.founder-section p {
+  color: rgba(255, 248, 236, 0.74);
+}
+
+.founder-image-wrap {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(20, 184, 166, 0.42);
+  border-radius: 8px;
+  background: #0c1315;
+  box-shadow: 0 28px 90px rgba(0, 0, 0, 0.32);
+}
+
+.founder-image-wrap::after {
+  position: absolute;
+  inset: 0;
+  content: "";
+  border: 1px solid rgba(255, 248, 236, 0.1);
+  pointer-events: none;
+}
+
+.founder-image-wrap img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+
+.founder-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.connect-lead {
+  border-top: 1px solid rgba(255, 248, 236, 0.12);
 }
 
 @keyframes riseIn {
@@ -1073,7 +1170,8 @@ textarea:focus-visible,
 }
 
 .site-footer {
-  flex-wrap: wrap;
+  align-items: stretch;
+  flex-direction: column;
   padding: 24px clamp(18px, 4vw, 56px);
   color: rgba(255, 248, 236, 0.7);
   background: #171310;
@@ -1085,8 +1183,19 @@ textarea:focus-visible,
   color: #fff8ec;
 }
 
-.site-footer span:last-child {
-  flex: 0 0 auto;
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 12px 24px;
+}
+
+.footer-disclaimer {
+  max-width: 1100px;
+  margin: 0;
+  color: rgba(255, 248, 236, 0.58);
+  font-size: 0.82rem;
+  line-height: 1.5;
 }
 
 @media (max-width: 1080px) {
@@ -1097,8 +1206,14 @@ textarea:focus-visible,
   .jesus-section,
   .lead-section,
   .community-section,
+  .founder-section,
   .builder-shell {
     grid-template-columns: 1fr;
+  }
+
+  .next-step-grid,
+  .growth-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .hero {
@@ -1175,7 +1290,8 @@ textarea:focus-visible,
   }
 
   .next-step-grid,
-  .growth-grid {
+  .growth-grid,
+  .connect-grid {
     grid-template-columns: 1fr;
   }
 

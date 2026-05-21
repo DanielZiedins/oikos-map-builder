@@ -16,6 +16,8 @@ Powered by [Love on The World](https://www.loveontheworld.com) and [Thy Kingdom 
 - Share/copy the live tool link
 - Collect lead emails through an optional Vercel function that forwards to a GoHighLevel workflow webhook
 - Dedicated `/growth` page connected to I Am Reborn
+- Dedicated `/connect` page for Kingdom Connect, e3 Canada collaboration, and founder/ministry links
+- Custom favicon and founder image assets
 - No accounts or paid services required for visitors to build, save, and download maps
 
 ## Local Development
