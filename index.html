@@ -5,39 +5,49 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Create a free custom Oikos Map, get outreach resources, learn what it means to follow Jesus, and connect with Kingdom communities."
+      content="Create a free custom Oikos Map online. Map your family, friends, coworkers, classmates, and neighbors so you can pray by name, love intentionally, and live on mission with Jesus."
     />
     <meta
       name="keywords"
-      content="Oikos Map, free Oikos Map builder, discipleship map, prayer map, evangelism tool, outreach group, follow Jesus, Christian personal growth, Kingdom Connect, e3 Canada, Love on The World, Seek First World, I Am Reborn, Thy Kingdom Network"
+      content="Oikos Map, free Oikos Map builder, Oikos mapping tool, discipleship map, prayer map, evangelism tool, outreach group, household map, relational evangelism, follow Jesus, Christian personal growth, Kingdom Connect, e3 Canada, Love on The World, Seek First World, I Am Reborn, Thy Kingdom Network"
     />
-    <meta name="robots" content="index, follow" />
-    <meta name="theme-color" content="#fff8ec" />
-    <link rel="icon" type="image/png" href="/favicon.png" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="author" content="Daniel Ziedins" />
+    <meta name="theme-color" content="#171310" />
+    <link rel="icon" type="image/svg+xml" href="/oikos-logo.svg" />
+    <link rel="alternate icon" type="image/png" href="/favicon.png" />
     <link rel="apple-touch-icon" href="/favicon.png" />
-    <link rel="canonical" href="https://oikos-map-builder.vercel.app/" />
-    <meta property="og:title" content="Free Oikos Map Builder" />
+    <link rel="canonical" href="https://www.oikosmap.com/" />
+    <link rel="preload" href="/oikos-logo.svg" as="image" type="image/svg+xml" />
+    <meta property="og:title" content="Free Oikos Map Builder | Map Your Oikos" />
     <meta
       property="og:description"
-      content="Build a custom Oikos Map, get practical outreach resources, learn how to follow Jesus, grow in spirit, mind, body, and purpose, and connect with Kingdom communities."
+      content="Build a custom Oikos Map, save it, download it, and begin praying intentionally for the people God has placed around you."
     />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://oikos-map-builder.vercel.app/" />
+    <meta property="og:url" content="https://www.oikosmap.com/" />
     <meta property="og:site_name" content="Oikos Map Builder" />
-    <meta name="twitter:card" content="summary" />
-    <meta name="twitter:title" content="Free Oikos Map Builder" />
+    <meta property="og:image" content="https://www.oikosmap.com/oikos-logo.svg" />
+    <meta property="og:image:alt" content="Oikos Map Builder logo with connected relationship nodes and a heart" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Free Oikos Map Builder | Map Your Oikos" />
     <meta
       name="twitter:description"
-      content="A free tool to map your oikos, pray intentionally, and love the people God has placed around you."
+      content="A free Christian outreach tool to map your oikos, pray by name, love intentionally, and live on mission."
     />
-    <title>Free Oikos Map Builder | Outreach, Jesus & Kingdom Growth</title>
+    <meta name="twitter:image" content="https://www.oikosmap.com/oikos-logo.svg" />
+    <title>Free Oikos Map Builder | Map Your Oikos Online</title>
     <script type="application/ld+json">
+      [
       {
         "@context": "https://schema.org",
         "@type": "WebApplication",
         "name": "Free Oikos Map Builder",
-        "url": "https://oikos-map-builder.vercel.app/",
+        "url": "https://www.oikosmap.com/",
+        "description": "Create a free custom Oikos Map online to pray by name, love intentionally, and reach the people God has placed around you.",
         "applicationCategory": "LifestyleApplication",
+        "browserRequirements": "Requires JavaScript",
         "operatingSystem": "Any",
         "offers": {
           "@type": "Offer",
@@ -49,11 +59,60 @@
           "name": "Daniel Ziedins",
           "url": "https://www.danielziedins.com"
         }
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Oikos Map",
+        "url": "https://www.oikosmap.com/",
+        "logo": "https://www.oikosmap.com/oikos-logo.svg",
+        "sameAs": [
+          "https://www.loveontheworld.com",
+          "https://www.thykingdom.net",
+          "https://e3ministry.ca/staff/katie-daniel-ziedins"
+        ]
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is an Oikos Map?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "An Oikos Map is a simple visual way to name the people in your everyday sphere of influence, such as family, friends, coworkers, classmates, and neighbors, so you can pray, care, share, and disciple intentionally."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is the Oikos Map Builder free?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. The Oikos Map Builder is free to use. You can create a map, save it locally, download it, and share the tool with others."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I download my Oikos Map?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. You can download your Oikos Map as PNG, SVG, JSON, and a simple prayer plan text file."
+            }
+          }
+        ]
       }
+      ]
     </script>
   </head>
   <body>
     <div id="root"></div>
+    <noscript>
+      <main>
+        <h1>Free Oikos Map Builder</h1>
+        <p>Create a free custom Oikos Map to pray by name, love intentionally, and reach the people God has placed around you.</p>
+      </main>
+    </noscript>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

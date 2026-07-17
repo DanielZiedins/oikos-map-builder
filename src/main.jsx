@@ -16,7 +16,6 @@ import {
   HeartHandshake,
   Link2,
   Mail,
-  Map,
   Plus,
   RotateCcw,
   Rocket,
@@ -31,6 +30,7 @@ import {
 import './styles.css';
 
 const STORAGE_KEY = 'love-on-the-world-oikos-map-v1';
+const SITE_URL = 'https://www.oikosmap.com';
 
 const partnerLinks = [
   { label: 'Love on The World', href: 'https://www.loveontheworld.com' },
@@ -296,6 +296,14 @@ function PoweredBy() {
   );
 }
 
+function LogoMark() {
+  return (
+    <span className="brand-mark" aria-hidden="true">
+      <img src="/oikos-logo.svg" alt="" width="38" height="38" />
+    </span>
+  );
+}
+
 function CollaborationCredit() {
   return (
     <>
@@ -329,7 +337,64 @@ function SiteFooter() {
   );
 }
 
-function LeadCapture({ compact = false }) {
+function ScrollEffects() {
+  useEffect(() => {
+    let frame = 0;
+
+    function update() {
+      frame = 0;
+      const height = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = height > 0 ? window.scrollY / height : 0;
+      document.documentElement.style.setProperty('--scroll-progress', progress.toFixed(4));
+      document.documentElement.style.setProperty('--scroll-width', `${Math.min(100, Math.max(0, progress * 100)).toFixed(2)}%`);
+      document.documentElement.style.setProperty('--scroll-y', String(Math.round(window.scrollY)));
+      document.documentElement.style.setProperty('--parallax-y', `${Math.round(window.scrollY * -0.08)}px`);
+    }
+
+    function requestUpdate() {
+      if (!frame) frame = window.requestAnimationFrame(update);
+    }
+
+    function updatePointer(event) {
+      const x = (event.clientX / window.innerWidth - 0.5).toFixed(4);
+      const y = (event.clientY / window.innerHeight - 0.5).toFixed(4);
+      document.documentElement.style.setProperty('--pointer-x', x);
+      document.documentElement.style.setProperty('--pointer-y', y);
+      document.documentElement.style.setProperty('--pointer-shift-x', `${Number(x) * 22}px`);
+      document.documentElement.style.setProperty('--pointer-shift-y', `${Number(y) * 22}px`);
+      document.documentElement.style.setProperty('--pointer-shift-x-reverse', `${Number(x) * -7}px`);
+      document.documentElement.style.setProperty('--pointer-shift-y-reverse', `${Number(y) * -7}px`);
+    }
+
+    update();
+    window.addEventListener('scroll', requestUpdate, { passive: true });
+    window.addEventListener('resize', requestUpdate);
+    window.addEventListener('pointermove', updatePointer, { passive: true });
+
+    return () => {
+      window.removeEventListener('scroll', requestUpdate);
+      window.removeEventListener('resize', requestUpdate);
+      window.removeEventListener('pointermove', updatePointer);
+      if (frame) window.cancelAnimationFrame(frame);
+    };
+  }, []);
+
+  return null;
+}
+
+function getLeadMapStats(mapData) {
+  if (!mapData) return undefined;
+  const firstCircleCount = mapData.people.filter((person) => !person.parentId).length;
+  return {
+    mapTitle: mapData.mapTitle,
+    centerName: mapData.centerName,
+    peopleCount: mapData.people.length,
+    firstCircleCount,
+    branchCount: mapData.people.length - firstCircleCount,
+  };
+}
+
+function LeadCapture({ compact = false, mapData = null }) {
   const [lead, setLead] = useState({
     name: '',
     email: '',
@@ -347,7 +412,9 @@ function LeadCapture({ compact = false }) {
         body: JSON.stringify({
           ...lead,
           page: window.location.pathname,
-          source: 'oikos-map-builder',
+          referrer: document.referrer,
+          source: 'oikosmap.com',
+          mapStats: getLeadMapStats(mapData),
         }),
       });
       const result = await response.json().catch(() => ({}));
@@ -416,9 +483,9 @@ function LeadCapture({ compact = false }) {
       <div aria-live="polite">
         {status === 'sent' && <p className="form-status success">You are in. Check your inbox soon.</p>}
         {status === 'error' && (
-          <p className="form-status error">
-            This form is ready, but the GoHighLevel webhook still needs to be connected in Vercel.
-          </p>
+        <p className="form-status error">
+            This form is ready, but Supabase needs to be connected in Vercel before live submissions can be stored.
+        </p>
         )}
       </div>
     </form>
@@ -428,11 +495,10 @@ function LeadCapture({ compact = false }) {
 function GrowthPage() {
   return (
     <main>
+      <ScrollEffects />
       <header className="site-header">
         <a className="brand" href="/" aria-label="Oikos Map Builder home">
-          <span className="brand-mark">
-            <Map size={20} aria-hidden="true" />
-          </span>
+          <LogoMark />
           <span>Oikos Map Builder</span>
         </a>
         <nav aria-label="Growth navigation">
@@ -507,11 +573,10 @@ function GrowthPage() {
 function ConnectPage() {
   return (
     <main>
+      <ScrollEffects />
       <header className="site-header">
         <a className="brand" href="/" aria-label="Oikos Map Builder home">
-          <span className="brand-mark">
-            <Map size={20} aria-hidden="true" />
-          </span>
+          <LogoMark />
           <span>Oikos Map Builder</span>
         </a>
         <nav aria-label="Connect navigation">
@@ -802,7 +867,7 @@ function App() {
     const shareData = {
       title: 'Free Oikos Map Builder',
       text: 'Create a free Oikos Map and pray intentionally for the people God has placed around you.',
-      url: 'https://oikos-map-builder.vercel.app',
+      url: SITE_URL,
     };
 
     try {
@@ -859,11 +924,10 @@ function App() {
 
   return (
     <main>
+      <ScrollEffects />
       <header className="site-header">
         <a className="brand" href="#top" aria-label="Oikos Map Builder home">
-          <span className="brand-mark">
-            <Map size={20} aria-hidden="true" />
-          </span>
+          <LogoMark />
           <span>Oikos Map Builder</span>
         </a>
         <nav aria-label="Primary navigation">
@@ -1077,7 +1141,7 @@ function App() {
           </p>
           <h2 id="resources-title">Get resources that help you turn the map into movement.</h2>
         </div>
-        <LeadCapture />
+        <LeadCapture mapData={mapData} />
       </section>
 
       <section className="builder-section" id="builder" aria-labelledby="builder-title">

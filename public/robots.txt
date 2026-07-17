@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://oikos-map-builder.vercel.app/sitemap.xml
+Sitemap: https://www.oikosmap.com/sitemap.xml
