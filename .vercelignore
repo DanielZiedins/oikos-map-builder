@@ -1,0 +1,6 @@
+site/
+jesus-festival-movement/
+dist/
+output/
+*.log
+.DS_Store
