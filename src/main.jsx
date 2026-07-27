@@ -4,8 +4,10 @@ import {
   ArrowDownToLine,
   ArrowRight,
   BookOpen,
+  CheckCircle2,
   Clipboard,
   CirclePlus,
+  Compass,
   Copy,
   Crown,
   Download,
@@ -23,9 +25,11 @@ import {
   Search,
   Share2,
   Sparkles,
+  Target,
   Trash2,
   Upload,
   UserRound,
+  WandSparkles,
 } from 'lucide-react';
 import './styles.css';
 
@@ -88,9 +92,14 @@ const stages = [
   { id: 'disciple', label: 'Disciple', prompt: 'Read Scripture together and help them reach their own oikos.' },
 ];
 
+function createId() {
+  if (typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function') return crypto.randomUUID();
+  return `oikos-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 10)}`;
+}
+
 const starterPeople = [
   {
-    id: crypto.randomUUID(),
+    id: createId(),
     name: 'Aunt Maria',
     group: 'family',
     stage: 'pray',
@@ -98,7 +107,7 @@ const starterPeople = [
     parentId: null,
   },
   {
-    id: crypto.randomUUID(),
+    id: createId(),
     name: 'Jordan',
     group: 'friends',
     stage: 'care',
@@ -106,7 +115,7 @@ const starterPeople = [
     parentId: null,
   },
   {
-    id: crypto.randomUUID(),
+    id: createId(),
     name: 'Sam',
     group: 'work',
     stage: 'share',
@@ -114,7 +123,7 @@ const starterPeople = [
     parentId: null,
   },
   {
-    id: crypto.randomUUID(),
+    id: createId(),
     name: 'Leah',
     group: 'neighbors',
     stage: 'pray',
@@ -122,7 +131,7 @@ const starterPeople = [
     parentId: null,
   },
   {
-    id: crypto.randomUUID(),
+    id: createId(),
     name: 'Mason',
     group: 'school',
     stage: 'pray',
@@ -136,6 +145,52 @@ const initialMap = {
   mapTitle: 'My Oikos Map',
   people: starterPeople,
 };
+
+const mapTemplates = [
+  {
+    id: 'starter',
+    label: 'Starter circle',
+    detail: 'A gentle place to begin with five everyday relationships.',
+    icon: Sparkles,
+    make: () => createFreshMap(false),
+  },
+  {
+    id: 'household',
+    label: 'Household',
+    detail: 'Begin with family and the people closest to home.',
+    icon: HeartHandshake,
+    make: () => createTemplateMap('My Household Oikos', [
+      ['Family member', 'family', 'pray'],
+      ['Close friend', 'friends', 'care'],
+      ['Neighbor', 'neighbors', 'pray'],
+      ['Work friend', 'work', 'share'],
+    ]),
+  },
+  {
+    id: 'campus',
+    label: 'Campus or school',
+    detail: 'See your classroom, team, and friendships as a mission field.',
+    icon: BookOpen,
+    make: () => createTemplateMap('My Campus Oikos', [
+      ['Classmate', 'school', 'pray'],
+      ['Teammate', 'school', 'care'],
+      ['Friend', 'friends', 'share'],
+      ['Teacher or mentor', 'school', 'pray'],
+    ]),
+  },
+  {
+    id: 'workplace',
+    label: 'Workplace',
+    detail: 'Make room for prayer, care, and courageous conversations at work.',
+    icon: Target,
+    make: () => createTemplateMap('My Workplace Oikos', [
+      ['Coworker', 'work', 'pray'],
+      ['Manager or leader', 'work', 'care'],
+      ['Client or customer', 'work', 'pray'],
+      ['Work friend', 'friends', 'share'],
+    ]),
+  },
+];
 
 function readStoredMap() {
   try {
@@ -237,7 +292,22 @@ function getDescendantIds(people, id) {
 function createFreshMap(blank = false) {
   return {
     ...initialMap,
-    people: blank ? [] : initialMap.people.map((person) => ({ ...person, id: crypto.randomUUID() })),
+    people: blank ? [] : initialMap.people.map((person) => ({ ...person, id: createId() })),
+  };
+}
+
+function createTemplateMap(mapTitle, people) {
+  return {
+    centerName: 'Your Name',
+    mapTitle,
+    people: people.map(([name, group, stage]) => ({
+      id: createId(),
+      name,
+      group,
+      stage,
+      notes: '',
+      parentId: null,
+    })),
   };
 }
 
@@ -340,6 +410,23 @@ function SiteFooter() {
 function ScrollEffects() {
   useEffect(() => {
     let frame = 0;
+    const revealItems = Array.from(document.querySelectorAll('[data-reveal]'));
+    const revealObserver = typeof IntersectionObserver === 'undefined'
+      ? null
+      : new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              revealObserver?.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.12 },
+      );
+
+    if (revealObserver) revealItems.forEach((item) => revealObserver.observe(item));
+    else revealItems.forEach((item) => item.classList.add('is-visible'));
 
     function update() {
       frame = 0;
@@ -375,6 +462,7 @@ function ScrollEffects() {
       window.removeEventListener('scroll', requestUpdate);
       window.removeEventListener('resize', requestUpdate);
       window.removeEventListener('pointermove', updatePointer);
+      revealObserver?.disconnect();
       if (frame) window.cancelAnimationFrame(frame);
     };
   }, []);
@@ -787,7 +875,7 @@ function App() {
 
   function addPerson(parentId = null) {
     const newPerson = {
-      id: crypto.randomUUID(),
+      id: createId(),
       name: parentId ? 'New connection' : 'New person',
       group: selectedPerson?.group || 'friends',
       stage: 'pray',
@@ -815,6 +903,25 @@ function App() {
     setSaveState('Saved locally');
   }
 
+  function applyTemplate(template) {
+    const fresh = template.make();
+    setMapData(fresh);
+    setSelectedId(fresh.people[0]?.id ?? null);
+    setSaveState(`${template.label} loaded`);
+  }
+
+  function advanceSelectedPerson() {
+    if (!selectedPerson) return;
+    const currentIndex = stages.findIndex((stage) => stage.id === selectedPerson.stage);
+    const nextStage = stages[currentIndex + 1];
+    if (!nextStage) {
+      setSaveState('Ready to multiply');
+      return;
+    }
+    updatePerson(selectedPerson.id, { stage: nextStage.id });
+    setSaveState(`${selectedPerson.name} is ready to ${nextStage.label.toLowerCase()}`);
+  }
+
   function saveNow() {
     setSaveState(writeStoredMap(mapData) ? 'Saved locally' : 'Download to keep');
   }
@@ -839,7 +946,7 @@ function App() {
         const imported = JSON.parse(String(reader.result));
         if (!Array.isArray(imported.people)) throw new Error('Invalid map file');
         const people = imported.people.map((person) => ({
-          id: person.id || crypto.randomUUID(),
+          id: person.id || createId(),
           name: person.name || 'Unnamed person',
           group: groups.some((group) => group.id === person.group) ? person.group : 'friends',
           stage: stages.some((stage) => stage.id === person.stage) ? person.stage : 'pray',
@@ -921,6 +1028,11 @@ function App() {
 
   const rootCount = mapData.people.filter((person) => !person.parentId).length;
   const secondDegreeCount = mapData.people.length - rootCount;
+  const stageCounts = stages.map((stage) => ({
+    ...stage,
+    count: mapData.people.filter((person) => person.stage === stage.id).length,
+  }));
+  const reachedCount = mapData.people.filter((person) => ['share', 'disciple'].includes(person.stage)).length;
 
   return (
     <main>
@@ -984,11 +1096,34 @@ function App() {
             <span className="mini-line line-3" />
             <span className="mini-line line-4" />
             <span className="mini-line line-5" />
+            <div className="hero-map-note">
+              <span><Compass size={16} aria-hidden="true" /> Your mission field</span>
+              <strong>Closer than you think.</strong>
+              <small>Start with one name, one prayer, one next step.</small>
+            </div>
           </div>
         </div>
       </section>
 
-      <section className="vision" id="vision" aria-labelledby="vision-title">
+      <section className="map-method" aria-labelledby="method-title" data-reveal>
+        <div className="method-heading">
+          <p className="section-kicker"><WandSparkles size={18} aria-hidden="true" /> A simple rhythm for everyday mission</p>
+          <h2 id="method-title">From a name on a page to a life touched by love.</h2>
+          <p>There is no pressure to have every answer. The map simply helps you notice, pray, and take the next faithful step.</p>
+        </div>
+        <div className="method-path" aria-label="The Oikos mission pathway">
+          {stages.map((stage, index) => (
+            <article key={stage.id}>
+              <span className="method-number">0{index + 1}</span>
+              <div className="method-dot" aria-hidden="true" />
+              <h3>{stage.label}</h3>
+              <p>{stage.prompt}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="vision" id="vision" aria-labelledby="vision-title" data-reveal>
         <div>
           <p className="section-kicker">The heart</p>
           <h2 id="vision-title">An Oikos Map helps love become specific.</h2>
@@ -1021,7 +1156,7 @@ function App() {
         </div>
       </section>
 
-      <section className="mission-pulse" id="mission" aria-labelledby="mission-title">
+      <section className="mission-pulse" id="mission" aria-labelledby="mission-title" data-reveal>
         <div className="mission-copy">
           <p className="section-kicker">
             <Globe2 size={18} aria-hidden="true" />
@@ -1052,7 +1187,7 @@ function App() {
         </div>
       </section>
 
-      <section className="next-steps" id="next-steps" aria-labelledby="next-steps-title">
+      <section className="next-steps" id="next-steps" aria-labelledby="next-steps-title" data-reveal>
         <div className="next-steps-heading">
           <p className="section-kicker">
             <Flame size={18} aria-hidden="true" />
@@ -1108,7 +1243,7 @@ function App() {
         </div>
       </section>
 
-      <section className="jesus-section" id="jesus" aria-labelledby="jesus-title">
+      <section className="jesus-section" id="jesus" aria-labelledby="jesus-title" data-reveal>
         <div>
           <p className="section-kicker">New to Jesus?</p>
           <h2 id="jesus-title">Following Jesus starts with surrender, trust, and a new life.</h2>
@@ -1133,7 +1268,7 @@ function App() {
         </div>
       </section>
 
-      <section className="lead-section" id="resources" aria-labelledby="resources-title">
+      <section className="lead-section" id="resources" aria-labelledby="resources-title" data-reveal>
         <div>
           <p className="section-kicker">
             <Mail size={18} aria-hidden="true" />
@@ -1144,7 +1279,7 @@ function App() {
         <LeadCapture mapData={mapData} />
       </section>
 
-      <section className="builder-section" id="builder" aria-labelledby="builder-title">
+      <section className="builder-section" id="builder" aria-labelledby="builder-title" data-reveal>
         <div className="builder-heading">
           <div>
             <p className="section-kicker">Create it here</p>
@@ -1168,6 +1303,24 @@ function App() {
               Center name
               <input value={mapData.centerName} onChange={(event) => updateMap({ centerName: event.target.value })} />
             </label>
+
+            <div className="template-picker" aria-label="Map templates">
+              <div className="panel-title">
+                <WandSparkles size={18} aria-hidden="true" />
+                <span>Start with a context</span>
+              </div>
+              <div className="template-grid">
+                {mapTemplates.map((template) => {
+                  const TemplateIcon = template.icon;
+                  return (
+                    <button type="button" className="template-option" onClick={() => applyTemplate(template)} key={template.id} title={template.detail}>
+                      <TemplateIcon size={16} aria-hidden="true" />
+                      <span>{template.label}</span>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
 
             <div className="button-row">
               <button type="button" onClick={() => addPerson(null)} title="Add first-circle person">
@@ -1305,6 +1458,24 @@ function App() {
               )}
             </div>
 
+            <div className="map-coach" aria-live="polite">
+              <div className="coach-heading">
+                <span><Compass size={18} aria-hidden="true" /> Map coach</span>
+                <small>{mapData.people.length ? `${reachedCount} in share or disciple` : 'Begin with one name'}</small>
+              </div>
+              {selectedPerson ? (
+                <>
+                  <p><strong>{selectedPerson.name}</strong>: {selectedStage.prompt}</p>
+                  <button type="button" className="coach-action" onClick={advanceSelectedPerson}>
+                    <CheckCircle2 size={17} aria-hidden="true" />
+                    {selectedStage.id === 'disciple' ? 'Celebrate and multiply' : `Move to ${stages[stages.findIndex((stage) => stage.id === selectedStage.id) + 1].label}`}
+                  </button>
+                </>
+              ) : (
+                <p>Add someone you already know. The first name is enough to begin.</p>
+              )}
+            </div>
+
             <div className="download-actions" aria-label="Save and download actions">
               <button type="button" onClick={saveNow} title="Save in this browser">
                 <Save size={18} aria-hidden="true" />
@@ -1347,6 +1518,19 @@ function App() {
           </aside>
 
           <div className="map-stage">
+            <div className="map-journey" aria-label="Oikos map progress">
+              <div>
+                <span>Map momentum</span>
+                <strong>{mapData.people.length ? `${mapData.people.length} names held in prayer` : 'Your map is ready for its first name'}</strong>
+              </div>
+              <div className="stage-meter">
+                {stageCounts.map((stage) => (
+                  <span key={stage.id} style={{ '--stage-size': `${Math.max(stage.count, 1)}` }} title={`${stage.label}: ${stage.count}`}>
+                    <b>{stage.count}</b>{stage.label}
+                  </span>
+                ))}
+              </div>
+            </div>
             <OikosSvg
               mapData={mapData}
               layout={layout}
@@ -1358,7 +1542,7 @@ function App() {
         </div>
       </section>
 
-      <section className="closing-band">
+      <section className="closing-band" data-reveal>
         <div>
           <p>Free to use. Easy to save. Share it with everyone you know so we can change the world together, for God's glory.</p>
           <span><PoweredBy /> · <CollaborationCredit /></span>
