@@ -11,6 +11,7 @@ import {
   Copy,
   Crown,
   Download,
+  FileImage,
   FileJson,
   FileText,
   Flame,
@@ -19,6 +20,7 @@ import {
   Link2,
   Mail,
   Plus,
+  Printer,
   RotateCcw,
   Rocket,
   Save,
@@ -27,6 +29,7 @@ import {
   Sparkles,
   Target,
   Trash2,
+  Undo2,
   Upload,
   UserRound,
   WandSparkles,
@@ -274,6 +277,74 @@ function getStage(stageId) {
   return stages.find((stage) => stage.id === stageId) || stages[0];
 }
 
+function sanitizeImportedMap(imported) {
+  if (!imported || !Array.isArray(imported.people)) throw new Error('Invalid map data');
+  const people = imported.people.map((person) => ({
+    id: person.id || createId(),
+    name: String(person.name || 'Unnamed person').slice(0, 80),
+    group: groups.some((group) => group.id === person.group) ? person.group : 'friends',
+    stage: stages.some((stage) => stage.id === person.stage) ? person.stage : 'pray',
+    notes: String(person.notes || '').slice(0, 1000),
+    parentId: person.parentId || null,
+  }));
+  return {
+    centerName: String(imported.centerName || 'Your Name').slice(0, 80),
+    mapTitle: String(imported.mapTitle || 'My Oikos Map').slice(0, 120),
+    people,
+  };
+}
+
+function encodeMapToHash(mapData) {
+  const bytes = new TextEncoder().encode(JSON.stringify(mapData));
+  let binary = '';
+  bytes.forEach((byte) => {
+    binary += String.fromCharCode(byte);
+  });
+  return btoa(binary).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+}
+
+function decodeMapFromHash(encoded) {
+  const base64 = encoded.replace(/-/g, '+').replace(/_/g, '/');
+  const binary = atob(base64);
+  const bytes = new Uint8Array(binary.length);
+  for (let i = 0; i < binary.length; i += 1) bytes[i] = binary.charCodeAt(i);
+  return sanitizeImportedMap(JSON.parse(new TextDecoder().decode(bytes)));
+}
+
+function readSharedMapFromUrl() {
+  try {
+    const match = window.location.hash.match(/^#map=([A-Za-z0-9\-_]+)/);
+    if (!match) return null;
+    return decodeMapFromHash(match[1]);
+  } catch {
+    return null;
+  }
+}
+
+const confettiColors = ['#f45d48', '#14b8a6', '#f59e0b', '#516cf0', '#8b5cf6', '#f3cf74'];
+
+function launchConfetti() {
+  if (typeof document === 'undefined') return;
+  if (window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) return;
+  const host = document.createElement('div');
+  host.className = 'confetti-host';
+  host.setAttribute('aria-hidden', 'true');
+  for (let i = 0; i < 60; i += 1) {
+    const piece = document.createElement('span');
+    piece.className = 'confetti-piece';
+    piece.style.setProperty('--confetti-x', `${Math.random() * 100}vw`);
+    piece.style.setProperty('--confetti-drift', `${(Math.random() - 0.5) * 240}px`);
+    piece.style.setProperty('--confetti-spin', `${Math.round(360 + Math.random() * 720)}deg`);
+    piece.style.setProperty('--confetti-delay', `${Math.random() * 420}ms`);
+    piece.style.setProperty('--confetti-duration', `${1500 + Math.random() * 1400}ms`);
+    piece.style.backgroundColor = confettiColors[i % confettiColors.length];
+    if (i % 3 === 0) piece.style.borderRadius = '999px';
+    host.appendChild(piece);
+  }
+  document.body.appendChild(host);
+  window.setTimeout(() => host.remove(), 3600);
+}
+
 function getDescendantIds(people, id) {
   const descendants = new Set([id]);
   let changed = true;
@@ -489,6 +560,7 @@ function LeadCapture({ compact = false, mapData = null }) {
     interest: adLeadOptions[0],
   });
   const [status, setStatus] = useState('idle');
+  const [errorMessage, setErrorMessage] = useState('');
 
   async function submitLead(event) {
     event.preventDefault();
@@ -506,10 +578,15 @@ function LeadCapture({ compact = false, mapData = null }) {
         }),
       });
       const result = await response.json().catch(() => ({}));
-      if (!response.ok) throw new Error(result.error || 'Unable to send');
+      if (!response.ok) throw new Error(result.error || 'Something went wrong. Please try again in a moment.');
       setStatus('sent');
       setLead({ name: '', email: '', interest: adLeadOptions[0] });
-    } catch {
+    } catch (error) {
+      setErrorMessage(
+        error instanceof TypeError
+          ? 'We could not reach the server. Please check your connection and try again.'
+          : error.message || 'Something went wrong. Please try again in a moment.',
+      );
       setStatus('error');
     }
   }
@@ -570,13 +647,67 @@ function LeadCapture({ compact = false, mapData = null }) {
       </button>
       <div aria-live="polite">
         {status === 'sent' && <p className="form-status success">You are in. Check your inbox soon.</p>}
-        {status === 'error' && (
-        <p className="form-status error">
-            This form is ready, but Supabase needs to be connected in Vercel before live submissions can be stored.
-        </p>
-        )}
+        {status === 'error' && <p className="form-status error">{errorMessage}</p>}
       </div>
     </form>
+  );
+}
+
+const faqItems = [
+  {
+    question: 'What is an Oikos Map?',
+    answer:
+      'An Oikos Map is a simple visual way to name the people in your everyday sphere of influence, such as family, friends, coworkers, classmates, and neighbors, so you can pray, care, share, and disciple intentionally.',
+  },
+  {
+    question: 'What does the word oikos mean?',
+    answer:
+      'Oikos is the Greek word for household. In the New Testament it describes your extended sphere of relationships: family, friends, neighbors, coworkers, and everyone God has naturally placed around your life.',
+  },
+  {
+    question: 'Is the Oikos Map Builder free?',
+    answer:
+      'Yes. The Oikos Map Builder is completely free for every believer, church, youth ministry, and disciple-maker. You can create a map, save it, download it, and share the tool with others.',
+  },
+  {
+    question: 'Is my Oikos Map private?',
+    answer:
+      'Yes. Your map is saved only in your own browser and is never uploaded to a server. If you copy a map link, the map travels inside the link itself so you choose exactly who sees it.',
+  },
+  {
+    question: 'Can I download or share my Oikos Map?',
+    answer:
+      'Yes. You can download your Oikos Map as PNG, SVG, JSON, and a simple prayer plan text file, or copy a private map link to reopen it on another device or share it with a friend.',
+  },
+  {
+    question: 'Can I use the Oikos Map with my church or small group?',
+    answer:
+      'Absolutely. The tool works great for churches, small groups, youth ministries, and outreach teams. Each person can build their own map, and the templates make it easy to start in a household, campus, or workplace context.',
+  },
+];
+
+function FaqSection() {
+  return (
+    <section className="faq-section" id="faq" aria-labelledby="faq-title" data-reveal>
+      <div>
+        <p className="section-kicker">
+          <BookOpen size={18} aria-hidden="true" />
+          Common questions
+        </p>
+        <h2 id="faq-title">Everything you need to know before you begin.</h2>
+        <p className="faq-lede">
+          Short, honest answers about the tool, your privacy, and how to use the map with your church or group.
+        </p>
+      </div>
+      <div className="faq-list">
+        {faqItems.map((item, index) => (
+          <details key={item.question} open={index === 0}>
+            <summary>{item.question}</summary>
+            <p>{item.answer}</p>
+          </details>
+        ))}
+      </div>
+    </section>
   );
 }
 
@@ -732,13 +863,17 @@ function ConnectPage() {
 
       <section className="founder-section" id="founder" aria-labelledby="founder-title">
         <div className="founder-image-wrap">
-          <img
-            src="/assets/daniel-ziedins-founder.jpg"
-            alt="Daniel Ziedins"
-            width="920"
-            height="920"
-            loading="lazy"
-          />
+          <picture>
+            <source srcSet="/assets/daniel-ziedins-founder.webp" type="image/webp" />
+            <img
+              src="/assets/daniel-ziedins-founder-640.jpg"
+              alt="Daniel Ziedins"
+              width="640"
+              height="640"
+              loading="lazy"
+              decoding="async"
+            />
+          </picture>
         </div>
         <div>
           <p className="section-kicker">
@@ -832,8 +967,27 @@ function App() {
   const [saveState, setSaveState] = useState('Saved locally');
   const [searchTerm, setSearchTerm] = useState('');
   const [shareState, setShareState] = useState('Share');
+  const [mapLinkState, setMapLinkState] = useState('Link');
+  const [planCopyState, setPlanCopyState] = useState('Plan');
+  const [canUndo, setCanUndo] = useState(false);
   const fileInputRef = useRef(null);
   const svgRef = useRef(null);
+  const historyRef = useRef([]);
+
+  useEffect(() => {
+    const sharedMap = readSharedMapFromUrl();
+    if (!sharedMap) return;
+    const hasSavedMap = Boolean(readStoredMap());
+    const shouldLoad =
+      !hasSavedMap ||
+      window.confirm(`Load the shared map "${sharedMap.mapTitle}"? It will replace the map currently saved on this device.`);
+    if (shouldLoad) {
+      setMapData(sharedMap);
+      setSelectedId(sharedMap.people[0]?.id ?? null);
+      setSaveState('Shared map loaded');
+    }
+    window.history.replaceState(null, '', window.location.pathname + window.location.search);
+  }, []);
 
   const layout = useMemo(() => computeLayout(mapData.people), [mapData.people]);
   const selectedPerson = mapData.people.find((person) => person.id === selectedId) || null;
@@ -850,6 +1004,37 @@ function App() {
     }, 300);
     return () => window.clearTimeout(timeout);
   }, [mapData]);
+
+  // Snapshot before structural changes only, so Undo rescues deletes, resets, and
+  // imports without fighting the browser's own text undo inside inputs.
+  function pushHistory() {
+    historyRef.current = [...historyRef.current.slice(-9), mapData];
+    setCanUndo(true);
+  }
+
+  function undoLastChange() {
+    const previous = historyRef.current.pop();
+    setCanUndo(historyRef.current.length > 0);
+    if (!previous) return;
+    setMapData(previous);
+    setSelectedId(previous.people[0]?.id ?? null);
+    setSaveState('Change undone');
+  }
+
+  useEffect(() => {
+    function onKeyDown(event) {
+      const key = event.key.toLowerCase();
+      const target = event.target;
+      const isTypingField = /^(input|textarea|select)$/i.test(target?.tagName || '') || target?.isContentEditable;
+      if (isTypingField) return;
+      if ((event.metaKey || event.ctrlKey) && key === 'z') {
+        event.preventDefault();
+        undoLastChange();
+      }
+    }
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  });
 
   function updateMap(partial) {
     setSaveState('Saving...');
@@ -889,6 +1074,7 @@ function App() {
   }
 
   function deletePerson(id) {
+    pushHistory();
     const descendants = getDescendantIds(mapData.people, id);
     const remaining = mapData.people.filter((person) => !descendants.has(person.id));
     setMapData((current) => ({ ...current, people: remaining }));
@@ -897,6 +1083,7 @@ function App() {
   }
 
   function resetMap(blank = false) {
+    pushHistory();
     const fresh = createFreshMap(blank);
     setMapData(fresh);
     setSelectedId(fresh.people[0]?.id ?? null);
@@ -904,10 +1091,17 @@ function App() {
   }
 
   function applyTemplate(template) {
+    pushHistory();
     const fresh = template.make();
     setMapData(fresh);
     setSelectedId(fresh.people[0]?.id ?? null);
     setSaveState(`${template.label} loaded`);
+  }
+
+  function changeStage(person, stageId) {
+    if (person.stage === stageId) return;
+    updatePerson(person.id, { stage: stageId });
+    if (stageId === 'disciple') launchConfetti();
   }
 
   function advanceSelectedPerson() {
@@ -915,10 +1109,11 @@ function App() {
     const currentIndex = stages.findIndex((stage) => stage.id === selectedPerson.stage);
     const nextStage = stages[currentIndex + 1];
     if (!nextStage) {
+      launchConfetti();
       setSaveState('Ready to multiply');
       return;
     }
-    updatePerson(selectedPerson.id, { stage: nextStage.id });
+    changeStage(selectedPerson, nextStage.id);
     setSaveState(`${selectedPerson.name} is ready to ${nextStage.label.toLowerCase()}`);
   }
 
@@ -943,23 +1138,10 @@ function App() {
     const reader = new FileReader();
     reader.onload = () => {
       try {
-        const imported = JSON.parse(String(reader.result));
-        if (!Array.isArray(imported.people)) throw new Error('Invalid map file');
-        const people = imported.people.map((person) => ({
-          id: person.id || createId(),
-          name: person.name || 'Unnamed person',
-          group: groups.some((group) => group.id === person.group) ? person.group : 'friends',
-          stage: stages.some((stage) => stage.id === person.stage) ? person.stage : 'pray',
-          notes: person.notes || '',
-          parentId: person.parentId || null,
-        }));
-        const importedMap = {
-          centerName: imported.centerName || 'Your Name',
-          mapTitle: imported.mapTitle || 'My Oikos Map',
-          people,
-        };
+        const importedMap = sanitizeImportedMap(JSON.parse(String(reader.result)));
+        pushHistory();
         setMapData(importedMap);
-        setSelectedId(people[0]?.id ?? null);
+        setSelectedId(importedMap.people[0]?.id ?? null);
         setSaveState('Imported');
       } catch {
         setSaveState('Import failed');
@@ -988,6 +1170,25 @@ function App() {
       setShareState('Share');
     }
     window.setTimeout(() => setShareState('Share'), 1800);
+  }
+
+  async function copyPrayerPlan() {
+    setPlanCopyState((await copyText(buildPrayerPlan(mapData))) ? 'Copied!' : 'Copy failed');
+    window.setTimeout(() => setPlanCopyState('Plan'), 1800);
+  }
+
+  function printMap() {
+    window.print();
+  }
+
+  async function copyMapLink() {
+    try {
+      const url = `${SITE_URL}/#map=${encodeMapToHash(mapData)}`;
+      setMapLinkState((await copyText(url)) ? 'Copied!' : 'Copy failed');
+    } catch {
+      setMapLinkState('Copy failed');
+    }
+    window.setTimeout(() => setMapLinkState('Link'), 1800);
   }
 
   function getSvgMarkup() {
@@ -1047,6 +1248,7 @@ function App() {
           <a href="#mission">Why it matters</a>
           <a href="#next-steps">Next steps</a>
           <a href="#builder">Create</a>
+          <a href="#faq">FAQ</a>
           <a href="/growth">Growth</a>
           <a href="/connect">Connect</a>
           <a href="#partners">Partners</a>
@@ -1268,6 +1470,8 @@ function App() {
         </div>
       </section>
 
+      <FaqSection />
+
       <section className="lead-section" id="resources" aria-labelledby="resources-title" data-reveal>
         <div>
           <p className="section-kicker">
@@ -1424,7 +1628,7 @@ function App() {
                     Prayer focus
                     <select
                       value={selectedPerson.stage}
-                      onChange={(event) => updatePerson(selectedPerson.id, { stage: event.target.value })}
+                      onChange={(event) => changeStage(selectedPerson, event.target.value)}
                     >
                       {stages.map((stage) => (
                         <option value={stage.id} key={stage.id}>
@@ -1486,7 +1690,7 @@ function App() {
                 PNG
               </button>
               <button type="button" onClick={downloadSvg} title="Download SVG">
-                <Link2 size={18} aria-hidden="true" />
+                <FileImage size={18} aria-hidden="true" />
                 SVG
               </button>
               <button type="button" onClick={downloadJson} title="Download editable data">
@@ -1497,9 +1701,25 @@ function App() {
                 <FileText size={18} aria-hidden="true" />
                 Plan
               </button>
+              <button type="button" onClick={copyPrayerPlan} title="Copy the prayer plan to your clipboard">
+                <Clipboard size={18} aria-hidden="true" />
+                {planCopyState === 'Plan' ? 'Copy' : planCopyState}
+              </button>
+              <button type="button" onClick={printMap} title="Print your map">
+                <Printer size={18} aria-hidden="true" />
+                Print
+              </button>
+              <button type="button" onClick={undoLastChange} disabled={!canUndo} title="Undo the last structural change">
+                <Undo2 size={18} aria-hidden="true" />
+                Undo
+              </button>
               <button type="button" onClick={() => fileInputRef.current?.click()} title="Import JSON map">
                 <Upload size={18} aria-hidden="true" />
                 Import
+              </button>
+              <button type="button" onClick={copyMapLink} title="Copy a private link that carries this exact map">
+                <Link2 size={18} aria-hidden="true" />
+                {mapLinkState}
               </button>
               <button type="button" onClick={shareTool} title="Copy or share this tool">
                 <Share2 size={18} aria-hidden="true" />
@@ -1525,7 +1745,7 @@ function App() {
               </div>
               <div className="stage-meter">
                 {stageCounts.map((stage) => (
-                  <span key={stage.id} style={{ '--stage-size': `${Math.max(stage.count, 1)}` }} title={`${stage.label}: ${stage.count}`}>
+                  <span key={stage.id} style={{ '--stage-size': `${Math.min(Math.max(stage.count, 1), 10)}` }} title={`${stage.label}: ${stage.count}`}>
                     <b>{stage.count}</b>{stage.label}
                   </span>
                 ))}
@@ -1666,4 +1886,14 @@ const routes = {
   '/growth': <GrowthPage />,
 };
 
-createRoot(document.getElementById('root')).render(routes[window.location.pathname] || <App />);
+const routePath = window.location.pathname.replace(/\.html$/, '').replace(/\/+$/, '') || '/';
+const container = document.getElementById('root');
+// Reuse the root across HMR updates instead of creating a second one.
+container.__oikosRoot = container.__oikosRoot || createRoot(container);
+container.__oikosRoot.render(routes[routePath] || <App />);
+
+if (import.meta.env.PROD && 'serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js').catch(() => {});
+  });
+}

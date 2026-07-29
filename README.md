@@ -15,6 +15,12 @@ Powered by [Love on The World](https://www.loveontheworld.com) and [Thy Kingdom 
 - Download maps as PNG, SVG, or editable JSON
 - Import a saved JSON map
 - Download a simple prayer-plan text file
+- Copy a private shareable link that carries the whole map inside the URL
+- Confetti celebration when someone reaches the Disciple stage
+- Installable PWA with offline support (web app manifest + service worker)
+- Visible FAQ section backed by matching FAQPage structured data
+- Per-page HTML entries (`index.html`, `growth.html`, `connect.html`) with tailored titles, descriptions, canonicals, and Open Graph tags
+- Real 1200x630 `og-image.png` for social sharing
 - Share/copy the live tool link
 - Collect lead emails through an optional Vercel function that forwards to a GoHighLevel workflow webhook
 - Dedicated `/growth` page connected to I Am Reborn
@@ -37,7 +43,7 @@ npm run dev
 npm run build
 ```
 
-The production output is generated in `dist/`.
+The production output is generated in `dist/` with three HTML entry points (`/`, `/growth`, `/connect`). Vercel serves the extensionless routes via `"cleanUrls": true` in `vercel.json`.
 
 ## Deploy on Vercel
 
@@ -46,8 +52,6 @@ Import this repository into Vercel and use the default Vite settings:
 - Framework preset: `Vite`
 - Build command: `npm run build`
 - Output directory: `dist`
-
-## GoHighLevel Automation
 
 ## Supabase Lead Capture
 

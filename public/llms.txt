@@ -18,5 +18,5 @@ Primary entities:
 - Daniel Ziedins
 
 Important summary:
-The Oikos Map Builder is free for everyone to use. Visitors can create a custom Oikos Map, save locally in their browser, export PNG/SVG/JSON, download a prayer plan, and request follow-up resources. The tool is shared to help believers pray, care, share, and disciple within the relationships God has already placed around them.
+The Oikos Map Builder is free for everyone to use. Visitors can create a custom Oikos Map, save locally in their browser, export PNG/SVG/JSON, download a prayer plan, copy a shareable map link, install the site as an app, and request follow-up resources. Maps are private: they are stored only in the visitor's browser and are never uploaded to a server. The tool is shared to help believers pray, care, share, and disciple within the relationships God has already placed around them.
 
