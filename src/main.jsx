@@ -26,6 +26,7 @@ import {
   Save,
   Search,
   Share2,
+  ShieldCheck,
   Sparkles,
   Target,
   Trash2,
@@ -33,11 +34,31 @@ import {
   Upload,
   UserRound,
   WandSparkles,
+  X,
 } from 'lucide-react';
 import './styles.css';
 
 const STORAGE_KEY = 'love-on-the-world-oikos-map-v1';
+const SUBSCRIBED_KEY = 'oikos-journey-subscribed-v1';
+const INVITE_DISMISSED_KEY = 'oikos-invite-dismissed-v1';
+const JOURNEY_EVENT = 'oikos:journey-started';
 const SITE_URL = 'https://www.oikosmap.com';
+
+function readFlag(key) {
+  try {
+    return window.localStorage?.getItem(key) === '1';
+  } catch {
+    return false;
+  }
+}
+
+function writeFlag(key) {
+  try {
+    window.localStorage?.setItem(key, '1');
+  } catch {
+    // A blocked localStorage only means the nudge may reappear later.
+  }
+}
 
 const partnerLinks = [
   { label: 'Love on The World', href: 'https://www.loveontheworld.com' },
@@ -481,11 +502,13 @@ function SiteFooter() {
 function ScrollEffects() {
   useEffect(() => {
     let frame = 0;
+    let observerReported = false;
     const revealItems = Array.from(document.querySelectorAll('[data-reveal]'));
     const revealObserver = typeof IntersectionObserver === 'undefined'
       ? null
       : new IntersectionObserver(
         (entries) => {
+          observerReported = true;
           entries.forEach((entry) => {
             if (entry.isIntersecting) {
               entry.target.classList.add('is-visible');
@@ -493,11 +516,24 @@ function ScrollEffects() {
             }
           });
         },
-        { threshold: 0.12 },
+        // Sections can be taller than the viewport, where a fractional threshold
+        // is unreachable and the content would never reveal. Trigger on the
+        // leading edge instead.
+        { threshold: 0, rootMargin: '0px 0px -12% 0px' },
       );
 
     if (revealObserver) revealItems.forEach((item) => revealObserver.observe(item));
     else revealItems.forEach((item) => item.classList.add('is-visible'));
+
+    // Fail-safe: content must never be stranded at opacity 0. The observer
+    // reports on its first tick even when nothing intersects, so silence here
+    // means callbacks are not running at all (prerender, some headless
+    // environments). Only then do we drop the animation and show everything.
+    const failSafe = window.setTimeout(() => {
+      if (observerReported) return;
+      revealItems.forEach((item) => item.classList.add('is-visible'));
+      revealObserver?.disconnect();
+    }, 2500);
 
     function update() {
       frame = 0;
@@ -534,6 +570,7 @@ function ScrollEffects() {
       window.removeEventListener('resize', requestUpdate);
       window.removeEventListener('pointermove', updatePointer);
       revealObserver?.disconnect();
+      window.clearTimeout(failSafe);
       if (frame) window.cancelAnimationFrame(frame);
     };
   }, []);
@@ -581,6 +618,8 @@ function LeadCapture({ compact = false, mapData = null }) {
       if (!response.ok) throw new Error(result.error || 'Something went wrong. Please try again in a moment.');
       setStatus('sent');
       setLead({ name: '', email: '', interest: adLeadOptions[0] });
+      writeFlag(SUBSCRIBED_KEY);
+      window.dispatchEvent(new CustomEvent(JOURNEY_EVENT));
     } catch (error) {
       setErrorMessage(
         error instanceof TypeError
@@ -591,14 +630,35 @@ function LeadCapture({ compact = false, mapData = null }) {
     }
   }
 
+  if (status === 'sent') {
+    return (
+      <div className={compact ? 'lead-form compact-form lead-done' : 'lead-form lead-done'} aria-live="polite">
+        <span className="lead-done-badge" aria-hidden="true">
+          <CheckCircle2 size={26} />
+        </span>
+        <h3>Check your inbox.</h3>
+        <p>
+          Your starter kit is on its way, and the first email of the Oikos Journey should land within a minute or two. If
+          you do not see it, have a quick look in promotions or spam and drag it across.
+        </p>
+        <p className="lead-done-note">
+          One email today, then five more over the next two weeks. Unsubscribe in one click, any time.
+        </p>
+      </div>
+    );
+  }
+
   return (
     <form className={compact ? 'lead-form compact-form' : 'lead-form'} onSubmit={submitLead}>
       <div>
-        <p className="form-kicker">Free follow-up resources</p>
-        <h3>{compact ? 'Join the Reborn community path.' : 'Get the free Oikos starter kit.'}</h3>
+        <p className="form-kicker">
+          <Sparkles size={14} aria-hidden="true" />
+          Free · 6 emails · 2 weeks
+        </p>
+        <h3>{compact ? 'Walk the Oikos Journey with us.' : 'Start the Oikos Journey.'}</h3>
         <p>
-          Leave your email and we will send encouragement, outreach steps, and simple ways to live on mission right where
-          God has placed you.
+          Six short emails that take you through praying, caring, sharing, and discipling the people already around you —
+          plus the starter kit to get going today.
         </p>
       </div>
       <label>
@@ -643,13 +703,169 @@ function LeadCapture({ compact = false, mapData = null }) {
       </label>
       <button type="submit" disabled={status === 'sending'}>
         <Mail size={18} aria-hidden="true" />
-        {status === 'sending' ? 'Sending...' : 'Send me the resources'}
+        {status === 'sending' ? 'Sending...' : 'Send me the first email'}
       </button>
-      <div aria-live="polite">
-        {status === 'sent' && <p className="form-status success">You are in. Check your inbox soon.</p>}
-        {status === 'error' && <p className="form-status error">{errorMessage}</p>}
-      </div>
+      <p className="lead-privacy">
+        <ShieldCheck size={14} aria-hidden="true" />
+        No spam, ever. Your map stays private in your browser — we never see it.
+      </p>
+      <div aria-live="polite">{status === 'error' && <p className="form-status error">{errorMessage}</p>}</div>
     </form>
+  );
+}
+
+// Showing people the actual emails they will receive converts far better than
+// asking them to trust the word "resources".
+const journeyEmails = [
+  {
+    when: 'Today',
+    title: 'Your oikos is not an accident',
+    note: 'The starter kit, and why the people around you are not random.',
+  },
+  { when: 'Day 2', title: 'Start with one name', note: 'The five-minute prayer rhythm that changes how you see people.' },
+  { when: 'Day 4', title: 'Love that shows up', note: 'Seven ordinary ways to move toward someone this week.' },
+  { when: 'Day 7', title: 'Your story is enough', note: 'How to share your testimony in about three minutes.' },
+  { when: 'Day 10', title: 'And then they reach theirs', note: 'Where one map quietly becomes a movement.' },
+  { when: 'Day 14', title: 'You play a real role', note: 'The bigger picture, and where to go next.' },
+];
+
+// Appears only once someone has actually built something, and only once.
+function StickyInvite() {
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    if (readFlag(SUBSCRIBED_KEY) || readFlag(INVITE_DISMISSED_KEY)) return undefined;
+
+    const builder = document.getElementById('builder');
+    if (!builder || typeof IntersectionObserver === 'undefined') return undefined;
+
+    let timer = 0;
+    // threshold 0: the builder is far taller than the viewport, so any
+    // percentage-based threshold could never be reached on a phone.
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (!entries.some((entry) => entry.isIntersecting)) return;
+        observer.disconnect();
+        timer = window.setTimeout(() => setVisible(true), 2600);
+      },
+      { threshold: 0, rootMargin: '-120px 0px' },
+    );
+    observer.observe(builder);
+
+    function onStarted() {
+      setVisible(false);
+    }
+    window.addEventListener(JOURNEY_EVENT, onStarted);
+
+    return () => {
+      observer.disconnect();
+      window.clearTimeout(timer);
+      window.removeEventListener(JOURNEY_EVENT, onStarted);
+    };
+  }, []);
+
+  function dismiss() {
+    writeFlag(INVITE_DISMISSED_KEY);
+    setVisible(false);
+  }
+
+  if (!visible) return null;
+
+  return (
+    <aside className="sticky-invite" role="complementary" aria-label="Oikos Journey invitation">
+      <div>
+        <strong>Want help actually praying through this map?</strong>
+        <span>Six short emails over two weeks — pray, care, share, disciple. Free, and you can leave any time.</span>
+      </div>
+      <div className="sticky-invite-actions">
+        <a className="primary-action" href="#resources" onClick={dismiss}>
+          <Sparkles size={17} aria-hidden="true" />
+          Start the journey
+        </a>
+        <button type="button" className="sticky-invite-close" onClick={dismiss} aria-label="Dismiss">
+          <X size={18} aria-hidden="true" />
+        </button>
+      </div>
+    </aside>
+  );
+}
+
+function BuilderInvite({ mapData }) {
+  const [subscribed, setSubscribed] = useState(() => readFlag(SUBSCRIBED_KEY));
+
+  useEffect(() => {
+    function onStarted() {
+      setSubscribed(true);
+    }
+    window.addEventListener(JOURNEY_EVENT, onStarted);
+    return () => window.removeEventListener(JOURNEY_EVENT, onStarted);
+  }, []);
+
+  const count = mapData.people.length;
+  const praying = mapData.people.filter((person) => person.stage === 'pray').length;
+
+  if (subscribed) {
+    return (
+      <div className="builder-invite builder-invite-done">
+        <CheckCircle2 size={22} aria-hidden="true" />
+        <div>
+          <strong>You are on the Oikos Journey.</strong>
+          <span>Keep building — the next email is already on its way.</span>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="builder-invite">
+      <div className="builder-invite-copy">
+        <p className="builder-invite-kicker">
+          <Flame size={15} aria-hidden="true" />
+          Do not stop at the map
+        </p>
+        <h3>
+          {count
+            ? `${count} ${count === 1 ? 'name' : 'names'} on your map${praying ? `, ${praying} waiting on prayer` : ''}. Now what?`
+            : 'Your map is ready for its first name. Want a guide?'}
+        </h3>
+        <p>
+          This is the point most people stall — the names are down, and then life gets loud. The Oikos Journey is six short
+          emails over two weeks that walk you through praying for them, caring well, sharing your story, and helping them
+          reach their own oikos.
+        </p>
+        <ul className="builder-invite-list">
+          <li>
+            <CheckCircle2 size={15} aria-hidden="true" /> A five-minute daily prayer rhythm
+          </li>
+          <li>
+            <CheckCircle2 size={15} aria-hidden="true" /> Seven practical ways to show up for someone
+          </li>
+          <li>
+            <CheckCircle2 size={15} aria-hidden="true" /> A three-minute testimony framework
+          </li>
+          <li>
+            <CheckCircle2 size={15} aria-hidden="true" /> Completely free, unsubscribe in one click
+          </li>
+        </ul>
+      </div>
+      <LeadCapture mapData={mapData} />
+    </div>
+  );
+}
+
+function JourneyTimeline() {
+  return (
+    <ol className="journey-timeline" aria-label="What arrives in your inbox">
+      {journeyEmails.map((email) => (
+        <li key={email.title}>
+          <span className="journey-when">{email.when}</span>
+          <div>
+            <strong>{email.title}</strong>
+            <small>{email.note}</small>
+          </div>
+        </li>
+      ))}
+    </ol>
   );
 }
 
@@ -906,12 +1122,17 @@ function ConnectPage() {
       </section>
 
       <section className="lead-section connect-lead" aria-labelledby="connect-resources-title">
-        <div>
+        <div className="lead-pitch">
           <p className="section-kicker">
             <Mail size={18} aria-hidden="true" />
-            Stay connected
+            The Oikos Journey · free
           </p>
           <h2 id="connect-resources-title">Get encouragement and next steps for mission.</h2>
+          <p className="lead-lede">
+            Six short emails over two weeks through the rhythm of <strong>pray, care, share, disciple</strong> — then the
+            bigger picture of what God is doing and where you fit in it.
+          </p>
+          <JourneyTimeline />
         </div>
         <LeadCapture />
       </section>
@@ -1034,7 +1255,9 @@ function App() {
     }
     window.addEventListener('keydown', onKeyDown);
     return () => window.removeEventListener('keydown', onKeyDown);
-  });
+    // Undo only touches refs and state setters, so binding once is enough.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   function updateMap(partial) {
     setSaveState('Saving...');
@@ -1473,12 +1696,22 @@ function App() {
       <FaqSection />
 
       <section className="lead-section" id="resources" aria-labelledby="resources-title" data-reveal>
-        <div>
+        <div className="lead-pitch">
           <p className="section-kicker">
             <Mail size={18} aria-hidden="true" />
-            High value for the journey
+            The Oikos Journey · free
           </p>
-          <h2 id="resources-title">Get resources that help you turn the map into movement.</h2>
+          <h2 id="resources-title">A map is a good start. Then comes the walk.</h2>
+          <p className="lead-lede">
+            Most of us do not need more information — we need someone walking beside us. So over two weeks we will send you
+            six short emails through the rhythm this whole map is built on: <strong>pray, care, share, disciple</strong>.
+          </p>
+          <p className="lead-lede">
+            No guilt, no pressure, no fundraising. Just encouragement, honest next steps, and the reminder that keeps all of
+            this in proportion: <strong>one plants, another waters, God makes it grow.</strong> You are not carrying the
+            mission — you are playing your part in it.
+          </p>
+          <JourneyTimeline />
         </div>
         <LeadCapture mapData={mapData} />
       </section>
@@ -1760,6 +1993,8 @@ function App() {
             />
           </div>
         </div>
+
+        <BuilderInvite mapData={mapData} />
       </section>
 
       <section className="closing-band" data-reveal>
@@ -1774,6 +2009,7 @@ function App() {
       </section>
 
       <SiteFooter />
+      <StickyInvite />
     </main>
   );
 }

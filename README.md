@@ -22,6 +22,9 @@ Powered by [Love on The World](https://www.loveontheworld.com) and [Thy Kingdom 
 - Per-page HTML entries (`index.html`, `growth.html`, `connect.html`) with tailored titles, descriptions, canonicals, and Open Graph tags
 - Real 1200x630 `og-image.png` for social sharing
 - Share/copy the live tool link
+- Six-part "Oikos Journey" email sequence sent through Resend, queued at signup
+- Contextual email capture beneath the builder that reacts to the map you just made
+- Token-gated one-click unsubscribe that cancels any still-queued emails
 - Collect lead emails through an optional Vercel function that forwards to a GoHighLevel workflow webhook
 - Dedicated `/growth` page connected to I Am Reborn
 - Dedicated `/connect` page for Kingdom Connect, e3 Canada collaboration, and founder/ministry links
@@ -52,6 +55,40 @@ Import this repository into Vercel and use the default Vite settings:
 - Framework preset: `Vite`
 - Build command: `npm run build`
 - Output directory: `dist`
+
+## The Oikos Journey (Resend)
+
+Signing up starts a six-part encouragement sequence written in `api/_journey.js`:
+
+| # | Sends | Subject |
+|---|-------|---------|
+| 1 | immediately | Your oikos is not an accident |
+| 2 | in 2 days | Start with one name *(Pray)* |
+| 3 | in 4 days | Love that shows up *(Care)* |
+| 4 | in 7 days | Your story is enough *(Share)* |
+| 5 | in 10 days | And then they reach theirs *(Disciple)* |
+| 6 | in 14 days | You play a real role in this |
+
+The whole sequence is queued **at signup** using Resend's `scheduled_at`, so there
+is no cron job and no dashboard automation to keep in sync — the emails are the
+code. Sending happens from the `team.thykingdom.net` domain.
+
+Set the API key in Vercel (the sender address already defaults correctly):
+
+```bash
+vercel env add RESEND_API_KEY production
+```
+
+Preview the emails locally without sending anything:
+
+```bash
+node -e "import('./api/_journey.js').then(m=>{const b=m.buildJourney('Daniel');console.log(m.renderEmail(b[0],'#'))})" > preview.html
+```
+
+Every email carries `List-Unsubscribe` headers and a footer link to
+`/api/unsubscribe?token=…`. Unsubscribing calls the token-gated
+`oikos_unsubscribe` Postgres function, which marks every row for that address and
+returns the queued Resend ids so the rest of the sequence is cancelled.
 
 ## Supabase Lead Capture
 
