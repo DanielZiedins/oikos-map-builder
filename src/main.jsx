@@ -36,6 +36,9 @@ import {
   WandSparkles,
   X,
 } from 'lucide-react';
+import { BlogIndex, BlogPost } from './Blog.jsx';
+import { postBySlug, sortedPosts } from './content/posts.js';
+import { networkGroups, sitesInGroup } from './content/network.js';
 import './styles.css';
 
 const STORAGE_KEY = 'love-on-the-world-oikos-map-v1';
@@ -448,7 +451,7 @@ function PoweredBy() {
       Powered by:{' '}
       {partnerLinks.map((partner, index) => (
         <React.Fragment key={partner.href}>
-          <a href={partner.href} target="_blank" rel="noreferrer">
+          <a href={partner.href} target="_blank" rel="noopener">
             {partner.label}
           </a>
           {index === 0 ? ' & ' : ''}
@@ -470,7 +473,7 @@ function CollaborationCredit() {
   return (
     <>
       In collaboration with{' '}
-      <a href={collaborationLink.href} target="_blank" rel="noreferrer">
+      <a href={collaborationLink.href} target="_blank" rel="noopener">
         {collaborationLink.label}
       </a>
     </>
@@ -480,10 +483,35 @@ function CollaborationCredit() {
 function SiteFooter() {
   return (
     <footer className="site-footer" id="partners">
+      <nav className="footer-network" aria-label="Kingdom network">
+        <div>
+          <span className="footer-network-title">Oikos Map</span>
+          <a href="/">Map Builder</a>
+          <a href="/blog">The Oikos Journal</a>
+          <a href="/growth">Growth</a>
+          <a href="/connect">Connect</a>
+        </div>
+        {networkGroups
+          .filter((group) => group.id !== 'people')
+          .map((group) => {
+            const sites = sitesInGroup(group.id);
+            if (!sites.length) return null;
+            return (
+              <div key={group.id}>
+                <span className="footer-network-title">{group.label}</span>
+                {sites.map((site) => (
+                  <a key={site.host} href={site.url} target="_blank" rel="noopener">
+                    {site.host}
+                  </a>
+                ))}
+              </div>
+            );
+          })}
+      </nav>
       <div className="footer-links">
         <span>
           Made with ❤️ by{' '}
-          <a href="https://www.danielziedins.com" target="_blank" rel="noreferrer">
+          <a href="https://www.danielziedins.com" target="_blank" rel="noopener">
             Daniel Ziedins
           </a>
         </span>
@@ -902,6 +930,85 @@ const faqItems = [
   },
 ];
 
+function LatestArticles() {
+  return (
+    <section className="latest-articles" id="journal" aria-labelledby="journal-title" data-reveal>
+      <div className="latest-heading">
+        <div>
+          <p className="section-kicker">
+            <BookOpen size={18} aria-hidden="true" />
+            The Oikos Journal
+          </p>
+          <h2 id="journal-title">Practical help for the part that comes after the map.</h2>
+        </div>
+        <a className="secondary-action" href="/blog">
+          <ArrowRight size={18} aria-hidden="true" />
+          Read the journal
+        </a>
+      </div>
+      <div className="latest-grid">
+        {sortedPosts.slice(0, 3).map((post) => (
+          <article key={post.slug}>
+            <p className="blog-card-kicker">{post.kicker}</p>
+            <h3>
+              <a href={`/blog/${post.slug}`}>{post.title}</a>
+            </h3>
+            <p>{post.excerpt}</p>
+            <a className="blog-card-link" href={`/blog/${post.slug}`}>
+              Read it <ArrowRight size={15} aria-hidden="true" />
+            </a>
+          </article>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function KingdomNetwork() {
+  return (
+    <section className="network-section" id="network" aria-labelledby="network-title" data-reveal>
+      <div className="network-heading">
+        <p className="section-kicker">
+          <Globe2 size={18} aria-hidden="true" />
+          One family, many doors
+        </p>
+        <h2 id="network-title">You are not doing this alone.</h2>
+        <p>
+          This map is one small piece of a wider family of free tools, communities, and initiatives — all aimed at the same
+          thing. Wherever your next step is, there is probably a door here for it.
+        </p>
+      </div>
+      <div className="network-groups">
+        {networkGroups.map((group) => {
+          const sites = sitesInGroup(group.id);
+          if (!sites.length) return null;
+          return (
+            <div className="network-group" key={group.id}>
+              <div className="network-group-head">
+                <h3>{group.label}</h3>
+                <small>{group.note}</small>
+              </div>
+              <ul>
+                {sites.map((site) => (
+                  <li key={site.host}>
+                    <a href={site.url} target="_blank" rel="noopener">
+                      <strong>{site.name}</strong>
+                      <span>{site.tagline}</span>
+                      <small>
+                        {site.host} <ArrowRight size={13} aria-hidden="true" />
+                      </small>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          );
+        })}
+      </div>
+    </section>
+  );
+}
+
 function FaqSection() {
   return (
     <section className="faq-section" id="faq" aria-labelledby="faq-title" data-reveal>
@@ -940,7 +1047,7 @@ function GrowthPage() {
           <a href="/">Map Builder</a>
           <a href="/connect">Connect</a>
           <a href="#growth-community">Community</a>
-          <a href="https://www.iamreborn.net" target="_blank" rel="noreferrer">
+          <a href="https://www.iamreborn.net" target="_blank" rel="noopener">
             I Am Reborn
           </a>
         </nav>
@@ -966,7 +1073,7 @@ function GrowthPage() {
               <Sparkles size={18} aria-hidden="true" />
               Join the community
             </a>
-            <a className="secondary-action" href="https://www.iamreborn.net" target="_blank" rel="noreferrer">
+            <a className="secondary-action" href="https://www.iamreborn.net" target="_blank" rel="noopener">
               <ArrowRight size={18} aria-hidden="true" />
               Visit IAmReborn.net
             </a>
@@ -1038,11 +1145,11 @@ function ConnectPage() {
             people who want to see Jesus glorified in every sphere of life.
           </p>
           <div className="hero-actions">
-            <a className="primary-action" href="https://kingdom-connect.net/" target="_blank" rel="noreferrer">
+            <a className="primary-action" href="https://kingdom-connect.net/" target="_blank" rel="noopener">
               <Globe2 size={18} aria-hidden="true" />
               Join Kingdom Connect
             </a>
-            <a className="secondary-action" href={collaborationLink.href} target="_blank" rel="noreferrer">
+            <a className="secondary-action" href={collaborationLink.href} target="_blank" rel="noopener">
               <ArrowRight size={18} aria-hidden="true" />
               e3 Canada collaboration
             </a>
@@ -1059,7 +1166,7 @@ function ConnectPage() {
             Connect more deeply with online Kingdom communities, find encouragement, and keep growing with people who
             care about prayer, mission, discipleship, culture, and Jesus.
           </p>
-          <a href="https://kingdom-connect.net/" target="_blank" rel="noreferrer">
+          <a href="https://kingdom-connect.net/" target="_blank" rel="noopener">
             Visit Kingdom Connect <ArrowRight size={16} aria-hidden="true" />
           </a>
         </article>
@@ -1071,7 +1178,7 @@ function ConnectPage() {
             establish His Church. This site is shared in collaboration with e3 Canada so more people can access a
             practical tool for prayer, outreach, and disciple-making.
           </p>
-          <a href={collaborationLink.href} target="_blank" rel="noreferrer">
+          <a href={collaborationLink.href} target="_blank" rel="noopener">
             Visit Daniel & Katie's e3 page <ArrowRight size={16} aria-hidden="true" />
           </a>
         </article>
@@ -1109,11 +1216,11 @@ function ConnectPage() {
             strengthen everyday believers, and make outreach feel clear, relational, and full of love.
           </p>
           <div className="founder-actions">
-            <a className="primary-action" href="https://www.danielziedins.com" target="_blank" rel="noreferrer">
+            <a className="primary-action" href="https://www.danielziedins.com" target="_blank" rel="noopener">
               <UserRound size={18} aria-hidden="true" />
               DanielZiedins.com
             </a>
-            <a className="secondary-action" href="https://www.kd-ziedins.com" target="_blank" rel="noreferrer">
+            <a className="secondary-action" href="https://www.kd-ziedins.com" target="_blank" rel="noopener">
               <HeartHandshake size={18} aria-hidden="true" />
               KD-Ziedins.com
             </a>
@@ -1471,10 +1578,11 @@ function App() {
           <a href="#mission">Why it matters</a>
           <a href="#next-steps">Next steps</a>
           <a href="#builder">Create</a>
+          <a href="/blog">Journal</a>
+          <a href="#network">Network</a>
           <a href="#faq">FAQ</a>
           <a href="/growth">Growth</a>
           <a href="/connect">Connect</a>
-          <a href="#partners">Partners</a>
         </nav>
       </header>
 
@@ -1593,7 +1701,7 @@ function App() {
             one perish, and an Oikos Map helps ordinary believers turn compassion into prayer, friendship, testimony,
             and discipleship.
           </p>
-          <a className="secondary-action" href="https://www.loveonmission.world/" target="_blank" rel="noreferrer">
+          <a className="secondary-action" href="https://www.loveonmission.world/" target="_blank" rel="noopener">
             <ArrowDownToLine size={18} aria-hidden="true" />
             View Love on Mission
           </a>
@@ -1606,7 +1714,7 @@ function App() {
               <p>{stat.note}</p>
             </article>
           ))}
-          <a className="stat-source" href="https://www.loveonmission.world/" target="_blank" rel="noreferrer">
+          <a className="stat-source" href="https://www.loveonmission.world/" target="_blank" rel="noopener">
             Stats via Love on Mission dashboard
           </a>
         </div>
@@ -1628,7 +1736,7 @@ function App() {
               Love on The World exists to help believers live on mission, reach their cities, and multiply disciples.
               Gather a few friends, pray over your map, and begin loving your city together.
             </p>
-            <a href="https://www.loveontheworld.com" target="_blank" rel="noreferrer">
+            <a href="https://www.loveontheworld.com" target="_blank" rel="noopener">
               Start at LoveonTheWorld.com <ArrowRight size={16} aria-hidden="true" />
             </a>
           </article>
@@ -1639,7 +1747,7 @@ function App() {
               Your oikos includes workplaces, classrooms, art, media, family, business, and civic life. Seek First World
               exists to call believers to seek the Kingdom first and help culture reflect God's glory.
             </p>
-            <a href="https://www.seekfirst.world" target="_blank" rel="noreferrer">
+            <a href="https://www.seekfirst.world" target="_blank" rel="noopener">
               Explore SeekFirst.World <ArrowRight size={16} aria-hidden="true" />
             </a>
           </article>
@@ -1692,6 +1800,10 @@ function App() {
           </ul>
         </div>
       </section>
+
+      <LatestArticles />
+
+      <KingdomNetwork />
 
       <FaqSection />
 
@@ -2120,13 +2232,25 @@ function OikosSvg({ mapData, layout, selectedId, setSelectedId, svgRef }) {
 const routes = {
   '/connect': <ConnectPage />,
   '/growth': <GrowthPage />,
+  '/blog': <BlogIndex />,
 };
 
 const routePath = window.location.pathname.replace(/\.html$/, '').replace(/\/+$/, '') || '/';
+
+function resolveRoute(path) {
+  if (routes[path]) return routes[path];
+  const blogMatch = path.match(/^\/blog\/(.+)$/);
+  if (blogMatch) {
+    const post = postBySlug(blogMatch[1]);
+    if (post) return <BlogPost post={post} />;
+  }
+  return <App />;
+}
+
 const container = document.getElementById('root');
 // Reuse the root across HMR updates instead of creating a second one.
 container.__oikosRoot = container.__oikosRoot || createRoot(container);
-container.__oikosRoot.render(routes[routePath] || <App />);
+container.__oikosRoot.render(resolveRoute(routePath));
 
 if (import.meta.env.PROD && 'serviceWorker' in navigator) {
   window.addEventListener('load', () => {

@@ -4,7 +4,9 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vite --host 0.0.0.0",
+    "dev": "npm run blog && vite --host 0.0.0.0",
+    "blog": "node scripts/build-blog.js",
+    "prebuild": "npm run blog",
     "build": "vite build",
     "preview": "vite preview --host 0.0.0.0"
   },

@@ -29,7 +29,7 @@ function supabaseConfig() {
   const url = process.env.SUPABASE_URL;
   const key = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_ANON_KEY;
   if (!url || !key) return null;
-  return { base: `${url.replace(/\/$/, '')}/rest/v1`, key, elevated: Boolean(process.env.SUPABASE_SERVICE_ROLE_KEY) };
+  return { base: `${url.replace(/\/$/, '')}/rest/v1`, key };
 }
 
 function supabaseHeaders(config, extra = {}) {
@@ -59,28 +59,25 @@ async function insertSupabaseLead(config, payload) {
   return { ok: true };
 }
 
-// Reading and updating rows needs the service-role key (anon only has INSERT),
-// so both of these degrade to a no-op rather than failing the request.
-async function alreadyOnJourney(config, email) {
-  if (!config.elevated) return false;
-  const query = `${config.base}/oikos_map_leads?email=eq.${encodeURIComponent(email)}&welcome_sent_at=not.is.null&select=id&limit=1`;
-  const response = await fetch(query, { headers: supabaseHeaders(config) }).catch(() => null);
-  if (!response?.ok) return false;
-  const rows = await response.json().catch(() => []);
-  return Array.isArray(rows) && rows.length > 0;
+async function callRpc(config, name, body) {
+  const response = await fetch(`${config.base}/rpc/${name}`, {
+    method: 'POST',
+    headers: supabaseHeaders(config),
+    body: JSON.stringify(body),
+  });
+  if (!response.ok) throw new Error(`${name} responded ${response.status}`);
+  return response.json().catch(() => null);
 }
 
-async function recordJourneyState(config, { email, token, scheduledIds }) {
-  if (!config.elevated) return;
-  const query = `${config.base}/oikos_map_leads?unsub_token=eq.${encodeURIComponent(token)}`;
-  await fetch(query, {
-    method: 'PATCH',
-    headers: supabaseHeaders(config, { Prefer: 'return=minimal' }),
-    body: JSON.stringify({
-      welcome_sent_at: new Date().toISOString(),
-      scheduled_email_ids: scheduledIds,
-    }),
-  }).catch(() => {});
+// Both of these run through token-gated SECURITY DEFINER functions, so the
+// sequence works with only the anon key — anon never gets SELECT or UPDATE.
+async function claimJourney(config, token) {
+  return callRpc(config, 'oikos_journey_claim', { p_token: token });
+}
+
+async function recordScheduledIds(config, token, scheduledIds) {
+  if (!scheduledIds.length) return;
+  await callRpc(config, 'oikos_journey_record', { p_token: token, p_ids: scheduledIds });
 }
 
 async function forwardToGoHighLevel(payload) {
@@ -160,14 +157,15 @@ export default async function handler(request, response) {
     }
 
     // Store the lead first, then start the email journey, so a Resend outage
-    // never costs us the signup itself.
-    const repeat = config ? await alreadyOnJourney(config, email) : false;
-    const journey = repeat
-      ? { configured: true, welcomed: false, scheduledIds: [], skipped: 'already-subscribed' }
-      : await startJourney({ email, name, token }).catch(() => ({ configured: true, welcomed: false, scheduledIds: [] }));
+    // never costs us the signup itself. The claim both de-duplicates repeat
+    // submissions and marks this row as welcomed.
+    const claimed = config ? await claimJourney(config, token).catch(() => true) : true;
+    const journey = claimed
+      ? await startJourney({ email, name, token }).catch(() => ({ configured: true, welcomed: false, scheduledIds: [] }))
+      : { configured: true, welcomed: false, scheduledIds: [], skipped: 'already-subscribed' };
 
-    if (config && journey.welcomed) {
-      await recordJourneyState(config, { email, token, scheduledIds: journey.scheduledIds });
+    if (config && journey.scheduledIds?.length) {
+      await recordScheduledIds(config, token, journey.scheduledIds).catch(() => {});
     }
 
     const ghlResult = await forwardToGoHighLevel(payload).catch(() => ({ configured: true, ok: false }));

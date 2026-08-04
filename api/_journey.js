@@ -76,6 +76,12 @@ export function buildJourney(name) {
         ref: 'Colossians 4:2–3',
       },
       cta: { text: 'Pray through your map', url: `${SITE_URL}/#builder` },
+      resource: {
+        label: 'Go deeper on this',
+        title: 'How to pray for unsaved family and friends',
+        note: 'The full rhythm, what to pray when it has been years, and how not to carry it alone.',
+        url: `${SITE_URL}/blog/how-to-pray-for-unsaved-family-and-friends`,
+      },
       ps: 'Tip: the Plan button downloads your whole map as a printable prayer list.',
     },
     {
@@ -98,6 +104,17 @@ export function buildJourney(name) {
         ref: '1 John 3:18',
       },
       cta: { text: 'Update someone to Care', url: `${SITE_URL}/#builder` },
+      resource: {
+        label: 'Go deeper on this',
+        title: 'Evangelism without being weird: 12 ways to love your neighbour',
+        note: 'All twelve, plus why this is not manipulation, and what it looks like when a whole city does it.',
+        url: `${SITE_URL}/blog/evangelism-without-being-weird`,
+      },
+      links: [
+        ['Love on Hamilton', 'https://www.loveonhamilton.com', 'a city adopted by its churches'],
+        ['Kingdom Response', 'https://www.kingdomresponse.com', 'church-led relief when disaster hits'],
+        ['Jesus Festival app', 'https://www.jesusfestival.app', 'daily Kingdom acts, done together'],
+      ],
     },
     {
       key: 'share',
@@ -119,7 +136,17 @@ export function buildJourney(name) {
         ref: '1 Peter 3:15',
       },
       cta: { text: 'Move someone to Share', url: `${SITE_URL}/#builder` },
-      ps: 'Practise it out loud once, in the car. It gets much easier the second time.',
+      resource: {
+        label: 'Go deeper on this',
+        title: 'How to share your testimony in three minutes',
+        note: 'The full framework, four things that make it land, and what to say when you cannot answer.',
+        url: `${SITE_URL}/blog/how-to-share-your-testimony`,
+      },
+      links: [
+        ['Jesus Festival', 'https://www.jesusfestival.ca', 'an easier first invitation than a Sunday service'],
+        ['SIX33 Outpost', 'https://six33outpost.com', 'apparel that starts the conversation for you'],
+        ['SIX33 Legends', 'https://six33legends.com', 'truth carried by story'],
+      ],
     },
     {
       key: 'disciple',
@@ -141,6 +168,17 @@ export function buildJourney(name) {
         ref: '2 Timothy 2:2',
       },
       cta: { text: 'Add a branch to your map', url: `${SITE_URL}/#builder` },
+      resource: {
+        label: 'Go deeper on this',
+        title: 'Oikos evangelism: how the early Church actually grew',
+        note: 'Why households were the engine of the fastest church growth in history — and why it still works.',
+        url: `${SITE_URL}/blog/oikos-evangelism-early-church`,
+      },
+      links: [
+        ['Kingdom Base', 'https://kingdombase.app', 'when your map outgrows one page'],
+        ['TaskSimply', 'https://tasksimply.com', 'so the next step actually gets scheduled'],
+        ['Lions Den Alliance', 'https://www.lionsdenalliance.com', 'for whoever you lead at work'],
+      ],
     },
     {
       key: 'bigger-picture',
@@ -221,6 +259,45 @@ function renderHeroBand(block) {
   </td></tr>`;
 }
 
+// A single featured article card — drives traffic to the journal and gives the
+// email somewhere substantial to send people.
+function renderResource(block) {
+  if (!block.resource) return '';
+  const { label, title, note, url } = block.resource;
+  return `<tr><td style="padding:6px 34px 4px;">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border:1px solid rgba(20,132,122,0.28);border-radius:10px;background:#f4fbf9;">
+      <tr><td style="padding:18px 20px;font-family:'Segoe UI',Roboto,Helvetica,Arial,sans-serif;">
+        <p style="margin:0 0 7px;font-size:10px;letter-spacing:1.6px;text-transform:uppercase;color:${TEAL};font-weight:800;">${escapeHtml(
+          label,
+        )}</p>
+        <p style="margin:0 0 6px;font-size:17px;line-height:1.35;font-weight:800;color:${INK};">
+          <a href="${url}" style="color:${INK};text-decoration:none;">${escapeHtml(title)}</a>
+        </p>
+        <p style="margin:0 0 10px;font-size:14px;line-height:1.55;color:${MUTED};">${escapeHtml(note)}</p>
+        <a href="${url}" style="font-size:14px;font-weight:800;color:${TEAL};text-decoration:none;">Read the article &rarr;</a>
+      </td></tr>
+    </table>
+  </td></tr>`;
+}
+
+// Contextual pointers into the wider network — only ever things relevant to the
+// step this email is about.
+function renderLinks(block) {
+  if (!block.links?.length) return '';
+  const rows = block.links
+    .map(
+      ([name, url, why]) =>
+        `<tr><td style="padding:0 0 9px;font-family:'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:14px;line-height:1.55;color:${MUTED};">
+          <a href="${url}" style="color:${TEAL};font-weight:800;text-decoration:none;">${escapeHtml(name)}</a> — ${escapeHtml(why)}
+        </td></tr>`,
+    )
+    .join('');
+  return `<tr><td style="padding:14px 34px 0;">
+    <p style="margin:0 0 10px;font-family:'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:10px;letter-spacing:1.6px;text-transform:uppercase;color:${DEEP};font-weight:800;">If you want to take it further</p>
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0">${rows}</table>
+  </td></tr>`;
+}
+
 export function renderEmail(block, unsubscribeUrl) {
   const scripture = block.scripture
     ? `<tr><td style="padding:4px 34px 10px;">
@@ -281,6 +358,8 @@ export function renderEmail(block, unsubscribeUrl) {
       ${paragraphs}
     </td></tr>
     ${scripture}
+    ${renderResource(block)}
+    ${renderLinks(block)}
     <tr><td style="padding:22px 34px 6px;">
       <table role="presentation" cellpadding="0" cellspacing="0"><tr>
         <td align="center" bgcolor="${INK}" style="border-radius:999px;">
@@ -317,6 +396,11 @@ export function plainTextFallback(block) {
 
   const lines = [block.heading, '', ...block.body.map(strip)];
   if (block.scripture) lines.push('', `"${block.scripture.text}" — ${block.scripture.ref}`);
+  if (block.resource) lines.push('', `${block.resource.label}: ${block.resource.title}`, block.resource.url);
+  if (block.links?.length) {
+    lines.push('', 'If you want to take it further:');
+    block.links.forEach(([name, url, why]) => lines.push(`- ${name} — ${why}: ${url}`));
+  }
   lines.push('', `${block.cta.text}: ${block.cta.url}`);
   if (block.ps) lines.push('', strip(block.ps));
   return lines.join('\n');
