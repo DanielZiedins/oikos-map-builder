@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>The Oikos Journal</title>
+    <link>https://www.oikosmap.com/blog</link>
+    <atom:link href="https://www.oikosmap.com/rss.xml" rel="self" type="application/rss+xml" />
+    <description>Practical, encouraging writing on prayer, everyday evangelism, discipleship, and loving the people God has placed around you.</description>
+    <language>en</language>
+    <lastBuildDate>Thu, 30 Jul 2026 09:00:00 GMT</lastBuildDate>
+    <item>
+      <title>What Is an Oikos? The Biblical Meaning of Your Household</title>
+      <link>https://www.oikosmap.com/blog/what-is-an-oikos</link>
+      <guid isPermaLink="true">https://www.oikosmap.com/blog/what-is-an-oikos</guid>
+      <pubDate>Thu, 30 Jul 2026 09:00:00 GMT</pubDate>
+      <description>Oikos is the Greek word for household, but in the New Testament it means far more than the people under your roof. Here is what it meant then, and what it means for you now.</description>
+      <category>Oikos</category>
+      <category>Bible study</category>
+      <category>Evangelism</category>
+    </item>
+    <item>
+      <title>How to Pray for Unsaved Family and Friends (A Simple Daily Rhythm)</title>
+      <link>https://www.oikosmap.com/blog/how-to-pray-for-unsaved-family-and-friends</link>
+      <guid isPermaLink="true">https://www.oikosmap.com/blog/how-to-pray-for-unsaved-family-and-friends</guid>
+      <pubDate>Thu, 30 Jul 2026 09:00:00 GMT</pubDate>
+      <description>A five-minute daily rhythm for praying by name for the people you love who do not yet follow Jesus — including what to pray when it has been years.</description>
+      <category>Prayer</category>
+      <category>Family</category>
+      <category>Perseverance</category>
+    </item>
+    <item>
+      <title>Evangelism Without Being Weird: 12 Ways to Love Your Neighbour This Week</title>
+      <link>https://www.oikosmap.com/blog/evangelism-without-being-weird</link>
+      <guid isPermaLink="true">https://www.oikosmap.com/blog/evangelism-without-being-weird</guid>
+      <pubDate>Thu, 30 Jul 2026 09:00:00 GMT</pubDate>
+      <description>Twelve ordinary, non-awkward ways to move toward the people around you — the practical middle ground between praying for someone and preaching at them.</description>
+      <category>Care</category>
+      <category>Neighbours</category>
+      <category>Practical</category>
+    </item>
+    <item>
+      <title>How to Share Your Testimony in Three Minutes</title>
+      <link>https://www.oikosmap.com/blog/how-to-share-your-testimony</link>
+      <guid isPermaLink="true">https://www.oikosmap.com/blog/how-to-share-your-testimony</guid>
+      <pubDate>Thu, 30 Jul 2026 09:00:00 GMT</pubDate>
+      <description>A simple three-part framework for telling your story of coming to faith — clearly, honestly, and short enough that people actually listen.</description>
+      <category>Testimony</category>
+      <category>Evangelism</category>
+      <category>Practical</category>
+    </item>
+    <item>
+      <title>Oikos Evangelism: How the Early Church Actually Grew</title>
+      <link>https://www.oikosmap.com/blog/oikos-evangelism-early-church</link>
+      <guid isPermaLink="true">https://www.oikosmap.com/blog/oikos-evangelism-early-church</guid>
+      <pubDate>Thu, 30 Jul 2026 09:00:00 GMT</pubDate>
+      <description>The early Church grew from a few thousand to millions without buildings, budgets, or public platforms. Households were the engine — and the method still works.</description>
+      <category>Church history</category>
+      <category>Multiplication</category>
+      <category>Discipleship</category>
+    </item>
+    <item>
+      <title>Faith at Work: Your Coworkers Are Your Oikos</title>
+      <link>https://www.oikosmap.com/blog/faith-at-work-your-coworkers-are-your-oikos</link>
+      <guid isPermaLink="true">https://www.oikosmap.com/blog/faith-at-work-your-coworkers-are-your-oikos</guid>
+      <pubDate>Thu, 30 Jul 2026 09:00:00 GMT</pubDate>
+      <description>You spend more waking hours with colleagues than with almost anyone else. Here is how to be a genuine witness at work without becoming the person everyone avoids.</description>
+      <category>Work</category>
+      <category>Culture</category>
+      <category>Integrity</category>
+    </item>
+  </channel>
+</rss>

@@ -42,6 +42,7 @@ function head({ title, description, canonical, extraSchema = [], published }) {
     <link rel="apple-touch-icon" href="/icon-192.png" />
     <link rel="manifest" href="/manifest.webmanifest" />
     <link rel="canonical" href="${canonical}" />
+    <link rel="alternate" type="application/rss+xml" title="The Oikos Journal" href="${SITE}/rss.xml" />
     <link rel="preload" href="/fonts/InterVariable-subset.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
     <meta property="og:title" content="${esc(title)}" />
     <meta property="og:description" content="${esc(description)}" />
@@ -247,4 +248,37 @@ ${urls
 `,
 );
 
-console.log(`build-blog: generated blog.html + ${posts.length} posts + sitemap (${urls.length} urls)`);
+// RSS so the journal can be followed and syndicated.
+const rssItems = sortedPosts
+  .map(
+    (post) => `    <item>
+      <title>${esc(post.title)}</title>
+      <link>${SITE}/blog/${post.slug}</link>
+      <guid isPermaLink="true">${SITE}/blog/${post.slug}</guid>
+      <pubDate>${new Date(`${post.date}T09:00:00Z`).toUTCString()}</pubDate>
+      <description>${esc(post.description)}</description>
+${post.tags.map((tag) => `      <category>${esc(tag)}</category>`).join('\n')}
+    </item>`,
+  )
+  .join('\n');
+
+writeFileSync(
+  resolve(root, 'public/rss.xml'),
+  `<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>The Oikos Journal</title>
+    <link>${SITE}/blog</link>
+    <atom:link href="${SITE}/rss.xml" rel="self" type="application/rss+xml" />
+    <description>Practical, encouraging writing on prayer, everyday evangelism, discipleship, and loving the people God has placed around you.</description>
+    <language>en</language>
+    <lastBuildDate>${new Date(`${today}T09:00:00Z`).toUTCString()}</lastBuildDate>
+${rssItems}
+  </channel>
+</rss>
+`,
+);
+
+console.log(
+  `build-blog: generated blog.html + ${posts.length} posts + sitemap (${urls.length} urls) + rss (${sortedPosts.length} items)`,
+);
