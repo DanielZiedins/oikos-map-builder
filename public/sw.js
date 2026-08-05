@@ -1,5 +1,6 @@
-const CACHE = 'oikos-map-v1';
-const CORE = ['/', '/growth', '/connect', '/oikos-logo.svg', '/favicon.png', '/manifest.webmanifest'];
+// Bump this whenever CORE changes so old shells are cleared on activate.
+const CACHE = 'oikos-map-v2';
+const CORE = ['/', '/blog', '/growth', '/connect', '/oikos-logo.svg', '/favicon.png', '/manifest.webmanifest'];
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
