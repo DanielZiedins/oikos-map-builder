@@ -9,6 +9,10 @@ Powered by [Love on The World](https://www.loveontheworld.com) and [Thy Kingdom 
 ## Features
 
 - Build an Oikos Map directly on the landing page
+- Bulk add: paste a list of names (newline, comma or semicolon separated) and the
+  map fills in, de-duplicated against what is already there
+- Canvas grows automatically so large first circles never overlap; small maps
+  keep the original 1100x820 export size
 - Add first-circle people and second-circle branches
 - Track relationship type, prayer focus, and notes
 - Save locally in the visitor's browser
@@ -46,7 +50,20 @@ npm run dev
 npm run build
 ```
 
-The production output is generated in `dist/` with three HTML entry points (`/`, `/growth`, `/connect`). Vercel serves the extensionless routes via `"cleanUrls": true` in `vercel.json`.
+The production output is generated in `dist/`. Vercel serves the extensionless
+routes via `"cleanUrls": true` in `vercel.json`.
+
+There are **two entry scripts**, which keeps each page's payload small:
+
+| Entry | Pages | Contains |
+|---|---|---|
+| `src/main.jsx` | `/`, `/growth`, `/connect` | the map builder |
+| `src/blog-entry.jsx` | `/blog`, `/blog/*` | the journal and article bodies |
+
+React and lucide are hoisted into a shared `vendor` chunk. Blog pages therefore
+never download the map builder, and the homepage never downloads article bodies —
+which is also why post summaries live in `src/content/posts-meta.js` separately
+from the full text in `src/content/posts.js`.
 
 ## Deploy on Vercel
 

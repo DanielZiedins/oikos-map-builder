@@ -27,6 +27,14 @@ export default defineConfig({
         blog: resolve(__dirname, 'blog.html'),
         ...blogInputs(),
       },
+      output: {
+        // Keep dependencies in one clearly-named shared chunk instead of letting
+        // Rollup name it after whichever shared module it happened to see first.
+        manualChunks(id) {
+          if (id.includes('node_modules')) return 'vendor';
+          return undefined;
+        },
+      },
     },
   },
 });

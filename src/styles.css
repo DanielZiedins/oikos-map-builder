@@ -2319,6 +2319,47 @@ textarea:focus-visible,
   grid-template-columns: repeat(5, minmax(0, 1fr));
 }
 
+.bulk-add {
+  display: grid;
+  gap: 11px;
+  padding: 14px;
+  border: 1px solid rgba(20, 184, 166, 0.22);
+  border-radius: 8px;
+  background: rgba(20, 184, 166, 0.06);
+}
+
+.bulk-label textarea {
+  min-height: 70px;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.bulk-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 8px;
+  align-items: end;
+}
+
+.bulk-row button {
+  min-height: 44px;
+  padding: 10px 14px;
+  color: #171310;
+  background: #f3cf74;
+  white-space: nowrap;
+}
+
+.bulk-row button:disabled {
+  cursor: not-allowed;
+  color: rgba(255, 248, 236, 0.5);
+  background: rgba(255, 248, 236, 0.1);
+}
+
+.bulk-row button:disabled:hover {
+  transform: none;
+  border-color: rgba(38, 32, 28, 0.16);
+}
+
 .button-row button,
 .download-actions button,
 .danger-button {

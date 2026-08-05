@@ -32,12 +32,13 @@ import {
   Trash2,
   Undo2,
   Upload,
+  UserPlus,
   UserRound,
+  Users,
   WandSparkles,
   X,
 } from 'lucide-react';
-import { BlogIndex, BlogPost } from './Blog.jsx';
-import { postBySlug, sortedPosts } from './content/posts.js';
+import { sortedPostsMeta } from './content/posts-meta.js';
 import { networkGroups, sitesInGroup } from './content/network.js';
 import './styles.css';
 
@@ -947,7 +948,7 @@ function LatestArticles() {
         </a>
       </div>
       <div className="latest-grid">
-        {sortedPosts.slice(0, 3).map((post) => (
+        {sortedPostsMeta.slice(0, 3).map((post) => (
           <article key={post.slug}>
             <p className="blog-card-kicker">{post.kicker}</p>
             <h3>
@@ -1249,11 +1250,35 @@ function ConnectPage() {
   );
 }
 
+const NAME_SPLIT = /[\n,;]+/;
+
+// Accepts a pasted list — newlines, commas or semicolons — and returns clean,
+// de-duplicated names.
+function parseNameList(text) {
+  const seen = new Set();
+  const names = [];
+  for (const raw of String(text || '').split(NAME_SPLIT)) {
+    const name = raw.trim().replace(/\s+/g, ' ').slice(0, 60);
+    if (!name) continue;
+    const key = name.toLowerCase();
+    if (seen.has(key)) continue;
+    seen.add(key);
+    names.push(name);
+    if (names.length >= 40) break;
+  }
+  return names;
+}
+
 function computeLayout(people) {
-  const width = 1100;
-  const height = 820;
-  const center = { x: width / 2, y: height / 2 };
   const roots = people.filter((person) => !person.parentId);
+  // Grow the canvas once a single ring can no longer hold the first circle
+  // without overlapping. Small maps keep the original 1100x820 exactly.
+  const baseRadius = roots.length > 7 ? 286 : 248;
+  const radius = Math.max(baseRadius, Math.round((Math.max(roots.length, 1) * 152) / (2 * Math.PI)));
+  const span = (radius + 162) * 2;
+  const width = Math.max(1100, span);
+  const height = Math.max(820, span);
+  const center = { x: width / 2, y: height / 2 };
   const childrenByParent = people.reduce((acc, person) => {
     if (person.parentId) {
       acc[person.parentId] = acc[person.parentId] || [];
@@ -1265,7 +1290,6 @@ function computeLayout(people) {
   const positions = {};
   roots.forEach((person, index) => {
     const angle = -Math.PI / 2 + (index * Math.PI * 2) / Math.max(roots.length, 1);
-    const radius = roots.length > 7 ? 286 : 248;
     const parentPosition = {
       x: center.x + Math.cos(angle) * radius,
       y: center.y + Math.sin(angle) * radius,
@@ -1298,6 +1322,8 @@ function App() {
   const [mapLinkState, setMapLinkState] = useState('Link');
   const [planCopyState, setPlanCopyState] = useState('Plan');
   const [canUndo, setCanUndo] = useState(false);
+  const [bulkText, setBulkText] = useState('');
+  const [bulkGroup, setBulkGroup] = useState('friends');
   const fileInputRef = useRef(null);
   const svgRef = useRef(null);
   const historyRef = useRef([]);
@@ -1401,6 +1427,36 @@ function App() {
     setSaveState('Saving...');
     setMapData((current) => ({ ...current, people: [...current.people, newPerson] }));
     setSelectedId(newPerson.id);
+  }
+
+  function addManyPeople() {
+    const names = parseNameList(bulkText);
+    if (!names.length) return;
+
+    const existing = new Set(mapData.people.map((person) => person.name.trim().toLowerCase()));
+    const fresh = names.filter((name) => !existing.has(name.toLowerCase()));
+    if (!fresh.length) {
+      setSaveState('Those names are already on your map');
+      setBulkText('');
+      return;
+    }
+
+    pushHistory();
+    const additions = fresh.map((name) => ({
+      id: createId(),
+      name,
+      group: bulkGroup,
+      stage: 'pray',
+      notes: '',
+      parentId: null,
+    }));
+    setMapData((current) => ({ ...current, people: [...current.people, ...additions] }));
+    setSelectedId(additions[0].id);
+    setBulkText('');
+    const skipped = names.length - fresh.length;
+    setSaveState(
+      `Added ${additions.length} ${additions.length === 1 ? 'name' : 'names'}${skipped ? ` · ${skipped} already there` : ''}`,
+    );
   }
 
   function deletePerson(id) {
@@ -1871,6 +1927,41 @@ function App() {
               </div>
             </div>
 
+            <div className="bulk-add">
+              <div className="panel-title">
+                <Users size={18} aria-hidden="true" />
+                <span>Add several at once</span>
+              </div>
+              <label className="bulk-label">
+                Paste or type names, one per line or comma separated
+                <textarea
+                  rows="3"
+                  value={bulkText}
+                  onChange={(event) => setBulkText(event.target.value)}
+                  placeholder={'Mum\nJordan, Sam\nLeah'}
+                />
+              </label>
+              <div className="bulk-row">
+                <label>
+                  Circle
+                  <select value={bulkGroup} onChange={(event) => setBulkGroup(event.target.value)}>
+                    {groups.map((group) => (
+                      <option value={group.id} key={group.id}>
+                        {group.label}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+                <button type="button" onClick={addManyPeople} disabled={!parseNameList(bulkText).length}>
+                  <UserPlus size={17} aria-hidden="true" />
+                  {(() => {
+                    const count = parseNameList(bulkText).length;
+                    return count ? `Add ${count}` : 'Add names';
+                  })()}
+                </button>
+              </div>
+            </div>
+
             <div className="button-row">
               <button type="button" onClick={() => addPerson(null)} title="Add first-circle person">
                 <Plus size={18} aria-hidden="true" />
@@ -2229,28 +2320,17 @@ function OikosSvg({ mapData, layout, selectedId, setSelectedId, svgRef }) {
   );
 }
 
+// Blog routes are served by src/blog-entry.jsx, so they never reach this file.
 const routes = {
   '/connect': <ConnectPage />,
   '/growth': <GrowthPage />,
-  '/blog': <BlogIndex />,
 };
 
 const routePath = window.location.pathname.replace(/\.html$/, '').replace(/\/+$/, '') || '/';
-
-function resolveRoute(path) {
-  if (routes[path]) return routes[path];
-  const blogMatch = path.match(/^\/blog\/(.+)$/);
-  if (blogMatch) {
-    const post = postBySlug(blogMatch[1]);
-    if (post) return <BlogPost post={post} />;
-  }
-  return <App />;
-}
-
 const container = document.getElementById('root');
 // Reuse the root across HMR updates instead of creating a second one.
 container.__oikosRoot = container.__oikosRoot || createRoot(container);
-container.__oikosRoot.render(resolveRoute(routePath));
+container.__oikosRoot.render(routes[routePath] || <App />);
 
 if (import.meta.env.PROD && 'serviceWorker' in navigator) {
   window.addEventListener('load', () => {

@@ -78,7 +78,7 @@ ${metaHead}
 ${noscript}
       </main>
     </noscript>
-    <script type="module" src="/src/main.jsx"></script>
+    <script type="module" src="/src/blog-entry.jsx"></script>
   </body>
 </html>
 `;
