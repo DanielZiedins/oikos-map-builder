@@ -1,0 +1,70 @@
+# Oikos Map Builder: Expanded Reference
+
+Canonical URL: https://www.oikosmap.com/
+Site language: English (Canada)
+Last updated: 2026-08-09
+
+## One-sentence description
+
+Oikos Map Builder is a free Christian prayer, outreach, and disciple-making tool that helps people visually map their everyday relationships and take a faithful next step to pray, care, share Jesus, and disciple.
+
+## What is an Oikos Map?
+
+An Oikos Map is a visual representation of a person's relational world. The word "oikos" is often translated as "household" and, in this setting, means the family, friends, coworkers, classmates, neighbors, teammates, and other relationships God has already placed around a person.
+
+## Who is it for?
+
+The tool is free for individual believers, churches, small groups, youth ministries, students, pastors, evangelists, and disciple-makers. It does not require an account.
+
+## What can visitors do?
+
+- Create a custom relationship map with a center person, first-circle relationships, and second-circle branches.
+- Classify relationships as family, friends, work, school, or neighbors.
+- Track an intentional next step: Pray, Care, Share, or Disciple.
+- Add notes and prayer focuses for each person.
+- Save locally in the browser.
+- Download the map as PNG, SVG, or editable JSON.
+- Download a text prayer plan.
+- Import a previously exported JSON map.
+
+## Suggested first use
+
+1. Put your name in the center of the map.
+2. Add several people already in your life.
+3. Pray by name for one person.
+4. Choose a practical way to care for them.
+5. Share your story or the Gospel naturally when an open door comes.
+6. Invite open people into simple discipleship and help them reach their own oikos.
+
+## Frequently asked questions
+
+### Is Oikos Map Builder free?
+
+Yes. Visitors can build, save, and download an Oikos Map at no cost.
+
+### Does an Oikos Map save automatically?
+
+The map saves locally in the visitor's browser. Visitors can also download portable files for backup or sharing.
+
+### Can a church or group use this tool?
+
+Yes. Churches and groups can use it to pray for their relational world, encourage outreach, plan follow-up, and imagine multiplication through everyday relationships.
+
+### What comes after making a map?
+
+Choose one person and one next step. The purpose is not a perfect diagram; it is faithful, prayerful action toward people.
+
+## Related pages and organizations
+
+- Main tool: https://www.oikosmap.com/
+- Personal growth: https://www.oikosmap.com/growth
+- Community and connection: https://www.oikosmap.com/connect
+- Love on The World: https://www.loveontheworld.com/
+- Thy Kingdom Network: https://www.thykingdom.net/
+- e3 Canada collaboration: https://e3ministry.ca/staff/katie-daniel-ziedins
+- Kingdom Connect: https://kingdom-connect.net/
+- I Am Reborn: https://www.iamreborn.net/
+
+## Attribution
+
+The original Oikos Map concept is not claimed as an invention of Daniel Ziedins. This site shares the tool freely, in collaboration with e3 Canada, to help more people pray, love, reach, and disciple their oikos.

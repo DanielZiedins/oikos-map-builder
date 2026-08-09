@@ -220,6 +220,41 @@ const mapTemplates = [
   },
 ];
 
+const faqItems = [
+  {
+    question: 'What is an Oikos Map?',
+    answer: 'An Oikos Map is a visual prayer and outreach tool for naming the people already in your everyday world: family, friends, coworkers, classmates, neighbors, and teammates. It helps you pray by name, care intentionally, share your faith naturally, and disciple people over time.',
+  },
+  {
+    question: 'What does oikos mean?',
+    answer: 'Oikos is a Greek word often translated as household. In this context, it means the network of relationships God has already placed around you, not only the people living under your roof.',
+  },
+  {
+    question: 'Is the Oikos Map Builder really free?',
+    answer: 'Yes. The Oikos Map Builder is free to use for individuals, churches, youth ministries, small groups, and disciple-makers. No account is required to create, save, or download a map.',
+  },
+  {
+    question: 'How do I create an Oikos Map?',
+    answer: 'Start with your name in the middle, add people in your first circle, choose their relationship type, and write a simple prayer focus or next step. You can then add branches to show the relationships connected to each person.',
+  },
+  {
+    question: 'Can I save and download my map?',
+    answer: 'Yes. Your map saves locally in your browser and can be downloaded as a PNG image, SVG graphic, editable JSON file, or a simple prayer-plan text file.',
+  },
+  {
+    question: 'Who can use this outreach tool?',
+    answer: 'Anyone who wants to live on mission with Jesus can use it. It is especially helpful for believers, pastors, churches, small groups, youth ministries, students, and people learning to make disciples in everyday life.',
+  },
+  {
+    question: 'What should I do after I make my map?',
+    answer: 'Choose one person and one faithful next step. Pray for them by name, look for a practical way to care, share your story when the moment is right, and invite them into simple discipleship when they are open.',
+  },
+  {
+    question: 'Can a church or small group use the Oikos Map?',
+    answer: 'Absolutely. Churches and groups can use the map to help people pray for their relational world, plan outreach, encourage follow-up, and notice how discipleship can multiply through ordinary relationships.',
+  },
+];
+
 function readStoredMap() {
   try {
     if (typeof window === 'undefined' || !window.localStorage) return null;
@@ -1656,6 +1691,10 @@ function App() {
           <p className="hero-lede">
             Build a simple, prayerful Oikos Map that turns names into intentional love, conversations, and disciple-making
             vision.
+          </p>
+          <p className="hero-definition">
+            <strong>What is an Oikos Map?</strong> A clear, visual way to pray for and love the people God has already
+            placed in your everyday world.
           </p>
           <div className="hero-actions">
             <a className="primary-action" href="#builder">
