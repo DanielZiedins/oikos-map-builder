@@ -42,6 +42,7 @@ function head({ title, description, canonical, extraSchema = [], published }) {
     <link rel="apple-touch-icon" href="/icon-192.png" />
     <link rel="manifest" href="/manifest.webmanifest" />
     <link rel="canonical" href="${canonical}" />
+    <link rel="alternate" type="text/plain" href="${SITE}/llms.txt" title="Oikos Map Builder for AI systems" />
     <link rel="alternate" type="application/rss+xml" title="The Oikos Journal" href="${SITE}/rss.xml" />
     <link rel="preload" href="/fonts/InterVariable-subset.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
     <meta property="og:title" content="${esc(title)}" />
@@ -49,7 +50,7 @@ function head({ title, description, canonical, extraSchema = [], published }) {
     <meta property="og:type" content="${published ? 'article' : 'website'}" />
     <meta property="og:url" content="${canonical}" />
     <meta property="og:site_name" content="Oikos Map Builder" />
-    <meta property="og:locale" content="en_US" />
+    <meta property="og:locale" content="en_CA" />
     <meta property="og:image" content="${SITE}/og-image.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
@@ -216,9 +217,26 @@ posts.forEach((post) => {
 });
 
 // Sitemap covers the core pages plus every post.
-const today = sortedPosts[0]?.date || '2026-07-30';
+const today = '2026-08-09';
 const urls = [
-  { loc: `${SITE}/`, priority: '1.0', changefreq: 'weekly', lastmod: today },
+  {
+    loc: `${SITE}/`,
+    priority: '1.0',
+    changefreq: 'weekly',
+    lastmod: today,
+    images: [
+      {
+        loc: `${SITE}/og-image.png`,
+        title: 'Free Oikos Map Builder',
+        caption: 'A visual prayer and outreach tool for mapping the people God has placed around you.',
+      },
+      {
+        loc: `${SITE}/oikos-map-social.png`,
+        title: 'Oikos Map Builder relational map',
+        caption: 'A glowing relational map connected by a heart, representing intentional love and prayer.',
+      },
+    ],
+  },
   { loc: `${SITE}/blog`, priority: '0.9', changefreq: 'weekly', lastmod: today },
   { loc: `${SITE}/connect`, priority: '0.8', changefreq: 'monthly', lastmod: today },
   { loc: `${SITE}/growth`, priority: '0.7', changefreq: 'monthly', lastmod: today },
@@ -233,7 +251,7 @@ const urls = [
 writeFileSync(
   resolve(root, 'public/sitemap.xml'),
   `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
 ${urls
   .map(
     (url) => `  <url>
@@ -241,6 +259,15 @@ ${urls
     <lastmod>${url.lastmod}</lastmod>
     <changefreq>${url.changefreq}</changefreq>
     <priority>${url.priority}</priority>
+${(url.images || [])
+  .map(
+    (image) => `    <image:image>
+      <image:loc>${image.loc}</image:loc>
+      <image:title>${esc(image.title)}</image:title>
+      <image:caption>${esc(image.caption)}</image:caption>
+    </image:image>`,
+  )
+  .join('\n')}
   </url>`,
   )
   .join('\n')}
