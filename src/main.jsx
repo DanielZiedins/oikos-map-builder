@@ -446,6 +446,21 @@ function buildPrayerPlan(mapData) {
   return lines.join('\n');
 }
 
+function buildTodayFocus(person) {
+  const group = getGroup(person.group).label.toLowerCase();
+  const stage = getStage(person.stage);
+  const note = person.notes.trim();
+  return [
+    'My Oikos focus for today',
+    '',
+    `Person: ${person.name}`,
+    `Relationship: ${group}`,
+    `Rhythm: ${stage.label}`,
+    `Faithful next step: ${stage.prompt}`,
+    ...(note ? [`My note: ${note}`] : []),
+  ].join('\n');
+}
+
 function PoweredBy() {
   return (
     <>
@@ -1321,6 +1336,7 @@ function App() {
   const [shareState, setShareState] = useState('Share');
   const [mapLinkState, setMapLinkState] = useState('Link');
   const [planCopyState, setPlanCopyState] = useState('Plan');
+  const [coachCopyState, setCoachCopyState] = useState('Copy step');
   const [canUndo, setCanUndo] = useState(false);
   const [bulkText, setBulkText] = useState('');
   const [bulkGroup, setBulkGroup] = useState('friends');
@@ -1563,6 +1579,12 @@ function App() {
     window.setTimeout(() => setPlanCopyState('Plan'), 1800);
   }
 
+  async function copyTodayFocus(person) {
+    if (!person) return;
+    setCoachCopyState((await copyText(buildTodayFocus(person))) ? 'Copied!' : 'Copy failed');
+    window.setTimeout(() => setCoachCopyState('Copy step'), 1800);
+  }
+
   function printMap() {
     window.print();
   }
@@ -1607,7 +1629,13 @@ function App() {
       URL.revokeObjectURL(url);
       canvas.toBlob((blob) => {
         if (blob) downloadBlob(blob, `${slugify(mapData.mapTitle)}.png`);
+        else setSaveState('PNG export failed');
       }, 'image/png');
+    };
+
+    image.onerror = () => {
+      URL.revokeObjectURL(url);
+      setSaveState('PNG export failed');
     };
 
     image.src = url;
@@ -1619,7 +1647,15 @@ function App() {
     ...stage,
     count: mapData.people.filter((person) => person.stage === stage.id).length,
   }));
-  const reachedCount = mapData.people.filter((person) => ['share', 'disciple'].includes(person.stage)).length;
+  const actionedCount = mapData.people.filter((person) => person.stage !== 'pray').length;
+  const movementPercent = mapData.people.length ? Math.round((actionedCount / mapData.people.length) * 100) : 0;
+  const coachPeople = [...mapData.people]
+    .sort((left, right) => {
+      const stageDifference = stages.findIndex((stage) => stage.id === left.stage) - stages.findIndex((stage) => stage.id === right.stage);
+      if (stageDifference) return stageDifference;
+      return left.name.localeCompare(right.name);
+    })
+    .slice(0, 4);
 
   return (
     <main>
@@ -2105,15 +2141,42 @@ function App() {
             <div className="map-coach" aria-live="polite">
               <div className="coach-heading">
                 <span><Compass size={18} aria-hidden="true" /> Map coach</span>
-                <small>{mapData.people.length ? `${reachedCount} in share or disciple` : 'Begin with one name'}</small>
+                <small>{mapData.people.length ? `${movementPercent}% taking a next step` : 'Begin with one name'}</small>
               </div>
               {selectedPerson ? (
                 <>
-                  <p><strong>{selectedPerson.name}</strong>: {selectedStage.prompt}</p>
-                  <button type="button" className="coach-action" onClick={advanceSelectedPerson}>
-                    <CheckCircle2 size={17} aria-hidden="true" />
-                    {selectedStage.id === 'disciple' ? 'Celebrate and multiply' : `Move to ${stages[stages.findIndex((stage) => stage.id === selectedStage.id) + 1].label}`}
-                  </button>
+                  <div className="coach-focus">
+                    <span className="coach-focus-dot" style={{ backgroundColor: getGroup(selectedPerson.group).color }} aria-hidden="true" />
+                    <div>
+                      <strong>Today: {selectedPerson.name}</strong>
+                      <p>{selectedStage.prompt}</p>
+                    </div>
+                  </div>
+                  {coachPeople.length > 1 ? (
+                    <div className="coach-people" aria-label="Choose a person to focus on">
+                      {coachPeople.map((person) => (
+                        <button
+                          type="button"
+                          className={person.id === selectedPerson.id ? 'coach-person active' : 'coach-person'}
+                          key={person.id}
+                          onClick={() => setSelectedId(person.id)}
+                          title={`Focus on ${person.name}`}
+                        >
+                          {person.name}
+                        </button>
+                      ))}
+                    </div>
+                  ) : null}
+                  <div className="coach-actions">
+                    <button type="button" className="coach-action" onClick={() => copyTodayFocus(selectedPerson)}>
+                      <Clipboard size={17} aria-hidden="true" />
+                      {coachCopyState}
+                    </button>
+                    <button type="button" className="coach-action coach-advance" onClick={advanceSelectedPerson}>
+                      <CheckCircle2 size={17} aria-hidden="true" />
+                      {selectedStage.id === 'disciple' ? 'Celebrate' : `Move to ${stages[stages.findIndex((stage) => stage.id === selectedStage.id) + 1].label}`}
+                    </button>
+                  </div>
                 </>
               ) : (
                 <p>Add someone you already know. The first name is enough to begin.</p>
@@ -2181,7 +2244,7 @@ function App() {
             <div className="map-journey" aria-label="Oikos map progress">
               <div>
                 <span>Map momentum</span>
-                <strong>{mapData.people.length ? `${mapData.people.length} names held in prayer` : 'Your map is ready for its first name'}</strong>
+                <strong>{mapData.people.length ? `${mapData.people.length} names held in prayer · ${actionedCount} with a next step` : 'Your map is ready for its first name'}</strong>
               </div>
               <div className="stage-meter">
                 {stageCounts.map((stage) => (

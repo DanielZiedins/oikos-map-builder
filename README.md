@@ -15,6 +15,7 @@ Powered by [Love on The World](https://www.loveontheworld.com) and [Thy Kingdom 
   keep the original 1100x820 export size
 - Add first-circle people and second-circle branches
 - Track relationship type, prayer focus, and notes
+- Use the Map Coach to choose a person for today, copy a concrete next step, and move them through Pray, Care, Share, and Disciple
 - Save locally in the visitor's browser
 - Download maps as PNG, SVG, or editable JSON
 - Import a saved JSON map

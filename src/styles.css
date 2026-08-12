@@ -2631,13 +2631,77 @@ textarea:focus-visible,
   line-height: 1.5;
 }
 
+.coach-focus {
+  display: grid;
+  grid-template-columns: 11px minmax(0, 1fr);
+  gap: 10px;
+  align-items: start;
+  padding: 12px;
+  border: 1px solid rgba(255, 248, 236, 0.12);
+  border-radius: 8px;
+  background: rgba(25, 21, 18, 0.46);
+}
+
+.coach-focus-dot {
+  width: 10px;
+  height: 10px;
+  margin-top: 0.33rem;
+  border-radius: 999px;
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.06);
+}
+
+.coach-focus strong {
+  display: block;
+  margin-bottom: 4px;
+  color: #fff8ec;
+  font-size: 0.92rem;
+}
+
+.coach-people {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.coach-person {
+  min-height: 32px;
+  max-width: 100%;
+  padding: 6px 9px;
+  border-color: rgba(255, 248, 236, 0.15);
+  border-radius: 999px;
+  color: rgba(255, 248, 236, 0.76);
+  background: rgba(25, 21, 18, 0.64);
+  font-size: 0.72rem;
+  font-weight: 850;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.coach-person.active {
+  border-color: rgba(243, 207, 116, 0.7);
+  color: #171310;
+  background: #f3cf74;
+}
+
+.coach-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
 .coach-action {
   justify-self: start;
   min-height: 38px;
   padding: 8px 11px;
+  color: #fff8ec;
+  background: rgba(255, 248, 236, 0.1);
+  font-size: 0.8rem;
+}
+
+.coach-advance {
   color: #171310;
   background: #f3cf74;
-  font-size: 0.8rem;
 }
 
 .file-input {
@@ -3032,6 +3096,10 @@ textarea:focus-visible,
 
   .map-stage svg {
     min-width: 760px;
+  }
+
+  .coach-actions .coach-action {
+    flex: 1 1 150px;
   }
 
   .closing-band {
