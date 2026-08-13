@@ -2387,6 +2387,10 @@ textarea:focus-visible,
   gap: 8px;
 }
 
+.template-grid .template-option:last-child:nth-child(odd) {
+  grid-column: 1 / -1;
+}
+
 .template-option {
   min-height: 44px;
   justify-content: flex-start;
@@ -2642,6 +2646,50 @@ textarea:focus-visible,
   background: rgba(25, 21, 18, 0.46);
 }
 
+.coach-checklist {
+  display: grid;
+  gap: 8px;
+  padding: 11px 12px;
+  border: 1px solid rgba(255, 248, 236, 0.1);
+  border-radius: 8px;
+  background: rgba(25, 21, 18, 0.36);
+}
+
+.coach-checklist-title {
+  color: rgba(255, 248, 236, 0.7);
+  font-size: 0.7rem;
+  font-weight: 950;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.coach-checklist > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px 10px;
+}
+
+.coach-check {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: rgba(255, 248, 236, 0.46);
+  font-size: 0.7rem;
+  font-weight: 800;
+}
+
+.coach-check svg {
+  color: rgba(255, 248, 236, 0.24);
+}
+
+.coach-check.done {
+  color: rgba(255, 248, 236, 0.88);
+}
+
+.coach-check.done svg {
+  color: #8ff0c8;
+}
+
 .coach-focus-dot {
   width: 10px;
   height: 10px;
@@ -2688,6 +2736,59 @@ textarea:focus-visible,
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
+}
+
+.prayer-sprint {
+  display: grid;
+  gap: 9px;
+  padding: 12px;
+  border: 1px solid rgba(243, 207, 116, 0.24);
+  border-radius: 8px;
+  background:
+    linear-gradient(135deg, rgba(243, 207, 116, 0.12), rgba(20, 184, 166, 0.07)),
+    rgba(25, 21, 18, 0.42);
+}
+
+.prayer-sprint-topline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.prayer-sprint-topline span {
+  color: #f3cf74;
+  font-size: 0.72rem;
+  font-weight: 950;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.prayer-sprint-topline strong {
+  color: #fff8ec;
+  font-variant-numeric: tabular-nums;
+  font-size: 1.05rem;
+  letter-spacing: 0.06em;
+}
+
+.prayer-sprint-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.prayer-sprint-actions button {
+  flex: 1 1 120px;
+  min-height: 38px;
+  padding: 8px 11px;
+  color: #171310;
+  background: #f3cf74;
+  font-size: 0.78rem;
+}
+
+.prayer-sprint-actions .prayer-reset {
+  color: rgba(255, 248, 236, 0.84);
+  background: rgba(255, 248, 236, 0.1);
 }
 
 .coach-action {

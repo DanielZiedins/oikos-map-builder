@@ -20,6 +20,8 @@ import {
   Link2,
   Mail,
   Plus,
+  Play,
+  Pause,
   Printer,
   RotateCcw,
   Rocket,
@@ -216,6 +218,18 @@ const mapTemplates = [
       ['Manager or leader', 'work', 'care'],
       ['Client or customer', 'work', 'pray'],
       ['Work friend', 'friends', 'share'],
+    ]),
+  },
+  {
+    id: 'outreach',
+    label: 'Outreach team',
+    detail: 'Prepare your team to pray together and care for a shared neighbourhood or city.',
+    icon: Users,
+    make: () => createTemplateMap('Our Outreach Oikos', [
+      ['Prayer partner', 'friends', 'pray'],
+      ['Neighbourhood contact', 'neighbors', 'care'],
+      ['Community leader', 'work', 'pray'],
+      ['Friend to invite', 'friends', 'share'],
     ]),
   },
 ];
@@ -449,7 +463,7 @@ function buildPrayerPlan(mapData) {
 function buildTodayFocus(person) {
   const group = getGroup(person.group).label.toLowerCase();
   const stage = getStage(person.stage);
-  const note = person.notes.trim();
+  const note = String(person.notes || '').trim();
   return [
     'My Oikos focus for today',
     '',
@@ -593,6 +607,10 @@ function ScrollEffects() {
       if (!frame) frame = window.requestAnimationFrame(update);
     }
 
+    const canUsePointerParallax =
+      !window.matchMedia('(prefers-reduced-motion: reduce)').matches &&
+      window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
     function updatePointer(event) {
       const x = (event.clientX / window.innerWidth - 0.5).toFixed(4);
       const y = (event.clientY / window.innerHeight - 0.5).toFixed(4);
@@ -607,12 +625,12 @@ function ScrollEffects() {
     update();
     window.addEventListener('scroll', requestUpdate, { passive: true });
     window.addEventListener('resize', requestUpdate);
-    window.addEventListener('pointermove', updatePointer, { passive: true });
+    if (canUsePointerParallax) window.addEventListener('pointermove', updatePointer, { passive: true });
 
     return () => {
       window.removeEventListener('scroll', requestUpdate);
       window.removeEventListener('resize', requestUpdate);
-      window.removeEventListener('pointermove', updatePointer);
+      if (canUsePointerParallax) window.removeEventListener('pointermove', updatePointer);
       revealObserver?.disconnect();
       window.clearTimeout(failSafe);
       if (frame) window.cancelAnimationFrame(frame);
@@ -910,6 +928,60 @@ function JourneyTimeline() {
         </li>
       ))}
     </ol>
+  );
+}
+
+function PrayerSprint({ person, stage, onComplete }) {
+  const [secondsRemaining, setSecondsRemaining] = useState(300);
+  const [isRunning, setIsRunning] = useState(false);
+  const completionRef = useRef(onComplete);
+
+  useEffect(() => {
+    completionRef.current = onComplete;
+  }, [onComplete]);
+
+  useEffect(() => {
+    setSecondsRemaining(300);
+    setIsRunning(false);
+  }, [person?.id]);
+
+  useEffect(() => {
+    if (!isRunning || secondsRemaining <= 0) return undefined;
+    const timer = window.setInterval(() => {
+      setSecondsRemaining((seconds) => {
+        if (seconds > 1) return seconds - 1;
+        window.clearInterval(timer);
+        setIsRunning(false);
+        completionRef.current?.();
+        return 0;
+      });
+    }, 1000);
+    return () => window.clearInterval(timer);
+  }, [isRunning, secondsRemaining]);
+
+  if (!person || !stage) return null;
+  const minutes = String(Math.floor(secondsRemaining / 60)).padStart(2, '0');
+  const seconds = String(secondsRemaining % 60).padStart(2, '0');
+  const complete = secondsRemaining === 0;
+
+  return (
+    <div className="prayer-sprint" aria-live="polite">
+      <div className="prayer-sprint-topline">
+        <span>Five-minute prayer</span>
+        <strong>{minutes}:{seconds}</strong>
+      </div>
+      <p>{complete ? `Beautiful. Keep listening for how to love ${person.name} today.` : `Hold ${person.name} before Jesus. ${stage.prompt}`}</p>
+      <div className="prayer-sprint-actions">
+        <button type="button" onClick={() => setIsRunning((running) => !running)} disabled={complete}>
+          {isRunning ? <Pause size={16} aria-hidden="true" /> : <Play size={16} aria-hidden="true" />}
+          {isRunning ? 'Pause' : complete ? 'Complete' : 'Start prayer'}
+        </button>
+        <button type="button" className="prayer-reset" onClick={() => { setSecondsRemaining(300); setIsRunning(false); }} title="Reset five-minute prayer">
+          <RotateCcw size={16} aria-hidden="true" />
+          Reset
+        </button>
+      </div>
+    </div>
   );
 }
 
@@ -1502,6 +1574,7 @@ function App() {
 
   function changeStage(person, stageId) {
     if (person.stage === stageId) return;
+    pushHistory();
     updatePerson(person.id, { stage: stageId });
     if (stageId === 'disciple') launchConfetti();
   }
@@ -1600,6 +1673,7 @@ function App() {
   }
 
   function getSvgMarkup() {
+    if (!svgRef.current) return null;
     const svg = svgRef.current.cloneNode(true);
     svg.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
     svg.setAttribute('width', layout.width);
@@ -1608,11 +1682,20 @@ function App() {
   }
 
   function downloadSvg() {
-    downloadBlob(new Blob([getSvgMarkup()], { type: 'image/svg+xml;charset=utf-8' }), `${slugify(mapData.mapTitle)}.svg`);
+    const svgMarkup = getSvgMarkup();
+    if (!svgMarkup) {
+      setSaveState('SVG export failed');
+      return;
+    }
+    downloadBlob(new Blob([svgMarkup], { type: 'image/svg+xml;charset=utf-8' }), `${slugify(mapData.mapTitle)}.svg`);
   }
 
   function downloadPng() {
     const svgMarkup = getSvgMarkup();
+    if (!svgMarkup) {
+      setSaveState('PNG export failed');
+      return;
+    }
     const image = new Image();
     const svgBlob = new Blob([svgMarkup], { type: 'image/svg+xml;charset=utf-8' });
     const url = URL.createObjectURL(svgBlob);
@@ -1622,6 +1705,11 @@ function App() {
       canvas.width = layout.width * 2;
       canvas.height = layout.height * 2;
       const context = canvas.getContext('2d');
+      if (!context) {
+        URL.revokeObjectURL(url);
+        setSaveState('PNG export failed');
+        return;
+      }
       context.fillStyle = '#fffaf3';
       context.fillRect(0, 0, canvas.width, canvas.height);
       context.scale(2, 2);
@@ -1649,6 +1737,13 @@ function App() {
   }));
   const actionedCount = mapData.people.filter((person) => person.stage !== 'pray').length;
   const movementPercent = mapData.people.length ? Math.round((actionedCount / mapData.people.length) * 100) : 0;
+  const mapMilestones = [
+    { done: mapData.centerName.trim() && mapData.centerName !== 'Your Name', label: 'Name your centre' },
+    { done: mapData.people.length >= 5, label: 'Add five names' },
+    { done: mapData.people.some((person) => String(person.notes || '').trim()), label: 'Add a prayer focus' },
+    { done: actionedCount > 0, label: 'Choose one next step' },
+  ];
+  const completedMilestones = mapMilestones.filter((milestone) => milestone.done).length;
   const coachPeople = [...mapData.people]
     .sort((left, right) => {
       const stageDifference = stages.findIndex((stage) => stage.id === left.stage) - stages.findIndex((stage) => stage.id === right.stage);
@@ -2143,6 +2238,17 @@ function App() {
                 <span><Compass size={18} aria-hidden="true" /> Map coach</span>
                 <small>{mapData.people.length ? `${movementPercent}% taking a next step` : 'Begin with one name'}</small>
               </div>
+              <div className="coach-checklist" aria-label={`Map readiness: ${completedMilestones} of ${mapMilestones.length} complete`}>
+                <span className="coach-checklist-title">Map readiness · {completedMilestones}/{mapMilestones.length}</span>
+                <div>
+                  {mapMilestones.map((milestone) => (
+                    <span className={milestone.done ? 'coach-check done' : 'coach-check'} key={milestone.label}>
+                      <CheckCircle2 size={14} aria-hidden="true" />
+                      {milestone.label}
+                    </span>
+                  ))}
+                </div>
+              </div>
               {selectedPerson ? (
                 <>
                   <div className="coach-focus">
@@ -2177,6 +2283,11 @@ function App() {
                       {selectedStage.id === 'disciple' ? 'Celebrate' : `Move to ${stages[stages.findIndex((stage) => stage.id === selectedStage.id) + 1].label}`}
                     </button>
                   </div>
+                  <PrayerSprint
+                    person={selectedPerson}
+                    stage={selectedStage}
+                    onComplete={() => setSaveState(`Prayer time complete for ${selectedPerson.name}`)}
+                  />
                 </>
               ) : (
                 <p>Add someone you already know. The first name is enough to begin.</p>
