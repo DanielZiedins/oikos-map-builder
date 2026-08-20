@@ -560,18 +560,34 @@ function SiteFooter() {
 function ScrollEffects() {
   useEffect(() => {
     let frame = 0;
-    let observerReported = false;
+    let revealed = 0;
     const revealItems = Array.from(document.querySelectorAll('[data-reveal]'));
+
+    function reveal(item) {
+      if (item.classList.contains('is-visible')) return;
+      item.classList.add('is-visible');
+      revealed += 1;
+      revealObserver?.unobserve(item);
+    }
+
+    // Geometry check, run on every scroll frame. This is the actual guarantee
+    // that content is never stranded at opacity 0: it needs no observer
+    // callbacks, so it still works where those never fire (background tabs,
+    // prerender, non-compositing embedders).
+    function revealInView() {
+      const limit = window.innerHeight * 0.92;
+      revealItems.forEach((item) => {
+        if (item.classList.contains('is-visible')) return;
+        if (item.getBoundingClientRect().top < limit) reveal(item);
+      });
+    }
+
     const revealObserver = typeof IntersectionObserver === 'undefined'
       ? null
       : new IntersectionObserver(
         (entries) => {
-          observerReported = true;
           entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('is-visible');
-              revealObserver?.unobserve(entry.target);
-            }
+            if (entry.isIntersecting) reveal(entry.target);
           });
         },
         // Sections can be taller than the viewport, where a fractional threshold
@@ -581,20 +597,19 @@ function ScrollEffects() {
       );
 
     if (revealObserver) revealItems.forEach((item) => revealObserver.observe(item));
-    else revealItems.forEach((item) => item.classList.add('is-visible'));
+    revealInView();
 
-    // Fail-safe: content must never be stranded at opacity 0. The observer
-    // reports on its first tick even when nothing intersects, so silence here
-    // means callbacks are not running at all (prerender, some headless
-    // environments). Only then do we drop the animation and show everything.
+    // Last resort: if neither route has revealed anything shortly after load,
+    // drop the animation entirely rather than leave the page blank.
     const failSafe = window.setTimeout(() => {
-      if (observerReported) return;
+      if (revealed > 0) return;
       revealItems.forEach((item) => item.classList.add('is-visible'));
       revealObserver?.disconnect();
     }, 2500);
 
     function update() {
       frame = 0;
+      revealInView();
       const height = document.documentElement.scrollHeight - window.innerHeight;
       const progress = height > 0 ? window.scrollY / height : 0;
       document.documentElement.style.setProperty('--scroll-progress', progress.toFixed(4));
@@ -1270,6 +1285,41 @@ function ConnectPage() {
             Visit Daniel & Katie's e3 page <ArrowRight size={16} aria-hidden="true" />
           </a>
         </article>
+      </section>
+
+      {/* The network's shared outreach map. Mapping your oikos is step one;
+          going out with people near you is step two. Embedded from the one
+          hosted map at evangelize.world (tinted to this site's gold) rather
+          than copied here, so it improves without a redeploy. */}
+      <section className="outreach-map-section" id="outreach-map" aria-labelledby="outreach-map-title">
+        <div className="outreach-map-intro">
+          <p className="eyebrow">
+            <Globe2 size={18} aria-hidden="true" />
+            Go with people near you
+          </p>
+          <h2 id="outreach-map-title">Find an outreach group</h2>
+          <p>
+            Your oikos is the people already in your world. When you are ready to
+            go further, this live map shows real evangelism and outreach groups
+            you can join — anywhere in the world.
+          </p>
+        </div>
+        <div className="outreach-map-frame">
+          <iframe
+            src="https://www.evangelize.world/embed?fill=1&accent=f3cf74&cta=0"
+            loading="lazy"
+            allow="geolocation"
+            referrerPolicy="strict-origin-when-cross-origin"
+            title="Love on The World — outreach groups you can join"
+          />
+        </div>
+        <p className="outreach-map-note">
+          Live from{" "}
+          <a href="https://www.evangelize.world" target="_blank" rel="noopener">
+            Evangelize.World
+          </a>
+          {" "}— the shared map for the whole network.
+        </p>
       </section>
 
       <section className="founder-section" id="founder" aria-labelledby="founder-title">

@@ -3251,6 +3251,18 @@ textarea:focus-visible,
   }
 }
 
+/* Skip layout and paint for long sections still below the fold. contain-intrinsic-size
+   supplies a placeholder height so the scrollbar does not jump as they render.
+   Deliberately excludes the builder, whose SVG needs real measurements. */
+.latest-articles,
+.network-section,
+.faq-section,
+.blog-list,
+.post-more {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 900px;
+}
+
 .download-actions button:disabled {
   cursor: not-allowed;
   opacity: 0.42;
@@ -3326,4 +3338,48 @@ textarea:focus-visible,
     scroll-behavior: auto !important;
     transition-duration: 1ms !important;
   }
+}
+
+/* ---------- shared outreach map (connect page) ----------
+   The network's one hosted map, embedded rather than rebuilt. The wrapper
+   owns the aspect ratio and the frame fills it, so no height messaging is
+   needed between the two sites. */
+.outreach-map-section {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 4rem 1.5rem 1rem;
+}
+.outreach-map-intro {
+  max-width: 46rem;
+  margin: 0 auto 2rem;
+  text-align: center;
+}
+.outreach-map-intro h2 {
+  margin: 0.75rem 0 0.75rem;
+}
+.outreach-map-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 10 / 7;
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid rgba(243, 207, 116, 0.32);
+  background: #050b1a;
+  box-shadow: 0 24px 60px -30px rgba(0, 0, 0, 0.7);
+}
+@media (min-width: 640px) {
+  .outreach-map-frame { aspect-ratio: 3 / 2; }
+}
+.outreach-map-frame iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+.outreach-map-note {
+  margin-top: 0.85rem;
+  text-align: center;
+  font-size: 0.85rem;
+  opacity: 0.7;
 }
