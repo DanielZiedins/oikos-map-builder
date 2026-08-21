@@ -1306,7 +1306,7 @@ function ConnectPage() {
         </div>
         <div className="outreach-map-frame">
           <iframe
-            src="https://www.evangelize.world/embed?fill=1&accent=f3cf74&cta=0"
+            src="https://map.loveontheworld.com/embed?site=oikos&fill=1&accent=f3cf74&globe=1"
             loading="lazy"
             allow="geolocation"
             referrerPolicy="strict-origin-when-cross-origin"
