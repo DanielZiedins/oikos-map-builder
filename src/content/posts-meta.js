@@ -92,6 +92,32 @@ export const postsMeta = [
     kicker: "Where you already are",
     excerpt: "Roughly 90,000 hours over a working life, with the same group of people. It is the largest mission field most Christians have, and the one we think about least.",
   },
+  {
+    slug: "how-to-invite-someone-to-church",
+    order: 7,
+    title: "How to Invite Someone to Church Without It Being Awkward",
+    description:
+      "Most people who come to faith were invited by someone they knew. Here is how to ask well, what to say, where to start, and what to do when the answer is no.",
+    date: "2026-08-13",
+    readingTime: "6 min read",
+    tags: ["Invitation", "Church", "Practical"],
+    kicker: "The ask",
+    excerpt:
+      "The invitation is not the hard part. Deciding to risk the small, brief awkwardness of asking is the hard part.",
+  },
+  {
+    slug: "what-to-say-when-someone-is-hurting",
+    order: 8,
+    title: "What to Actually Say When Someone Is Going Through Something Hard",
+    description:
+      "Real sentences that help, the well-meant ones that hurt, and why showing up matters more than saying the right thing.",
+    date: "2026-08-13",
+    readingTime: "7 min read",
+    tags: ["Care", "Grief", "Practical"],
+    kicker: "Step two · Care",
+    excerpt:
+      "Most of us say nothing because we are afraid of saying the wrong thing. Silence is the one option guaranteed to hurt.",
+  },
 ];
 
 export const sortedPostsMeta = [...postsMeta].sort((a, b) => a.order - b.order);

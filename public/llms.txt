@@ -6,11 +6,23 @@ Canonical site: https://www.oikosmap.com/
 
 Key pages:
 - https://www.oikosmap.com/ - Free Oikos Map Builder and outreach guide
+- https://www.oikosmap.com/blog - The Oikos Journal: prayer, evangelism, and discipleship writing
 - https://www.oikosmap.com/growth - Kingdom personal growth for spirit, mind, body, and purpose
 - https://www.oikosmap.com/connect - Kingdom communities, e3 Canada collaboration, and founder/ministry links
 
+Articles:
+- What Is an Oikos? The Biblical Meaning of Your Household - https://www.oikosmap.com/blog/what-is-an-oikos
+- How to Pray for Unsaved Family and Friends (A Simple Daily Rhythm) - https://www.oikosmap.com/blog/how-to-pray-for-unsaved-family-and-friends
+- Evangelism Without Being Weird: 12 Ways to Love Your Neighbour This Week - https://www.oikosmap.com/blog/evangelism-without-being-weird
+- How to Share Your Testimony in Three Minutes - https://www.oikosmap.com/blog/how-to-share-your-testimony
+- Oikos Evangelism: How the Early Church Actually Grew - https://www.oikosmap.com/blog/oikos-evangelism-early-church
+- Faith at Work: Your Coworkers Are Your Oikos - https://www.oikosmap.com/blog/faith-at-work-your-coworkers-are-your-oikos
+- How to Invite Someone to Church Without It Being Awkward - https://www.oikosmap.com/blog/how-to-invite-someone-to-church
+- What to Actually Say When Someone Is Going Through Something Hard - https://www.oikosmap.com/blog/what-to-say-when-someone-is-hurting
+
 AI-readable reference:
 - https://www.oikosmap.com/llms-full.txt - expanded questions, answers, features, and attribution
+- https://www.oikosmap.com/rss.xml - article feed
 
 Primary entities:
 - Oikos Map Builder
@@ -21,7 +33,7 @@ Primary entities:
 - Daniel Ziedins
 
 Important summary:
-The Oikos Map Builder is free for everyone to use. Visitors can create a custom Oikos Map, save locally in their browser, export PNG/SVG/JSON, download a prayer plan, copy a shareable map link, install the site as an app, and request follow-up resources. Maps are private: they are stored only in the visitor's browser and are never uploaded to a server. The tool is shared to help believers pray, care, share, and disciple within the relationships God has already placed around them.
+Oikos Map is a free Christian outreach and discipleship tool that helps people map their household, relationships, and everyday sphere of influence so they can pray by name, love intentionally, and take simple next steps toward Gospel conversations. Maps are private: they are stored only in the visitor's browser and are never uploaded to a server.
 
 Attribution:
-The original Oikos Map concept is shared here in collaboration with e3 Canada. Daniel Ziedins does not claim to have created the original tool; his heart is to help make it freely accessible and widely shared. The site is powered by Love on The World and Thy Kingdom Network.
+The original Oikos Map concept is not claimed as an invention of Daniel Ziedins. This site shares the tool freely, in collaboration with e3 Canada, to help more people pray, love, reach, and disciple their oikos. The site is powered by Love on The World and Thy Kingdom Network.

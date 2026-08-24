@@ -19,13 +19,17 @@ The tool is free for individual believers, churches, small groups, youth ministr
 ## What can visitors do?
 
 - Create a custom relationship map with a center person, first-circle relationships, and second-circle branches.
+- Add many people at once by pasting a list of names.
 - Classify relationships as family, friends, work, school, or neighbors.
 - Track an intentional next step: Pray, Care, Share, or Disciple.
 - Add notes and prayer focuses for each person.
-- Save locally in the browser.
+- Use a guided five-minute prayer timer for the person currently in focus.
+- Save locally in the browser, with undo for structural changes.
 - Download the map as PNG, SVG, or editable JSON.
-- Download a text prayer plan.
+- Download or copy a text prayer plan, and print the map on its own.
+- Copy a private share link that carries the whole map inside the URL.
 - Import a previously exported JSON map.
+- Install the site as an app and use it offline.
 
 ## Suggested first use
 
@@ -40,11 +44,15 @@ The tool is free for individual believers, churches, small groups, youth ministr
 
 ### Is Oikos Map Builder free?
 
-Yes. Visitors can build, save, and download an Oikos Map at no cost.
+Yes. Visitors can build, save, and download an Oikos Map at no cost, with no account and no paid tier.
 
 ### Does an Oikos Map save automatically?
 
 The map saves locally in the visitor's browser. Visitors can also download portable files for backup or sharing.
+
+### Is an Oikos Map private?
+
+Yes. The map is stored only in the visitor's own browser and is never uploaded to a server. A copied share link carries the map inside the URL itself, so the visitor chooses exactly who receives it.
 
 ### Can a church or group use this tool?
 
@@ -52,19 +60,91 @@ Yes. Churches and groups can use it to pray for their relational world, encourag
 
 ### What comes after making a map?
 
-Choose one person and one next step. The purpose is not a perfect diagram; it is faithful, prayerful action toward people.
+Choose one person and one next step. The purpose is not a perfect diagram; it is faithful, prayerful action toward people. A free six-part email journey walks through pray, care, share, and disciple over two weeks.
 
-## Related pages and organizations
+### What does the word oikos mean?
+
+Oikos is the Greek word for household. In the New Testament it describes an extended sphere of relationships rather than only immediate family: relatives, friends, workers, neighbours, and regular guests.
+
+## Articles
+
+- What Is an Oikos? The Biblical Meaning of Your Household
+  https://www.oikosmap.com/blog/what-is-an-oikos
+  Oikos is the Greek word for household, but in the New Testament it means far more than the people under your roof. Here is what it meant then, and what it means for you now.
+
+- How to Pray for Unsaved Family and Friends (A Simple Daily Rhythm)
+  https://www.oikosmap.com/blog/how-to-pray-for-unsaved-family-and-friends
+  A five-minute daily rhythm for praying by name for the people you love who do not yet follow Jesus — including what to pray when it has been years.
+
+- Evangelism Without Being Weird: 12 Ways to Love Your Neighbour This Week
+  https://www.oikosmap.com/blog/evangelism-without-being-weird
+  Twelve ordinary, non-awkward ways to move toward the people around you — the practical middle ground between praying for someone and preaching at them.
+
+- How to Share Your Testimony in Three Minutes
+  https://www.oikosmap.com/blog/how-to-share-your-testimony
+  A simple three-part framework for telling your story of coming to faith — clearly, honestly, and short enough that people actually listen.
+
+- Oikos Evangelism: How the Early Church Actually Grew
+  https://www.oikosmap.com/blog/oikos-evangelism-early-church
+  The early Church grew from a few thousand to millions without buildings, budgets, or public platforms. Households were the engine — and the method still works.
+
+- Faith at Work: Your Coworkers Are Your Oikos
+  https://www.oikosmap.com/blog/faith-at-work-your-coworkers-are-your-oikos
+  You spend more waking hours with colleagues than with almost anyone else. Here is how to be a genuine witness at work without becoming the person everyone avoids.
+
+- How to Invite Someone to Church Without It Being Awkward
+  https://www.oikosmap.com/blog/how-to-invite-someone-to-church
+  Most people who come to faith were invited by someone they knew. Here is how to ask well, what to say, where to start, and what to do when the answer is no.
+
+- What to Actually Say When Someone Is Going Through Something Hard
+  https://www.oikosmap.com/blog/what-to-say-when-someone-is-hurting
+  Real sentences that help, the well-meant ones that hurt, and why showing up matters more than saying the right thing.
+
+## The wider Kingdom network
+
+- Love on The World (LoveonTheWorld.com): Where an Oikos Map turns into a team. Love on The World helps everyday believers gather a few friends, pray over their city, and take the Gospel into their streets.
+  https://www.loveontheworld.com
+- Love on Mission (LoveonMission.world): A living picture of what God is doing globally: unreached peoples, frontier groups, and the growing mission force of the Church.
+  https://www.loveonmission.world
+- Love on Hamilton (LoveonHamilton.com): What it looks like when a local church family adopts an actual city. Prayer, service, and outreach aimed at Hamilton, Ontario.
+  https://www.loveonhamilton.com
+- Seek First World (SeekFirst.World): A call to put the Kingdom first in work, business, art, media, family, and civic life — the places your oikos actually lives.
+  https://www.seekfirst.world
+- I Am Reborn (IAmReborn.net): Kingdom personal growth as stewardship rather than self-improvement. Becoming the kind of person who can carry the assignment.
+  https://www.iamreborn.net
+- Kingdom Base (KingdomBase.App): When your map outgrows a single page: track conversations, prayer requests, and next steps across a whole team or church.
+  https://kingdombase.app
+- TaskSimply (TaskSimply.com): A clean place to run the practical side of life and ministry, so the important things do not quietly fall through.
+  https://tasksimply.com
+- Thy Kingdom Network (ThyKingdom.net): The hub connecting these sites, tools, and ministry initiatives into one movement with one aim: His Kingdom come.
+  https://www.thykingdom.net
+- Lions Den Alliance (LionsDenAlliance.com): Business owners who refuse to split their faith from their work, building companies that serve the Kingdom.
+  https://www.lionsdenalliance.com
+- Jesus Festival (JesusFestival.ca): Two days of worship, hope, and encounter in Hamilton — the kind of event you can actually invite your oikos to.
+  https://www.jesusfestival.ca
+- Jesus Festival App (JesusFestival.app): Daily Kingdom acts, a live prayer wall, and church crews — a whole community lighting up one city at a time.
+  https://www.jesusfestival.app
+- Jesus Festival Movement (JesusFestivalMovement.com): Why cities should hear the Gospel together, and how a festival becomes a movement.
+  https://www.jesusfestivalmovement.com
+- Kingdom Response (KingdomResponse.com): When crisis hits, the Church shows up. Practical relief coordinated by local congregations.
+  https://www.kingdomresponse.com
+- Daniel Ziedins (DanielZiedins.com): Writing and projects on faith, mission, business, and building things that serve the Kingdom.
+  https://www.danielziedins.com
+- Daniel & Katie (KD-Ziedins.com): Daniel and Katie, serving with e3 Canada, and what it looks like to do this as a family.
+  https://www.kd-ziedins.com
+- SIX33 Outpost (SIX33Outpost.com): Tactical Christian apparel for people who would rather start a conversation than blend in.
+  https://six33outpost.com
+- SIX33 Legends (SIX33Legends.com): A cinematic sci-fi universe carrying Kingdom themes into a genre that rarely hears them.
+  https://six33legends.com
+
+## Related pages
 
 - Main tool: https://www.oikosmap.com/
+- The Oikos Journal: https://www.oikosmap.com/blog
 - Personal growth: https://www.oikosmap.com/growth
 - Community and connection: https://www.oikosmap.com/connect
-- Love on The World: https://www.loveontheworld.com/
-- Thy Kingdom Network: https://www.thykingdom.net/
-- e3 Canada collaboration: https://e3ministry.ca/staff/katie-daniel-ziedins
-- Kingdom Connect: https://kingdom-connect.net/
-- I Am Reborn: https://www.iamreborn.net/
+- Article feed: https://www.oikosmap.com/rss.xml
 
 ## Attribution
 
-The original Oikos Map concept is not claimed as an invention of Daniel Ziedins. This site shares the tool freely, in collaboration with e3 Canada, to help more people pray, love, reach, and disciple their oikos.
+The original Oikos Map concept is not claimed as an invention of Daniel Ziedins. This site shares the tool freely, in collaboration with e3 Canada, to help more people pray, love, reach, and disciple their oikos. The site is powered by Love on The World and Thy Kingdom Network.

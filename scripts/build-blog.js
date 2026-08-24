@@ -306,6 +306,103 @@ ${rssItems}
 `,
 );
 
+// --- AI-readable discovery files -------------------------------------------
+// Generated from the same content modules as everything else, so the article
+// index and network list cannot drift out of date.
+const llms = await import(resolve(root, 'src/content/llms.js'));
+const { networkSites } = await import(resolve(root, 'src/content/network.js'));
+
+const articleLines = sortedPosts.map((post) => `- ${post.title}\n  ${SITE}/blog/${post.slug}\n  ${post.description}`);
+
+writeFileSync(
+  resolve(root, 'public/llms.txt'),
+  `# Oikos Map
+
+> ${llms.llmsSummary}
+
+Canonical site: ${SITE}/
+
+Key pages:
+- ${SITE}/ - Free Oikos Map Builder and outreach guide
+- ${SITE}/blog - The Oikos Journal: prayer, evangelism, and discipleship writing
+- ${SITE}/growth - Kingdom personal growth for spirit, mind, body, and purpose
+- ${SITE}/connect - Kingdom communities, e3 Canada collaboration, and founder/ministry links
+
+Articles:
+${sortedPosts.map((post) => `- ${post.title} - ${SITE}/blog/${post.slug}`).join('\n')}
+
+AI-readable reference:
+- ${SITE}/llms-full.txt - expanded questions, answers, features, and attribution
+- ${SITE}/rss.xml - article feed
+
+Primary entities:
+${llms.llmsPrimaryEntities.map((entity) => `- ${entity}`).join('\n')}
+
+Important summary:
+${llms.llmsSummary} Maps are private: they are stored only in the visitor's browser and are never uploaded to a server.
+
+Attribution:
+${llms.llmsAttribution}
+`,
+);
+
+writeFileSync(
+  resolve(root, 'public/llms-full.txt'),
+  `# Oikos Map Builder: Expanded Reference
+
+Canonical URL: ${SITE}/
+Site language: English (Canada)
+Last updated: ${today}
+
+## One-sentence description
+
+${llms.llmsOneSentence}
+
+## What is an Oikos Map?
+
+${llms.llmsWhatIsAnOikosMap}
+
+## Who is it for?
+
+${llms.llmsWhoIsItFor}
+
+## What can visitors do?
+
+${llms.llmsCapabilities.map((item) => `- ${item}`).join('\n')}
+
+## Suggested first use
+
+${llms.llmsFirstUse.map((step, index) => `${index + 1}. ${step}`).join('\n')}
+
+## Frequently asked questions
+
+${llms.llmsFaq.map((item) => `### ${item.q}\n\n${item.a}`).join('\n\n')}
+
+## Articles
+
+${articleLines.join('\n\n')}
+
+## The wider Kingdom network
+
+${networkSites
+  .filter((site) => !site.isSelf)
+  .map((site) => `- ${site.name} (${site.host}): ${site.blurb}\n  ${site.url}`)
+  .join('\n')}
+
+## Related pages
+
+- Main tool: ${SITE}/
+- The Oikos Journal: ${SITE}/blog
+- Personal growth: ${SITE}/growth
+- Community and connection: ${SITE}/connect
+- Article feed: ${SITE}/rss.xml
+
+## Attribution
+
+${llms.llmsAttribution}
+`,
+);
+
 console.log(
-  `build-blog: generated blog.html + ${posts.length} posts + sitemap (${urls.length} urls) + rss (${sortedPosts.length} items)`,
+  `build-blog: generated blog.html + ${posts.length} posts + sitemap (${urls.length} urls) + rss (${sortedPosts.length} items) + llms.txt/llms-full.txt`,
 );
