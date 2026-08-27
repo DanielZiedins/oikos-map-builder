@@ -9,11 +9,7 @@ export const postsMeta = [
     description: "Oikos is the Greek word for household, but in the New Testament it means far more than the people under your roof. Here is what it meant then, and what it means for you now.",
     date: "2026-07-30",
     readingTime: "6 min read",
-    tags: [
-      "Oikos",
-      "Bible study",
-      "Evangelism"
-    ],
+    tags: ["Oikos", "Foundations", "Evangelism"],
     kicker: "Start here",
     excerpt: "The word appears more than a hundred times in the New Testament, and it quietly explains how the early Church grew so fast.",
   },
@@ -24,11 +20,7 @@ export const postsMeta = [
     description: "A five-minute daily rhythm for praying by name for the people you love who do not yet follow Jesus — including what to pray when it has been years.",
     date: "2026-07-30",
     readingTime: "7 min read",
-    tags: [
-      "Prayer",
-      "Family",
-      "Perseverance"
-    ],
+    tags: ["Prayer", "Oikos", "Family"],
     kicker: "Step one · Pray",
     excerpt: "Most of us do not stop praying for the people we love because we lack faith. We stop because we never had a rhythm.",
   },
@@ -39,11 +31,7 @@ export const postsMeta = [
     description: "A simple three-part framework for telling your story of coming to faith — clearly, honestly, and short enough that people actually listen.",
     date: "2026-07-30",
     readingTime: "6 min read",
-    tags: [
-      "Testimony",
-      "Evangelism",
-      "Practical"
-    ],
+    tags: ["Share", "Evangelism", "Practical"],
     kicker: "Step three · Share",
     excerpt: "You are not the expert witness on theology. You are the eyewitness on your own life, and nobody can cross-examine that.",
   },
@@ -54,11 +42,7 @@ export const postsMeta = [
     description: "Twelve ordinary, non-awkward ways to move toward the people around you — the practical middle ground between praying for someone and preaching at them.",
     date: "2026-07-30",
     readingTime: "5 min read",
-    tags: [
-      "Care",
-      "Neighbours",
-      "Practical"
-    ],
+    tags: ["Care", "Practical", "Evangelism"],
     kicker: "Step two · Care",
     excerpt: "Almost nobody changes their mind about Jesus because they lost an argument. They change because someone loved them in a way that did not add up.",
   },
@@ -69,11 +53,7 @@ export const postsMeta = [
     description: "The early Church grew from a few thousand to millions without buildings, budgets, or public platforms. Households were the engine — and the method still works.",
     date: "2026-07-30",
     readingTime: "8 min read",
-    tags: [
-      "Church history",
-      "Multiplication",
-      "Discipleship"
-    ],
+    tags: ["Foundations", "Oikos", "Discipleship"],
     kicker: "The bigger picture",
     excerpt: "No buildings, no budget, no legal standing, and frequently illegal. And it kept spreading. The mechanism is not a mystery.",
   },
@@ -84,11 +64,7 @@ export const postsMeta = [
     description: "You spend more waking hours with colleagues than with almost anyone else. Here is how to be a genuine witness at work without becoming the person everyone avoids.",
     date: "2026-07-30",
     readingTime: "7 min read",
-    tags: [
-      "Work",
-      "Culture",
-      "Integrity"
-    ],
+    tags: ["Work", "Practical", "Evangelism"],
     kicker: "Where you already are",
     excerpt: "Roughly 90,000 hours over a working life, with the same group of people. It is the largest mission field most Christians have, and the one we think about least.",
   },
@@ -100,7 +76,7 @@ export const postsMeta = [
       "Most people who come to faith were invited by someone they knew. Here is how to ask well, what to say, where to start, and what to do when the answer is no.",
     date: "2026-08-13",
     readingTime: "6 min read",
-    tags: ["Invitation", "Church", "Practical"],
+    tags: ["Invitation", "Care", "Practical"],
     kicker: "The ask",
     excerpt:
       "The invitation is not the hard part. Deciding to risk the small, brief awkwardness of asking is the hard part.",
@@ -113,7 +89,7 @@ export const postsMeta = [
       "Real sentences that help, the well-meant ones that hurt, and why showing up matters more than saying the right thing.",
     date: "2026-08-13",
     readingTime: "7 min read",
-    tags: ["Care", "Grief", "Practical"],
+    tags: ["Care", "Practical", "Prayer"],
     kicker: "Step two · Care",
     excerpt:
       "Most of us say nothing because we are afraid of saying the wrong thing. Silence is the one option guaranteed to hurt.",

@@ -121,6 +121,17 @@ function postSchema(post) {
       wordCount: stripTags(
         [...post.intro, ...post.sections.flatMap((s) => [...(s.paragraphs || []), ...(s.list || []), ...(s.after || [])])].join(' '),
       ).split(/\s+/).length,
+      inLanguage: 'en-CA',
+      articleSection: post.tags[0],
+      timeRequired: `PT${parseInt(post.readingTime, 10) || 6}M`,
+      about: post.tags.map((tag) => ({ '@type': 'Thing', name: tag })),
+      // Named anchors let search engines link straight to a section.
+      hasPart: post.sections.map((section) => ({
+        '@type': 'WebPageElement',
+        name: section.heading,
+        url: `${url}#s-${section.heading.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')}`,
+      })),
+      isAccessibleForFree: true,
       author: { '@type': 'Person', name: 'Daniel Ziedins', url: 'https://www.danielziedins.com' },
       publisher: {
         '@type': 'Organization',
@@ -303,6 +314,52 @@ writeFileSync(
 ${rssItems}
   </channel>
 </rss>
+`,
+);
+
+// --- Branded 404 -----------------------------------------------------------
+// Vercel serves 404.html from the output root for unmatched routes. Static on
+// purpose: no bundle, and it still works if the app fails to boot.
+writeFileSync(
+  resolve(root, 'public/404.html'),
+  `<!doctype html>
+<html lang="en-CA">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, follow" />
+    <title>Page not found | Oikos Map</title>
+    <link rel="icon" type="image/svg+xml" href="/oikos-logo.svg" />
+    <link rel="preload" href="/fonts/InterVariable-subset.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+    <style>
+      @font-face{font-family:InterVariable;font-style:normal;font-weight:100 900;font-display:swap;src:url("/fonts/InterVariable-subset.woff2") format("woff2")}
+      *{box-sizing:border-box}
+      body{margin:0;min-height:100vh;display:grid;place-items:center;padding:24px;background:#fff8ec;color:#26201c;
+        font-family:InterVariable,Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
+      main{max-width:620px}
+      .kicker{margin:0 0 14px;font-size:.72rem;font-weight:900;letter-spacing:.14em;text-transform:uppercase;color:#9c3327}
+      h1{margin:0 0 16px;font-size:clamp(2.2rem,6vw,3.6rem);line-height:1.06;letter-spacing:-1px}
+      p{margin:0 0 26px;color:#62564e;font-size:1.08rem;line-height:1.65}
+      ul{display:flex;flex-wrap:wrap;gap:10px;margin:0;padding:0;list-style:none}
+      a{display:inline-flex;align-items:center;min-height:46px;padding:12px 20px;border-radius:999px;
+        font-weight:800;text-decoration:none;border:1px solid rgba(38,32,28,.16)}
+      a.primary{color:#fff8ec;background:#26201c;border-color:transparent}
+      a.secondary{color:#26201c;background:rgba(255,253,247,.8)}
+      a:hover{transform:translateY(-1px)}
+    </style>
+  </head>
+  <body>
+    <main>
+      <p class="kicker">404 &middot; Page not found</p>
+      <h1>That page is not here.</h1>
+      <p>The link may be old or mistyped &mdash; but the map is still free, and the people God has placed around you are still worth praying for.</p>
+      <ul>
+        <li><a class="primary" href="/">Build your Oikos Map &rarr;</a></li>
+        <li><a class="secondary" href="/blog">Read the Oikos Journal</a></li>
+      </ul>
+    </main>
+  </body>
+</html>
 `,
 );
 

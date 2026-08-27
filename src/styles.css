@@ -1660,8 +1660,66 @@ button:hover,
   line-height: 1.72 !important;
 }
 
+.post-toc {
+  margin: 34px 0 10px;
+  padding: 20px 24px;
+  border: 1px solid rgba(72, 57, 43, 0.15);
+  border-left: 3px solid #14b8a6;
+  border-radius: 8px;
+  background: rgba(255, 253, 247, 0.9);
+}
+
+.post-toc p {
+  margin: 0 0 12px !important;
+  color: #9c3327;
+  font-size: 0.72rem !important;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.post-toc ol {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: toc;
+}
+
+.post-toc li {
+  counter-increment: toc;
+  padding-left: 0;
+}
+
+.post-toc li::before {
+  content: counter(toc, decimal-leading-zero);
+  display: inline-block;
+  min-width: 26px;
+  color: rgba(98, 86, 78, 0.7);
+  font-size: 0.78rem;
+  font-weight: 900;
+}
+
+.post-toc a {
+  color: #3d342e;
+  font-weight: 700;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+
+.post-toc a:hover {
+  color: #9c3327;
+  border-bottom-color: currentColor;
+}
+
 .post-body section {
   margin-top: 42px;
+  scroll-margin-top: 90px;
+}
+
+.post-body h2 {
+  scroll-margin-top: 90px;
 }
 
 .post-body h2 {

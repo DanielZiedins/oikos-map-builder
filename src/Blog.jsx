@@ -130,8 +130,45 @@ export function BlogIndex() {
   );
 }
 
+// Stable, readable anchors so the contents list and any inbound deep links keep
+// working even if a heading moves.
+export function headingId(heading) {
+  return `s-${String(heading)
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-|-$/g, '')}`;
+}
+
+function TableOfContents({ sections }) {
+  if (sections.length < 3) return null;
+  return (
+    <nav className="post-toc" aria-labelledby="post-toc-title">
+      <p id="post-toc-title">In this article</p>
+      <ol>
+        {sections.map((section) => (
+          <li key={section.heading}>
+            <a href={`#${headingId(section.heading)}`}>{section.heading}</a>
+          </li>
+        ))}
+      </ol>
+    </nav>
+  );
+}
+
+// Rank by shared tags so "keep reading" is genuinely related rather than
+// whichever three posts happen to sort first.
+function relatedPosts(post, limit = 3) {
+  const tags = new Set(post.tags || []);
+  return sortedPosts
+    .filter((entry) => entry.slug !== post.slug)
+    .map((entry) => ({ entry, shared: (entry.tags || []).filter((tag) => tags.has(tag)).length }))
+    .sort((a, b) => b.shared - a.shared || a.entry.order - b.entry.order)
+    .slice(0, limit)
+    .map((match) => match.entry);
+}
+
 export function BlogPost({ post }) {
-  const others = sortedPosts.filter((entry) => entry.slug !== post.slug).slice(0, 3);
+  const others = relatedPosts(post);
 
   return (
     <main>
@@ -161,9 +198,11 @@ export function BlogPost({ post }) {
             <p key={paragraph.slice(0, 40)} className="post-lede" dangerouslySetInnerHTML={{ __html: paragraph }} />
           ))}
 
+          <TableOfContents sections={post.sections} />
+
           {post.sections.map((section) => (
             <section key={section.heading}>
-              <h2>{section.heading}</h2>
+              <h2 id={headingId(section.heading)}>{section.heading}</h2>
               {(section.paragraphs || []).map((paragraph) => (
                 <p key={paragraph.slice(0, 40)} dangerouslySetInnerHTML={{ __html: paragraph }} />
               ))}
@@ -198,7 +237,7 @@ export function BlogPost({ post }) {
         <NetworkMentions hosts={post.network} />
 
         {others.length ? (
-          <nav className="post-more" aria-label="More articles">
+          <nav className="post-more" aria-label="Related articles">
             <h2>Keep reading</h2>
             <div>
               {others.map((entry) => (

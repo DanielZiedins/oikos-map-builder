@@ -14,7 +14,7 @@
       <pubDate>Thu, 30 Jul 2026 09:00:00 GMT</pubDate>
       <description>Oikos is the Greek word for household, but in the New Testament it means far more than the people under your roof. Here is what it meant then, and what it means for you now.</description>
       <category>Oikos</category>
-      <category>Bible study</category>
+      <category>Foundations</category>
       <category>Evangelism</category>
     </item>
     <item>
@@ -24,8 +24,8 @@
       <pubDate>Thu, 30 Jul 2026 09:00:00 GMT</pubDate>
       <description>A five-minute daily rhythm for praying by name for the people you love who do not yet follow Jesus — including what to pray when it has been years.</description>
       <category>Prayer</category>
+      <category>Oikos</category>
       <category>Family</category>
-      <category>Perseverance</category>
     </item>
     <item>
       <title>Evangelism Without Being Weird: 12 Ways to Love Your Neighbour This Week</title>
@@ -34,8 +34,8 @@
       <pubDate>Thu, 30 Jul 2026 09:00:00 GMT</pubDate>
       <description>Twelve ordinary, non-awkward ways to move toward the people around you — the practical middle ground between praying for someone and preaching at them.</description>
       <category>Care</category>
-      <category>Neighbours</category>
       <category>Practical</category>
+      <category>Evangelism</category>
     </item>
     <item>
       <title>How to Share Your Testimony in Three Minutes</title>
@@ -43,7 +43,7 @@
       <guid isPermaLink="true">https://www.oikosmap.com/blog/how-to-share-your-testimony</guid>
       <pubDate>Thu, 30 Jul 2026 09:00:00 GMT</pubDate>
       <description>A simple three-part framework for telling your story of coming to faith — clearly, honestly, and short enough that people actually listen.</description>
-      <category>Testimony</category>
+      <category>Share</category>
       <category>Evangelism</category>
       <category>Practical</category>
     </item>
@@ -53,8 +53,8 @@
       <guid isPermaLink="true">https://www.oikosmap.com/blog/oikos-evangelism-early-church</guid>
       <pubDate>Thu, 30 Jul 2026 09:00:00 GMT</pubDate>
       <description>The early Church grew from a few thousand to millions without buildings, budgets, or public platforms. Households were the engine — and the method still works.</description>
-      <category>Church history</category>
-      <category>Multiplication</category>
+      <category>Foundations</category>
+      <category>Oikos</category>
       <category>Discipleship</category>
     </item>
     <item>
@@ -64,8 +64,8 @@
       <pubDate>Thu, 30 Jul 2026 09:00:00 GMT</pubDate>
       <description>You spend more waking hours with colleagues than with almost anyone else. Here is how to be a genuine witness at work without becoming the person everyone avoids.</description>
       <category>Work</category>
-      <category>Culture</category>
-      <category>Integrity</category>
+      <category>Practical</category>
+      <category>Evangelism</category>
     </item>
     <item>
       <title>How to Invite Someone to Church Without It Being Awkward</title>
@@ -74,7 +74,7 @@
       <pubDate>Thu, 13 Aug 2026 09:00:00 GMT</pubDate>
       <description>Most people who come to faith were invited by someone they knew. Here is how to ask well, what to say, where to start, and what to do when the answer is no.</description>
       <category>Invitation</category>
-      <category>Church</category>
+      <category>Care</category>
       <category>Practical</category>
     </item>
     <item>
@@ -84,8 +84,8 @@
       <pubDate>Thu, 13 Aug 2026 09:00:00 GMT</pubDate>
       <description>Real sentences that help, the well-meant ones that hurt, and why showing up matters more than saying the right thing.</description>
       <category>Care</category>
-      <category>Grief</category>
       <category>Practical</category>
+      <category>Prayer</category>
     </item>
   </channel>
 </rss>
