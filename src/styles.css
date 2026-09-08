@@ -1589,6 +1589,45 @@ button:hover,
   text-decoration: none;
 }
 
+.journal-signup {
+  display: grid;
+  grid-template-columns: minmax(280px, 0.9fr) minmax(320px, 1fr);
+  gap: clamp(26px, 5vw, 60px);
+  align-items: start;
+  padding: clamp(54px, 8vw, 100px) clamp(18px, 4vw, 56px);
+  color: #fff8ec;
+  background:
+    radial-gradient(circle at 88% 10%, rgba(20, 184, 166, 0.16), transparent 34%),
+    linear-gradient(135deg, rgba(38, 32, 28, 0.98), rgba(31, 26, 23, 0.94)),
+    #1f1a17;
+}
+
+.journal-signup .section-kicker {
+  color: #f3cf74;
+}
+
+.journal-signup h2 {
+  font-size: clamp(1.9rem, 3.6vw, 3rem);
+  line-height: 1.12;
+  letter-spacing: -0.6px;
+}
+
+/* Inside an article the signup sits in the body column, so it needs its own
+   rounded card rather than a full-bleed band. */
+.journal-signup.compact {
+  grid-template-columns: 1fr;
+  gap: 24px;
+  max-width: 900px;
+  margin: 56px auto 0;
+  padding: clamp(26px, 4vw, 40px);
+  border: 1px solid rgba(243, 207, 116, 0.28);
+  border-radius: 14px;
+}
+
+.journal-signup.compact h2 {
+  font-size: clamp(1.5rem, 2.6vw, 2rem);
+}
+
 .blog-cta {
   color: #fff8ec;
   background: #26201c;
@@ -3056,6 +3095,7 @@ textarea:focus-visible,
   .founder-section,
   .faq-section,
   .builder-invite,
+  .journal-signup,
   .builder-shell {
     grid-template-columns: 1fr;
   }

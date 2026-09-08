@@ -1,7 +1,59 @@
-import React from 'react';
-import { ArrowLeft, ArrowRight, BookOpen, CalendarDays, Clock, Compass, Sparkles } from 'lucide-react';
+import React, { useEffect } from 'react';
+import { ArrowLeft, ArrowRight, BookOpen, CalendarDays, Clock, Compass, Mail, Sparkles } from 'lucide-react';
 import { sortedPosts } from './content/posts.js';
 import { siteByHost } from './content/network.js';
+import { JourneyTimeline, LeadCapture } from './journey.jsx';
+
+// Drives the progress bar already styled on body::before. The builder pages set
+// this from ScrollEffects; the journal had no equivalent, so on long articles the
+// bar simply never moved.
+function useReadingProgress() {
+  useEffect(() => {
+    let frame = 0;
+    function update() {
+      frame = 0;
+      const height = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = height > 0 ? window.scrollY / height : 0;
+      document.documentElement.style.setProperty(
+        '--scroll-width',
+        `${Math.min(100, Math.max(0, progress * 100)).toFixed(2)}%`,
+      );
+    }
+    function request() {
+      if (!frame) frame = window.requestAnimationFrame(update);
+    }
+    update();
+    window.addEventListener('scroll', request, { passive: true });
+    window.addEventListener('resize', request);
+    return () => {
+      window.removeEventListener('scroll', request);
+      window.removeEventListener('resize', request);
+      if (frame) window.cancelAnimationFrame(frame);
+    };
+  }, []);
+}
+
+// The journal is what brings people to the site, so every article ends with a
+// way to keep going rather than a dead end.
+function JournalSignup({ compact = false }) {
+  return (
+    <aside className={compact ? 'journal-signup compact' : 'journal-signup'} aria-labelledby="journal-signup-title">
+      <div>
+        <p className="section-kicker">
+          <Mail size={18} aria-hidden="true" />
+          The Oikos Journey · free
+        </p>
+        <h2 id="journal-signup-title">Want the rest of this, one step at a time?</h2>
+        <p className="lead-lede">
+          Six short emails over two weeks through the same rhythm these articles keep circling — <strong>pray, care,
+          share, disciple</strong> — plus the starter kit to begin today.
+        </p>
+        {compact ? null : <JourneyTimeline />}
+      </div>
+      <LeadCapture source="oikosmap.com/blog" />
+    </aside>
+  );
+}
 
 function formatDate(iso) {
   const date = new Date(`${iso}T00:00:00Z`);
@@ -109,6 +161,8 @@ export function BlogIndex() {
         ))}
       </section>
 
+      <JournalSignup />
+
       <section className="blog-cta">
         <div>
           <p className="section-kicker">
@@ -168,6 +222,7 @@ function relatedPosts(post, limit = 3) {
 }
 
 export function BlogPost({ post }) {
+  useReadingProgress();
   const others = relatedPosts(post);
 
   return (
@@ -233,6 +288,8 @@ export function BlogPost({ post }) {
             </a>
           </div>
         </div>
+
+        <JournalSignup compact />
 
         <NetworkMentions hosts={post.network} />
 
