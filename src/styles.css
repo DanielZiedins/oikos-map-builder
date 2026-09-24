@@ -1569,12 +1569,82 @@ button:hover,
   gap: 7px;
 }
 
-.blog-tags span {
+/* These are buttons now (they filter the list), so the global dark button
+   styling has to be unwound back to a quiet chip. */
+.blog-tags button {
+  min-height: 0;
   padding: 5px 11px;
   border: 1px solid rgba(72, 57, 43, 0.16);
   border-radius: 999px;
   color: #62564e;
+  background: transparent;
   font-size: 0.74rem;
+  font-weight: 800;
+}
+
+.blog-tags button::after {
+  display: none;
+}
+
+.blog-tags button:hover {
+  color: #9c3327;
+  border-color: rgba(179, 54, 36, 0.4);
+  background: rgba(179, 54, 36, 0.06);
+  transform: none;
+}
+
+.blog-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: clamp(28px, 5vw, 48px) clamp(18px, 4vw, 56px) 0;
+  background: #fff8ec;
+}
+
+.blog-filter-chip {
+  min-height: 38px;
+  padding: 8px 15px;
+  border: 1px solid rgba(72, 57, 43, 0.18);
+  border-radius: 999px;
+  color: #3d342e;
+  background: #fffdf7;
+  font-size: 0.84rem;
+  font-weight: 800;
+}
+
+.blog-filter-chip::after {
+  display: none;
+}
+
+.blog-filter-chip small {
+  margin-left: 6px;
+  padding: 1px 7px;
+  border-radius: 999px;
+  background: rgba(72, 57, 43, 0.1);
+  font-size: 0.72rem;
+  font-weight: 900;
+}
+
+.blog-filter-chip:hover {
+  border-color: rgba(179, 54, 36, 0.4);
+}
+
+.blog-filter-chip.active {
+  color: #fff8ec;
+  background: #26201c;
+  border-color: transparent;
+}
+
+.blog-filter-chip.active small {
+  background: rgba(255, 248, 236, 0.2);
+}
+
+.blog-filter-status {
+  margin: 0;
+  padding: 14px clamp(18px, 4vw, 56px) 0;
+  background: #fff8ec;
+  color: #62564e;
+  font-size: 0.84rem;
   font-weight: 800;
 }
 

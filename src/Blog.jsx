@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ArrowLeft, ArrowRight, BookOpen, CalendarDays, Clock, Compass, Mail, Sparkles } from 'lucide-react';
 import { sortedPosts } from './content/posts.js';
 import { siteByHost } from './content/network.js';
@@ -110,7 +110,40 @@ function NetworkMentions({ hosts }) {
   );
 }
 
+// Tag counts, most-used first, so the filter row leads with the broadest topics.
+function tagCounts() {
+  const counts = new Map();
+  sortedPosts.forEach((post) => (post.tags || []).forEach((tag) => counts.set(tag, (counts.get(tag) || 0) + 1)));
+  return [...counts.entries()].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
+}
+
 export function BlogIndex() {
+  // Read the tag from the hash so a filtered view can be linked and the back
+  // button behaves. Filtering stays client-side: with eight posts, per-tag URLs
+  // would be thin pages competing with the articles themselves.
+  const [activeTag, setActiveTag] = useState(() => {
+    const fromHash = decodeURIComponent(window.location.hash.replace(/^#tag=/, ''));
+    return window.location.hash.startsWith('#tag=') && fromHash ? fromHash : null;
+  });
+
+  useEffect(() => {
+    function onHashChange() {
+      const raw = window.location.hash;
+      setActiveTag(raw.startsWith('#tag=') ? decodeURIComponent(raw.slice(5)) || null : null);
+    }
+    window.addEventListener('hashchange', onHashChange);
+    return () => window.removeEventListener('hashchange', onHashChange);
+  }, []);
+
+  function chooseTag(tag) {
+    setActiveTag(tag);
+    const next = tag ? `#tag=${encodeURIComponent(tag)}` : ' ';
+    window.history.replaceState(null, '', tag ? next : window.location.pathname);
+  }
+
+  const tags = tagCounts();
+  const visible = activeTag ? sortedPosts.filter((post) => (post.tags || []).includes(activeTag)) : sortedPosts;
+
   return (
     <main>
       <BlogHeader current="blog" />
@@ -133,8 +166,36 @@ export function BlogIndex() {
         </div>
       </section>
 
+      <nav className="blog-filter" aria-label="Filter articles by topic">
+        <button
+          type="button"
+          className={activeTag ? 'blog-filter-chip' : 'blog-filter-chip active'}
+          onClick={() => chooseTag(null)}
+          aria-pressed={!activeTag}
+        >
+          All <small>{sortedPosts.length}</small>
+        </button>
+        {tags.map(([tag, count]) => (
+          <button
+            key={tag}
+            type="button"
+            className={activeTag === tag ? 'blog-filter-chip active' : 'blog-filter-chip'}
+            onClick={() => chooseTag(tag)}
+            aria-pressed={activeTag === tag}
+          >
+            {tag} <small>{count}</small>
+          </button>
+        ))}
+      </nav>
+
+      <p className="blog-filter-status" aria-live="polite">
+        {activeTag
+          ? `${visible.length} ${visible.length === 1 ? 'article' : 'articles'} tagged ${activeTag}`
+          : `All ${sortedPosts.length} articles`}
+      </p>
+
       <section className="blog-list" aria-label="Articles">
-        {sortedPosts.map((post, index) => (
+        {visible.map((post, index) => (
           <article key={post.slug} className={index === 0 ? 'blog-card featured' : 'blog-card'}>
             <p className="blog-card-kicker">{post.kicker}</p>
             <h2>
@@ -151,7 +212,14 @@ export function BlogIndex() {
             </div>
             <div className="blog-tags">
               {post.tags.map((tag) => (
-                <span key={tag}>{tag}</span>
+                <button
+                  type="button"
+                  key={tag}
+                  onClick={() => chooseTag(tag)}
+                  aria-label={`Show articles tagged ${tag}`}
+                >
+                  {tag}
+                </button>
               ))}
             </div>
             <a className="blog-card-link" href={`/blog/${post.slug}`}>
