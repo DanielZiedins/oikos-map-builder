@@ -10,6 +10,9 @@ Key pages:
 - https://www.oikosmap.com/growth - Kingdom personal growth for spirit, mind, body, and purpose
 - https://www.oikosmap.com/connect - Kingdom communities, e3 Canada collaboration, and founder/ministry links
 
+Author of all articles:
+Daniel Ziedins - https://www.danielziedins.com
+
 Articles:
 - What Is an Oikos? The Biblical Meaning of Your Household - https://www.oikosmap.com/blog/what-is-an-oikos
 - How to Pray for Unsaved Family and Friends (A Simple Daily Rhythm) - https://www.oikosmap.com/blog/how-to-pray-for-unsaved-family-and-friends
@@ -19,6 +22,8 @@ Articles:
 - Faith at Work: Your Coworkers Are Your Oikos - https://www.oikosmap.com/blog/faith-at-work-your-coworkers-are-your-oikos
 - How to Invite Someone to Church Without It Being Awkward - https://www.oikosmap.com/blog/how-to-invite-someone-to-church
 - What to Actually Say When Someone Is Going Through Something Hard - https://www.oikosmap.com/blog/what-to-say-when-someone-is-hurting
+- How to Disciple Someone When You Do Not Feel Qualified - https://www.oikosmap.com/blog/how-to-disciple-someone
+- How to Pray for Your City (Without It Feeling Abstract) - https://www.oikosmap.com/blog/praying-for-your-city
 
 AI-readable reference:
 - https://www.oikosmap.com/llms-full.txt - expanded questions, answers, features, and attribution

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { ArrowLeft, ArrowRight, BookOpen, CalendarDays, Clock, Compass, Mail, Sparkles } from 'lucide-react';
+import { ArrowLeft, ArrowRight, BookOpen, Compass, Mail, Sparkles } from 'lucide-react';
 import { sortedPosts } from './content/posts.js';
 import { siteByHost } from './content/network.js';
 import { JourneyTimeline, LeadCapture } from './journey.jsx';
@@ -51,6 +51,57 @@ function JournalSignup({ compact = false }) {
         {compact ? null : <JourneyTimeline />}
       </div>
       <LeadCapture source="oikosmap.com/blog" />
+    </aside>
+  );
+}
+
+// One source for authorship. Schema alone is a weak E-E-A-T signal — search and
+// answer engines both want a visible, attributable human.
+export const author = {
+  name: 'Daniel Ziedins',
+  url: 'https://www.danielziedins.com',
+  image: '/assets/daniel-ziedins-founder.webp',
+  role: 'Founder, Oikos Map',
+  bio:
+    'Daniel builds free Kingdom tools and gives them away. He did not create the original Oikos Map — his aim is to make it easy to access and easy to share. He and his wife Katie serve with e3 Canada.',
+};
+
+function AuthorByline({ date, readingTime, compact = false }) {
+  return (
+    <div className={compact ? 'byline compact' : 'byline'}>
+      <img src={author.image} alt="" width="36" height="36" loading="lazy" decoding="async" />
+      <div>
+        <span>
+          By{' '}
+          <a href={author.url} rel="author noopener" target="_blank">
+            {author.name}
+          </a>
+        </span>
+        <small>
+          <time dateTime={date}>{formatDate(date)}</time> · {readingTime}
+        </small>
+      </div>
+    </div>
+  );
+}
+
+function AuthorCard() {
+  return (
+    <aside className="author-card" aria-labelledby="author-card-title">
+      <img src={author.image} alt={author.name} width="72" height="72" loading="lazy" decoding="async" />
+      <div>
+        <p className="author-card-kicker">Written by</p>
+        <h2 id="author-card-title">
+          <a href={author.url} rel="author noopener" target="_blank">
+            {author.name}
+          </a>
+        </h2>
+        <p className="author-card-role">{author.role}</p>
+        <p>{author.bio}</p>
+        <a className="author-card-link" href={author.url} rel="author noopener" target="_blank">
+          DanielZiedins.com <ArrowRight size={14} aria-hidden="true" />
+        </a>
+      </div>
     </aside>
   );
 }
@@ -202,14 +253,7 @@ export function BlogIndex() {
               <a href={`/blog/${post.slug}`}>{post.title}</a>
             </h2>
             <p className="blog-card-excerpt">{post.excerpt}</p>
-            <div className="blog-card-meta">
-              <span>
-                <CalendarDays size={14} aria-hidden="true" /> {formatDate(post.date)}
-              </span>
-              <span>
-                <Clock size={14} aria-hidden="true" /> {post.readingTime}
-              </span>
-            </div>
+            <AuthorByline date={post.date} readingTime={post.readingTime} compact />
             <div className="blog-tags">
               {post.tags.map((tag) => (
                 <button
@@ -306,14 +350,7 @@ export function BlogPost({ post }) {
           <p className="eyebrow">{post.kicker}</p>
           <h1>{post.title}</h1>
           <p className="post-standfirst">{post.description}</p>
-          <div className="blog-card-meta">
-            <span>
-              <CalendarDays size={14} aria-hidden="true" /> {formatDate(post.date)}
-            </span>
-            <span>
-              <Clock size={14} aria-hidden="true" /> {post.readingTime}
-            </span>
-          </div>
+          <AuthorByline date={post.date} readingTime={post.readingTime} />
         </div>
 
         <div className="post-body">
@@ -356,6 +393,8 @@ export function BlogPost({ post }) {
             </a>
           </div>
         </div>
+
+        <AuthorCard />
 
         <JournalSignup compact />
 

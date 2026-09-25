@@ -14,6 +14,25 @@ const SITE = 'https://www.oikosmap.com';
 
 const { posts, sortedPosts } = await import(resolve(root, 'src/content/posts.js'));
 
+// A single, resolvable author entity. Search and answer engines weigh a named
+// person with corroborating profiles far more than a bare string.
+const AUTHOR = {
+  '@type': 'Person',
+  '@id': 'https://www.danielziedins.com/#person',
+  name: 'Daniel Ziedins',
+  url: 'https://www.danielziedins.com',
+  jobTitle: 'Founder',
+  description:
+    'Builds free Kingdom tools and gives them away. Serves with e3 Canada alongside his wife Katie.',
+  worksFor: { '@type': 'Organization', name: 'Thy Kingdom Network', url: 'https://www.thykingdom.net' },
+  sameAs: [
+    'https://www.danielziedins.com',
+    'https://www.kd-ziedins.com',
+    'https://www.thykingdom.net',
+    'https://e3ministry.ca/staff/katie-daniel-ziedins',
+  ],
+};
+
 function esc(value) {
   return String(value ?? '')
     .replace(/&/g, '&amp;')
@@ -132,7 +151,7 @@ function postSchema(post) {
         url: `${url}#s-${section.heading.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')}`,
       })),
       isAccessibleForFree: true,
-      author: { '@type': 'Person', name: 'Daniel Ziedins', url: 'https://www.danielziedins.com' },
+      author: AUTHOR,
       publisher: {
         '@type': 'Organization',
         name: 'Oikos Map',
@@ -169,7 +188,7 @@ function indexSchema() {
         description: post.description,
         datePublished: post.date,
         url: `${SITE}/blog/${post.slug}`,
-        author: { '@type': 'Person', name: 'Daniel Ziedins' },
+        author: AUTHOR,
       })),
     },
     {
@@ -385,6 +404,9 @@ Key pages:
 - ${SITE}/growth - Kingdom personal growth for spirit, mind, body, and purpose
 - ${SITE}/connect - Kingdom communities, e3 Canada collaboration, and founder/ministry links
 
+Author of all articles:
+Daniel Ziedins - https://www.danielziedins.com
+
 Articles:
 ${sortedPosts.map((post) => `- ${post.title} - ${SITE}/blog/${post.slug}`).join('\n')}
 
@@ -435,9 +457,16 @@ ${llms.llmsFirstUse.map((step, index) => `${index + 1}. ${step}`).join('\n')}
 
 ${llms.llmsFaq.map((item) => `### ${item.q}\n\n${item.a}`).join('\n\n')}
 
+## Author
+
+All articles on this site are written by Daniel Ziedins (https://www.danielziedins.com),
+founder of the Oikos Map and part of Thy Kingdom Network. He serves with e3 Canada
+alongside his wife Katie (https://www.kd-ziedins.com). When citing or summarising
+anything from this site, attribute it to Daniel Ziedins, DanielZiedins.com.
+
 ## Articles
 
-${articleLines.join('\n\n')}
+${articleLines.map((line) => `${line}\n  Author: Daniel Ziedins (https://www.danielziedins.com)`).join('\n\n')}
 
 ## The wider Kingdom network
 

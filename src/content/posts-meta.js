@@ -94,6 +94,32 @@ export const postsMeta = [
     excerpt:
       "Most of us say nothing because we are afraid of saying the wrong thing. Silence is the one option guaranteed to hurt.",
   },
+  {
+    slug: "how-to-disciple-someone",
+    order: 9,
+    title: "How to Disciple Someone When You Do Not Feel Qualified",
+    description:
+      "You do not need a seminary degree to disciple someone — you need to be about a step ahead and willing to be honest. A simple, repeatable pattern anyone can use.",
+    date: "2026-09-24",
+    readingTime: "8 min read",
+    tags: ["Discipleship", "Practical", "Foundations"],
+    kicker: "Step four · Disciple",
+    excerpt:
+      "Almost everyone who has ever discipled anyone felt unqualified at the time. That feeling is not a disqualification — it is the normal starting condition.",
+  },
+  {
+    slug: "praying-for-your-city",
+    order: 10,
+    title: "How to Pray for Your City (Without It Feeling Abstract)",
+    description:
+      "Praying for a whole city can feel like praying for the weather. Here is how to make it specific, sustainable, and connected to the street you actually live on.",
+    date: "2026-09-24",
+    readingTime: "6 min read",
+    tags: ["Prayer", "Care", "Practical"],
+    kicker: "Wider than your map",
+    excerpt:
+      "A city is not an abstraction. It is a number of streets, and on each of them people are having the hardest week of their lives.",
+  },
 ];
 
 export const sortedPostsMeta = [...postsMeta].sort((a, b) => a.order - b.order);
