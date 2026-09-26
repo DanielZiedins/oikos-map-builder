@@ -1,7 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { ArrowLeft, ArrowRight, BookOpen, Compass, Mail, Sparkles } from 'lucide-react';
-import { sortedPosts } from './content/posts.js';
+import { sortedPostsMeta } from './content/posts-meta.js';
 import { siteByHost } from './content/network.js';
+
+// One chunk per article. Reading one article used to download every article's
+// body, which got worse with each new post; now only the opened one is fetched.
+const bodyLoaders = import.meta.glob('./content/bodies/*.js');
+
+function loadBody(slug) {
+  const load = bodyLoaders[`./content/bodies/${slug}.js`];
+  return load ? load().then((mod) => mod.default) : Promise.resolve(null);
+}
 import { JourneyTimeline, LeadCapture } from './journey.jsx';
 
 // Drives the progress bar already styled on body::before. The builder pages set
@@ -164,7 +173,7 @@ function NetworkMentions({ hosts }) {
 // Tag counts, most-used first, so the filter row leads with the broadest topics.
 function tagCounts() {
   const counts = new Map();
-  sortedPosts.forEach((post) => (post.tags || []).forEach((tag) => counts.set(tag, (counts.get(tag) || 0) + 1)));
+  sortedPostsMeta.forEach((post) => (post.tags || []).forEach((tag) => counts.set(tag, (counts.get(tag) || 0) + 1)));
   return [...counts.entries()].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
 }
 
@@ -193,7 +202,7 @@ export function BlogIndex() {
   }
 
   const tags = tagCounts();
-  const visible = activeTag ? sortedPosts.filter((post) => (post.tags || []).includes(activeTag)) : sortedPosts;
+  const visible = activeTag ? sortedPostsMeta.filter((post) => (post.tags || []).includes(activeTag)) : sortedPostsMeta;
 
   return (
     <main>
@@ -224,7 +233,7 @@ export function BlogIndex() {
           onClick={() => chooseTag(null)}
           aria-pressed={!activeTag}
         >
-          All <small>{sortedPosts.length}</small>
+          All <small>{sortedPostsMeta.length}</small>
         </button>
         {tags.map(([tag, count]) => (
           <button
@@ -242,7 +251,7 @@ export function BlogIndex() {
       <p className="blog-filter-status" aria-live="polite">
         {activeTag
           ? `${visible.length} ${visible.length === 1 ? 'article' : 'articles'} tagged ${activeTag}`
-          : `All ${sortedPosts.length} articles`}
+          : `All ${sortedPostsMeta.length} articles`}
       </p>
 
       <section className="blog-list" aria-label="Articles">
@@ -325,7 +334,7 @@ function TableOfContents({ sections }) {
 // whichever three posts happen to sort first.
 function relatedPosts(post, limit = 3) {
   const tags = new Set(post.tags || []);
-  return sortedPosts
+  return sortedPostsMeta
     .filter((entry) => entry.slug !== post.slug)
     .map((entry) => ({ entry, shared: (entry.tags || []).filter((tag) => tags.has(tag)).length }))
     .sort((a, b) => b.shared - a.shared || a.entry.order - b.entry.order)
@@ -333,9 +342,25 @@ function relatedPosts(post, limit = 3) {
     .map((match) => match.entry);
 }
 
-export function BlogPost({ post }) {
+export function BlogPost({ post: meta }) {
   useReadingProgress();
-  const others = relatedPosts(post);
+  const others = relatedPosts(meta);
+  // The header renders immediately from the summary; the body arrives from its
+  // own chunk a tick later. Seeded synchronously when the module is already in
+  // the graph so there is usually no empty frame at all.
+  const [body, setBody] = useState(null);
+
+  useEffect(() => {
+    let live = true;
+    loadBody(meta.slug).then((loaded) => {
+      if (live) setBody(loaded);
+    });
+    return () => {
+      live = false;
+    };
+  }, [meta.slug]);
+
+  const post = body ? { ...meta, ...body } : meta;
 
   return (
     <main>
@@ -353,6 +378,9 @@ export function BlogPost({ post }) {
           <AuthorByline date={post.date} readingTime={post.readingTime} />
         </div>
 
+        {!body ? <p className="post-loading">Loading the article…</p> : null}
+
+        {body ? (
         <div className="post-body">
           {post.intro.map((paragraph) => (
             <p key={paragraph.slice(0, 40)} className="post-lede" dangerouslySetInnerHTML={{ __html: paragraph }} />
@@ -393,6 +421,7 @@ export function BlogPost({ post }) {
             </a>
           </div>
         </div>
+        ) : null}
 
         <AuthorCard />
 

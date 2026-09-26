@@ -60,12 +60,35 @@ There are **two entry scripts**, which keeps each page's payload small:
 | Entry | Pages | Contains |
 |---|---|---|
 | `src/main.jsx` | `/`, `/growth`, `/connect` | the map builder |
-| `src/blog-entry.jsx` | `/blog`, `/blog/*` | the journal and article bodies |
+| `src/blog-entry.jsx` | `/blog`, `/blog/*` | the journal shell |
 
-React and lucide are hoisted into a shared `vendor` chunk. Blog pages therefore
-never download the map builder, and the homepage never downloads article bodies —
-which is also why post summaries live in `src/content/posts-meta.js` separately
-from the full text in `src/content/posts.js`.
+React and lucide are hoisted into a shared `vendor` chunk, so blog pages never
+download the map builder.
+
+### Where article content lives
+
+| File | Holds | Loaded by |
+|---|---|---|
+| `src/content/posts-meta.js` | summaries (title, tags, date…) | listings, related posts, the homepage strip |
+| `src/content/bodies/<slug>.js` | one article's full text | that article page only, on demand |
+| `src/content/posts.js` | meta + every body, assembled | **build only** (`scripts/build-blog.js`) |
+
+Article bodies are split one-per-file and pulled in with `import.meta.glob`, so
+Rollup emits a chunk per article and a reader downloads only the one they opened.
+Before this, opening any article downloaded all of them, and every new post made
+every article page heavier.
+
+**Do not import `src/content/posts.js` from browser code** — it pulls in every
+body at once. Use `posts-meta.js` for listings. `posts.js` throws at build time
+if a post has no matching body module, so a new article cannot ship empty.
+
+### Adding an article
+
+1. Add the summary to `src/content/posts-meta.js` (give it the next `order`).
+2. Create `src/content/bodies/<slug>.js` with a default-exported
+   `{ intro, sections, scripture, network, cta }`.
+3. Register it in the `bodies` map in `src/content/posts.js`.
+4. `npm run build` — the shell, sitemap, feed and llms files regenerate.
 
 ## Deploy on Vercel
 

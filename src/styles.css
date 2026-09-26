@@ -1903,6 +1903,13 @@ button:hover,
   line-height: 1.72 !important;
 }
 
+.post-loading {
+  max-width: 720px;
+  margin: 28px auto 0;
+  color: rgba(98, 86, 78, 0.8);
+  font-weight: 700;
+}
+
 .post-toc {
   margin: 34px 0 10px;
   padding: 20px 24px;
