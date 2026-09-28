@@ -1,7 +1,7 @@
 // Shared Oikos Journey signup, used by both entry points. It lived in main.jsx,
 // which meant the journal — the part of the site that actually attracts traffic —
 // had no way to subscribe at all.
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { CheckCircle2, Mail, ShieldCheck, Sparkles } from 'lucide-react';
 
 export const SUBSCRIBED_KEY = 'oikos-journey-subscribed-v1';
@@ -52,6 +52,11 @@ export function LeadCapture({ compact = false, mapData = null, source = 'oikosma
   });
   const [status, setStatus] = useState('idle');
   const [errorMessage, setErrorMessage] = useState('');
+  // Bot guard (see api/lead.js, which enforces it). Every signup sends six emails
+  // from team.thykingdom.net — shared by all 18 network sites — so bot addresses
+  // that bounce degrade deliverability for the whole network, not just this one.
+  const mountedAt = useRef(Date.now());
+  const honeypot = useRef(null);
 
   async function submitLead(event) {
     event.preventDefault();
@@ -66,6 +71,8 @@ export function LeadCapture({ compact = false, mapData = null, source = 'oikosma
           referrer: document.referrer,
           source,
           mapStats: getLeadMapStats(mapData),
+          company_website: honeypot.current?.value || '',
+          elapsedMs: Date.now() - mountedAt.current,
         }),
       });
       const result = await response.json().catch(() => ({}));
@@ -114,6 +121,15 @@ export function LeadCapture({ compact = false, mapData = null, source = 'oikosma
           Six short emails that take you through praying, caring, sharing, and discipling the people already around you —
           plus the starter kit to get going today.
         </p>
+      </div>
+      {/* Honeypot: off-screen rather than display:none (some bots skip hidden
+          fields), and removed from the tab order and accessibility tree so it can
+          never trap a keyboard or screen-reader user. */}
+      <div className="hp-field" aria-hidden="true">
+        <label>
+          Company website
+          <input ref={honeypot} type="text" name="company_website" tabIndex={-1} autoComplete="off" defaultValue="" />
+        </label>
       </div>
       <label>
         Name

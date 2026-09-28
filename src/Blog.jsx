@@ -314,6 +314,26 @@ export function headingId(heading) {
     .replace(/^-|-$/g, '')}`;
 }
 
+// Short, direct answers to the questions each article targets. Visible on the
+// page (FAQPage schema must describe content the reader can actually see), and
+// the shape answer engines lift straight into a response.
+function QuickAnswers({ faq }) {
+  if (!faq?.length) return null;
+  return (
+    <section className="quick-answers" aria-labelledby="quick-answers-title">
+      <h2 id="quick-answers-title">Quick answers</h2>
+      <dl>
+        {faq.map((item) => (
+          <div key={item.q}>
+            <dt>{item.q}</dt>
+            <dd>{item.a}</dd>
+          </div>
+        ))}
+      </dl>
+    </section>
+  );
+}
+
 function TableOfContents({ sections }) {
   if (sections.length < 3) return null;
   return (
@@ -385,6 +405,8 @@ export function BlogPost({ post: meta }) {
           {post.intro.map((paragraph) => (
             <p key={paragraph.slice(0, 40)} className="post-lede" dangerouslySetInnerHTML={{ __html: paragraph }} />
           ))}
+
+          <QuickAnswers faq={post.faq} />
 
           <TableOfContents sections={post.sections} />
 

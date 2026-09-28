@@ -74,5 +74,19 @@ export default {
   "cta": {
     "text": "Build your prayer list",
     "url": "/#builder"
-  }
+  },
+  "faq": [
+    {
+      "q": "How do I pray for an unsaved family member?",
+      "a": "Pray for them by name, daily and briefly. Ask what they need from God today, ask for one natural open door this week, and write down anything that comes to mind. Consistency matters more than length."
+    },
+    {
+      "q": "What should I pray for someone who is not a Christian?",
+      "a": "Scripture gives clear prayers: that God would open a door for the message (Colossians 4:3), enlighten the eyes of their heart (Ephesians 1:18), give them a new heart (Ezekiel 36:26), and send workers (Matthew 9:38)."
+    },
+    {
+      "q": "What if I have been praying for years with no change?",
+      "a": "No prayer prayed in faith is wasted, and the outcome was never yours to secure. Shorten the prayer rather than dropping it, keep the name on the list, and find someone to pray the same names with you."
+    }
+  ]
 };

@@ -73,5 +73,19 @@ export default {
   "cta": {
     "text": "Help them map their oikos",
     "url": "/#builder"
-  }
+  },
+  "faq": [
+    {
+      "q": "How do you disciple someone as a beginner?",
+      "a": "Meet regularly, catch up honestly, read a short Gospel passage together, and ask three questions: what stands out, what will you do about it, and who could you tell. Then pray for each other."
+    },
+    {
+      "q": "Do you need to be qualified to disciple someone?",
+      "a": "No. You need to be about a step ahead, following Jesus yourself, consistent, and honest about what you do not know. Character matters more than credentials."
+    },
+    {
+      "q": "What is the goal of discipleship?",
+      "a": "Not only a well-taught Christian, but someone able to disciple others — the pattern in 2 Timothy 2:2, reaching four generations in a single sentence."
+    }
+  ]
 };

@@ -1229,6 +1229,18 @@ button:hover,
   line-height: 1.5;
 }
 
+/* Honeypot: moved off-screen, never display:none — some bots skip hidden fields. */
+.hp-field {
+  position: absolute !important;
+  left: -9999px !important;
+  top: auto !important;
+  width: 1px !important;
+  height: 1px !important;
+  overflow: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
 .lead-privacy {
   display: flex;
   align-items: center;
@@ -1901,6 +1913,44 @@ button:hover,
   color: #3d342e;
   font-size: 1.18rem !important;
   line-height: 1.72 !important;
+}
+
+.quick-answers {
+  margin: 30px 0 6px;
+  padding: 22px 24px;
+  border: 1px solid rgba(20, 184, 166, 0.28);
+  border-radius: 10px;
+  background: linear-gradient(135deg, rgba(20, 184, 166, 0.07), rgba(243, 207, 116, 0.06)), #fffdf7;
+}
+
+.quick-answers h2 {
+  margin: 0 0 14px !important;
+  color: #14857a;
+  font-size: 0.74rem !important;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.quick-answers dl {
+  display: grid;
+  gap: 16px;
+  margin: 0;
+}
+
+.quick-answers dt {
+  margin-bottom: 4px;
+  color: #26201c;
+  font-size: 1.02rem;
+  font-weight: 900;
+  line-height: 1.35;
+}
+
+.quick-answers dd {
+  margin: 0;
+  color: #4b423b;
+  font-size: 0.98rem;
+  line-height: 1.65;
 }
 
 .post-loading {

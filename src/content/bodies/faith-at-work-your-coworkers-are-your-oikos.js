@@ -69,5 +69,15 @@ export default {
   "cta": {
     "text": "Add your colleagues to your map",
     "url": "/#builder"
-  }
+  },
+  "faq": [
+    {
+      "q": "How can I share my faith at work?",
+      "a": "Start with competence and character: do excellent work, own your mistakes, refuse to gossip, and treat everyone well. When faith comes up naturally — often during a crisis — be honest about where your hope comes from."
+    },
+    {
+      "q": "Should a manager evangelise their staff?",
+      "a": "No. Authority makes it pressure regardless of intent. A leader shapes something broader instead: fair pay, humane hours, honesty with customers and room for people to be human."
+    }
+  ]
 };

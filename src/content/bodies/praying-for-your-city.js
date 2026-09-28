@@ -62,5 +62,15 @@ export default {
   "cta": {
     "text": "Start with your own street",
     "url": "/#builder"
-  }
+  },
+  "faq": [
+    {
+      "q": "How do I pray for my city?",
+      "a": "Start with your own street, then pray for the city's institutions one a day — schools, hospitals, emergency services, local government, businesses and churches. Specific prayers are easier to sustain than general ones."
+    },
+    {
+      "q": "What does the Bible say about praying for your city?",
+      "a": "Jeremiah 29:7 tells exiles to seek the peace and prosperity of the city they were in and pray for it, because their own wellbeing was bound up with it."
+    }
+  ]
 };

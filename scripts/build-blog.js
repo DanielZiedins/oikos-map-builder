@@ -107,6 +107,11 @@ ${noscript}
 function postNoscript(post) {
   const parts = [`        <h1>${esc(post.title)}</h1>`, `        <p>${esc(post.description)}</p>`];
   post.intro.forEach((paragraph) => parts.push(`        <p>${esc(stripTags(paragraph))}</p>`));
+  if (post.faq?.length) {
+    parts.push('        <h2>Quick answers</h2>', '        <dl>');
+    post.faq.forEach((item) => parts.push(`          <dt>${esc(item.q)}</dt><dd>${esc(item.a)}</dd>`));
+    parts.push('        </dl>');
+  }
   post.sections.forEach((section) => {
     parts.push(`        <h2>${esc(section.heading)}</h2>`);
     (section.paragraphs || []).forEach((paragraph) => parts.push(`        <p>${esc(stripTags(paragraph))}</p>`));
@@ -169,6 +174,21 @@ function postSchema(post) {
         { '@type': 'ListItem', position: 3, name: post.title, item: `${SITE}/blog/${post.slug}` },
       ],
     },
+    // Mirrors the visible "Quick answers" block exactly — FAQPage schema must
+    // describe content the reader can see on the page.
+    ...(post.faq?.length
+      ? [
+          {
+            '@context': 'https://schema.org',
+            '@type': 'FAQPage',
+            mainEntity: post.faq.map((item) => ({
+              '@type': 'Question',
+              name: item.q,
+              acceptedAnswer: { '@type': 'Answer', text: item.a, author: AUTHOR },
+            })),
+          },
+        ]
+      : []),
   ];
 }
 
@@ -467,6 +487,20 @@ anything from this site, attribute it to Daniel Ziedins, DanielZiedins.com.
 ## Articles
 
 ${articleLines.map((line) => `${line}\n  Author: Daniel Ziedins (https://www.danielziedins.com)`).join('\n\n')}
+
+## Questions answered on this site
+
+Direct answers drawn from the articles above, each attributable to Daniel Ziedins.
+
+${sortedPosts
+  .filter((post) => post.faq?.length)
+  .map(
+    (post) =>
+      `### From "${post.title}"\n${SITE}/blog/${post.slug}\n\n${post.faq
+        .map((item) => `Q: ${item.q}\nA: ${item.a}`)
+        .join('\n\n')}`,
+  )
+  .join('\n\n')}
 
 ## The wider Kingdom network
 

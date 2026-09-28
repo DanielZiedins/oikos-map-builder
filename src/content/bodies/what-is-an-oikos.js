@@ -68,5 +68,19 @@ export default {
   "cta": {
     "text": "Map your oikos free",
     "url": "/#builder"
-  }
+  },
+  "faq": [
+    {
+      "q": "What does oikos mean in the Bible?",
+      "a": "Oikos is the Greek word for household. In the New Testament it means more than immediate family: it described an extended network of relatives, workers, friends, business partners and regular guests bound together by daily life."
+    },
+    {
+      "q": "How many people are in a typical oikos?",
+      "a": "Most adults have roughly eight to fifteen people with genuine relational weight, and a wider ring of perhaps fifty they could contact without it being strange."
+    },
+    {
+      "q": "Why does the oikos matter for evangelism?",
+      "a": "In Acts the Gospel repeatedly spread through existing households — Cornelius, Lydia, the Philippian jailer. People are far more likely to reconsider faith because someone they already trust changed than because a stranger argued well."
+    }
+  ]
 };

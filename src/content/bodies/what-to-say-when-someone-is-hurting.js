@@ -76,5 +76,19 @@ export default {
   "cta": {
     "text": "Note what they are facing",
     "url": "/#builder"
-  }
+  },
+  "faq": [
+    {
+      "q": "What do you say to someone who is grieving?",
+      "a": "Keep it short and honest: \"I am so sorry, I do not have words,\" \"Tell me about them,\" or \"I am still here.\" Presence matters more than the right sentence."
+    },
+    {
+      "q": "What should you not say to someone who is grieving?",
+      "a": "Avoid \"everything happens for a reason,\" anything starting \"at least,\" and \"let me know if you need anything\" — which hands the work to the person with the least capacity. Offer something specific instead."
+    },
+    {
+      "q": "When should I check in after a loss?",
+      "a": "Weeks later, not only at first. Support fades after about a fortnight, so a message in week six often means the most. Put a reminder in your calendar."
+    }
+  ]
 };

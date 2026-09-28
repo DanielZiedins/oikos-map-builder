@@ -72,5 +72,19 @@ export default {
   "cta": {
     "text": "See who is ready to be asked",
     "url": "/#builder"
-  }
+  },
+  "faq": [
+    {
+      "q": "How do I invite someone to church?",
+      "a": "Be specific, casual and easy to decline: name the event, the day and the time, say you are going, and add \"no stress if it is not your thing.\" Then offer to go with them."
+    },
+    {
+      "q": "What should I invite someone to first?",
+      "a": "Often something lower-commitment than a Sunday service — a meal at your home, a free community event, serving together, or a short course with a fixed end date."
+    },
+    {
+      "q": "What if they say no?",
+      "a": "Say \"no problem at all\" and treat them exactly the same next week. A no is rarely permanent; ask again in a few months about something different."
+    }
+  ]
 };

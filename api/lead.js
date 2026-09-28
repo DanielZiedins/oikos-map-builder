@@ -8,6 +8,20 @@ const allowedInterests = new Set([
   'I want personal growth and community',
 ]);
 
+// Under this, nobody has read a label and typed an address. Bots post in well
+// under a second; the slowest real person is still far above this.
+const MIN_HUMAN_MS = 2500;
+
+// Enforced here as well as in the form, because a client-only guard is bypassed
+// by anything posting straight to /api/lead.
+function looksLikeBot(body) {
+  const honeypot = String(body.company_website || '').trim();
+  if (honeypot) return 'honeypot';
+  const elapsed = Number(body.elapsedMs);
+  if (!Number.isFinite(elapsed) || elapsed < MIN_HUMAN_MS) return 'too-fast';
+  return null;
+}
+
 function isValidEmail(email) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
@@ -120,6 +134,14 @@ export default async function handler(request, response) {
 
     if (!isValidEmail(email)) {
       return response.status(400).json({ error: 'Please enter a valid email address.' });
+    }
+
+    // A tripped guard gets the exact response a real signup gets, and nothing is
+    // stored or sent. A visible error would only teach the bot to adapt.
+    // The body mirrors a real success byte-for-byte; returning stored:false here
+    // would hand the bot the exact signal we are trying to hide.
+    if (looksLikeBot(body)) {
+      return response.status(200).json({ ok: true, stored: true, forwarded: false, journeyStarted: true });
     }
 
     const token = crypto.randomUUID();

@@ -57,5 +57,15 @@ export default {
   "cta": {
     "text": "Pick one person to start with",
     "url": "/#builder"
-  }
+  },
+  "faq": [
+    {
+      "q": "How do I share my faith without being awkward?",
+      "a": "Start with care rather than argument: ask real questions, listen, show up in practical ways, and be consistent over months. Faith tends to come up naturally in relationships where people already feel loved."
+    },
+    {
+      "q": "Is being kind in order to evangelise manipulative?",
+      "a": "Only if the kindness is conditional. If you would still bring the meal in ten years whether or not they ever changed their mind, it is love. If not, it was leverage."
+    }
+  ]
 };

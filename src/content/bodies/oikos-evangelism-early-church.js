@@ -72,5 +72,15 @@ export default {
   "cta": {
     "text": "Map your household network",
     "url": "/#builder"
-  }
+  },
+  "faq": [
+    {
+      "q": "How did the early Church grow so fast?",
+      "a": "Mainly through households and existing relationships. It met in homes, spread along lines of trust, and became known for costly, visible care for the sick and poor — all without buildings, budgets or legal standing."
+    },
+    {
+      "q": "What is oikos evangelism?",
+      "a": "Reaching people through the relationships you already have — family, friends, coworkers and neighbours — rather than primarily through strangers, and then helping those people reach their own networks."
+    }
+  ]
 };

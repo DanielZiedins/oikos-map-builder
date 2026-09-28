@@ -67,5 +67,19 @@ export default {
   "cta": {
     "text": "See who to share with",
     "url": "/#builder"
-  }
+  },
+  "faq": [
+    {
+      "q": "How do I write my Christian testimony?",
+      "a": "Use three short parts of about a minute each: what life was like before Jesus was real to you, how it happened, and what is genuinely different now — including what you are still working through."
+    },
+    {
+      "q": "How long should a testimony be?",
+      "a": "About three minutes. Short enough to stay a conversation rather than a speech."
+    },
+    {
+      "q": "What if someone asks a question I cannot answer?",
+      "a": "Say so: \"I do not know, but I would love to find out with you.\" It keeps the conversation open and treats them as a person. A bluff closes it."
+    }
+  ]
 };
