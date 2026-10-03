@@ -51,6 +51,7 @@ import {
   readFlag,
   writeFlag,
 } from './journey.jsx';
+import { track, trackOutboundClicks } from './track.js';
 import './styles.css';
 
 const STORAGE_KEY = 'love-on-the-world-oikos-map-v1';
@@ -802,7 +803,14 @@ function PrayerSprint({ person, stage, onComplete }) {
       </div>
       <p>{complete ? `Beautiful. Keep listening for how to love ${person.name} today.` : `Hold ${person.name} before Jesus. ${stage.prompt}`}</p>
       <div className="prayer-sprint-actions">
-        <button type="button" onClick={() => setIsRunning((running) => !running)} disabled={complete}>
+        <button
+          type="button"
+          onClick={() => {
+            if (!isRunning) track('prayer_start');
+            setIsRunning((running) => !running);
+          }}
+          disabled={complete}
+        >
           {isRunning ? <Pause size={16} aria-hidden="true" /> : <Play size={16} aria-hidden="true" />}
           {isRunning ? 'Pause' : complete ? 'Complete' : 'Start prayer'}
         </button>
@@ -1395,6 +1403,7 @@ function App() {
     }
 
     pushHistory();
+    track('bulk_add');
     const additions = fresh.map((name) => ({
       id: createId(),
       name,
@@ -1462,6 +1471,7 @@ function App() {
   }
 
   function downloadJson() {
+    track('export_json');
     downloadBlob(
       new Blob([JSON.stringify(mapData, null, 2)], { type: 'application/json' }),
       `${slugify(mapData.mapTitle)}.json`,
@@ -1469,6 +1479,7 @@ function App() {
   }
 
   function downloadPrayerPlan() {
+    track('export_plan');
     downloadBlob(new Blob([buildPrayerPlan(mapData)], { type: 'text/plain;charset=utf-8' }), `${slugify(mapData.mapTitle)}-prayer-plan.txt`);
   }
 
@@ -1493,6 +1504,7 @@ function App() {
   }
 
   async function shareTool() {
+    track('share_tool');
     const shareData = {
       title: 'Free Oikos Map Builder',
       text: 'Create a free Oikos Map and pray intentionally for the people God has placed around you.',
@@ -1513,6 +1525,7 @@ function App() {
   }
 
   async function copyPrayerPlan() {
+    track('copy_plan');
     setPlanCopyState((await copyText(buildPrayerPlan(mapData))) ? 'Copied!' : 'Copy failed');
     window.setTimeout(() => setPlanCopyState('Plan'), 1800);
   }
@@ -1524,10 +1537,12 @@ function App() {
   }
 
   function printMap() {
+    track('print_map');
     window.print();
   }
 
   async function copyMapLink() {
+    track('share_link');
     try {
       const url = `${SITE_URL}/#map=${encodeMapToHash(mapData)}`;
       setMapLinkState((await copyText(url)) ? 'Copied!' : 'Copy failed');
@@ -1547,6 +1562,7 @@ function App() {
   }
 
   function downloadSvg() {
+    track('export_svg');
     const svgMarkup = getSvgMarkup();
     if (!svgMarkup) {
       setSaveState('SVG export failed');
@@ -1556,6 +1572,7 @@ function App() {
   }
 
   function downloadPng() {
+    track('export_png');
     const svgMarkup = getSvgMarkup();
     if (!svgMarkup) {
       setSaveState('PNG export failed');
@@ -2374,6 +2391,11 @@ const container = document.getElementById('root');
 // Reuse the root across HMR updates instead of creating a second one.
 container.__oikosRoot = container.__oikosRoot || createRoot(container);
 container.__oikosRoot.render(routes[routePath] || <App />);
+
+if (!container.__oikosTracking) {
+  container.__oikosTracking = true;
+  trackOutboundClicks();
+}
 
 if (import.meta.env.PROD && 'serviceWorker' in navigator) {
   window.addEventListener('load', () => {

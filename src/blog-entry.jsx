@@ -7,6 +7,7 @@ import { BlogIndex, BlogPost } from './Blog.jsx';
 // Summary only. Importing posts.js here would pull every article body into the
 // entry chunk, which is exactly what the per-article split avoids.
 import { metaBySlug } from './content/posts-meta.js';
+import { trackOutboundClicks } from './track.js';
 import './styles.css';
 
 const path = window.location.pathname.replace(/\.html$/, '').replace(/\/+$/, '') || '/';
@@ -16,6 +17,11 @@ const post = slug ? metaBySlug(slug) : null;
 const container = document.getElementById('root');
 container.__oikosRoot = container.__oikosRoot || createRoot(container);
 container.__oikosRoot.render(post ? <BlogPost post={post} /> : <BlogIndex />);
+
+if (!container.__oikosTracking) {
+  container.__oikosTracking = true;
+  trackOutboundClicks();
+}
 
 if (import.meta.env.PROD && 'serviceWorker' in navigator) {
   window.addEventListener('load', () => {

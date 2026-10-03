@@ -3,6 +3,7 @@
 // had no way to subscribe at all.
 import React, { useRef, useState } from 'react';
 import { CheckCircle2, Mail, ShieldCheck, Sparkles } from 'lucide-react';
+import { track } from './track.js';
 
 export const SUBSCRIBED_KEY = 'oikos-journey-subscribed-v1';
 export const INVITE_DISMISSED_KEY = 'oikos-invite-dismissed-v1';
@@ -78,6 +79,7 @@ export function LeadCapture({ compact = false, mapData = null, source = 'oikosma
       const result = await response.json().catch(() => ({}));
       if (!response.ok) throw new Error(result.error || 'Something went wrong. Please try again in a moment.');
       setStatus('sent');
+      track('signup');
       setLead({ name: '', email: '', interest: adLeadOptions[0] });
       writeFlag(SUBSCRIBED_KEY);
       window.dispatchEvent(new CustomEvent(JOURNEY_EVENT));

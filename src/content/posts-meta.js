@@ -127,3 +127,68 @@ export const sortedPostsMeta = [...postsMeta].sort((a, b) => a.order - b.order);
 export function metaBySlug(slug) {
   return postsMeta.find((post) => post.slug === slug);
 }
+
+// Related-post rails, computed once for the whole journal rather than per
+// article. Picking each article's top matches independently made the strongest
+// few win everywhere (7 inbound links for one post, 1 for another), so newer
+// articles were barely linked. Here shared tags still dominate, but a target
+// that already has many inbound links is penalised, which spreads the rails.
+// Shared by the client (Blog.jsx) and the build (non-JS shell links).
+export function buildRelatedMap(limit = 3) {
+  const posts = sortedPostsMeta;
+  const inbound = Object.fromEntries(posts.map((p) => [p.slug, 0]));
+  const map = {};
+  posts.forEach((post) => {
+    const picks = posts
+      .filter((other) => other.slug !== post.slug)
+      .map((other) => {
+        const shared = (other.tags || []).filter((t) => (post.tags || []).includes(t)).length;
+        return { other, score: shared * 10 - inbound[other.slug] * 4, distance: Math.abs(other.order - post.order) };
+      })
+      .sort((a, b) => b.score - a.score || a.distance - b.distance)
+      .slice(0, limit)
+      .map((pick) => pick.other);
+    picks.forEach((p) => (inbound[p.slug] += 1));
+    map[post.slug] = picks;
+  });
+  return map;
+}
+
+export const relatedMap = buildRelatedMap();
+
+// The journal organised along the rhythm the whole site teaches. Explicit
+// placement rather than inferring from tags, so a stage means what it says.
+// scripts/build-blog.js fails the build if any article is missing from here,
+// so a new post cannot silently fall outside the path.
+export const readingPath = [
+  {
+    id: 'start',
+    label: 'Start here',
+    note: 'What an oikos is, and why households have always carried the Gospel.',
+    slugs: ['what-is-an-oikos', 'oikos-evangelism-early-church'],
+  },
+  {
+    id: 'pray',
+    label: 'Pray',
+    note: 'Name people before God, daily — then widen it to your street and city.',
+    slugs: ['how-to-pray-for-unsaved-family-and-friends', 'praying-for-your-city'],
+  },
+  {
+    id: 'care',
+    label: 'Care',
+    note: 'Love that shows up, especially when life gets hard.',
+    slugs: ['evangelism-without-being-weird', 'what-to-say-when-someone-is-hurting'],
+  },
+  {
+    id: 'share',
+    label: 'Share',
+    note: 'Your story, a simple invitation, and faith where you already spend your days.',
+    slugs: ['how-to-share-your-testimony', 'how-to-invite-someone-to-church', 'faith-at-work-your-coworkers-are-your-oikos'],
+  },
+  {
+    id: 'disciple',
+    label: 'Disciple',
+    note: 'Walk with someone until they can do it for someone else.',
+    slugs: ['how-to-disciple-someone'],
+  },
+];

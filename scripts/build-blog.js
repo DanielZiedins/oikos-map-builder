@@ -13,6 +13,17 @@ const blogDir = resolve(root, 'blog');
 const SITE = 'https://www.oikosmap.com';
 
 const { posts, sortedPosts } = await import(resolve(root, 'src/content/posts.js'));
+const { relatedMap, readingPath } = await import(resolve(root, 'src/content/posts-meta.js'));
+
+// Every article must sit somewhere on the reading path (src/content/posts-meta.js).
+{
+  const placed = new Set(readingPath.flatMap((stage) => stage.slugs));
+  const unplaced = posts.filter((post) => !placed.has(post.slug)).map((post) => post.slug);
+  const unknown = [...placed].filter((slug) => !posts.some((post) => post.slug === slug));
+  if (unplaced.length || unknown.length) {
+    throw new Error(`readingPath: unplaced ${unplaced.join(', ') || '-'}; unknown ${unknown.join(', ') || '-'}`);
+  }
+}
 
 // A single, resolvable author entity. Search and answer engines weigh a named
 // person with corroborating profiles far more than a bare string.
@@ -125,6 +136,23 @@ function postNoscript(post) {
   if (post.scripture) {
     parts.push(`        <blockquote><p>${esc(post.scripture.text)}</p><cite>${esc(post.scripture.ref)}</cite></blockquote>`);
   }
+  // Links, so a crawler that does not run JavaScript can keep going instead of
+  // hitting a dead end on every article.
+  parts.push(`        <p>Written by <a href="https://www.danielziedins.com" rel="author">Daniel Ziedins</a>.</p>`);
+  const related = relatedMap[post.slug] || [];
+  if (related.length) {
+    parts.push('        <h2>Keep reading</h2>', '        <ul>');
+    related.forEach((r) => parts.push(`          <li><a href="/blog/${r.slug}">${esc(r.title)}</a></li>`));
+    parts.push('        </ul>');
+  }
+  parts.push(
+    '        <nav>',
+    '          <a href="/blog">All articles in the Oikos Journal</a> ·',
+    '          <a href="/">Build your free Oikos Map</a> ·',
+    '          <a href="/growth">Growth</a> ·',
+    '          <a href="/connect">Connect</a>',
+    '        </nav>',
+  );
   return parts.join('\n');
 }
 
@@ -219,6 +247,24 @@ function indexSchema() {
         { '@type': 'ListItem', position: 2, name: 'The Oikos Journal', item: `${SITE}/blog` },
       ],
     },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'ItemList',
+      name: 'The Oikos reading path',
+      description: 'The Oikos Journal in reading order: start here, then pray, care, share, and disciple.',
+      itemListOrder: 'https://schema.org/ItemListOrderAscending',
+      itemListElement: readingPath
+        .flatMap((stage) => stage.slugs.map((slug) => ({ stage, slug })))
+        .map(({ stage, slug }, index) => {
+          const post = posts.find((entry) => entry.slug === slug);
+          return {
+            '@type': 'ListItem',
+            position: index + 1,
+            name: `${stage.label}: ${post.title}`,
+            url: `${SITE}/blog/${slug}`,
+          };
+        }),
+    },
   ];
 }
 
@@ -267,7 +313,13 @@ posts.forEach((post) => {
 });
 
 // Sitemap covers the core pages plus every post.
-const today = '2026-08-09';
+// Content dates, never the build clock (a rebuild is not an update).
+// Bump CONTENT_UPDATED when the hub pages themselves change; article dates come
+// from posts-meta. The journal index changes whenever an article is added, so
+// it takes whichever is newer.
+const CONTENT_UPDATED = '2026-10-03';
+const latestPost = posts.map((post) => post.date).sort().at(-1);
+const today = [CONTENT_UPDATED, latestPost].sort().at(-1);
 const urls = [
   {
     loc: `${SITE}/`,

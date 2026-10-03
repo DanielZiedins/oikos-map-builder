@@ -8,7 +8,8 @@
     "blog": "node scripts/build-blog.js",
     "prebuild": "npm run blog",
     "build": "vite build",
-    "preview": "vite preview --host 0.0.0.0"
+    "preview": "vite preview --host 0.0.0.0",
+    "indexnow": "node scripts/indexnow.mjs"
   },
   "dependencies": {
     "@vitejs/plugin-react": "^5.0.4",

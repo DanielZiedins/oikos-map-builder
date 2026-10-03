@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { ArrowLeft, ArrowRight, BookOpen, Compass, Mail, Sparkles } from 'lucide-react';
-import { sortedPostsMeta } from './content/posts-meta.js';
+import { readingPath, relatedMap, sortedPostsMeta } from './content/posts-meta.js';
 import { siteByHost } from './content/network.js';
 
 // One chunk per article. Reading one article used to download every article's
@@ -12,6 +12,7 @@ function loadBody(slug) {
   return load ? load().then((mod) => mod.default) : Promise.resolve(null);
 }
 import { JourneyTimeline, LeadCapture } from './journey.jsx';
+import { track } from './track.js';
 
 // Drives the progress bar already styled on body::before. The builder pages set
 // this from ScrollEffects; the journal had no equivalent, so on long articles the
@@ -170,6 +171,47 @@ function NetworkMentions({ hosts }) {
   );
 }
 
+// The journal laid out along Pray → Care → Share → Disciple. Organises a growing
+// library without hiding anything: the full filterable list still follows.
+function ReadingPath() {
+  const bySlug = Object.fromEntries(sortedPostsMeta.map((post) => [post.slug, post]));
+  return (
+    <section className="reading-path" aria-labelledby="reading-path-title">
+      <div className="reading-path-head">
+        <p className="section-kicker">
+          <Compass size={18} aria-hidden="true" />
+          The reading path
+        </p>
+        <h2 id="reading-path-title">Read it in the order you will live it.</h2>
+        <p>
+          The same rhythm the map is built on. Start at the beginning, or jump to the step you are in right now.
+        </p>
+      </div>
+      <ol className="reading-path-steps">
+        {readingPath.map((stage, index) => (
+          <li key={stage.id} className={`reading-step step-${stage.id}`}>
+            <span className="reading-step-number" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+            <h3>{stage.label}</h3>
+            <p>{stage.note}</p>
+            <ul>
+              {stage.slugs.map((slug) =>
+                bySlug[slug] ? (
+                  <li key={slug}>
+                    <a href={`/blog/${slug}`} onClick={() => track('path_click', `/blog/${slug}`)}>
+                      {bySlug[slug].title}
+                    </a>
+                    <small>{bySlug[slug].readingTime}</small>
+                  </li>
+                ) : null,
+              )}
+            </ul>
+          </li>
+        ))}
+      </ol>
+    </section>
+  );
+}
+
 // Tag counts, most-used first, so the filter row leads with the broadest topics.
 function tagCounts() {
   const counts = new Map();
@@ -197,6 +239,7 @@ export function BlogIndex() {
 
   function chooseTag(tag) {
     setActiveTag(tag);
+    if (tag) track('journal_filter', `/blog#tag=${tag}`);
     const next = tag ? `#tag=${encodeURIComponent(tag)}` : ' ';
     window.history.replaceState(null, '', tag ? next : window.location.pathname);
   }
@@ -225,6 +268,8 @@ export function BlogIndex() {
           </p>
         </div>
       </section>
+
+      <ReadingPath />
 
       <nav className="blog-filter" aria-label="Filter articles by topic">
         <button
@@ -350,16 +395,10 @@ function TableOfContents({ sections }) {
   );
 }
 
-// Rank by shared tags so "keep reading" is genuinely related rather than
-// whichever three posts happen to sort first.
-function relatedPosts(post, limit = 3) {
-  const tags = new Set(post.tags || []);
-  return sortedPostsMeta
-    .filter((entry) => entry.slug !== post.slug)
-    .map((entry) => ({ entry, shared: (entry.tags || []).filter((tag) => tags.has(tag)).length }))
-    .sort((a, b) => b.shared - a.shared || a.entry.order - b.entry.order)
-    .slice(0, limit)
-    .map((match) => match.entry);
+// "Keep reading" picks, balanced across the whole journal — see buildRelatedMap
+// in posts-meta.js, which the build also uses for the non-JS shell links.
+function relatedPosts(post) {
+  return relatedMap[post.slug] || [];
 }
 
 export function BlogPost({ post: meta }) {
@@ -381,6 +420,25 @@ export function BlogPost({ post: meta }) {
   }, [meta.slug]);
 
   const post = body ? { ...meta, ...body } : meta;
+
+  // A view when the article arrives; a "read" once someone gets three-quarters
+  // of the way down — the honest signal that an article is actually being read.
+  useEffect(() => {
+    if (!body) return undefined;
+    track('article_view');
+    let counted = false;
+    function onScroll() {
+      if (counted) return;
+      const height = document.documentElement.scrollHeight - window.innerHeight;
+      if (height > 0 && window.scrollY / height >= 0.75) {
+        counted = true;
+        track('article_read');
+        window.removeEventListener('scroll', onScroll);
+      }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, [body]);
 
   return (
     <main>
