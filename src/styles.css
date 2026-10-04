@@ -3855,3 +3855,81 @@ textarea:focus-visible,
   font-size: 0.85rem;
   opacity: 0.7;
 }
+
+/* ---------- Article share bar ---------- */
+.share-article {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px 24px;
+  max-width: 900px;
+  margin: 48px auto 0;
+  padding: 22px 24px;
+  border: 1px solid rgba(72, 57, 43, 0.16);
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(243, 207, 116, 0.16), rgba(20, 184, 166, 0.07)), #fffdf7;
+}
+
+.share-article-title {
+  margin: 0 0 4px;
+  color: #26201c;
+  font-size: 1.12rem;
+  font-weight: 900;
+}
+
+.share-article-note {
+  margin: 0;
+  color: #62564e;
+  font-size: 0.9rem;
+}
+
+.share-article-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.share-chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px; /* WCAG 2.2 target size */
+  padding: 10px 16px;
+  border: 1px solid rgba(38, 32, 28, 0.2);
+  border-radius: 999px;
+  color: #26201c;
+  background: #fffdf7;
+  font-size: 0.88rem;
+  font-weight: 800;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.share-chip::after {
+  display: none;
+}
+
+.share-chip:hover,
+.share-chip:focus-visible {
+  border-color: rgba(179, 54, 36, 0.45);
+  color: #9c3327;
+  transform: none;
+}
+
+.share-chip.primary {
+  color: #fff8ec;
+  background: #26201c;
+  border-color: transparent;
+}
+
+.share-chip.primary:hover {
+  color: #fff8ec;
+  background: #3a302a;
+}
+
+@media (max-width: 620px) {
+  .share-article-actions .share-chip {
+    flex: 1 1 calc(50% - 8px);
+    justify-content: center;
+  }
+}

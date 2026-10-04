@@ -28,7 +28,9 @@ export function trackOutboundClicks() {
     'click',
     (event) => {
       const link = event.target instanceof Element ? event.target.closest('a[href]') : null;
-      if (!link) return;
+      // Share buttons count themselves as share_article; skip them here so
+      // outbound stays a clean measure of visits to other sites.
+      if (!link || link.hasAttribute('data-no-outbound')) return;
       let url;
       try {
         url = new URL(link.href, window.location.href);

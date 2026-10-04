@@ -15,6 +15,12 @@ const SITE = 'https://www.oikosmap.com';
 const { posts, sortedPosts } = await import(resolve(root, 'src/content/posts.js'));
 const { relatedMap, readingPath } = await import(resolve(root, 'src/content/posts-meta.js'));
 
+// Every article needs its own social preview (npm run og writes them).
+{
+  const missing = posts.filter((post) => !existsSync(resolve(root, 'public/og', `${post.slug}.png`))).map((p) => p.slug);
+  if (missing.length) throw new Error(`Missing social preview image for: ${missing.join(', ')} — run npm run og`);
+}
+
 // Every article must sit somewhere on the reading path (src/content/posts-meta.js).
 {
   const placed = new Set(readingPath.flatMap((stage) => stage.slugs));
@@ -59,7 +65,7 @@ function stripTags(value) {
     .trim();
 }
 
-function head({ title, description, canonical, extraSchema = [], published }) {
+function head({ title, description, canonical, extraSchema = [], published, image = `${SITE}/og-image.png`, imageAlt = 'Oikos Map Builder — see the people God has placed around you' }) {
   const schema = JSON.stringify(extraSchema, null, 2);
   return `    <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -81,15 +87,16 @@ function head({ title, description, canonical, extraSchema = [], published }) {
     <meta property="og:url" content="${canonical}" />
     <meta property="og:site_name" content="Oikos Map Builder" />
     <meta property="og:locale" content="en_CA" />
-    <meta property="og:image" content="${SITE}/og-image.png" />
+    <meta property="og:image" content="${image}" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:type" content="image/png" />
-    <meta property="og:image:alt" content="Oikos Map Builder — see the people God has placed around you" />
+    <meta property="og:image:alt" content="${esc(imageAlt)}" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="${esc(title)}" />
     <meta name="twitter:description" content="${esc(description)}" />
-    <meta name="twitter:image" content="${SITE}/og-image.png" />
+    <meta name="twitter:image" content="${image}" />
+    <meta name="twitter:image:alt" content="${esc(imageAlt)}" />
 ${published ? `    <meta property="article:published_time" content="${published}" />\n` : ''}    <title>${esc(title)}</title>
     <script type="application/ld+json">
 ${schema}
@@ -168,7 +175,12 @@ function postSchema(post) {
       dateModified: post.date,
       url,
       mainEntityOfPage: { '@type': 'WebPage', '@id': url },
-      image: `${SITE}/og-image.png`,
+      image: {
+        '@type': 'ImageObject',
+        url: `${SITE}/og/${post.slug}.png`,
+        width: 1200,
+        height: 630,
+      },
       keywords: post.tags.join(', '),
       wordCount: stripTags(
         [...post.intro, ...post.sections.flatMap((s) => [...(s.paragraphs || []), ...(s.list || []), ...(s.after || [])])].join(' '),
@@ -306,6 +318,8 @@ posts.forEach((post) => {
         canonical: `${SITE}/blog/${post.slug}`,
         extraSchema: postSchema(post),
         published: post.date,
+        image: `${SITE}/og/${post.slug}.png`,
+        imageAlt: `${post.title} — The Oikos Journal, by Daniel Ziedins`,
       }),
       noscript: postNoscript(post),
     }),

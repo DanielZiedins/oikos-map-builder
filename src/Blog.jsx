@@ -379,6 +379,89 @@ function QuickAnswers({ faq }) {
   );
 }
 
+// Passing an article along is how a ministry resource actually travels, so every
+// article ends with the channels people really use: the phone's own share sheet,
+// a copyable link, WhatsApp, Facebook, X and email. Counted by channel.
+function ShareArticle({ post }) {
+  const [copied, setCopied] = useState(false);
+  const url = `https://www.oikosmap.com/blog/${post.slug}`;
+  const text = `${post.title} — by Daniel Ziedins`;
+  const enc = encodeURIComponent;
+  const canNativeShare = typeof navigator !== 'undefined' && typeof navigator.share === 'function';
+
+  function count(channel) {
+    track('share_article', `/blog/${post.slug}#${channel}`);
+  }
+
+  async function nativeShare() {
+    try {
+      await navigator.share({ title: post.title, text, url });
+      count('native');
+    } catch {
+      // Dismissing the share sheet is not an error worth showing.
+    }
+  }
+
+  async function copyLink() {
+    try {
+      await navigator.clipboard.writeText(url);
+    } catch {
+      const field = document.createElement('textarea');
+      field.value = url;
+      field.setAttribute('readonly', '');
+      field.style.position = 'fixed';
+      field.style.opacity = '0';
+      document.body.appendChild(field);
+      field.select();
+      document.execCommand('copy');
+      field.remove();
+    }
+    setCopied(true);
+    count('copy');
+    window.setTimeout(() => setCopied(false), 2200);
+  }
+
+  const links = [
+    ['WhatsApp', `https://wa.me/?text=${enc(`${text} ${url}`)}`, 'whatsapp'],
+    ['Facebook', `https://www.facebook.com/sharer/sharer.php?u=${enc(url)}`, 'facebook'],
+    ['X', `https://x.com/intent/post?text=${enc(text)}&url=${enc(url)}`, 'x'],
+    ['Email', `mailto:?subject=${enc(post.title)}&body=${enc(`I thought this might help: ${url}`)}`, 'email'],
+  ];
+
+  return (
+    <aside className="share-article" aria-labelledby="share-article-title">
+      <div>
+        <p id="share-article-title" className="share-article-title">Know someone who needs this?</p>
+        <p className="share-article-note">Send it to one person today — that is how this travels.</p>
+      </div>
+      <div className="share-article-actions">
+        {canNativeShare ? (
+          <button type="button" className="share-chip primary" onClick={nativeShare}>
+            Share…
+          </button>
+        ) : null}
+        <button type="button" className="share-chip" onClick={copyLink} aria-live="polite">
+          {copied ? 'Link copied ✓' : 'Copy link'}
+        </button>
+        {links.map(([label, href, channel]) => (
+          <a
+            key={channel}
+            className="share-chip"
+            href={href}
+            target={channel === 'email' ? undefined : '_blank'}
+            rel="noopener"
+            onClick={() => count(channel)}
+            data-no-outbound=""
+            aria-label={`Share on ${label}`}
+          >
+            {label}
+          </a>
+        ))}
+      </div>
+    </aside>
+  );
+}
+
 function TableOfContents({ sections }) {
   if (sections.length < 3) return null;
   return (
@@ -502,6 +585,8 @@ export function BlogPost({ post: meta }) {
           </div>
         </div>
         ) : null}
+
+        {body ? <ShareArticle post={post} /> : null}
 
         <AuthorCard />
 

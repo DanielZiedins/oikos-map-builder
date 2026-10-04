@@ -9,14 +9,17 @@
     "prebuild": "npm run blog",
     "build": "vite build",
     "preview": "vite preview --host 0.0.0.0",
-    "indexnow": "node scripts/indexnow.mjs"
+    "indexnow": "node scripts/indexnow.mjs",
+    "og": "node scripts/og-images.mjs"
   },
   "dependencies": {
     "@vitejs/plugin-react": "^5.0.4",
-    "vite": "^7.1.12",
+    "lucide-react": "^0.468.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
-    "lucide-react": "^0.468.0"
+    "vite": "^7.1.12"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "sharp": "^0.35.5"
+  }
 }
