@@ -1491,7 +1491,8 @@ button:hover,
 
 .reading-path-steps {
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  /* One column per stage, so adding a stage never strands one on its own row. */
+  grid-template-columns: repeat(6, minmax(0, 1fr));
   gap: 12px;
   margin: 0;
   padding: 0;
@@ -1513,6 +1514,7 @@ button:hover,
 .reading-step.step-care { border-top-color: #f3cf74; }
 .reading-step.step-share { border-top-color: #f45d48; }
 .reading-step.step-disciple { border-top-color: #516cf0; }
+.reading-step.step-send { border-top-color: #9c3327; }
 
 .reading-step-number {
   color: #9c3327;
@@ -1567,7 +1569,11 @@ button:hover,
   font-weight: 700;
 }
 
-@media (max-width: 1080px) {
+@media (max-width: 1180px) {
+  .reading-path-steps { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+@media (max-width: 860px) {
   .reading-path-steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
@@ -3931,5 +3937,66 @@ textarea:focus-visible,
   .share-article-actions .share-chip {
     flex: 1 1 calc(50% - 8px);
     justify-content: center;
+  }
+}
+
+/* ---------- Connect: partnership band ---------- */
+.partner-band {
+  display: grid;
+  grid-template-columns: minmax(280px, 1.1fr) minmax(260px, 0.9fr);
+  gap: clamp(24px, 5vw, 64px);
+  align-items: center;
+  padding: clamp(54px, 8vw, 96px) clamp(18px, 4vw, 56px);
+  color: #fff8ec;
+  background:
+    radial-gradient(circle at 85% 20%, rgba(156, 51, 39, 0.38), transparent 40%),
+    radial-gradient(circle at 10% 90%, rgba(243, 207, 116, 0.16), transparent 36%),
+    #171310;
+}
+
+.partner-band .section-kicker {
+  color: #f3cf74;
+}
+
+.partner-band h2 {
+  margin-bottom: 18px;
+  font-size: clamp(2rem, 4.2vw, 3.4rem);
+  line-height: 1.06;
+  letter-spacing: -0.8px;
+}
+
+.partner-band-copy > p:not(.section-kicker) {
+  max-width: 620px;
+  margin: 0 0 14px;
+  color: rgba(255, 248, 236, 0.8);
+  font-size: 1.06rem;
+  line-height: 1.66;
+}
+
+.partner-band-copy strong {
+  color: #f3cf74;
+}
+
+.partner-band-actions {
+  display: grid;
+  gap: 10px;
+}
+
+.partner-band-actions .primary-action {
+  color: #171310;
+  background: #f3cf74;
+  justify-content: flex-start;
+}
+
+.partner-band-actions .secondary-action {
+  color: #fff8ec;
+  background: rgba(255, 248, 236, 0.06);
+  border-color: rgba(255, 248, 236, 0.22);
+  justify-content: flex-start;
+}
+
+@media (max-width: 860px) {
+  .partner-band {
+    grid-template-columns: 1fr;
   }
 }

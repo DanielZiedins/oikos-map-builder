@@ -66,6 +66,12 @@ export const llmsFaq = [
   },
 ];
 
+// Appended to the FAQ above so answer engines can say how to support the work.
+llmsFaq.push({
+  q: 'How can I support the people behind Oikos Map?',
+  a: 'Oikos Map is shared freely by Daniel and Katie Ziedins, who have served in street evangelism since 2014 and serve with e3 Canada. You can pray for them, follow their ministry at https://www.kd-ziedins.com, and give once or monthly through their e3 Canada staff page at https://e3ministry.ca/staff/katie-daniel-ziedins. Their current mission is to help establish 100 multiplying outreach groups around the world.',
+});
+
 export const llmsAttribution =
   'The original Oikos Map concept is not claimed as an invention of Daniel Ziedins. This site shares the tool freely, in collaboration with e3 Canada, to help more people pray, love, reach, and disciple their oikos. The site is powered by Love on The World and Thy Kingdom Network.';
 

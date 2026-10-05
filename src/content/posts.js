@@ -14,6 +14,7 @@ import howToInviteSomeoneToChurch from './bodies/how-to-invite-someone-to-church
 import howToPrayForUnsavedFamilyAndFriends from './bodies/how-to-pray-for-unsaved-family-and-friends.js';
 import howToShareYourTestimony from './bodies/how-to-share-your-testimony.js';
 import oikosEvangelismEarlyChurch from './bodies/oikos-evangelism-early-church.js';
+import plunderHellPopulateHeaven from './bodies/plunder-hell-populate-heaven.js';
 import prayingForYourCity from './bodies/praying-for-your-city.js';
 import whatIsAnOikos from './bodies/what-is-an-oikos.js';
 import whatToSayWhenSomeoneIsHurting from './bodies/what-to-say-when-someone-is-hurting.js';
@@ -26,6 +27,7 @@ const bodies = {
   'how-to-pray-for-unsaved-family-and-friends': howToPrayForUnsavedFamilyAndFriends,
   'how-to-share-your-testimony': howToShareYourTestimony,
   'oikos-evangelism-early-church': oikosEvangelismEarlyChurch,
+  'plunder-hell-populate-heaven': plunderHellPopulateHeaven,
   'praying-for-your-city': prayingForYourCity,
   'what-is-an-oikos': whatIsAnOikos,
   'what-to-say-when-someone-is-hurting': whatToSayWhenSomeoneIsHurting,
@@ -44,3 +46,25 @@ export const sortedPosts = sortedPostsMeta.map((meta) => ({ ...meta, ...bodies[m
 export function postBySlug(slug) {
   return posts.find((post) => post.slug === slug);
 }
+
+// One reading-time formula for the whole journal, counting what a reader actually
+// reads: intro, headings, body, lists and the quick answers, at 220 words a
+// minute. The stored readingTime in posts-meta.js must match this —
+// scripts/build-blog.js fails the build if it does not, so it cannot drift.
+export function readingMinutes(post) {
+  const text = [
+    ...(post.intro || []),
+    ...(post.faq || []).flatMap((item) => [item.q, item.a]),
+    ...(post.sections || []).flatMap((section) => [
+      section.heading,
+      ...(section.paragraphs || []),
+      ...(section.list || []),
+      ...(section.after || []),
+    ]),
+  ]
+    .join(' ')
+    .replace(/<[^>]+>/g, ' ');
+  const words = text.split(/\s+/).filter(Boolean).length;
+  return Math.max(1, Math.round(words / 220));
+}
+

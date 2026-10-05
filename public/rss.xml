@@ -6,7 +6,7 @@
     <atom:link href="https://www.oikosmap.com/rss.xml" rel="self" type="application/rss+xml" />
     <description>Practical, encouraging writing on prayer, everyday evangelism, discipleship, and loving the people God has placed around you.</description>
     <language>en</language>
-    <lastBuildDate>Sat, 03 Oct 2026 09:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Mon, 05 Oct 2026 09:00:00 GMT</lastBuildDate>
     <item>
       <title>What Is an Oikos? The Biblical Meaning of Your Household</title>
       <link>https://www.oikosmap.com/blog/what-is-an-oikos</link>
@@ -106,6 +106,16 @@
       <category>Prayer</category>
       <category>Care</category>
       <category>Practical</category>
+    </item>
+    <item>
+      <title>Plunder Hell, Populate Heaven: Your Part in Sending the Gospel</title>
+      <link>https://www.oikosmap.com/blog/plunder-hell-populate-heaven</link>
+      <guid isPermaLink="true">https://www.oikosmap.com/blog/plunder-hell-populate-heaven</guid>
+      <pubDate>Mon, 05 Oct 2026 09:00:00 GMT</pubDate>
+      <description>Your Oikos Map is your front line — but the Great Commission also needs people who send. A biblical call to go, pray and give, and an invitation to partner with Daniel and Katie Ziedins through e3 Canada.</description>
+      <category>Send</category>
+      <category>Foundations</category>
+      <category>Prayer</category>
     </item>
   </channel>
 </rss>

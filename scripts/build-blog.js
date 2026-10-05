@@ -12,7 +12,20 @@ const root = resolve(here, '..');
 const blogDir = resolve(root, 'blog');
 const SITE = 'https://www.oikosmap.com';
 
-const { posts, sortedPosts } = await import(resolve(root, 'src/content/posts.js'));
+const { posts, sortedPosts, readingMinutes } = await import(resolve(root, 'src/content/posts.js'));
+
+// Stated reading times must match the text. They were once set by hand and ran
+// at roughly double the real length.
+{
+  const wrong = posts
+    .map((post) => ({ slug: post.slug, stated: parseInt(post.readingTime, 10), actual: readingMinutes(post) }))
+    .filter((entry) => entry.stated !== entry.actual);
+  if (wrong.length) {
+    throw new Error(
+      `readingTime out of date: ${wrong.map((w) => `${w.slug} says ${w.stated}, is ${w.actual}`).join('; ')} — update posts-meta.js`,
+    );
+  }
+}
 const { relatedMap, readingPath } = await import(resolve(root, 'src/content/posts-meta.js'));
 
 // Every article needs its own social preview (npm run og writes them).

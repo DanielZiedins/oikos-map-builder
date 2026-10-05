@@ -15,7 +15,7 @@ const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const outDir = resolve(root, 'public/og');
 mkdirSync(outDir, { recursive: true });
 
-const STAGE_COLOURS = { start: '#26201c', pray: '#14b8a6', care: '#e0a800', share: '#f45d48', disciple: '#516cf0' };
+const STAGE_COLOURS = { start: '#26201c', pray: '#14b8a6', care: '#e0a800', share: '#f45d48', disciple: '#516cf0', send: '#9c3327' };
 
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 

@@ -8,7 +8,7 @@ export const postsMeta = [
     title: "What Is an Oikos? The Biblical Meaning of Your Household",
     description: "Oikos is the Greek word for household, but in the New Testament it means far more than the people under your roof. Here is what it meant then, and what it means for you now.",
     date: "2026-07-30",
-    readingTime: "6 min read",
+    readingTime: "4 min read",
     tags: ["Oikos", "Foundations", "Evangelism"],
     kicker: "Start here",
     excerpt: "The word appears more than a hundred times in the New Testament, and it quietly explains how the early Church grew so fast.",
@@ -19,7 +19,7 @@ export const postsMeta = [
     title: "How to Pray for Unsaved Family and Friends (A Simple Daily Rhythm)",
     description: "A five-minute daily rhythm for praying by name for the people you love who do not yet follow Jesus — including what to pray when it has been years.",
     date: "2026-07-30",
-    readingTime: "7 min read",
+    readingTime: "4 min read",
     tags: ["Prayer", "Oikos", "Family"],
     kicker: "Step one · Pray",
     excerpt: "Most of us do not stop praying for the people we love because we lack faith. We stop because we never had a rhythm.",
@@ -30,7 +30,7 @@ export const postsMeta = [
     title: "How to Share Your Testimony in Three Minutes",
     description: "A simple three-part framework for telling your story of coming to faith — clearly, honestly, and short enough that people actually listen.",
     date: "2026-07-30",
-    readingTime: "6 min read",
+    readingTime: "3 min read",
     tags: ["Share", "Evangelism", "Practical"],
     kicker: "Step three · Share",
     excerpt: "You are not the expert witness on theology. You are the eyewitness on your own life, and nobody can cross-examine that.",
@@ -41,7 +41,7 @@ export const postsMeta = [
     title: "Evangelism Without Being Weird: 12 Ways to Love Your Neighbour This Week",
     description: "Twelve ordinary, non-awkward ways to move toward the people around you — the practical middle ground between praying for someone and preaching at them.",
     date: "2026-07-30",
-    readingTime: "5 min read",
+    readingTime: "3 min read",
     tags: ["Care", "Practical", "Evangelism"],
     kicker: "Step two · Care",
     excerpt: "Almost nobody changes their mind about Jesus because they lost an argument. They change because someone loved them in a way that did not add up.",
@@ -52,7 +52,7 @@ export const postsMeta = [
     title: "Oikos Evangelism: How the Early Church Actually Grew",
     description: "The early Church grew from a few thousand to millions without buildings, budgets, or public platforms. Households were the engine — and the method still works.",
     date: "2026-07-30",
-    readingTime: "8 min read",
+    readingTime: "4 min read",
     tags: ["Foundations", "Oikos", "Discipleship"],
     kicker: "The bigger picture",
     excerpt: "No buildings, no budget, no legal standing, and frequently illegal. And it kept spreading. The mechanism is not a mystery.",
@@ -63,7 +63,7 @@ export const postsMeta = [
     title: "Faith at Work: Your Coworkers Are Your Oikos",
     description: "You spend more waking hours with colleagues than with almost anyone else. Here is how to be a genuine witness at work without becoming the person everyone avoids.",
     date: "2026-07-30",
-    readingTime: "7 min read",
+    readingTime: "3 min read",
     tags: ["Work", "Practical", "Evangelism"],
     kicker: "Where you already are",
     excerpt: "Roughly 90,000 hours over a working life, with the same group of people. It is the largest mission field most Christians have, and the one we think about least.",
@@ -75,7 +75,7 @@ export const postsMeta = [
     description:
       "Most people who come to faith were invited by someone they knew. Here is how to ask well, what to say, where to start, and what to do when the answer is no.",
     date: "2026-08-13",
-    readingTime: "6 min read",
+    readingTime: "4 min read",
     tags: ["Invitation", "Care", "Practical"],
     kicker: "The ask",
     excerpt:
@@ -88,7 +88,7 @@ export const postsMeta = [
     description:
       "Real sentences that help, the well-meant ones that hurt, and why showing up matters more than saying the right thing.",
     date: "2026-08-13",
-    readingTime: "7 min read",
+    readingTime: "4 min read",
     tags: ["Care", "Practical", "Prayer"],
     kicker: "Step two · Care",
     excerpt:
@@ -101,7 +101,7 @@ export const postsMeta = [
     description:
       "You do not need a seminary degree to disciple someone — you need to be about a step ahead and willing to be honest. A simple, repeatable pattern anyone can use.",
     date: "2026-09-24",
-    readingTime: "8 min read",
+    readingTime: "4 min read",
     tags: ["Discipleship", "Practical", "Foundations"],
     kicker: "Step four · Disciple",
     excerpt:
@@ -114,11 +114,24 @@ export const postsMeta = [
     description:
       "Praying for a whole city can feel like praying for the weather. Here is how to make it specific, sustainable, and connected to the street you actually live on.",
     date: "2026-09-24",
-    readingTime: "6 min read",
+    readingTime: "3 min read",
     tags: ["Prayer", "Care", "Practical"],
     kicker: "Wider than your map",
     excerpt:
       "A city is not an abstraction. It is a number of streets, and on each of them people are having the hardest week of their lives.",
+  },
+  {
+    slug: "plunder-hell-populate-heaven",
+    order: 11,
+    title: "Plunder Hell, Populate Heaven: Your Part in Sending the Gospel",
+    description:
+      "Your Oikos Map is your front line — but the Great Commission also needs people who send. A biblical call to go, pray and give, and an invitation to partner with Daniel and Katie Ziedins through e3 Canada.",
+    date: "2026-10-05",
+    readingTime: "5 min read",
+    tags: ["Send", "Foundations", "Prayer"],
+    kicker: "Beyond your oikos · Send",
+    excerpt:
+      "Nobody reaches the nations alone. Some go, some pray, some send — and Scripture says every one of them shares the same reward.",
   },
 ];
 
@@ -190,5 +203,11 @@ export const readingPath = [
     label: 'Disciple',
     note: 'Walk with someone until they can do it for someone else.',
     slugs: ['how-to-disciple-someone'],
+  },
+  {
+    id: 'send',
+    label: 'Send',
+    note: 'Beyond your own street: how ordinary believers go, pray and give so the Gospel reaches the nations.',
+    slugs: ['plunder-hell-populate-heaven'],
   },
 ];

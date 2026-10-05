@@ -1189,6 +1189,41 @@ function ConnectPage() {
         </div>
       </section>
 
+      {/* Partnership invitation. Facts here mirror what Daniel and Katie publish on
+          kd-ziedins.com; the giving link is their e3 Canada staff page. */}
+      <section className="partner-band" aria-labelledby="partner-band-title">
+        <div className="partner-band-copy">
+          <p className="section-kicker">
+            <HeartHandshake size={18} aria-hidden="true" />
+            Partner in the mission
+          </p>
+          <h2 id="partner-band-title">Plunder hell. Populate heaven. Do it together.</h2>
+          <p>
+            Daniel and Katie have served in street evangelism since 2014 and now serve with e3 Canada, equipping believers
+            to evangelise and establish multiplying churches. Their current call: help establish{' '}
+            <strong>100 multiplying outreach groups around the world</strong>.
+          </p>
+          <p>
+            Some go, some pray, some send — and Scripture says every one of them shares in the fruit. You can stand with
+            them today.
+          </p>
+        </div>
+        <div className="partner-band-actions">
+          <a className="primary-action" href="https://e3ministry.ca/staff/katie-daniel-ziedins" target="_blank" rel="noopener">
+            <HeartHandshake size={18} aria-hidden="true" />
+            Partner through e3 Canada
+          </a>
+          <a className="secondary-action" href="/blog/plunder-hell-populate-heaven">
+            <BookOpen size={18} aria-hidden="true" />
+            Read: your part in sending
+          </a>
+          <a className="secondary-action" href="https://www.kd-ziedins.com" target="_blank" rel="noopener">
+            <ArrowRight size={18} aria-hidden="true" />
+            Follow the story at KD-Ziedins.com
+          </a>
+        </div>
+      </section>
+
       <section className="lead-section connect-lead" aria-labelledby="connect-resources-title">
         <div className="lead-pitch">
           <p className="section-kicker">
