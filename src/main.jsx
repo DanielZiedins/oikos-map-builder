@@ -1217,6 +1217,10 @@ function ConnectPage() {
             <BookOpen size={18} aria-hidden="true" />
             Read: your part in sending
           </a>
+          <a className="secondary-action" href="/blog/from-hamilton-to-the-nations">
+            <BookOpen size={18} aria-hidden="true" />
+            Read: what 12 years of yes has built
+          </a>
           <a className="secondary-action" href="https://www.kd-ziedins.com" target="_blank" rel="noopener">
             <ArrowRight size={18} aria-hidden="true" />
             Follow the story at KD-Ziedins.com

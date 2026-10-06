@@ -3,7 +3,13 @@
 //
 // sendBeacon survives the page unloading, which matters for outbound clicks
 // and exports that navigate away; fetch keepalive is the fallback.
+// Only production traffic is counted. Vercel previews and localhost share the
+// same live table, so without this every preview check and local test would be
+// recorded as a real visitor.
+const PRODUCTION_HOSTS = new Set(['www.oikosmap.com', 'oikosmap.com']);
+
 export function track(event, path = window.location.pathname) {
+  if (!PRODUCTION_HOSTS.has(window.location.hostname)) return;
   try {
     const payload = JSON.stringify({ event, path: String(path).slice(0, 200) });
     if (navigator.sendBeacon) {

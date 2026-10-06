@@ -6,7 +6,7 @@
     <atom:link href="https://www.oikosmap.com/rss.xml" rel="self" type="application/rss+xml" />
     <description>Practical, encouraging writing on prayer, everyday evangelism, discipleship, and loving the people God has placed around you.</description>
     <language>en</language>
-    <lastBuildDate>Mon, 05 Oct 2026 09:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Tue, 06 Oct 2026 09:00:00 GMT</lastBuildDate>
     <item>
       <title>What Is an Oikos? The Biblical Meaning of Your Household</title>
       <link>https://www.oikosmap.com/blog/what-is-an-oikos</link>
@@ -116,6 +116,16 @@
       <category>Send</category>
       <category>Foundations</category>
       <category>Prayer</category>
+    </item>
+    <item>
+      <title>From Hamilton's Streets to the Nations: What 12 Years of Saying Yes Has Built</title>
+      <link>https://www.oikosmap.com/blog/from-hamilton-to-the-nations</link>
+      <guid isPermaLink="true">https://www.oikosmap.com/blog/from-hamilton-to-the-nations</guid>
+      <pubDate>Tue, 06 Oct 2026 09:00:00 GMT</pubDate>
+      <description>How a weekly street outreach in Hamilton grew into Love on The World in 12 cities, Jesus Festival and SIX33 — and how you can partner with Daniel and Katie Ziedins through e3 Canada.</description>
+      <category>Send</category>
+      <category>Foundations</category>
+      <category>Evangelism</category>
     </item>
   </channel>
 </rss>

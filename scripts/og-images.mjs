@@ -46,10 +46,14 @@ function wrap(text, maxChars) {
 }
 
 function layoutTitle(title) {
-  // Shrink until the title fits in four lines.
-  for (const [size, chars] of [[66, 24], [58, 28], [50, 32], [44, 36]]) {
-    const lines = wrap(title, chars);
-    if (lines.length <= 4) return { size, lines };
+  // Prefer three lines (a four-line block at 66px reaches up into the kicker),
+  // shrinking as needed; fall back to four lines only for very long titles.
+  const sizes = [[66, 24], [58, 28], [50, 32], [44, 36]];
+  for (const maxLines of [3, 4]) {
+    for (const [size, chars] of sizes) {
+      const lines = wrap(title, chars);
+      if (lines.length <= maxLines) return { size, lines };
+    }
   }
   return { size: 40, lines: wrap(title, 40).slice(0, 4) };
 }

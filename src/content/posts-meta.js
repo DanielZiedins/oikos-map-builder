@@ -133,6 +133,19 @@ export const postsMeta = [
     excerpt:
       "Nobody reaches the nations alone. Some go, some pray, some send — and Scripture says every one of them shares the same reward.",
   },
+  {
+    slug: "from-hamilton-to-the-nations",
+    order: 12,
+    title: "From Hamilton's Streets to the Nations: What 12 Years of Saying Yes Has Built",
+    description:
+      "How a weekly street outreach in Hamilton grew into Love on The World in 12 cities, Jesus Festival and SIX33 — and how you can partner with Daniel and Katie Ziedins through e3 Canada.",
+    date: "2026-10-06",
+    readingTime: "6 min read",
+    tags: ["Send", "Foundations", "Evangelism"],
+    kicker: "Beyond your oikos · Send",
+    excerpt:
+      "It started as one night on one street in one city. Twelve years later, here is what God has done with a small yes — and where it goes next.",
+  },
 ];
 
 export const sortedPostsMeta = [...postsMeta].sort((a, b) => a.order - b.order);
@@ -208,6 +221,6 @@ export const readingPath = [
     id: 'send',
     label: 'Send',
     note: 'Beyond your own street: how ordinary believers go, pray and give so the Gospel reaches the nations.',
-    slugs: ['plunder-hell-populate-heaven'],
+    slugs: ['plunder-hell-populate-heaven', 'from-hamilton-to-the-nations'],
   },
 ];

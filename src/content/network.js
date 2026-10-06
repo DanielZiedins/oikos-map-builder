@@ -151,6 +151,16 @@ export const networkSites = [
     relevance: 'Mission is not a solo sport, and it starts at home.',
   },
   {
+    name: 'SIX33',
+    url: 'https://www.six33.world',
+    host: 'SIX33.World',
+    group: 'culture',
+    tagline: 'Seek first. Live different.',
+    blurb:
+      'A Christian lifestyle and performance culture brand built on Matthew 6:33 — apparel, athletes, creators and stories carrying the Kingdom into culture, with a heart to fund street outreach through Love on The World. Coming soon.',
+    relevance: 'Your oikos includes the culture you move through every day.',
+  },
+  {
     name: 'SIX33 Outpost',
     url: 'https://six33outpost.com',
     host: 'SIX33Outpost.com',

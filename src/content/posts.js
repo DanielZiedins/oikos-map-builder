@@ -9,6 +9,7 @@ import { postsMeta, sortedPostsMeta } from './posts-meta.js';
 
 import evangelismWithoutBeingWeird from './bodies/evangelism-without-being-weird.js';
 import faithAtWork from './bodies/faith-at-work-your-coworkers-are-your-oikos.js';
+import fromHamiltonToTheNations from './bodies/from-hamilton-to-the-nations.js';
 import howToDiscipleSomeone from './bodies/how-to-disciple-someone.js';
 import howToInviteSomeoneToChurch from './bodies/how-to-invite-someone-to-church.js';
 import howToPrayForUnsavedFamilyAndFriends from './bodies/how-to-pray-for-unsaved-family-and-friends.js';
@@ -22,6 +23,7 @@ import whatToSayWhenSomeoneIsHurting from './bodies/what-to-say-when-someone-is-
 const bodies = {
   'evangelism-without-being-weird': evangelismWithoutBeingWeird,
   'faith-at-work-your-coworkers-are-your-oikos': faithAtWork,
+  'from-hamilton-to-the-nations': fromHamiltonToTheNations,
   'how-to-disciple-someone': howToDiscipleSomeone,
   'how-to-invite-someone-to-church': howToInviteSomeoneToChurch,
   'how-to-pray-for-unsaved-family-and-friends': howToPrayForUnsavedFamilyAndFriends,
