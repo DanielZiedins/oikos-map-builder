@@ -146,6 +146,32 @@ export const postsMeta = [
     excerpt:
       "It started as one night on one street in one city. Twelve years later, here is what God has done with a small yes — and where it goes next.",
   },
+  {
+    slug: "bible-verses-to-pray-for-unsaved-loved-ones",
+    order: 13,
+    title: "23 Bible Verses to Pray Over Unsaved Family and Friends (With a Prayer for Each)",
+    description:
+      "Scripture to pray for unsaved loved ones, grouped by what you are asking God for — open eyes, a soft heart, freedom, an open door — each with a short prayer you can say with their name in it.",
+    date: "2026-10-07",
+    readingTime: "8 min read",
+    tags: ["Prayer", "Family", "Scripture"],
+    kicker: "Step one · Pray",
+    excerpt:
+      "When you have prayed for the same person for years, you run out of words. The cure is to borrow God's.",
+  },
+  {
+    slug: "how-to-lead-someone-to-jesus",
+    order: 14,
+    title: "How to Lead Someone to Jesus: A Simple, Honest Conversation Guide",
+    description:
+      "How to tell when someone is open, explain the Gospel in four simple parts, pray with them without a script, and walk with a new believer through their first seven days.",
+    date: "2026-10-07",
+    readingTime: "6 min read",
+    tags: ["Share", "Evangelism", "Practical"],
+    kicker: "Step three · Share",
+    excerpt:
+      "Most Christians have never led anyone to Jesus — not because they do not care, but because nobody showed them what the conversation sounds like.",
+  },
 ];
 
 export const sortedPostsMeta = [...postsMeta].sort((a, b) => a.order - b.order);
@@ -197,7 +223,7 @@ export const readingPath = [
     id: 'pray',
     label: 'Pray',
     note: 'Name people before God, daily — then widen it to your street and city.',
-    slugs: ['how-to-pray-for-unsaved-family-and-friends', 'praying-for-your-city'],
+    slugs: ['how-to-pray-for-unsaved-family-and-friends', 'bible-verses-to-pray-for-unsaved-loved-ones', 'praying-for-your-city'],
   },
   {
     id: 'care',
@@ -209,7 +235,7 @@ export const readingPath = [
     id: 'share',
     label: 'Share',
     note: 'Your story, a simple invitation, and faith where you already spend your days.',
-    slugs: ['how-to-share-your-testimony', 'how-to-invite-someone-to-church', 'faith-at-work-your-coworkers-are-your-oikos'],
+    slugs: ['how-to-share-your-testimony', 'how-to-lead-someone-to-jesus', 'how-to-invite-someone-to-church', 'faith-at-work-your-coworkers-are-your-oikos'],
   },
   {
     id: 'disciple',

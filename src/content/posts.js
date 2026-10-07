@@ -7,11 +7,13 @@
 
 import { postsMeta, sortedPostsMeta } from './posts-meta.js';
 
+import bibleVersesToPray from './bodies/bible-verses-to-pray-for-unsaved-loved-ones.js';
 import evangelismWithoutBeingWeird from './bodies/evangelism-without-being-weird.js';
 import faithAtWork from './bodies/faith-at-work-your-coworkers-are-your-oikos.js';
 import fromHamiltonToTheNations from './bodies/from-hamilton-to-the-nations.js';
 import howToDiscipleSomeone from './bodies/how-to-disciple-someone.js';
 import howToInviteSomeoneToChurch from './bodies/how-to-invite-someone-to-church.js';
+import howToLeadSomeoneToJesus from './bodies/how-to-lead-someone-to-jesus.js';
 import howToPrayForUnsavedFamilyAndFriends from './bodies/how-to-pray-for-unsaved-family-and-friends.js';
 import howToShareYourTestimony from './bodies/how-to-share-your-testimony.js';
 import oikosEvangelismEarlyChurch from './bodies/oikos-evangelism-early-church.js';
@@ -21,11 +23,13 @@ import whatIsAnOikos from './bodies/what-is-an-oikos.js';
 import whatToSayWhenSomeoneIsHurting from './bodies/what-to-say-when-someone-is-hurting.js';
 
 const bodies = {
+  'bible-verses-to-pray-for-unsaved-loved-ones': bibleVersesToPray,
   'evangelism-without-being-weird': evangelismWithoutBeingWeird,
   'faith-at-work-your-coworkers-are-your-oikos': faithAtWork,
   'from-hamilton-to-the-nations': fromHamiltonToTheNations,
   'how-to-disciple-someone': howToDiscipleSomeone,
   'how-to-invite-someone-to-church': howToInviteSomeoneToChurch,
+  'how-to-lead-someone-to-jesus': howToLeadSomeoneToJesus,
   'how-to-pray-for-unsaved-family-and-friends': howToPrayForUnsavedFamilyAndFriends,
   'how-to-share-your-testimony': howToShareYourTestimony,
   'oikos-evangelism-early-church': oikosEvangelismEarlyChurch,

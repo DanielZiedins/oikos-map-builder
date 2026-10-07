@@ -24,6 +24,7 @@ import {
   Pause,
   Printer,
   RotateCcw,
+  Shuffle,
   Rocket,
   Save,
   Search,
@@ -41,6 +42,7 @@ import {
   X,
 } from 'lucide-react';
 import { sortedPostsMeta } from './content/posts-meta.js';
+import { prayerVerses, verseIndexFor, versePrayer } from './content/prayer-verses.js';
 import { networkGroups, sitesInGroup } from './content/network.js';
 import {
   INVITE_DISMISSED_KEY,
@@ -765,6 +767,7 @@ function BuilderInvite({ mapData }) {
 function PrayerSprint({ person, stage, onComplete }) {
   const [secondsRemaining, setSecondsRemaining] = useState(300);
   const [isRunning, setIsRunning] = useState(false);
+  const [verseOffset, setVerseOffset] = useState(0);
   const completionRef = useRef(onComplete);
 
   useEffect(() => {
@@ -774,6 +777,7 @@ function PrayerSprint({ person, stage, onComplete }) {
   useEffect(() => {
     setSecondsRemaining(300);
     setIsRunning(false);
+    setVerseOffset(0);
   }, [person?.id]);
 
   useEffect(() => {
@@ -794,14 +798,31 @@ function PrayerSprint({ person, stage, onComplete }) {
   const minutes = String(Math.floor(secondsRemaining / 60)).padStart(2, '0');
   const seconds = String(secondsRemaining % 60).padStart(2, '0');
   const complete = secondsRemaining === 0;
+  const verse = prayerVerses[verseIndexFor(person.id, verseOffset)];
 
   return (
-    <div className="prayer-sprint" aria-live="polite">
+    <div className="prayer-sprint">
       <div className="prayer-sprint-topline">
         <span>Five-minute prayer</span>
-        <strong>{minutes}:{seconds}</strong>
+        {/* Announced only when it matters, not every second. */}
+        <strong aria-live="off">{minutes}:{seconds}</strong>
       </div>
-      <p>{complete ? `Beautiful. Keep listening for how to love ${person.name} today.` : `Hold ${person.name} before Jesus. ${stage.prompt}`}</p>
+      <p aria-live="polite">{complete ? `Beautiful. Keep listening for how to love ${person.name} today.` : `Hold ${person.name} before Jesus. ${stage.prompt}`}</p>
+      <figure className="prayer-verse">
+        <figcaption>
+          <BookOpen size={14} aria-hidden="true" />
+          Scripture to pray · {verse.ref}
+        </figcaption>
+        <blockquote>“{verse.text}”</blockquote>
+        <p className="prayer-verse-prayer">{versePrayer(verse, person.name)}</p>
+        <div className="prayer-verse-actions">
+          <button type="button" onClick={() => setVerseOffset((offset) => offset + 1)}>
+            <Shuffle size={14} aria-hidden="true" />
+            Another verse
+          </button>
+          <a href="/blog/bible-verses-to-pray-for-unsaved-loved-ones">All 23 verses</a>
+        </div>
+      </figure>
       <div className="prayer-sprint-actions">
         <button
           type="button"
@@ -2392,16 +2413,26 @@ function OikosSvg({ mapData, layout, selectedId, setSelectedId, svgRef }) {
         const group = getGroup(person.group);
         const isSelected = selectedId === person.id;
         const radius = person.parentId ? 52 : 64;
+        const stageLabel = stages.find((stage) => stage.id === person.stage)?.label || 'Pray';
         return (
           <g
             className="map-node"
             key={person.id}
             transform={`translate(${position.x} ${position.y})`}
             onClick={() => setSelectedId(person.id)}
-            onKeyDown={(event) => event.key === 'Enter' && setSelectedId(person.id)}
+            onKeyDown={(event) => {
+              // role="button" promises Space as well as Enter.
+              if (event.key === 'Enter' || event.key === ' ') {
+                event.preventDefault();
+                setSelectedId(person.id);
+              }
+            }}
             tabIndex="0"
             role="button"
-            aria-label={`Edit ${person.name}`}
+            aria-pressed={isSelected}
+            // Starts with the visible text (name, then stage) so voice-control
+            // users can say what they see (WCAG 2.5.3).
+            aria-label={`${person.name}, ${stageLabel} — edit`}
           >
             <circle r={radius + 9} fill={isSelected ? '#171310' : '#ffffff'} opacity={isSelected ? 1 : 0.78} />
             <circle r={radius} fill={group.color} />
@@ -2410,7 +2441,7 @@ function OikosSvg({ mapData, layout, selectedId, setSelectedId, svgRef }) {
               {truncateLabel(person.name)}
             </text>
             <text y="24" textAnchor="middle" className="svg-person-stage">
-              {stages.find((stage) => stage.id === person.stage)?.label || 'Pray'}
+              {stageLabel}
             </text>
           </g>
         );

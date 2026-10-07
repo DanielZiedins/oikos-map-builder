@@ -7,7 +7,7 @@ import { siteByHost } from './content/network.js';
 // body, which got worse with each new post; now only the opened one is fetched.
 const bodyLoaders = import.meta.glob('./content/bodies/*.js');
 
-function loadBody(slug) {
+export function loadBody(slug) {
   const load = bodyLoaders[`./content/bodies/${slug}.js`];
   return load ? load().then((mod) => mod.default) : Promise.resolve(null);
 }
@@ -484,15 +484,17 @@ function relatedPosts(post) {
   return relatedMap[post.slug] || [];
 }
 
-export function BlogPost({ post: meta }) {
+export function BlogPost({ post: meta, initialBody = null }) {
   useReadingProgress();
   const others = relatedPosts(meta);
-  // The header renders immediately from the summary; the body arrives from its
-  // own chunk a tick later. Seeded synchronously when the module is already in
-  // the graph so there is usually no empty frame at all.
-  const [body, setBody] = useState(null);
+  // blog-entry.jsx loads the body before the first render (the prerendered shell
+  // stays on screen meanwhile), so the page paints once in its final layout.
+  // Rendering the header first and the body a tick later pushed the author card
+  // down the page — a 0.17 layout shift on every article.
+  const [body, setBody] = useState(initialBody);
 
   useEffect(() => {
+    if (body && body === initialBody) return undefined;
     let live = true;
     loadBody(meta.slug).then((loaded) => {
       if (live) setBody(loaded);

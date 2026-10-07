@@ -344,7 +344,7 @@ posts.forEach((post) => {
 // Bump CONTENT_UPDATED when the hub pages themselves change; article dates come
 // from posts-meta. The journal index changes whenever an article is added, so
 // it takes whichever is newer.
-const CONTENT_UPDATED = '2026-10-03';
+const CONTENT_UPDATED = '2026-10-07';
 const latestPost = posts.map((post) => post.date).sort().at(-1);
 const today = [CONTENT_UPDATED, latestPost].sort().at(-1);
 const urls = [
