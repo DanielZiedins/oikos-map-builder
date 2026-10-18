@@ -59,6 +59,13 @@ export default {
         "Then ask the question this whole site is built around: <em>who is in your oikos?</em> Help them make their own <a href=\"/#builder\">Oikos Map</a>. The moment they start praying for their own five names, the thing has multiplied beyond you.",
         "If you are doing this with more than a couple of people, keeping track gets hard — <a href=\"https://kingdombase.app\" target=\"_blank\" rel=\"noopener\">Kingdom Base</a> is built for exactly that, and <a href=\"https://www.loveontheworld.com\" target=\"_blank\" rel=\"noopener\">Love on The World</a> helps a whole group start together rather than alone."
       ]
+    },
+    {
+      "heading": "Keep going",
+      "list": [
+        "Want to read the Bible with friends who do not believe yet? <a href=\"/blog/how-to-start-a-bible-study-with-friends\">Here is a simple format anyone can lead</a>.",
+        "And when someone first comes to faith, <a href=\"/blog/how-to-lead-someone-to-jesus\">their first seven days</a> matter enormously."
+      ]
     }
   ],
   "scripture": {

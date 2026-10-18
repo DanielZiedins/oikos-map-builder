@@ -42,6 +42,14 @@ export default {
         "What happens when a whole church does this on purpose, in one place, is worth seeing. <a href=\"https://www.loveonhamilton.com\" target=\"_blank\" rel=\"noopener\">Love on Hamilton</a> is a working example of a city adopted by its congregations, and <a href=\"https://www.kingdomresponse.com\" target=\"_blank\" rel=\"noopener\">Kingdom Response</a> is what this looks like at its most urgent — church-led relief when disaster hits.",
         "If you would rather not do it alone, the <a href=\"https://www.jesusfestival.app\" target=\"_blank\" rel=\"noopener\">Jesus Festival app</a> turns daily acts of kindness into something a whole community does together, and <a href=\"https://www.loveontheworld.com\" target=\"_blank\" rel=\"noopener\">Love on The World</a> will help you start a group where you live."
       ]
+    },
+    {
+      "heading": "Keep going",
+      "list": [
+        "When a door opens, <a href=\"/blog/spiritual-conversation-starters\">these 30 conversation starters</a> help you go one step deeper without forcing it.",
+        "For the biblical heart behind all of this, read <a href=\"/blog/who-is-my-neighbour\">Who Is My Neighbour?</a>",
+        "And for a plain definition of the word itself, see <a href=\"/blog/what-is-evangelism\">What Is Evangelism?</a>"
+      ]
     }
   ],
   "scripture": {

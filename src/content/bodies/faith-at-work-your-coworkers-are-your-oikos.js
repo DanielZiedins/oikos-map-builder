@@ -52,6 +52,13 @@ export default {
         "If you are working with a team, or your list has grown past what one page can hold, <a href=\"https://kingdombase.app\" target=\"_blank\" rel=\"noopener\">Kingdom Base</a> is built for tracking conversations and follow-ups properly across a group.",
         "And guard the source. Sustained witness in a demanding job runs on something, and if that something is willpower it will not last. <a href=\"https://www.iamreborn.net\" target=\"_blank\" rel=\"noopener\">I Am Reborn</a> is about that formation — spirit, mind, body, purpose — and <a href=\"https://www.danielziedins.com\" target=\"_blank\" rel=\"noopener\">Daniel Ziedins</a> writes on faith, work, and building things that serve the Kingdom."
       ]
+    },
+    {
+      "heading": "Keep going",
+      "list": [
+        "Good questions open more doors at work than arguments do: <a href=\"/blog/spiritual-conversation-starters\">30 spiritual conversation starters</a>.",
+        "Still in school or university? <a href=\"/blog/how-to-share-your-faith-at-school\">How to Share Your Faith at School</a> is written for you."
+      ]
     }
   ],
   "scripture": {

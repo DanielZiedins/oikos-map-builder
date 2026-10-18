@@ -26,6 +26,9 @@ import freePrintableOikosMapTemplate from './bodies/free-printable-oikos-map-tem
 import whatIsEvangelism from './bodies/what-is-evangelism.js';
 import howToPrayerWalk from './bodies/how-to-prayer-walk.js';
 import howToStartABibleStudy from './bodies/how-to-start-a-bible-study-with-friends.js';
+import spiritualConversationStarters from './bodies/spiritual-conversation-starters.js';
+import whoIsMyNeighbour from './bodies/who-is-my-neighbour.js';
+import howToShareYourFaithAtSchool from './bodies/how-to-share-your-faith-at-school.js';
 import whatIsAnOikos from './bodies/what-is-an-oikos.js';
 import whatToSayWhenSomeoneIsHurting from './bodies/what-to-say-when-someone-is-hurting.js';
 
@@ -49,6 +52,9 @@ const bodies = {
   'what-is-evangelism': whatIsEvangelism,
   'how-to-prayer-walk': howToPrayerWalk,
   'how-to-start-a-bible-study-with-friends': howToStartABibleStudy,
+  'spiritual-conversation-starters': spiritualConversationStarters,
+  'who-is-my-neighbour': whoIsMyNeighbour,
+  'how-to-share-your-faith-at-school': howToShareYourFaithAtSchool,
   'what-is-an-oikos': whatIsAnOikos,
   'what-to-say-when-someone-is-hurting': whatToSayWhenSomeoneIsHurting,
 };

@@ -57,6 +57,13 @@ export default {
         "Pick one. Choose the specific thing you will invite them to, and the day you will ask. Vague intentions do not survive a busy week; <a href=\"https://tasksimply.com\" target=\"_blank\" rel=\"noopener\">put it in whatever you actually use to plan</a>, the way you would any other commitment.",
         "If your church does not currently have an obvious low-rung thing to invite people to, that is worth solving. <a href=\"https://www.loveontheworld.com\" target=\"_blank\" rel=\"noopener\">Love on The World</a> helps groups create exactly that, and <a href=\"https://www.loveonhamilton.com\" target=\"_blank\" rel=\"noopener\">Love on Hamilton</a> is a working example of a city where the invitations are easy to make."
       ]
+    },
+    {
+      "heading": "Keep going",
+      "list": [
+        "Christmas Eve is one of the easiest invitations of the year — <a href=\"/blog/talking-about-jesus-with-family-at-the-holidays\">here is how to talk about Jesus with family at the holidays</a>.",
+        "If church feels like too big a step, <a href=\"/blog/how-to-start-a-bible-study-with-friends\">start a Bible study with friends</a> at your kitchen table instead."
+      ]
     }
   ],
   "scripture": {

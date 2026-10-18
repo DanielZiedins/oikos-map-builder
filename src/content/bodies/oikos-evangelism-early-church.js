@@ -58,6 +58,14 @@ export default {
         "Numbers that size can make a person feel pointless. Scripture is unusually direct about this: one plants, another waters, God makes it grow, and the planter and the waterer are simply co-workers with one purpose. No single person is the whole thing, and no faithful part is wasted.",
         "Your part may be five names and five minutes a day. Historically, that is exactly what this has always been made of. If you want the wider vision, <a href=\"https://www.thykingdom.net\" target=\"_blank\" rel=\"noopener\">Thy Kingdom Network</a> is the family these tools come from, and <a href=\"https://www.seekfirst.world\" target=\"_blank\" rel=\"noopener\">Seek First World</a> presses the same question into work, art, and public life."
       ]
+    },
+    {
+      "heading": "Keep going",
+      "list": [
+        "The open door into a household in Acts was often one person: <a href=\"/blog/what-is-a-person-of-peace\">What Is a Person of Peace?</a>",
+        "For a plain definition of the word evangelism and its different forms, see <a href=\"/blog/what-is-evangelism\">What Is Evangelism?</a>",
+        "And for where it all started, <a href=\"/blog/what-is-the-great-commission\">the Great Commission explained</a>."
+      ]
     }
   ],
   "scripture": {

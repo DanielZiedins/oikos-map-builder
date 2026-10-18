@@ -3484,6 +3484,15 @@ textarea:focus-visible,
   background: rgba(255, 248, 236, 0.06);
 }
 
+.conversation-card {
+  margin-top: 10px;
+  border-left-color: #14b8a6;
+}
+
+.prayer-verse.conversation-card figcaption {
+  color: #7ee0d3;
+}
+
 .prayer-verse figcaption {
   display: flex;
   align-items: center;

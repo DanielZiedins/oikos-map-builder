@@ -19,6 +19,7 @@ import {
   HeartHandshake,
   Link2,
   Mail,
+  MessagesSquare,
   Plus,
   Play,
   Pause,
@@ -43,6 +44,7 @@ import {
 } from 'lucide-react';
 import { sortedPostsMeta } from './content/posts-meta.js';
 import { prayerVerses, verseIndexFor, versePrayer } from './content/prayer-verses.js';
+import { conversationGuides, starterFor } from './content/conversation-starters.js';
 import { networkGroups, sitesInGroup } from './content/network.js';
 import {
   INVITE_DISMISSED_KEY,
@@ -850,6 +852,45 @@ function PrayerSprint({ person, stage, onComplete }) {
         </button>
       </div>
     </div>
+  );
+}
+
+// A question to ask this person, for the stages where the next step is a
+// conversation. Same date-after-mount rule as the verse: the prerendered HTML
+// was built on another day.
+function ConversationCard({ person, stage }) {
+  const [offset, setOffset] = useState(0);
+  const [today, setToday] = useState(null);
+
+  useEffect(() => {
+    setToday(new Date());
+  }, []);
+
+  useEffect(() => {
+    setOffset(0);
+  }, [person?.id]);
+
+  if (!person || !stage) return null;
+  const question = starterFor(stage.id, person.id, offset, today ?? new Date(0));
+  if (!question) return null;
+  const guide = conversationGuides[stage.id];
+
+  return (
+    <figure className="prayer-verse conversation-card">
+      <figcaption>
+        <MessagesSquare size={14} aria-hidden="true" />
+        {stage.id === 'disciple' ? `A question to explore with ${person.name}` : `A question to ask ${person.name}`}
+      </figcaption>
+      <blockquote>“{question}”</blockquote>
+      <p className="prayer-verse-prayer">Ask it, then listen more than you talk. Note what you learn in their notes.</p>
+      <div className="prayer-verse-actions">
+        <button type="button" onClick={() => setOffset((value) => value + 1)}>
+          <Shuffle size={14} aria-hidden="true" />
+          Another question
+        </button>
+        <a href={guide.href}>{guide.label}</a>
+      </div>
+    </figure>
   );
 }
 
@@ -2385,6 +2426,7 @@ function App() {
                     stage={selectedStage}
                     onComplete={() => setSaveState(`Prayer time complete for ${selectedPerson.name}`)}
                   />
+                  <ConversationCard person={selectedPerson} stage={selectedStage} />
                 </>
               ) : (
                 <p>Add someone you already know. The first name is enough to begin.</p>
@@ -2594,9 +2636,10 @@ function OikosSvg({ mapData, layout, selectedId, setSelectedId, svgRef }) {
             tabIndex="0"
             role="button"
             aria-pressed={isSelected}
-            // Starts with the visible text (name, then stage) so voice-control
-            // users can say what they see (WCAG 2.5.3).
-            aria-label={`${person.name}, ${stageLabel} — edit`}
+            // Starts with the visible text exactly as shown (name, then stage, no
+            // punctuation between) so voice-control users can say what they see
+            // (WCAG 2.5.3).
+            aria-label={`${person.name} ${stageLabel} — edit`}
           >
             <circle r={radius + 9} fill={isSelected ? '#171310' : '#ffffff'} opacity={isSelected ? 1 : 0.78} />
             <circle r={radius} fill={group.color} />

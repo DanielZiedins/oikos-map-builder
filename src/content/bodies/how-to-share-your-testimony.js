@@ -52,6 +52,13 @@ export default {
         "Not every conversation has to start with you. An invitation to something joyful often does the work — a free city-wide gathering like <a href=\"https://www.jesusfestival.ca\" target=\"_blank\" rel=\"noopener\">Jesus Festival</a> is a far easier first ask than a Sunday service, and the <a href=\"https://www.jesusfestivalmovement.com\" target=\"_blank\" rel=\"noopener\">movement behind it</a> exists precisely so cities can hear the Gospel together.",
         "Sometimes it is simpler still. A shirt from <a href=\"https://six33outpost.com\" target=\"_blank\" rel=\"noopener\">SIX33 Outpost</a> has started plenty of conversations its wearer did not have to open, and a story can go where an argument cannot — which is the whole idea behind <a href=\"https://six33legends.com\" target=\"_blank\" rel=\"noopener\">SIX33 Legends</a>."
       ]
+    },
+    {
+      "heading": "Keep going",
+      "list": [
+        "Need a way into the conversation? Try <a href=\"/blog/spiritual-conversation-starters\">one of these 30 questions</a>.",
+        "When someone wants to know more, <a href=\"/blog/how-to-lead-someone-to-jesus\">How to Lead Someone to Jesus</a> walks through what to say next."
+      ]
     }
   ],
   "scripture": {

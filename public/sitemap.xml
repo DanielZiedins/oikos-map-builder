@@ -184,4 +184,25 @@
     <priority>0.8</priority>
 
   </url>
+  <url>
+    <loc>https://www.oikosmap.com/blog/spiritual-conversation-starters</loc>
+    <lastmod>2026-10-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+
+  </url>
+  <url>
+    <loc>https://www.oikosmap.com/blog/who-is-my-neighbour</loc>
+    <lastmod>2026-10-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+
+  </url>
+  <url>
+    <loc>https://www.oikosmap.com/blog/how-to-share-your-faith-at-school</loc>
+    <lastmod>2026-10-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+
+  </url>
 </urlset>

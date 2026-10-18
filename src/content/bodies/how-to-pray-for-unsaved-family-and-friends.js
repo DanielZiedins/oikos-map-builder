@@ -60,6 +60,14 @@ export default {
         "Praying alone for years is heavy, and it is not how this was designed to work. Find at least one other person who will pray the same names with you — a spouse, a friend, a small group.",
         "If you do not have that, build it. <a href=\"https://www.loveontheworld.com\" target=\"_blank\" rel=\"noopener\">Love on The World</a> exists to help believers gather a few friends and start praying for their city together, and the <a href=\"https://www.jesusfestival.app\" target=\"_blank\" rel=\"noopener\">Jesus Festival app</a> has a live prayer wall where you can put a request in front of a whole community. <a href=\"https://www.kd-ziedins.com\" target=\"_blank\" rel=\"noopener\">Daniel and Katie</a> write about doing this as a family, which is its own particular challenge."
       ]
+    },
+    {
+      "heading": "Keep going",
+      "list": [
+        "Run out of words? Pray Scripture: <a href=\"/blog/bible-verses-to-pray-for-unsaved-loved-ones\">23 Bible verses to pray over unsaved family and friends</a>, each with a short prayer.",
+        "Want to pray for your street too? <a href=\"/blog/how-to-prayer-walk\">Try a simple prayer walk</a>.",
+        "Holidays coming? <a href=\"/blog/talking-about-jesus-with-family-at-the-holidays\">How to talk about Jesus with family at Thanksgiving and Christmas</a>."
+      ]
     }
   ],
   "scripture": {

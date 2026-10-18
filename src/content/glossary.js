@@ -47,6 +47,12 @@ export const glossary = [
       'Jesus’ final instruction in Matthew 28:18–20 to go and make disciples of all nations, baptizing them and teaching them to obey Him, with His promise to be with His followers always.',
   },
   {
+    term: 'Love your neighbour',
+    slug: 'who-is-my-neighbour',
+    definition:
+      'The command of Leviticus 19:18 that Jesus called the second greatest (Mark 12:31). Through the parable of the Good Samaritan He showed that your neighbour is anyone in need God puts in your path.',
+  },
+  {
     term: 'Testimony',
     slug: 'how-to-share-your-testimony',
     definition:

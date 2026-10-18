@@ -72,6 +72,9 @@ export const author = {
   name: 'Daniel Ziedins',
   url: 'https://www.danielziedins.com',
   image: '/assets/daniel-ziedins-founder.webp',
+  // 144px: 2x the 72px author card (the byline shows it at 36px). The 920px
+  // original was being downloaded for a 72px circle.
+  thumb: '/assets/daniel-ziedins-founder-144.webp',
   role: 'Founder, Oikos Map',
   bio:
     'Daniel builds free Kingdom tools and gives them away. He did not create the original Oikos Map — his aim is to make it easy to access and easy to share. He and his wife Katie serve with e3 Canada.',
@@ -80,7 +83,7 @@ export const author = {
 function AuthorByline({ date, readingTime, compact = false }) {
   return (
     <div className={compact ? 'byline compact' : 'byline'}>
-      <img src={author.image} alt="" width="36" height="36" loading="lazy" decoding="async" />
+      <img src={author.thumb} alt="" width="36" height="36" loading="lazy" decoding="async" />
       <div>
         <span>
           By{' '}
@@ -99,7 +102,7 @@ function AuthorByline({ date, readingTime, compact = false }) {
 function AuthorCard() {
   return (
     <aside className="author-card" aria-labelledby="author-card-title">
-      <img src={author.image} alt={author.name} width="72" height="72" loading="lazy" decoding="async" />
+      <img src={author.thumb} alt={author.name} width="72" height="72" loading="lazy" decoding="async" />
       <div>
         <p className="author-card-kicker">Written by</p>
         <h2 id="author-card-title">

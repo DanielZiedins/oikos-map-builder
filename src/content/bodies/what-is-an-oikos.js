@@ -54,6 +54,14 @@ export default {
         "One caution, because this teaching can go wrong. An oikos is not a sales funnel, and the people on your map are not prospects. Treating a friendship as a conversion project is both unloving and obvious — people can feel it immediately.",
         "The aim is not to work through a list. The aim is to love the people God has actually placed around you, pray for them honestly, and be ready to speak when the door opens. Some doors open in a week. Some take fifteen years. Neither is a failure of technique."
       ]
+    },
+    {
+      "heading": "Keep going",
+      "list": [
+        "Spot the open doors: <a href=\"/blog/what-is-a-person-of-peace\">What Is a Person of Peace?</a> shows how one welcoming person can open a whole household.",
+        "Love the people next door: <a href=\"/blog/who-is-my-neighbour\">Who Is My Neighbour?</a> unpacks what Jesus meant by loving them.",
+        "Prefer paper? <a href=\"/blog/free-printable-oikos-map-template\">Print a free Oikos Map</a> for your fridge, Bible or small group."
+      ]
     }
   ],
   "scripture": {

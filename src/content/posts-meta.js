@@ -263,6 +263,45 @@ export const postsMeta = [
     excerpt:
       "Some of your friends will never walk into a church. Many would come to your kitchen table to read something with you.",
   },
+  {
+    slug: "spiritual-conversation-starters",
+    order: 22,
+    title: "30 Spiritual Conversation Starters: Questions That Open Faith Conversations",
+    description:
+      "Thirty genuine questions that open spiritual conversations naturally — from light to deep, about life, meaning, faith, Jesus and pain — plus how to follow up when someone answers.",
+    date: "2026-10-18",
+    readingTime: "5 min read",
+    tags: ["Share", "Evangelism", "Practical"],
+    kicker: "Step three · Share",
+    excerpt:
+      "Most faith conversations do not start with a speech. They start with a good question — and someone willing to listen.",
+  },
+  {
+    slug: "who-is-my-neighbour",
+    order: 23,
+    title: "Who Is My Neighbour? What Jesus Meant by \"Love Your Neighbour\"",
+    description:
+      "What \"love your neighbour as yourself\" means in the Bible, how the Good Samaritan turns the question upside down, who your neighbour really is, and what loving them looks like this week.",
+    date: "2026-10-18",
+    readingTime: "5 min read",
+    tags: ["Care", "Scripture", "Foundations"],
+    kicker: "Step two · Care",
+    excerpt:
+      "A lawyer asked Jesus where the edge of the command was. Jesus answered with a story and a different question.",
+  },
+  {
+    slug: "how-to-share-your-faith-at-school",
+    order: 24,
+    title: "How to Share Your Faith at School: A Guide for Christian Students",
+    description:
+      "For high school and college students: how to live your faith at school, talk about Jesus naturally, invite friends, pray with other Christians and respond when people mock you.",
+    date: "2026-10-18",
+    readingTime: "6 min read",
+    tags: ["Share", "Evangelism", "Practical"],
+    kicker: "Step three · Share",
+    excerpt:
+      "School might be the hardest place to be a Christian — and the place where you have the most influence.",
+  },
 ];
 
 export const sortedPostsMeta = [...postsMeta].sort((a, b) => a.order - b.order);
@@ -320,13 +359,13 @@ export const readingPath = [
     id: 'care',
     label: 'Care',
     note: 'Love that shows up, especially when life gets hard.',
-    slugs: ['evangelism-without-being-weird', 'what-to-say-when-someone-is-hurting'],
+    slugs: ['who-is-my-neighbour', 'evangelism-without-being-weird', 'what-to-say-when-someone-is-hurting'],
   },
   {
     id: 'share',
     label: 'Share',
     note: 'Your story, a simple invitation, and faith where you already spend your days.',
-    slugs: ['how-to-share-your-testimony', 'how-to-lead-someone-to-jesus', 'how-to-invite-someone-to-church', 'talking-about-jesus-with-family-at-the-holidays', 'faith-at-work-your-coworkers-are-your-oikos'],
+    slugs: ['spiritual-conversation-starters', 'how-to-share-your-testimony', 'how-to-lead-someone-to-jesus', 'how-to-invite-someone-to-church', 'talking-about-jesus-with-family-at-the-holidays', 'faith-at-work-your-coworkers-are-your-oikos', 'how-to-share-your-faith-at-school'],
   },
   {
     id: 'disciple',

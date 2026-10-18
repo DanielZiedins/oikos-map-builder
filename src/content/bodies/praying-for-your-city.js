@@ -47,6 +47,13 @@ export default {
         "If you want something structured, <a href=\"https://www.loveontheworld.com\" target=\"_blank\" rel=\"noopener\">Love on The World</a> exists to help a few friends start praying for and loving their city together, and the <a href=\"https://www.jesusfestival.app\" target=\"_blank\" rel=\"noopener\">Jesus Festival app</a> has a live prayer wall where a whole community carries requests between them.",
         "And keep the long view. Cities do not change on a quarterly timeline. One plants, another waters, God gives the growth — and some of the answers will be gathered in by people who come after you."
       ]
+    },
+    {
+      "heading": "Keep going",
+      "list": [
+        "Ready to start on foot? <a href=\"/blog/how-to-prayer-walk\">How to Prayer Walk Your Neighbourhood</a> has a 30-minute plan you can do this week.",
+        "For the bigger picture of why we pray for the nations as well as our streets, read <a href=\"/blog/what-is-the-great-commission\">What Is the Great Commission?</a>"
+      ]
     }
   ],
   "scripture": {
