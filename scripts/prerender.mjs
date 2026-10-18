@@ -34,14 +34,31 @@ await build({
 });
 
 const { renderToString } = await import('react-dom/server');
-const { routes } = await import(pathToFileURL(resolve(ssrOut, 'main.mjs')).href);
+const { routes, growthFaq } = await import(pathToFileURL(resolve(ssrOut, 'main.mjs')).href);
 const blog = await import(pathToFileURL(resolve(ssrOut, 'blog.mjs')).href);
 
 // Minimum words a crawler must see on each page, so a regression (an empty
 // render, content moved behind an effect) fails the build instead of shipping.
 const pages = [
   { path: '/', file: 'index.html', minWords: 1500, render: routes['/'] },
-  { path: '/growth', file: 'growth.html', minWords: 300, render: routes['/growth'] },
+  {
+    path: '/growth',
+    file: 'growth.html',
+    minWords: 900,
+    render: routes['/growth'],
+    // Built from the same array the page renders, so the schema can never
+    // drift from the visible questions.
+    jsonLd: {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      '@id': 'https://www.oikosmap.com/growth#faq',
+      mainEntity: growthFaq.map((item) => ({
+        '@type': 'Question',
+        name: item.question,
+        acceptedAnswer: { '@type': 'Answer', text: item.answer },
+      })),
+    },
+  },
   { path: '/connect', file: 'connect.html', minWords: 300, render: routes['/connect'] },
   { path: '/blog', file: 'blog.html', minWords: 600, render: blog.blogIndexPage },
   ...blog.slugs.map((slug) => ({
@@ -74,11 +91,15 @@ for (const page of pages) {
   const h1s = (markup.match(/<h1[\s>]/g) || []).length;
   if (h1s !== 1) throw new Error(`prerender: ${page.path} has ${h1s} <h1> elements`);
 
-  const html = template
+  let html = template
     .replace('<div id="root"></div>', `<div id="root">${markup}</div>`)
     // The <noscript> summary existed only because #root was empty. With the real
     // page in the HTML it would just be a second <h1> and duplicate copy.
     .replace(/\s*<noscript>\s*<main>[\s\S]*?<\/main>\s*<\/noscript>/, '');
+  if (page.jsonLd) {
+    const json = JSON.stringify(page.jsonLd).replace(/</g, '\\u003c');
+    html = html.replace('</head>', `  <script type="application/ld+json">${json}</script>\n  </head>`);
+  }
   if (/<noscript>\s*<main>/.test(html)) throw new Error(`prerender: ${page.file} still has its <noscript> summary`);
   writeFileSync(file, html);
   console.log(`prerender: ${page.path} → ${page.file} (${words} words, ${(markup.length / 1024).toFixed(0)} KB)`);

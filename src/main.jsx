@@ -880,6 +880,11 @@ const faqItems = [
       'Yes. You can download your Oikos Map as PNG, SVG, JSON, and a simple prayer plan text file, or copy a private map link to reopen it on another device or share it with a friend.',
   },
   {
+    question: 'Is there a printable Oikos Map template?',
+    answer:
+      'Yes. A free two-page printable Oikos Map template is available as a PDF: page one is the map with circles for family, friends, work, school and neighbours, and page two is a five-person prayer and next-step plan. It is free to print and share with your church, small group or youth group.',
+  },
+  {
     question: 'Can I use the Oikos Map with my church or small group?',
     answer:
       'Absolutely. The tool works great for churches, small groups, youth ministries, and outreach teams. Each person can build their own map, and the templates make it easy to start in a household, campus, or workplace context.',
@@ -965,21 +970,24 @@ function KingdomNetwork() {
   );
 }
 
-function FaqSection() {
+function FaqSection({
+  items = faqItems,
+  id = 'faq',
+  title = 'Everything you need to know before you begin.',
+  lede = 'Short, honest answers about the tool, your privacy, and how to use the map with your church or group.',
+}) {
   return (
-    <section className="faq-section" id="faq" aria-labelledby="faq-title" data-reveal>
+    <section className="faq-section" id={id} aria-labelledby={`${id}-title`} data-reveal>
       <div>
         <p className="section-kicker">
           <BookOpen size={18} aria-hidden="true" />
           Common questions
         </p>
-        <h2 id="faq-title">Everything you need to know before you begin.</h2>
-        <p className="faq-lede">
-          Short, honest answers about the tool, your privacy, and how to use the map with your church or group.
-        </p>
+        <h2 id={`${id}-title`}>{title}</h2>
+        <p className="faq-lede">{lede}</p>
       </div>
       <div className="faq-list">
-        {faqItems.map((item, index) => (
+        {items.map((item, index) => (
           <details key={item.question} open={index === 0}>
             <summary>{item.question}</summary>
             <p>{item.answer}</p>
@@ -989,6 +997,65 @@ function FaqSection() {
     </section>
   );
 }
+
+// Each area keeps its original one-line summary, now with an anchor verse (NIV,
+// word for word) and three practices small enough to start this week.
+const growthAreas = [
+  {
+    title: 'Spirit',
+    body: 'Abide in Jesus, learn to hear His voice, and live from intimacy instead of striving.',
+    verse: { text: 'I am the vine; you are the branches. If you remain in me and I in you, you will bear much fruit; apart from me you can do nothing.', ref: 'John 15:5' },
+    practices: ['Ten unhurried minutes in a Gospel each morning', 'Pray through your Oikos Map by name', 'One sabbath rhythm a week — a real stop'],
+  },
+  {
+    title: 'Mind',
+    body: 'Renew your thoughts, break agreement with lies, and build faith-filled focus.',
+    verse: { text: 'Do not conform to the pattern of this world, but be transformed by the renewing of your mind.', ref: 'Romans 12:2' },
+    practices: ['Memorise one verse a week', 'Name a lie you have believed and the truth that answers it', 'Trade one hour of scrolling for reading'],
+  },
+  {
+    title: 'Body',
+    body: 'Treat health, energy, and discipline as stewardship for the assignment.',
+    verse: { text: 'You are not your own; you were bought at a price. Therefore honor God with your bodies.', ref: '1 Corinthians 6:19–20' },
+    practices: ['Protect your sleep like an appointment', 'Move every day — a walk counts, and a prayer walk counts twice', 'Eat and rest as someone with a calling to carry'],
+  },
+  {
+    title: 'Purpose',
+    body: 'Bring your gifts, work, family, and influence under the Lordship of Jesus.',
+    verse: { text: 'For we are God’s handiwork, created in Christ Jesus to do good works, which God prepared in advance for us to do.', ref: 'Ephesians 2:10' },
+    practices: ['Write one sentence on what God has put you here to do', 'See your workplace as a mission field, not a waiting room', 'Use one gift to serve someone on your map this week'],
+  },
+];
+
+const growthRhythm = [
+  ['Daily', 'Scripture and prayer before the phone. Pray for your five by name. A short walk.'],
+  ['Weekly', 'Sabbath rest, church, and one intentional act of care for someone on your map.'],
+  ['Monthly', 'Review your map and your four areas. What grew? What is crowding out what matters?'],
+  ['Yearly', 'Ask God for one word or verse for the year, and one person to disciple.'],
+];
+
+export const growthFaq = [
+  {
+    question: 'What is Kingdom personal growth?',
+    answer:
+      'Kingdom personal growth is becoming more like Jesus in every part of life — spirit, mind, body and purpose — as an act of stewardship rather than self-improvement. Luke 2:52 says Jesus himself "grew in wisdom and stature, and in favor with God and man."',
+  },
+  {
+    question: 'How is Christian personal growth different from self-help?',
+    answer:
+      'Self-help aims at a better version of yourself for your own sake. Christian growth starts with abiding in Jesus (John 15:5), is powered by the Holy Spirit rather than willpower alone, and aims at bearing fruit that blesses other people and glorifies God.',
+  },
+  {
+    question: 'How does personal growth relate to evangelism?',
+    answer:
+      'Healthy people reach people. Prayer, a renewed mind, energy and a clear sense of purpose make it easier to love the people in your oikos well and to share your faith with integrity. Your growth becomes part of your witness (Matthew 5:16).',
+  },
+  {
+    question: 'Where should I start?',
+    answer:
+      'Start small and daily: ten minutes in a Gospel, praying for five people by name, protecting your sleep, and one act of care each week. Then grow with others — the I Am Reborn community exists for exactly that.',
+  },
+];
 
 function GrowthPage() {
   return (
@@ -1037,19 +1104,98 @@ function GrowthPage() {
         </div>
       </section>
 
+      <section className="growth-why" aria-labelledby="growth-why-title">
+        <p className="section-kicker">
+          <Sparkles size={18} aria-hidden="true" />
+          Why growth belongs on a mission site
+        </p>
+        <h2 id="growth-why-title">Healthy people reach people.</h2>
+        <p>
+          Even Jesus grew: <em>"And Jesus grew in wisdom and stature, and in favor with God and man"</em> (Luke 2:52).
+          That one verse covers the mind, the body, the spirit and relationships. Growth is not a detour from the
+          Great Commission — it is how ordinary people become able to carry it for a lifetime instead of a season.
+        </p>
+        <p>
+          The people on your <a href="/">Oikos Map</a> are watching how you live long before they listen to what you
+          say. A rested body, a renewed mind and a life rooted in Jesus make your love more patient and your witness
+          more believable.
+        </p>
+      </section>
+
       <section className="growth-grid" aria-label="Growth areas">
-        {[
-          ['Spirit', 'Abide in Jesus, learn to hear His voice, and live from intimacy instead of striving.'],
-          ['Mind', 'Renew your thoughts, break agreement with lies, and build faith-filled focus.'],
-          ['Body', 'Treat health, energy, and discipline as stewardship for the assignment.'],
-          ['Purpose', 'Bring your gifts, work, family, and influence under the Lordship of Jesus.'],
-        ].map(([title, body]) => (
-          <article key={title}>
-            <span>{title}</span>
-            <p>{body}</p>
+        {growthAreas.map((area) => (
+          <article key={area.title}>
+            <span>{area.title}</span>
+            <p>{area.body}</p>
+            <blockquote className="growth-verse">
+              “{area.verse.text}”
+              <cite>{area.verse.ref}</cite>
+            </blockquote>
+            <h3 className="growth-practices-title">Start this week</h3>
+            <ul className="growth-practices">
+              {area.practices.map((practice) => (
+                <li key={practice}>{practice}</li>
+              ))}
+            </ul>
           </article>
         ))}
       </section>
+
+      <section className="growth-rhythm" aria-labelledby="growth-rhythm-title">
+        <div>
+          <p className="section-kicker">
+            <Target size={18} aria-hidden="true" />
+            A simple rhythm
+          </p>
+          <h2 id="growth-rhythm-title">Grow on purpose, not by accident.</h2>
+          <p>
+            Most growth is not dramatic. It is small things done faithfully at the right intervals. Here is a rhythm you
+            can actually keep.
+          </p>
+        </div>
+        <ol>
+          {growthRhythm.map(([when, what]) => (
+            <li key={when}>
+              <strong>{when}</strong>
+              <span>{what}</span>
+            </li>
+          ))}
+        </ol>
+      </section>
+
+      <section className="growth-why growth-overflow" aria-labelledby="growth-overflow-title">
+        <p className="section-kicker">
+          <HeartHandshake size={18} aria-hidden="true" />
+          Growth that overflows
+        </p>
+        <h2 id="growth-overflow-title">Let your growth reach the people around you.</h2>
+        <ul>
+          <li>
+            Turn your prayer time outward: <a href="/blog/how-to-pray-for-unsaved-family-and-friends">a five-minute
+            daily rhythm for the people you love</a>, with <a href="/blog/bible-verses-to-pray-for-unsaved-loved-ones">23
+            verses to pray over them</a>.
+          </li>
+          <li>
+            Bring faith into your workday: <a href="/blog/faith-at-work-your-coworkers-are-your-oikos">your coworkers are
+            your oikos</a>.
+          </li>
+          <li>
+            Pass on what you are learning: <a href="/blog/how-to-disciple-someone">how to disciple someone when you do not
+            feel qualified</a>.
+          </li>
+          <li>
+            Prefer paper? <a href="/blog/free-printable-oikos-map-template">Print a free Oikos Map</a> and put it where
+            you will see it every day.
+          </li>
+        </ul>
+      </section>
+
+      <FaqSection
+        items={growthFaq}
+        id="growth-faq"
+        title="Questions about growing in Christ."
+        lede="Short answers on what Kingdom personal growth is, how it differs from self-help, and where to start."
+      />
 
       <section className="community-section" id="growth-community">
         <div>
@@ -2300,6 +2446,15 @@ function App() {
               </button>
               <input ref={fileInputRef} className="file-input" type="file" accept="application/json" onChange={importJson} />
             </div>
+            <p className="printable-note">
+              <FileText size={16} aria-hidden="true" />
+              <span>
+                Prefer paper, or need copies for a group?{' '}
+                <a href="/downloads/oikos-map-template.pdf" download>Download the free printable</a>
+                {' '}·{' '}
+                <a href="/blog/free-printable-oikos-map-template">how to use it</a>
+              </span>
+            </p>
           </aside>
 
           <div className="map-stage">

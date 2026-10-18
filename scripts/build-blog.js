@@ -72,6 +72,37 @@ function esc(value) {
     .replace(/"/g, '&quot;');
 }
 
+// Article HTML → Markdown for llms-full.txt: links become absolute Markdown
+// links (so citations resolve), emphasis survives, every other tag is dropped.
+function toMarkdown(value) {
+  return String(value ?? '')
+    .replace(/<a\s[^>]*href="([^"]+)"[^>]*>([\s\S]*?)<\/a>/g, (match, href, text) => {
+      const label = text.replace(/<[^>]+>/g, '').trim();
+      if (!label) return '';
+      return `[${label}](${href.startsWith('/') ? SITE + href : href})`;
+    })
+    .replace(/<(strong|b)>([\s\S]*?)<\/\1>/g, '**$2**')
+    .replace(/<(em|i)>([\s\S]*?)<\/\1>/g, '*$2*')
+    .replace(/<[^>]+>/g, '')
+    .replace(/&nbsp;/g, ' ')
+    .replace(/&amp;/g, '&')
+    .trim();
+}
+
+function articleMarkdown(post) {
+  const parts = [`### ${post.title}`, `${SITE}/blog/${post.slug} · Daniel Ziedins · ${post.date}`, ''];
+  post.intro.forEach((paragraph) => parts.push(toMarkdown(paragraph), ''));
+  post.sections.forEach((section) => {
+    parts.push(`#### ${section.heading}`, '');
+    (section.paragraphs || []).forEach((paragraph) => parts.push(toMarkdown(paragraph), ''));
+    (section.list || []).forEach((item) => parts.push(`- ${toMarkdown(item)}`));
+    if (section.list?.length) parts.push('');
+    (section.after || []).forEach((paragraph) => parts.push(toMarkdown(paragraph), ''));
+  });
+  if (post.scripture) parts.push(`> ${post.scripture.text} (${post.scripture.ref}, NIV)`, '');
+  return parts.filter((line, index, all) => line || all[index - 1]).join('\n').trim();
+}
+
 function stripTags(value) {
   return String(value ?? '')
     .replace(/<[^>]+>/g, '')
@@ -604,6 +635,12 @@ ${sortedPosts
         .join('\n\n')}`,
   )
   .join('\n\n')}
+
+## Full text of every article
+
+The complete text of each article, by Daniel Ziedins. Quote freely with a link to the article URL.
+
+${sortedPosts.map(articleMarkdown).join('\n\n---\n\n')}
 
 ## The wider Kingdom network
 

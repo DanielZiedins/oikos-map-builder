@@ -211,6 +211,58 @@ export const postsMeta = [
     excerpt:
       "Not the street, not the office — the dinner table. Here is the way between preaching over the turkey and saying nothing.",
   },
+  {
+    slug: "free-printable-oikos-map-template",
+    order: 18,
+    title: "Free Printable Oikos Map Template (PDF) — and How to Use It",
+    description:
+      "Download a free two-page printable Oikos Map: circles for family, friends, work, school and neighbours, plus a five-person prayer and next-step plan — with ideas for churches, small groups and youth groups.",
+    date: "2026-10-18",
+    readingTime: "5 min read",
+    tags: ["Oikos", "Practical", "Prayer"],
+    kicker: "Start here",
+    excerpt:
+      "Some people think best with a pen in hand. Here is a free two-page Oikos Map you can print, photocopy and put on the fridge.",
+  },
+  {
+    slug: "what-is-evangelism",
+    order: 19,
+    title: "What Is Evangelism? A Simple Biblical Definition (and What It Is Not)",
+    description:
+      "A clear, biblical definition of evangelism, what the good news actually is, what evangelism is not, the different forms it takes, and why it is meant for ordinary Christians.",
+    date: "2026-10-18",
+    readingTime: "5 min read",
+    tags: ["Evangelism", "Foundations", "Scripture"],
+    kicker: "Start here",
+    excerpt:
+      "It sounds like a megaphone on a street corner. It is actually one of the happiest words in the New Testament.",
+  },
+  {
+    slug: "how-to-prayer-walk",
+    order: 20,
+    title: "How to Prayer Walk Your Neighbourhood: A Simple Guide",
+    description:
+      "What prayer walking is, why it is biblical, what to pray for homes, schools and businesses as you pass, a 30-minute plan you can do this week, and how churches prayer walk together.",
+    date: "2026-10-18",
+    readingTime: "5 min read",
+    tags: ["Prayer", "Practical", "Care"],
+    kicker: "Step one · Pray",
+    excerpt:
+      "Prayer walking turns scenery into people. Here is how to do it — quietly, simply, and in thirty minutes.",
+  },
+  {
+    slug: "how-to-start-a-bible-study-with-friends",
+    order: 21,
+    title: "How to Start a Bible Study With Friends Who Do Not Believe (Yet)",
+    description:
+      "How to invite curious friends to read the Bible together, a simple discovery-style format anyone can lead, eight passages to start with, and ground rules that keep it safe and honest.",
+    date: "2026-10-18",
+    readingTime: "5 min read",
+    tags: ["Disciple", "Practical", "Scripture"],
+    kicker: "Step four · Disciple",
+    excerpt:
+      "Some of your friends will never walk into a church. Many would come to your kitchen table to read something with you.",
+  },
 ];
 
 export const sortedPostsMeta = [...postsMeta].sort((a, b) => a.order - b.order);
@@ -256,13 +308,13 @@ export const readingPath = [
     id: 'start',
     label: 'Start here',
     note: 'What an oikos is, and why households have always carried the Gospel.',
-    slugs: ['what-is-an-oikos', 'oikos-evangelism-early-church', 'what-is-a-person-of-peace'],
+    slugs: ['what-is-an-oikos', 'free-printable-oikos-map-template', 'what-is-evangelism', 'oikos-evangelism-early-church', 'what-is-a-person-of-peace'],
   },
   {
     id: 'pray',
     label: 'Pray',
     note: 'Name people before God, daily — then widen it to your street and city.',
-    slugs: ['how-to-pray-for-unsaved-family-and-friends', 'bible-verses-to-pray-for-unsaved-loved-ones', 'praying-for-your-city'],
+    slugs: ['how-to-pray-for-unsaved-family-and-friends', 'bible-verses-to-pray-for-unsaved-loved-ones', 'how-to-prayer-walk', 'praying-for-your-city'],
   },
   {
     id: 'care',
@@ -280,7 +332,7 @@ export const readingPath = [
     id: 'disciple',
     label: 'Disciple',
     note: 'Walk with someone until they can do it for someone else.',
-    slugs: ['how-to-disciple-someone'],
+    slugs: ['how-to-disciple-someone', 'how-to-start-a-bible-study-with-friends'],
   },
   {
     id: 'send',

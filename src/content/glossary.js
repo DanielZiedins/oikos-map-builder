@@ -23,6 +23,18 @@ export const glossary = [
       'Someone who welcomes the messengers of Jesus and opens their home and relationships to the Gospel, from Luke 10:5–7. Lydia, Cornelius and Zacchaeus are biblical examples.',
   },
   {
+    term: 'Evangelism',
+    slug: 'what-is-evangelism',
+    definition:
+      'Sharing the good news of Jesus — that He died for our sins and rose again — with people who do not yet know Him, and inviting them to trust and follow Him. From the Greek euangelion, "good news."',
+  },
+  {
+    term: 'Prayer walking',
+    slug: 'how-to-prayer-walk',
+    definition:
+      'Walking through a neighbourhood, campus or city while quietly praying for the people and places you pass, letting what you see shape what you pray.',
+  },
+  {
     term: 'Oikos evangelism',
     slug: 'oikos-evangelism-early-church',
     definition:

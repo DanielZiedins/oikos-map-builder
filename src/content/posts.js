@@ -22,6 +22,10 @@ import prayingForYourCity from './bodies/praying-for-your-city.js';
 import talkingAboutJesusAtTheHolidays from './bodies/talking-about-jesus-with-family-at-the-holidays.js';
 import whatIsAPersonOfPeace from './bodies/what-is-a-person-of-peace.js';
 import whatIsTheGreatCommission from './bodies/what-is-the-great-commission.js';
+import freePrintableOikosMapTemplate from './bodies/free-printable-oikos-map-template.js';
+import whatIsEvangelism from './bodies/what-is-evangelism.js';
+import howToPrayerWalk from './bodies/how-to-prayer-walk.js';
+import howToStartABibleStudy from './bodies/how-to-start-a-bible-study-with-friends.js';
 import whatIsAnOikos from './bodies/what-is-an-oikos.js';
 import whatToSayWhenSomeoneIsHurting from './bodies/what-to-say-when-someone-is-hurting.js';
 
@@ -41,6 +45,10 @@ const bodies = {
   'talking-about-jesus-with-family-at-the-holidays': talkingAboutJesusAtTheHolidays,
   'what-is-a-person-of-peace': whatIsAPersonOfPeace,
   'what-is-the-great-commission': whatIsTheGreatCommission,
+  'free-printable-oikos-map-template': freePrintableOikosMapTemplate,
+  'what-is-evangelism': whatIsEvangelism,
+  'how-to-prayer-walk': howToPrayerWalk,
+  'how-to-start-a-bible-study-with-friends': howToStartABibleStudy,
   'what-is-an-oikos': whatIsAnOikos,
   'what-to-say-when-someone-is-hurting': whatToSayWhenSomeoneIsHurting,
 };

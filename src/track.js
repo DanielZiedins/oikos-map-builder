@@ -27,7 +27,8 @@ export function track(event, path = window.location.pathname) {
   }
 }
 
-// Counts clicks on links leaving the site, by destination host — this is how
+// Counts clicks on links leaving the site, by destination host, plus downloads of
+// the printable template (by the page they came from) — this is how
 // you can see which network sites the Oikos Map actually sends people to.
 export function trackOutboundClicks() {
   document.addEventListener(
@@ -43,7 +44,13 @@ export function trackOutboundClicks() {
       } catch {
         return;
       }
-      if (!/^https?:$/.test(url.protocol) || url.host === window.location.host) return;
+      if (!/^https?:$/.test(url.protocol)) return;
+      // The printable PDF is the one same-site link worth counting: which page
+      // the download came from shows what is sending people to it.
+      if (url.host === window.location.host) {
+        if (url.pathname.startsWith('/downloads/')) track('download_template');
+        return;
+      }
       track('outbound', url.host.replace(/^www\./, ''));
     },
     { capture: true, passive: true },

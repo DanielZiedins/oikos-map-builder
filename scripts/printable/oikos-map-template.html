@@ -1,0 +1,144 @@
+<!doctype html>
+<!-- Source for public/downloads/oikos-map-template.pdf. Regenerate with
+     `node scripts/printable.mjs` after editing. US Letter, two pages:
+     1) the map itself, 2) "My five" next-step plan. Scripture is NIV. -->
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Oikos Map Template — Free Printable | OikosMap.com</title>
+<style>
+  @font-face { font-family: Inter; font-weight: 100 900; src: url("../../public/fonts/InterVariable-subset.woff2") format("woff2"); }
+  @page { size: Letter; margin: 0; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; font-family: Inter, system-ui, sans-serif; color: #26201c; }
+  .page { width: 8.5in; height: 11in; padding: 0.5in 0.55in 0.45in; position: relative; overflow: hidden; background: #fffdf7; page-break-after: always; }
+  .page:last-child { page-break-after: auto; }
+  .bar { position: absolute; inset: 0 auto 0 0; width: 0.12in; background: #9c3327; }
+  header { display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 2px solid #26201c; padding-bottom: 8px; }
+  .kicker { margin: 0 0 4px; color: #9c3327; font-size: 9pt; font-weight: 900; letter-spacing: 0.14em; text-transform: uppercase; }
+  h1 { margin: 0; font-size: 25pt; line-height: 1; letter-spacing: -0.5px; }
+  .field { font-size: 9.5pt; font-weight: 700; color: #5c5047; text-align: right; line-height: 2; }
+  .field span { display: inline-block; width: 1.9in; border-bottom: 1px solid #8a7d72; margin-left: 6px; }
+  .lede { margin: 10px 0 0; font-size: 10pt; line-height: 1.45; color: #4f453e; }
+  svg { display: block; margin: 6px auto 0; }
+  .ring-label { font: 900 11pt Inter, sans-serif; letter-spacing: 0.08em; text-transform: uppercase; }
+  .hint { font: 600 7.5pt Inter, sans-serif; fill: #6f625a; }
+  .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 6px; }
+  .step { border: 1.5px solid #e4d8c4; border-radius: 6px; padding: 7px 9px; font-size: 8.4pt; line-height: 1.35; }
+  .step b { display: block; font-size: 10pt; margin-bottom: 2px; }
+  footer { position: absolute; left: 0.55in; right: 0.55in; bottom: 0.32in; display: flex; justify-content: space-between; font-size: 8pt; color: #6f625a; }
+  footer strong { color: #0e7268; }
+  table { width: 100%; border-collapse: collapse; margin-top: 12px; }
+  th { text-align: left; font-size: 8.5pt; letter-spacing: 0.08em; text-transform: uppercase; color: #9c3327; padding: 6px 6px; border-bottom: 2px solid #26201c; }
+  td { border-bottom: 1px solid #d9ccb7; padding: 0 6px; height: 0.98in; vertical-align: top; font-size: 8pt; color: #8a7d72; }
+  td.n { width: 0.3in; font-size: 16pt; font-weight: 900; color: #26201c; padding-top: 8px; }
+  td.name { width: 1.75in; }
+  td.box { width: 0.62in; text-align: center; padding-top: 10px; }
+  .check { display: inline-block; width: 15px; height: 15px; border: 1.5px solid #5c5047; border-radius: 3px; }
+  .prompts { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 18px; margin-top: 14px; font-size: 8.8pt; line-height: 1.45; }
+  .prompts h3 { margin: 0 0 3px; font-size: 10pt; }
+  .prompts p { margin: 0; color: #4f453e; }
+  blockquote { margin: 14px 0 0; padding: 10px 14px; border-left: 4px solid #f3cf74; background: #fff6df; font-size: 9.5pt; line-height: 1.5; font-style: italic; }
+  blockquote cite { display: block; margin-top: 3px; font-style: normal; font-weight: 800; font-size: 8.5pt; }
+</style>
+</head>
+<body>
+
+<section class="page">
+  <div class="bar"></div>
+  <header>
+    <div>
+      <p class="kicker">Free printable · OikosMap.com</p>
+      <h1>My Oikos Map</h1>
+    </div>
+    <div class="field">Name <span></span><br />Date <span></span></div>
+  </header>
+  <p class="lede"><strong>Oikos</strong> is the New Testament word for household — the people God has already placed around you. Write your name in the centre, then add names in each circle: people you see regularly who do not yet follow Jesus, or who need encouragement. Aim for at least five.</p>
+
+  <svg width="7.3in" height="6.55in" viewBox="0 0 730 655" xmlns="http://www.w3.org/2000/svg">
+    <!-- spokes -->
+    <g stroke="#cdbfa8" stroke-width="2" stroke-dasharray="5 6">
+      <line x1="365" y1="330" x2="365" y2="112" />
+      <line x1="365" y1="330" x2="572" y2="250" />
+      <line x1="365" y1="330" x2="493" y2="526" />
+      <line x1="365" y1="330" x2="237" y2="526" />
+      <line x1="365" y1="330" x2="158" y2="250" />
+    </g>
+    <!-- centre -->
+    <circle cx="365" cy="330" r="62" fill="#26201c" />
+    <text x="365" y="318" text-anchor="middle" fill="#f3cf74" class="ring-label" style="font-size:10pt">Me</text>
+    <line x1="318" y1="350" x2="412" y2="350" stroke="#8a7d72" stroke-width="1.2" />
+    <!-- groups: cx, cy, colour, label, hint -->
+    <g>
+      <circle cx="365" cy="112" r="100" fill="#fff" stroke="#f45d48" stroke-width="5" />
+      <text x="365" y="52" text-anchor="middle" fill="#c83a28" class="ring-label">Family</text>
+      <g stroke="#b9ab96" stroke-width="1"><line x1="300" y1="88" x2="430" y2="88"/><line x1="290" y1="118" x2="440" y2="118"/><line x1="300" y1="148" x2="430" y2="148"/><line x1="322" y1="178" x2="408" y2="178"/></g>
+    </g>
+    <g>
+      <circle cx="572" cy="250" r="100" fill="#fff" stroke="#14b8a6" stroke-width="5" />
+      <text x="572" y="190" text-anchor="middle" fill="#0e7268" class="ring-label">Friends</text>
+      <g stroke="#b9ab96" stroke-width="1"><line x1="507" y1="226" x2="637" y2="226"/><line x1="497" y1="256" x2="647" y2="256"/><line x1="507" y1="286" x2="637" y2="286"/><line x1="529" y1="316" x2="615" y2="316"/></g>
+    </g>
+    <g>
+      <circle cx="493" cy="526" r="100" fill="#fff" stroke="#f59e0b" stroke-width="5" />
+      <text x="493" y="466" text-anchor="middle" fill="#a86500" class="ring-label">Work</text>
+      <g stroke="#b9ab96" stroke-width="1"><line x1="428" y1="502" x2="558" y2="502"/><line x1="418" y1="532" x2="568" y2="532"/><line x1="428" y1="562" x2="558" y2="562"/><line x1="450" y1="592" x2="536" y2="592"/></g>
+    </g>
+    <g>
+      <circle cx="237" cy="526" r="100" fill="#fff" stroke="#516cf0" stroke-width="5" />
+      <text x="237" y="466" text-anchor="middle" fill="#3249c4" class="ring-label">School</text>
+      <g stroke="#b9ab96" stroke-width="1"><line x1="172" y1="502" x2="302" y2="502"/><line x1="162" y1="532" x2="312" y2="532"/><line x1="172" y1="562" x2="302" y2="562"/><line x1="194" y1="592" x2="280" y2="592"/></g>
+    </g>
+    <g>
+      <circle cx="158" cy="250" r="100" fill="#fff" stroke="#8b5cf6" stroke-width="5" />
+      <text x="158" y="190" text-anchor="middle" fill="#6a3fd0" class="ring-label">Neighbours</text>
+      <g stroke="#b9ab96" stroke-width="1"><line x1="93" y1="226" x2="223" y2="226"/><line x1="83" y1="256" x2="233" y2="256"/><line x1="93" y1="286" x2="223" y2="286"/><line x1="115" y1="316" x2="201" y2="316"/></g>
+    </g>
+    <text x="365" y="642" text-anchor="middle" class="hint">Also think about: teammates, gym, church, online friends, the barista, the parents at pickup, the people you text most.</text>
+  </svg>
+
+  <div class="steps">
+    <div class="step"><b>1 · Pray</b>Pray for each name, every day, for an open door.</div>
+    <div class="step"><b>2 · Care</b>Show up, serve a need, make space to listen.</div>
+    <div class="step"><b>3 · Share</b>Tell your story and the good news when a door opens.</div>
+    <div class="step"><b>4 · Disciple</b>Read Scripture together and help them reach their oikos.</div>
+  </div>
+
+  <footer><span>Build it online, free and private: <strong>www.oikosmap.com</strong></span><span>Page 1 of 2</span></footer>
+</section>
+
+<section class="page">
+  <div class="bar"></div>
+  <header>
+    <div>
+      <p class="kicker">Free printable · OikosMap.com</p>
+      <h1>My Five</h1>
+    </div>
+    <div class="field">Start date <span></span><br />Prayer partner <span></span></div>
+  </header>
+  <p class="lede">Choose five names from your map. Pray for them daily, and tick each step as you take it. The goal is not speed — it is faithfulness.</p>
+
+  <table>
+    <thead><tr><th></th><th>Name</th><th>How I will pray / what I know they need</th><th style="text-align:center">Pray</th><th style="text-align:center">Care</th><th style="text-align:center">Share</th><th style="text-align:center">Disciple</th></tr></thead>
+    <tbody>
+      <tr><td class="n">1</td><td class="name"></td><td></td><td class="box"><span class="check"></span></td><td class="box"><span class="check"></span></td><td class="box"><span class="check"></span></td><td class="box"><span class="check"></span></td></tr>
+      <tr><td class="n">2</td><td class="name"></td><td></td><td class="box"><span class="check"></span></td><td class="box"><span class="check"></span></td><td class="box"><span class="check"></span></td><td class="box"><span class="check"></span></td></tr>
+      <tr><td class="n">3</td><td class="name"></td><td></td><td class="box"><span class="check"></span></td><td class="box"><span class="check"></span></td><td class="box"><span class="check"></span></td><td class="box"><span class="check"></span></td></tr>
+      <tr><td class="n">4</td><td class="name"></td><td></td><td class="box"><span class="check"></span></td><td class="box"><span class="check"></span></td><td class="box"><span class="check"></span></td><td class="box"><span class="check"></span></td></tr>
+      <tr><td class="n">5</td><td class="name"></td><td></td><td class="box"><span class="check"></span></td><td class="box"><span class="check"></span></td><td class="box"><span class="check"></span></td><td class="box"><span class="check"></span></td></tr>
+    </tbody>
+  </table>
+
+  <div class="prompts">
+    <div><h3>Pray (2 Corinthians 4:4)</h3><p>Ask God to open their eyes to the light of the Gospel, soften their heart, and send someone to them — maybe you.</p></div>
+    <div><h3>Care (Matthew 5:16)</h3><p>A meal, a message, help with a move, an honest "how are you really?" Love that shows up opens doors.</p></div>
+    <div><h3>Share (1 Peter 3:15)</h3><p>Your story in three minutes: life before Jesus, how you met Him, what is different now. Then invite them.</p></div>
+    <div><h3>Disciple (2 Timothy 2:2)</h3><p>Read a Gospel story together each week. Ask: what does this show about God? About people? What will I do?</p></div>
+  </div>
+
+  <blockquote>"Ask the Lord of the harvest, therefore, to send out workers into his harvest field."<cite>Matthew 9:38 (NIV)</cite></blockquote>
+
+  <footer><span>Free guides on praying, sharing and discipling: <strong>www.oikosmap.com/blog</strong></span><span>Page 2 of 2</span></footer>
+</section>
+</body>
+</html>
