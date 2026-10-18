@@ -4007,45 +4007,15 @@ textarea:focus-visible,
   }
 }
 
-/* Skip layout and paint for long sections still below the fold. contain-intrinsic-size
-   supplies a placeholder height so the scrollbar does not jump as they render.
-   Deliberately excludes the builder, whose SVG needs real measurements. */
-.latest-articles,
-.network-section,
-.faq-section,
-.blog-list,
+/* Skip layout and paint for the end-of-article "keep reading" block only.
+   It used to cover the homepage articles, network and FAQ sections and the
+   journal list too, but anything above an in-page link target breaks the link:
+   the browser aims with placeholder heights, the sections render at their real
+   heights mid-scroll, and "Create" landed 872px past the builder (2026-10-18).
+   Nothing links to a spot below .post-more, so it is safe there. */
 .post-more {
   content-visibility: auto;
   contain-intrinsic-size: auto 900px;
-}
-
-/* Placeholders close to the measured real heights (2026-10-18). A flat 900px
-   was ~2,000px short for the network section on a phone, so everything below
-   it jumped when it rendered mid-scroll. */
-.latest-articles {
-  contain-intrinsic-size: auto 720px;
-}
-
-.network-section {
-  contain-intrinsic-size: auto 1640px;
-}
-
-.faq-section {
-  contain-intrinsic-size: auto 710px;
-}
-
-@media (max-width: 760px) {
-  .latest-articles {
-    contain-intrinsic-size: auto 1330px;
-  }
-
-  .network-section {
-    contain-intrinsic-size: auto 2860px;
-  }
-
-  .faq-section {
-    contain-intrinsic-size: auto 1020px;
-  }
 }
 
 .printable-note {

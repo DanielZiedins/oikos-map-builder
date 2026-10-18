@@ -220,7 +220,7 @@ function ReadingPath() {
 // (/blog#term-oikos) so an answer can link straight to its definition.
 function KeyTerms() {
   return (
-    <section className="key-terms" aria-labelledby="key-terms-title">
+    <section className="key-terms" id="key-terms" aria-labelledby="key-terms-title">
       <div className="reading-path-head">
         <p className="section-kicker">
           <BookOpen size={18} aria-hidden="true" />
