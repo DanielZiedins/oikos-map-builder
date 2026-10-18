@@ -4,6 +4,7 @@ import {
   ArrowDownToLine,
   ArrowRight,
   BookOpen,
+  CalendarPlus,
   CheckCircle2,
   Clipboard,
   CirclePlus,
@@ -45,6 +46,7 @@ import {
 import { sortedPostsMeta } from './content/posts-meta.js';
 import { prayerVerses, verseIndexFor, versePrayer } from './content/prayer-verses.js';
 import { conversationGuides, starterFor } from './content/conversation-starters.js';
+import { buildPrayerReminderIcs } from './reminder.js';
 import { networkGroups, sitesInGroup } from './content/network.js';
 import {
   INVITE_DISMISSED_KEY,
@@ -894,6 +896,48 @@ function ConversationCard({ person, stage }) {
   );
 }
 
+// A daily calendar reminder to pray for the people on the map. The .ics file is
+// built on the device (src/reminder.js) — names never leave the browser.
+function PrayerReminder({ mapData }) {
+  const [time, setTime] = useState('07:30');
+  const [done, setDone] = useState(false);
+
+  function addReminder() {
+    track('reminder_ics');
+    downloadBlob(
+      new Blob([buildPrayerReminderIcs(mapData, time)], { type: 'text/calendar;charset=utf-8' }),
+      'pray-for-my-oikos.ics',
+    );
+    setDone(true);
+  }
+
+  return (
+    <div className="prayer-reminder">
+      <p className="prayer-reminder-title">
+        <CalendarPlus size={16} aria-hidden="true" />
+        Daily prayer reminder
+      </p>
+      <p className="prayer-reminder-copy">
+        Add a five-minute daily event to your phone or computer calendar, with your first five names in it. Made on
+        this device — nothing is uploaded.
+      </p>
+      <div className="prayer-reminder-row">
+        <label htmlFor="prayer-reminder-time">Remind me at</label>
+        <input id="prayer-reminder-time" type="time" value={time} onChange={(event) => setTime(event.target.value)} />
+        <button type="button" onClick={addReminder} disabled={!mapData.people.length}>
+          <CalendarPlus size={16} aria-hidden="true" />
+          {done ? 'Downloaded — open it' : 'Add to calendar'}
+        </button>
+      </div>
+      {done ? (
+        <p className="prayer-reminder-copy" role="status">
+          Open the downloaded file to add it to Apple, Google or Outlook Calendar.
+        </p>
+      ) : null}
+    </div>
+  );
+}
+
 const faqItems = [
   {
     question: 'What is an Oikos Map?',
@@ -919,6 +963,11 @@ const faqItems = [
     question: 'Can I download or share my Oikos Map?',
     answer:
       'Yes. You can download your Oikos Map as PNG, SVG, JSON, and a simple prayer plan text file, or copy a private map link to reopen it on another device or share it with a friend.',
+  },
+  {
+    question: 'Can I get a daily reminder to pray for the people on my map?',
+    answer:
+      'Yes. In the builder, choose a time and select Add to calendar. It downloads a daily five-minute calendar event with your first five names in it, which you can open in Apple, Google or Outlook Calendar. The file is created on your device, so the names are never uploaded.',
   },
   {
     question: 'Is there a printable Oikos Map template?',
@@ -2488,6 +2537,7 @@ function App() {
               </button>
               <input ref={fileInputRef} className="file-input" type="file" accept="application/json" onChange={importJson} />
             </div>
+            <PrayerReminder mapData={mapData} />
             <p className="printable-note">
               <FileText size={16} aria-hidden="true" />
               <span>

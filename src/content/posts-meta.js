@@ -302,6 +302,45 @@ export const postsMeta = [
     excerpt:
       "School might be the hardest place to be a Christian — and the place where you have the most influence.",
   },
+  {
+    slug: "bible-verses-about-evangelism",
+    order: 25,
+    title: "25 Bible Verses About Evangelism and Sharing Your Faith",
+    description:
+      "Twenty-five Bible verses about evangelism, grouped by theme — the command, the message, why it matters, courage, gentleness, sowing and harvest — each with a one-line takeaway.",
+    date: "2026-10-18",
+    readingTime: "7 min read",
+    tags: ["Share", "Scripture", "Evangelism"],
+    kicker: "Step three · Share",
+    excerpt:
+      "Nervous about sharing your faith? The Bible has a lot to say to you — about the message, the courage and who makes it grow.",
+  },
+  {
+    slug: "biblical-hospitality",
+    order: 26,
+    title: "What Does the Bible Say About Hospitality? Opening Your Home to Your Oikos",
+    description:
+      "What biblical hospitality means, how Jesus used the table, why hospitality is not entertaining, and simple ways to open your home to neighbours, coworkers and friends this month.",
+    date: "2026-10-18",
+    readingTime: "5 min read",
+    tags: ["Care", "Scripture", "Practical"],
+    kicker: "Step two · Care",
+    excerpt:
+      "Some of the most important conversations about Jesus will happen around your kitchen table, not in a church building.",
+  },
+  {
+    slug: "what-is-missional-living",
+    order: 27,
+    title: "What Is Missional Living? How to Live on Mission in Everyday Life",
+    description:
+      "What missional living means, where it comes from in Scripture, the five BELLS habits, and how to treat your street, workplace and third places as your mission field.",
+    date: "2026-10-18",
+    readingTime: "4 min read",
+    tags: ["Send", "Foundations", "Practical"],
+    kicker: "Beyond your oikos · Send",
+    excerpt:
+      "Mission is not only a trip. Your street, your job and your group chat are the mission field.",
+  },
 ];
 
 export const sortedPostsMeta = [...postsMeta].sort((a, b) => a.order - b.order);
@@ -359,13 +398,13 @@ export const readingPath = [
     id: 'care',
     label: 'Care',
     note: 'Love that shows up, especially when life gets hard.',
-    slugs: ['who-is-my-neighbour', 'evangelism-without-being-weird', 'what-to-say-when-someone-is-hurting'],
+    slugs: ['who-is-my-neighbour', 'biblical-hospitality', 'evangelism-without-being-weird', 'what-to-say-when-someone-is-hurting'],
   },
   {
     id: 'share',
     label: 'Share',
     note: 'Your story, a simple invitation, and faith where you already spend your days.',
-    slugs: ['spiritual-conversation-starters', 'how-to-share-your-testimony', 'how-to-lead-someone-to-jesus', 'how-to-invite-someone-to-church', 'talking-about-jesus-with-family-at-the-holidays', 'faith-at-work-your-coworkers-are-your-oikos', 'how-to-share-your-faith-at-school'],
+    slugs: ['spiritual-conversation-starters', 'bible-verses-about-evangelism', 'how-to-share-your-testimony', 'how-to-lead-someone-to-jesus', 'how-to-invite-someone-to-church', 'talking-about-jesus-with-family-at-the-holidays', 'faith-at-work-your-coworkers-are-your-oikos', 'how-to-share-your-faith-at-school'],
   },
   {
     id: 'disciple',
@@ -377,6 +416,6 @@ export const readingPath = [
     id: 'send',
     label: 'Send',
     note: 'Beyond your own street: how ordinary believers go, pray and give so the Gospel reaches the nations.',
-    slugs: ['what-is-the-great-commission', 'plunder-hell-populate-heaven', 'from-hamilton-to-the-nations'],
+    slugs: ['what-is-the-great-commission', 'what-is-missional-living', 'plunder-hell-populate-heaven', 'from-hamilton-to-the-nations'],
   },
 ];

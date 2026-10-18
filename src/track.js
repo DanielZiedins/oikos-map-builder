@@ -8,8 +8,21 @@
 // recorded as a real visitor.
 const PRODUCTION_HOSTS = new Set(['www.oikosmap.com', 'oikosmap.com']);
 
+// Automated browsers run the page's JavaScript too: Googlebot and Bingbot
+// render it, and so do Lighthouse and headless QA. Each fired article_view as a
+// "reader", so a speed audit or a crawl looked like traffic.
+const AUTOMATED = /bot|crawl|spider|slurp|headless|lighthouse|chrome-lighthouse|pagespeed|preview|facebookexternalhit|embedly/i;
+
+function isAutomated() {
+  try {
+    return navigator.webdriver === true || AUTOMATED.test(navigator.userAgent || '');
+  } catch {
+    return false;
+  }
+}
+
 export function track(event, path = window.location.pathname) {
-  if (!PRODUCTION_HOSTS.has(window.location.hostname)) return;
+  if (!PRODUCTION_HOSTS.has(window.location.hostname) || isAutomated()) return;
   try {
     const payload = JSON.stringify({ event, path: String(path).slice(0, 200) });
     if (navigator.sendBeacon) {

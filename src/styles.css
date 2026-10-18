@@ -4018,6 +4018,73 @@ textarea:focus-visible,
   contain-intrinsic-size: auto 900px;
 }
 
+.prayer-reminder {
+  display: grid;
+  gap: 8px;
+  margin-top: 14px;
+  padding: 12px;
+  border: 1px solid rgba(243, 207, 116, 0.24);
+  border-radius: 8px;
+  background: rgba(25, 21, 18, 0.42);
+}
+
+.prayer-reminder-title {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin: 0;
+  color: #f3cf74;
+  font-size: 0.74rem;
+  font-weight: 950;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.prayer-reminder-copy {
+  margin: 0;
+  color: rgba(255, 248, 236, 0.78);
+  font-size: 0.8rem;
+  line-height: 1.5;
+}
+
+.prayer-reminder-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.prayer-reminder-row label {
+  color: rgba(255, 248, 236, 0.86);
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.prayer-reminder-row input {
+  min-height: 38px;
+  padding: 6px 8px;
+  border: 1px solid rgba(255, 248, 236, 0.24);
+  border-radius: 6px;
+  color: #fff8ec;
+  background: rgba(255, 248, 236, 0.08);
+  color-scheme: dark;
+  font: inherit;
+  font-size: 0.86rem;
+}
+
+.prayer-reminder-row button {
+  display: inline-flex;
+  flex: 1 1 150px;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 38px;
+  padding: 8px 11px;
+  color: #171310;
+  background: #f3cf74;
+  font-size: 0.8rem;
+}
+
 .printable-note {
   display: flex;
   align-items: flex-start;

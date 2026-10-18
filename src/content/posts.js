@@ -29,6 +29,9 @@ import howToStartABibleStudy from './bodies/how-to-start-a-bible-study-with-frie
 import spiritualConversationStarters from './bodies/spiritual-conversation-starters.js';
 import whoIsMyNeighbour from './bodies/who-is-my-neighbour.js';
 import howToShareYourFaithAtSchool from './bodies/how-to-share-your-faith-at-school.js';
+import bibleVersesAboutEvangelism from './bodies/bible-verses-about-evangelism.js';
+import biblicalHospitality from './bodies/biblical-hospitality.js';
+import whatIsMissionalLiving from './bodies/what-is-missional-living.js';
 import whatIsAnOikos from './bodies/what-is-an-oikos.js';
 import whatToSayWhenSomeoneIsHurting from './bodies/what-to-say-when-someone-is-hurting.js';
 
@@ -55,6 +58,9 @@ const bodies = {
   'spiritual-conversation-starters': spiritualConversationStarters,
   'who-is-my-neighbour': whoIsMyNeighbour,
   'how-to-share-your-faith-at-school': howToShareYourFaithAtSchool,
+  'bible-verses-about-evangelism': bibleVersesAboutEvangelism,
+  'biblical-hospitality': biblicalHospitality,
+  'what-is-missional-living': whatIsMissionalLiving,
   'what-is-an-oikos': whatIsAnOikos,
   'what-to-say-when-someone-is-hurting': whatToSayWhenSomeoneIsHurting,
 };
