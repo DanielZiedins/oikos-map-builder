@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
-import { createRoot } from 'react-dom/client';
+import { createRoot, hydrateRoot } from 'react-dom/client';
 import {
   ArrowDownToLine,
   ArrowRight,
@@ -112,9 +112,11 @@ function createId() {
   return `oikos-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 10)}`;
 }
 
+// Fixed ids, not createId(): the homepage is prerendered, and random ids would
+// differ between the server HTML and the browser (option values, keys).
 const starterPeople = [
   {
-    id: createId(),
+    id: 'starter-1',
     name: 'Aunt Maria',
     group: 'family',
     stage: 'pray',
@@ -122,7 +124,7 @@ const starterPeople = [
     parentId: null,
   },
   {
-    id: createId(),
+    id: 'starter-2',
     name: 'Jordan',
     group: 'friends',
     stage: 'care',
@@ -130,7 +132,7 @@ const starterPeople = [
     parentId: null,
   },
   {
-    id: createId(),
+    id: 'starter-3',
     name: 'Sam',
     group: 'work',
     stage: 'share',
@@ -138,7 +140,7 @@ const starterPeople = [
     parentId: null,
   },
   {
-    id: createId(),
+    id: 'starter-4',
     name: 'Leah',
     group: 'neighbors',
     stage: 'pray',
@@ -146,7 +148,7 @@ const starterPeople = [
     parentId: null,
   },
   {
-    id: createId(),
+    id: 'starter-5',
     name: 'Mason',
     group: 'school',
     stage: 'pray',
@@ -768,7 +770,14 @@ function PrayerSprint({ person, stage, onComplete }) {
   const [secondsRemaining, setSecondsRemaining] = useState(300);
   const [isRunning, setIsRunning] = useState(false);
   const [verseOffset, setVerseOffset] = useState(0);
+  // Today's date is read after mount: the prerendered HTML was built on another
+  // day, and a date read during render would never match it.
+  const [today, setToday] = useState(null);
   const completionRef = useRef(onComplete);
+
+  useEffect(() => {
+    setToday(new Date());
+  }, []);
 
   useEffect(() => {
     completionRef.current = onComplete;
@@ -798,7 +807,7 @@ function PrayerSprint({ person, stage, onComplete }) {
   const minutes = String(Math.floor(secondsRemaining / 60)).padStart(2, '0');
   const seconds = String(secondsRemaining % 60).padStart(2, '0');
   const complete = secondsRemaining === 0;
-  const verse = prayerVerses[verseIndexFor(person.id, verseOffset)];
+  const verse = prayerVerses[verseIndexFor(person.id, verseOffset, today ?? new Date(0))];
 
   return (
     <div className="prayer-sprint">
@@ -2451,24 +2460,49 @@ function OikosSvg({ mapData, layout, selectedId, setSelectedId, svgRef }) {
 }
 
 // Blog routes are served by src/blog-entry.jsx, so they never reach this file.
-const routes = {
-  '/connect': <ConnectPage />,
-  '/growth': <GrowthPage />,
+export const routes = {
+  '/connect': () => <ConnectPage />,
+  '/growth': () => <GrowthPage />,
+  '/': () => <App />,
 };
 
-const routePath = window.location.pathname.replace(/\.html$/, '').replace(/\/+$/, '') || '/';
-const container = document.getElementById('root');
-// Reuse the root across HMR updates instead of creating a second one.
-container.__oikosRoot = container.__oikosRoot || createRoot(container);
-container.__oikosRoot.render(routes[routePath] || <App />);
+export { App, ConnectPage, GrowthPage };
 
-if (!container.__oikosTracking) {
-  container.__oikosTracking = true;
-  trackOutboundClicks();
-}
+// Mount only in the browser; scripts/prerender.mjs imports this module in Node
+// to render the same tree to HTML at build time.
+if (typeof document !== 'undefined') {
+  const routePath = window.location.pathname.replace(/\.html$/, '').replace(/\/+$/, '') || '/';
+  const container = document.getElementById('root');
+  const page = (routes[routePath] || routes['/'])();
 
-if (import.meta.env.PROD && 'serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/sw.js').catch(() => {});
-  });
+  if (container.__oikosRoot) {
+    // HMR: reuse the root instead of creating a second one.
+    container.__oikosRoot.render(page);
+  } else {
+    // The prerendered HTML is a first-time visitor's view. Hydrate it when that
+    // is what this visitor will see; a returning visitor's saved map (or a
+    // shared #map= link) renders differently, so build fresh rather than
+    // hydrate a tree that is bound to mismatch.
+    const personalised = routePath === '/' && (readStoredMap() || window.location.hash.startsWith('#map='));
+    const prerendered = container.firstElementChild && !personalised;
+    container.__oikosRoot = prerendered
+      ? hydrateRoot(container, page, {
+          onRecoverableError: (error) => {
+            if (import.meta.env.DEV) console.warn('Hydration recovered:', error);
+          },
+        })
+      : createRoot(container);
+    if (!prerendered) container.__oikosRoot.render(page);
+  }
+
+  if (!container.__oikosTracking) {
+    container.__oikosTracking = true;
+    trackOutboundClicks();
+  }
+
+  if (import.meta.env.PROD && 'serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/sw.js').catch(() => {});
+    });
+  }
 }

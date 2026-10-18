@@ -7,7 +7,7 @@
     "dev": "npm run blog && vite --host 0.0.0.0",
     "blog": "node scripts/build-blog.js",
     "prebuild": "npm run blog",
-    "build": "vite build",
+    "build": "vite build && node scripts/prerender.mjs",
     "preview": "vite preview --host 0.0.0.0",
     "indexnow": "node scripts/indexnow.mjs",
     "og": "node scripts/og-images.mjs"

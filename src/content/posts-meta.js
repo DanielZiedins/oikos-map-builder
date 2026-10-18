@@ -172,6 +172,45 @@ export const postsMeta = [
     excerpt:
       "Most Christians have never led anyone to Jesus — not because they do not care, but because nobody showed them what the conversation sounds like.",
   },
+  {
+    slug: "what-is-the-great-commission",
+    order: 15,
+    title: "What Is the Great Commission? Matthew 28:18–20 Explained for Everyday Believers",
+    description:
+      "What the Great Commission says, what \"make disciples of all nations\" really means, why Jesus gave it to doubters, and how it starts with the people already around you.",
+    date: "2026-10-18",
+    readingTime: "5 min read",
+    tags: ["Send", "Foundations", "Scripture"],
+    kicker: "Beyond your oikos · Send",
+    excerpt:
+      "Most Christians can quote the start of it. Far fewer could tell you what it asks of them on an ordinary Tuesday.",
+  },
+  {
+    slug: "what-is-a-person-of-peace",
+    order: 16,
+    title: "What Is a Person of Peace? Luke 10 and Finding People Who Are Open to Jesus",
+    description:
+      "The biblical meaning of a person of peace from Luke 10, how to recognise one, examples from Lydia to Zacchaeus, and how one open person can open a whole household.",
+    date: "2026-10-18",
+    readingTime: "6 min read",
+    tags: ["Oikos", "Foundations", "Evangelism"],
+    kicker: "Start here",
+    excerpt:
+      "Jesus did not give the seventy-two a script. He told them to look for one particular kind of person — and stay.",
+  },
+  {
+    slug: "talking-about-jesus-with-family-at-the-holidays",
+    order: 17,
+    title: "How to Talk About Jesus With Family at Thanksgiving and Christmas",
+    description:
+      "How to share your faith with family over the holidays without preaching or staying silent — gratitude questions, grace at the table, what to do when it gets tense, and hope for the only believer at the table.",
+    date: "2026-10-18",
+    readingTime: "5 min read",
+    tags: ["Share", "Family", "Practical"],
+    kicker: "Step three · Share",
+    excerpt:
+      "Not the street, not the office — the dinner table. Here is the way between preaching over the turkey and saying nothing.",
+  },
 ];
 
 export const sortedPostsMeta = [...postsMeta].sort((a, b) => a.order - b.order);
@@ -217,7 +256,7 @@ export const readingPath = [
     id: 'start',
     label: 'Start here',
     note: 'What an oikos is, and why households have always carried the Gospel.',
-    slugs: ['what-is-an-oikos', 'oikos-evangelism-early-church'],
+    slugs: ['what-is-an-oikos', 'oikos-evangelism-early-church', 'what-is-a-person-of-peace'],
   },
   {
     id: 'pray',
@@ -235,7 +274,7 @@ export const readingPath = [
     id: 'share',
     label: 'Share',
     note: 'Your story, a simple invitation, and faith where you already spend your days.',
-    slugs: ['how-to-share-your-testimony', 'how-to-lead-someone-to-jesus', 'how-to-invite-someone-to-church', 'faith-at-work-your-coworkers-are-your-oikos'],
+    slugs: ['how-to-share-your-testimony', 'how-to-lead-someone-to-jesus', 'how-to-invite-someone-to-church', 'talking-about-jesus-with-family-at-the-holidays', 'faith-at-work-your-coworkers-are-your-oikos'],
   },
   {
     id: 'disciple',
@@ -247,6 +286,6 @@ export const readingPath = [
     id: 'send',
     label: 'Send',
     note: 'Beyond your own street: how ordinary believers go, pray and give so the Gospel reaches the nations.',
-    slugs: ['plunder-hell-populate-heaven', 'from-hamilton-to-the-nations'],
+    slugs: ['what-is-the-great-commission', 'plunder-hell-populate-heaven', 'from-hamilton-to-the-nations'],
   },
 ];

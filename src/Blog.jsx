@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { ArrowLeft, ArrowRight, BookOpen, Compass, Mail, Sparkles } from 'lucide-react';
 import { readingPath, relatedMap, sortedPostsMeta } from './content/posts-meta.js';
 import { siteByHost } from './content/network.js';
+import { glossary } from './content/glossary.js';
 
 // One chunk per article. Reading one article used to download every article's
 // body, which got worse with each new post; now only the opened one is fetched.
@@ -212,6 +213,36 @@ function ReadingPath() {
   );
 }
 
+// Short definitions for the terms the journal keeps using. Each term has an id
+// (/blog#term-oikos) so an answer can link straight to its definition.
+function KeyTerms() {
+  return (
+    <section className="key-terms" aria-labelledby="key-terms-title">
+      <div className="reading-path-head">
+        <p className="section-kicker">
+          <BookOpen size={18} aria-hidden="true" />
+          Key terms
+        </p>
+        <h2 id="key-terms-title">The words behind the map, in plain English.</h2>
+        <p>Quick definitions, each with the article that explains it properly.</p>
+      </div>
+      <dl className="key-terms-list">
+        {glossary.map((entry) => (
+          <div className="key-term" key={entry.term} id={`term-${entry.term.toLowerCase().replace(/[^a-z]+/g, '-')}`}>
+            <dt>{entry.term}</dt>
+            <dd>
+              {entry.definition}{' '}
+              <a href={`/blog/${entry.slug}`} aria-label={`Read more about ${entry.term}`}>
+                Read more <ArrowRight size={14} aria-hidden="true" />
+              </a>
+            </dd>
+          </div>
+        ))}
+      </dl>
+    </section>
+  );
+}
+
 // Tag counts, most-used first, so the filter row leads with the broadest topics.
 function tagCounts() {
   const counts = new Map();
@@ -223,10 +254,14 @@ export function BlogIndex() {
   // Read the tag from the hash so a filtered view can be linked and the back
   // button behaves. Filtering stays client-side: with eight posts, per-tag URLs
   // would be thin pages competing with the articles themselves.
-  const [activeTag, setActiveTag] = useState(() => {
+  // Starts unfiltered (that is what the prerendered HTML shows) and picks up a
+  // #tag= link after hydration.
+  const [activeTag, setActiveTag] = useState(null);
+
+  useEffect(() => {
     const fromHash = decodeURIComponent(window.location.hash.replace(/^#tag=/, ''));
-    return window.location.hash.startsWith('#tag=') && fromHash ? fromHash : null;
-  });
+    if (window.location.hash.startsWith('#tag=') && fromHash) setActiveTag(fromHash);
+  }, []);
 
   useEffect(() => {
     function onHashChange() {
@@ -327,6 +362,8 @@ export function BlogIndex() {
         ))}
       </section>
 
+      <KeyTerms />
+
       <JournalSignup />
 
       <section className="blog-cta">
@@ -387,7 +424,11 @@ function ShareArticle({ post }) {
   const url = `https://www.oikosmap.com/blog/${post.slug}`;
   const text = `${post.title} — by Daniel Ziedins`;
   const enc = encodeURIComponent;
-  const canNativeShare = typeof navigator !== 'undefined' && typeof navigator.share === 'function';
+  // Decided after mount: the prerendered HTML cannot know the visitor's device.
+  const [canNativeShare, setCanNativeShare] = useState(false);
+  useEffect(() => {
+    setCanNativeShare(typeof navigator.share === 'function');
+  }, []);
 
   function count(channel) {
     track('share_article', `/blog/${post.slug}#${channel}`);

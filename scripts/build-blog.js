@@ -27,6 +27,7 @@ const { posts, sortedPosts, readingMinutes } = await import(resolve(root, 'src/c
   }
 }
 const { relatedMap, readingPath } = await import(resolve(root, 'src/content/posts-meta.js'));
+const { glossary } = await import(resolve(root, 'src/content/glossary.js'));
 
 // Every article needs its own social preview (npm run og writes them).
 {
@@ -274,9 +275,29 @@ function indexSchema() {
     },
     {
       '@context': 'https://schema.org',
+      '@type': 'DefinedTermSet',
+      '@id': `${SITE}/blog#key-terms`,
+      name: 'Oikos Map key terms',
+      description: 'Plain-English definitions of the terms used across the Oikos Journal.',
+      url: `${SITE}/blog#key-terms`,
+      hasDefinedTerm: glossary.map((entry) => {
+        const id = `term-${entry.term.toLowerCase().replace(/[^a-z]+/g, '-')}`;
+        return {
+          '@type': 'DefinedTerm',
+          '@id': `${SITE}/blog#${id}`,
+          name: entry.term,
+          description: entry.definition,
+          url: `${SITE}/blog#${id}`,
+          inDefinedTermSet: `${SITE}/blog#key-terms`,
+          subjectOf: `${SITE}/blog/${entry.slug}`,
+        };
+      }),
+    },
+    {
+      '@context': 'https://schema.org',
       '@type': 'ItemList',
       name: 'The Oikos reading path',
-      description: 'The Oikos Journal in reading order: start here, then pray, care, share, and disciple.',
+      description: 'The Oikos Journal in reading order: start here, then pray, care, share, disciple, and send.',
       itemListOrder: 'https://schema.org/ItemListOrderAscending',
       itemListElement: readingPath
         .flatMap((stage) => stage.slugs.map((slug) => ({ stage, slug })))
@@ -344,7 +365,7 @@ posts.forEach((post) => {
 // Bump CONTENT_UPDATED when the hub pages themselves change; article dates come
 // from posts-meta. The journal index changes whenever an article is added, so
 // it takes whichever is newer.
-const CONTENT_UPDATED = '2026-10-07';
+const CONTENT_UPDATED = '2026-10-18';
 const latestPost = posts.map((post) => post.date).sort().at(-1);
 const today = [CONTENT_UPDATED, latestPost].sort().at(-1);
 const urls = [
@@ -507,7 +528,10 @@ Author of all articles:
 Daniel Ziedins - https://www.danielziedins.com
 
 Articles:
-${sortedPosts.map((post) => `- ${post.title} - ${SITE}/blog/${post.slug}`).join('\n')}
+${sortedPosts.map((post) => `- ${post.title} - ${SITE}/blog/${post.slug}: ${post.description}`).join('\n')}
+
+Key terms (plain-English definitions; full list at ${SITE}/blog#key-terms):
+${glossary.map((entry) => `- ${entry.term}: ${entry.definition} (${SITE}/blog/${entry.slug})`).join('\n')}
 
 AI-readable reference:
 - ${SITE}/llms-full.txt - expanded questions, answers, features, and attribution

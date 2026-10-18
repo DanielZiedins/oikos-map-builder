@@ -171,10 +171,15 @@ a {
   min-width: 0;
   width: 100%;
   max-width: 760px;
-  animation: riseIn 760ms ease both;
+  /* Slide only: an opacity fade made the prerendered headline (the LCP) count
+     as painted ~760ms late. */
+  animation: slideUp 760ms ease both;
 }
 
-[data-reveal] {
+/* Gated on .js (set by an inline script in each page head): the builder pages
+   are prerendered, and without the gate anyone not running JavaScript — and
+   every crawler screenshot — would get the sections at opacity 0. */
+.js [data-reveal] {
   opacity: 0;
   transform: translateY(28px);
   transition:
@@ -182,7 +187,7 @@ a {
     transform 700ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-[data-reveal].is-visible {
+.js [data-reveal].is-visible {
   opacity: 1;
   transform: translateY(0);
 }
@@ -1475,6 +1480,54 @@ button:hover,
   background: #fff8ec;
 }
 
+.key-terms {
+  padding: clamp(46px, 7vw, 84px) clamp(18px, 4vw, 56px);
+  background: #fff8ec;
+}
+
+.key-terms-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+  gap: 12px;
+  margin: 0;
+}
+
+.key-term {
+  padding: 18px 20px;
+  border: 1px solid rgba(38, 32, 28, 0.1);
+  border-radius: 8px;
+  background: #fffdf7;
+  scroll-margin-top: 96px;
+}
+
+.key-term:target {
+  border-color: #0e7268;
+  box-shadow: 0 0 0 3px rgba(14, 114, 104, 0.18);
+}
+
+.key-term dt {
+  margin-bottom: 6px;
+  color: #26201c;
+  font-size: 1.05rem;
+  font-weight: 900;
+}
+
+.key-term dd {
+  margin: 0;
+  color: #4f453e;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.key-term dd a {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: #0e7268;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
 .reading-path-head {
   max-width: 720px;
   margin-bottom: 30px;
@@ -2649,6 +2702,15 @@ button:hover,
   border-top: 1px solid rgba(255, 248, 236, 0.12);
 }
 
+@keyframes slideUp {
+  from {
+    transform: translateY(18px);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
 @keyframes riseIn {
   from {
     opacity: 0;
@@ -3813,6 +3875,35 @@ textarea:focus-visible,
 .post-more {
   content-visibility: auto;
   contain-intrinsic-size: auto 900px;
+}
+
+/* Placeholders close to the measured real heights (2026-10-18). A flat 900px
+   was ~2,000px short for the network section on a phone, so everything below
+   it jumped when it rendered mid-scroll. */
+.latest-articles {
+  contain-intrinsic-size: auto 720px;
+}
+
+.network-section {
+  contain-intrinsic-size: auto 1640px;
+}
+
+.faq-section {
+  contain-intrinsic-size: auto 710px;
+}
+
+@media (max-width: 760px) {
+  .latest-articles {
+    contain-intrinsic-size: auto 1330px;
+  }
+
+  .network-section {
+    contain-intrinsic-size: auto 2860px;
+  }
+
+  .faq-section {
+    contain-intrinsic-size: auto 1020px;
+  }
 }
 
 .download-actions button:disabled {
