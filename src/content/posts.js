@@ -32,6 +32,9 @@ import howToShareYourFaithAtSchool from './bodies/how-to-share-your-faith-at-sch
 import bibleVersesAboutEvangelism from './bodies/bible-verses-about-evangelism.js';
 import biblicalHospitality from './bodies/biblical-hospitality.js';
 import whatIsMissionalLiving from './bodies/what-is-missional-living.js';
+import whatIsADisciple from './bodies/what-is-a-disciple.js';
+import howToLeadYourChildToJesus from './bodies/how-to-lead-your-child-to-jesus.js';
+import answeringCommonObjections from './bodies/answering-common-objections-to-christianity.js';
 import whatIsAnOikos from './bodies/what-is-an-oikos.js';
 import whatToSayWhenSomeoneIsHurting from './bodies/what-to-say-when-someone-is-hurting.js';
 
@@ -61,6 +64,9 @@ const bodies = {
   'bible-verses-about-evangelism': bibleVersesAboutEvangelism,
   'biblical-hospitality': biblicalHospitality,
   'what-is-missional-living': whatIsMissionalLiving,
+  'what-is-a-disciple': whatIsADisciple,
+  'how-to-lead-your-child-to-jesus': howToLeadYourChildToJesus,
+  'answering-common-objections-to-christianity': answeringCommonObjections,
   'what-is-an-oikos': whatIsAnOikos,
   'what-to-say-when-someone-is-hurting': whatToSayWhenSomeoneIsHurting,
 };

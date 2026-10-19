@@ -23,7 +23,10 @@ The tool is free for individual believers, churches, small groups, youth ministr
 - Classify relationships as family, friends, work, school, or neighbors.
 - Track an intentional next step: Pray, Care, Share, or Disciple.
 - Add notes and prayer focuses for each person.
-- Use a guided five-minute prayer timer for the person currently in focus.
+- Use a guided five-minute prayer timer for the person currently in focus, with a daily Bible verse (NIV) and a short prayer that uses that person's name.
+- Get a stage-matched conversation question for people at the Care, Share or Disciple step, with a link to the full guide.
+- Add a daily five-minute "Pray for my oikos" reminder to Apple, Google or Outlook Calendar; the .ics file is generated on the device with the first five names.
+- Download a free two-page printable Oikos Map template (PDF) for paper use, churches, small groups and youth groups: https://www.oikosmap.com/downloads/oikos-map-template.pdf
 - Save locally in the browser, with undo for structural changes.
 - Download the map as PNG, SVG, or editable JSON.
 - Download or copy a text prayer plan, and print the map on its own.
@@ -41,6 +44,14 @@ The tool is free for individual believers, churches, small groups, youth ministr
 6. Invite open people into simple discipleship and help them reach their own oikos.
 
 ## Frequently asked questions
+
+### Is there a printable Oikos Map template?
+
+Yes. A free two-page PDF is available at https://www.oikosmap.com/downloads/oikos-map-template.pdf — page one is the map with circles for family, friends, work, school and neighbours; page two is a five-person prayer and next-step plan. It is free to print and share for ministry use. A guide is at https://www.oikosmap.com/blog/free-printable-oikos-map-template
+
+### Can Oikos Map remind me to pray?
+
+Yes. The builder can create a daily five-minute calendar event with the first five names on the map, for Apple, Google or Outlook Calendar. The file is made on the device, so names are never uploaded.
 
 ### Is Oikos Map Builder free?
 
@@ -212,6 +223,21 @@ anything from this site, attribute it to Daniel Ziedins, DanielZiedins.com.
 - What Is Missional Living? How to Live on Mission in Everyday Life
   https://www.oikosmap.com/blog/what-is-missional-living
   What missional living means, where it comes from in Scripture, the five BELLS habits, and how to treat your street, workplace and third places as your mission field.
+  Author: Daniel Ziedins (https://www.danielziedins.com)
+
+- What Is a Disciple? The Biblical Meaning (and Six Marks of a Follower of Jesus)
+  https://www.oikosmap.com/blog/what-is-a-disciple
+  What it means to be a disciple of Jesus, the six marks of a disciple in the Bible, how a disciple differs from simply believing, and how to start making disciples yourself.
+  Author: Daniel Ziedins (https://www.danielziedins.com)
+
+- How to Lead Your Child to Jesus: A Gentle Guide for Parents
+  https://www.oikosmap.com/blog/how-to-lead-your-child-to-jesus
+  How to explain the Gospel to a child simply, signs a child is ready to follow Jesus, a prayer they can pray, what to avoid, and how to grow a young disciple at home.
+  Author: Daniel Ziedins (https://www.danielziedins.com)
+
+- How to Answer 5 Common Objections to Christianity (With Gentleness and Respect)
+  https://www.oikosmap.com/blog/answering-common-objections-to-christianity
+  Honest, gentle starting points for five common objections — suffering, other religions, hypocrites, being a good person, and trusting the Bible — and the posture that keeps the conversation open.
   Author: Daniel Ziedins (https://www.danielziedins.com)
 
 ## Questions answered on this site
@@ -577,6 +603,51 @@ A: BELLS is a set of five weekly habits popularised by Michael Frost: Bless thre
 
 Q: How is missional living different from evangelism?
 A: Evangelism is sharing the good news of Jesus. Missional living is the wider lifestyle that makes evangelism natural: being present, building friendships and serving in everyday places, so there are relationships in which the Gospel can be shared.
+
+### From "What Is a Disciple? The Biblical Meaning (and Six Marks of a Follower of Jesus)"
+https://www.oikosmap.com/blog/what-is-a-disciple
+
+Q: What is a disciple of Jesus?
+A: A disciple of Jesus is a learner and follower who trusts Him, stays with Him, learns from Him and obeys Him, becoming more like Him over time. The Greek word mathētēs means learner or apprentice, and Jesus said a fully trained student "will be like their teacher" (Luke 6:40).
+
+Q: What are the marks of a true disciple?
+A: In the Bible a disciple follows Jesus (Matthew 4:19), holds to His teaching (John 8:31), denies self daily (Luke 9:23), loves other believers (John 13:35), bears fruit (John 15:8) and makes other disciples (Matthew 28:19).
+
+Q: What is the difference between a Christian and a disciple?
+A: In the New Testament they describe the same people: "the disciples were called Christians first at Antioch" (Acts 11:26). But today "Christian" can mean simply agreeing with Christian beliefs, while "disciple" emphasises actively following, learning from and obeying Jesus.
+
+Q: How do you make a disciple?
+A: Walk with someone as they learn to follow Jesus: read Scripture together, ask what it shows about God and what you will each obey, pray together, and encourage them to pass it on. 2 Timothy 2:2 describes this chain of teaching others who will teach others.
+
+### From "How to Lead Your Child to Jesus: A Gentle Guide for Parents"
+https://www.oikosmap.com/blog/how-to-lead-your-child-to-jesus
+
+Q: How do I explain salvation to a child?
+A: Keep it simple and concrete: God made you and loves you; everyone has done wrong things, and sin separates us from God; Jesus died to take the punishment for our sin and came back to life; when we say sorry to God and trust Jesus, He forgives us and makes us part of His family forever.
+
+Q: At what age can a child accept Jesus?
+A: There is no set age. Look for signs of readiness: the child understands they have done wrong and is genuinely sorry, can explain who Jesus is in their own words, asks questions themselves, and wants to follow Jesus because they love Him rather than to please an adult.
+
+Q: What prayer can a child pray to accept Jesus?
+A: A child can pray in their own words, or something simple like: "Dear God, thank You for loving me. I am sorry for the wrong things I have done. Please forgive me. Thank You, Jesus, for dying for me and coming back to life. I want to follow You. Amen." The trust matters more than the exact words.
+
+Q: What does the Bible say about teaching children about God?
+A: Deuteronomy 6:6–7 tells parents to impress God's words on their children and talk about them at home, on the road, at bedtime and in the morning. Jesus said, "Let the little children come to me, and do not hinder them" (Mark 10:14), and Psalm 78:4 calls each generation to tell the next about God's deeds.
+
+### From "How to Answer 5 Common Objections to Christianity (With Gentleness and Respect)"
+https://www.oikosmap.com/blog/answering-common-objections-to-christianity
+
+Q: How should Christians respond to objections to the faith?
+A: With gentleness and respect (1 Peter 3:15): listen before answering (Proverbs 18:13), be merciful to doubters (Jude 22), admit when you do not know, and gently bring the conversation back to the person of Jesus rather than trying to win an argument.
+
+Q: How do you answer "why does God allow suffering?"
+A: Start by listening, since the question is often personal. Christianity does not deny suffering; in Jesus, God entered suffering Himself, and the Bible promises a future with no more death or pain (Revelation 21:4). It is honest to admit you do not understand everything while sharing how Jesus has been with you in hard times.
+
+Q: Are all religions the same?
+A: Many religions share good moral teaching, but their central claims differ. Christianity teaches salvation as a gift of grace rather than earned by effort (Ephesians 2:8–9), and Jesus claimed, "I am the way and the truth and the life. No one comes to the Father except through me" (John 14:6).
+
+Q: What do you say when someone says the church is full of hypocrites?
+A: Agree honestly that Christians often fail, and note that Jesus Himself condemned religious hypocrisy. The church is a community of forgiven people rather than perfect ones (1 Timothy 1:15), so the key question is whether Jesus is who He claimed to be.
 
 ## Full text of every article
 
@@ -2405,6 +2476,209 @@ Jesus called it being salt: *"You are the salt of the earth"* (Matthew 5:13). Sa
 For the global picture of what you are part of, read [What Is the Great Commission?](https://www.oikosmap.com/blog/what-is-the-great-commission)
 
 > As the Father has sent me, I am sending you. (John 20:21, NIV)
+
+---
+
+### What Is a Disciple? The Biblical Meaning (and Six Marks of a Follower of Jesus)
+https://www.oikosmap.com/blog/what-is-a-disciple · Daniel Ziedins · 2026-10-18
+
+The word "Christian" appears in the New Testament only three times. The word "disciple" appears well over two hundred times. That alone says something: Jesus did not call people to attach a label to themselves. He called them to follow Him.
+
+Here is what a disciple of Jesus is, what the Bible says marks one, how it differs from simply believing, and how to start making disciples yourself — because that was always the point.
+
+#### What does "disciple" mean?
+
+**A disciple is a learner and follower of Jesus — someone who trusts Him, stays with Him, learns from Him and obeys Him, so that over time they become like Him.**
+
+The New Testament word is *mathētēs*, a learner or apprentice. In the first century a disciple did not just attend a teacher's lectures; they lived with him, watched him, and learned to do what he did. Jesus said it plainly: *"The student is not above the teacher, but everyone who is fully trained will be like their teacher"* (Luke 6:40).
+
+The early followers of Jesus were first called disciples. Only later, in one city, did a new name appear: *"The disciples were called Christians first at Antioch"* (Acts 11:26).
+
+#### It starts with an invitation
+
+Discipleship does not begin with effort. It begins with Jesus calling: *"'Come, follow me,' Jesus said, 'and I will send you out to fish for people'"* (Matthew 4:19). Notice the promise inside the call — Jesus does the making. *"I will send you."*
+
+And it is not a heavy yoke: *"Come to me, all you who are weary and burdened, and I will give you rest. Take my yoke upon you and learn from me, for I am gentle and humble in heart, and you will find rest for your souls. For my yoke is easy and my burden is light"* (Matthew 11:28–30).
+
+#### Six marks of a disciple in the Bible
+
+- **A disciple follows.** They go where Jesus leads, not just agree with what He says (Matthew 4:19).
+- **A disciple holds to His teaching.** *"If you hold to my teaching, you are really my disciples. Then you will know the truth, and the truth will set you free"* (John 8:31–32).
+- **A disciple denies self.** *"Whoever wants to be my disciple must deny themselves and take up their cross daily and follow me"* (Luke 9:23). Daily — not once.
+- **A disciple loves other disciples.** *"By this everyone will know that you are my disciples, if you love one another"* (John 13:35).
+- **A disciple bears fruit.** *"This is to my Father's glory, that you bear much fruit, showing yourselves to be my disciples"* (John 15:8).
+- **A disciple makes disciples.** The Great Commission is not "make converts" but *"go and make disciples"* (Matthew 28:19). [The Great Commission explained.](https://www.oikosmap.com/blog/what-is-the-great-commission)
+
+#### Disciple or just a believer?
+
+Many people believe things about Jesus without following Him. Belief that never changes how you live is closer to an opinion than to discipleship. Jesus' question was never only "do you agree with Me?" but "will you come after Me?"
+
+That is good news, not a burden. A disciple is not someone who has it all together. The first disciples argued, doubted, ran away and denied Him — and Jesus kept training them. Discipleship is a direction, not a performance.
+
+#### What growing as a disciple looks like
+
+- **Time with Jesus** — reading the Gospels and praying, a little every day.
+- **Obedience in small things** — doing the next thing He says, this week.
+- **Life with other disciples** — a church and a few friends who know you well.
+- **Love for the people around you** — your [oikos](https://www.oikosmap.com/blog/what-is-an-oikos) is where discipleship gets real.
+- **Passing it on** — helping someone else follow Jesus too.
+
+#### Making disciples: the chain that never ends
+
+Paul described four generations of discipleship in a single sentence: *"And the things you have heard me say in the presence of many witnesses entrust to reliable people who will also be qualified to teach others"* (2 Timothy 2:2).
+
+You do not need a seminary degree to be part of that chain. You need to be a step ahead of someone and willing to walk with them. [How to Disciple Someone When You Do Not Feel Qualified](https://www.oikosmap.com/blog/how-to-disciple-someone) gives a simple pattern, and [How to Start a Bible Study With Friends](https://www.oikosmap.com/blog/how-to-start-a-bible-study-with-friends) shows how discipleship can begin even before someone believes.
+
+#### Start today
+
+- **Read one Gospel story** and ask: what does this show me about Jesus, and what will I do about it?
+- **Name one person** you could help follow Jesus — a friend, a child, a new believer. Put them on your [Oikos Map](https://www.oikosmap.com/#builder).
+- **Ask them to read with you** once a week for a month.
+
+> Whoever wants to be my disciple must deny themselves and take up their cross daily and follow me. (Luke 9:23, NIV)
+
+---
+
+### How to Lead Your Child to Jesus: A Gentle Guide for Parents
+https://www.oikosmap.com/blog/how-to-lead-your-child-to-jesus · Daniel Ziedins · 2026-10-18
+
+For many Christian parents, nothing matters more than their children knowing Jesus — and few things feel more intimidating to talk about. What if you say it wrong? What if you push too hard, or not enough?
+
+Here is how to share the Gospel with your child simply and honestly, how to tell when they are ready to respond, what to say and pray, and how to keep growing their faith afterwards. Grandparents, aunts, uncles and godparents: this is for you too.
+
+#### Jesus wants children to come to Him
+
+When the disciples tried to keep children away, Jesus was not mildly disappointed. He was angry: *"When Jesus saw this, he was indignant. He said to them, 'Let the little children come to me, and do not hinder them, for the kingdom of God belongs to such as these'"* (Mark 10:14).
+
+He even made children the model for everyone else: *"Truly I tell you, unless you change and become like little children, you will never enter the kingdom of heaven"* (Matthew 18:3). Children are not too young to trust Jesus. In some ways, adults are too old.
+
+#### Faith is caught at home before it is taught
+
+God gave families the first and best classroom: *"These commandments that I give you today are to be on your hearts. Impress them on your children. Talk about them when you sit at home and when you walk along the road, when you lie down and when you get up"* (Deuteronomy 6:6–7).
+
+Notice where it happens: at home, on the road, at bedtime, at breakfast. Not mainly in a formal lesson, but in ordinary moments. Timothy's faith, Paul says, *"first lived in your grandmother Lois and in your mother Eunice"* (2 Timothy 1:5), and he had known the Scriptures *"from infancy"* (2 Timothy 3:15).
+
+- Pray with your children every day — at meals, at bedtime, when someone is sick.
+- Read Bible stories together and talk about what they show about God.
+- Tell them your own story of meeting Jesus.
+- Let them see you repent, forgive and ask forgiveness.
+- Celebrate answered prayers out loud.
+
+#### How to explain the Gospel to a child
+
+Keep it simple, true and concrete. Children understand more than we think, but abstract words like "justification" will not help. Something like this, in your own words:
+
+- **God made you and loves you** — more than anyone ever could (John 3:16).
+- **Everyone has done wrong things** — we call that sin — and sin separates us from God (Romans 3:23).
+- **Jesus, God's Son, died on the cross** to take the punishment for our sin, and then He came back to life.
+- **When we tell God we are sorry and trust Jesus**, He forgives us, makes us part of His family, and is with us forever.
+
+Use their questions as your guide. If they ask "where is heaven?" or "does Jesus see me?", those are invitations to keep talking, not distractions.
+
+#### How to tell when a child is ready
+
+There is no magic age, and children differ enormously. Some signs that a child may be ready to respond personally:
+
+- They understand that they have done wrong and feel genuinely sorry, not just afraid of getting caught.
+- They can explain in their own words who Jesus is and what He did.
+- They are asking questions on their own, not just repeating answers.
+- They want to follow Jesus because they love Him, not to please you.
+
+If they are not there yet, that is fine. Keep praying, keep talking, keep living it. Faith that grows slowly is still faith.
+
+#### When your child wants to follow Jesus
+
+Talk it through gently, without pressure or a sense of performance. Ask them why they want to follow Jesus. Then pray together — they can pray in their own words, or you can offer a simple prayer for them to say after you if they would like:
+
+- *Dear God, thank You for loving me.*
+- *I am sorry for the wrong things I have done. Please forgive me.*
+- *Thank You, Jesus, for dying for me and coming back to life. I want to follow You. Amen.*
+
+The words are not magic; the trust is what matters. Then celebrate! Write down the date, tell family who will be glad, and talk with your church about next steps such as baptism, as churches approach that in different ways.
+
+#### What to avoid
+
+- **Pressure or fear.** Scaring a child into a prayer produces anxiety, not faith.
+- **Rewards for "deciding."** Faith is not a sticker chart.
+- **Treating it as finished.** A first prayer is the start of a lifetime of discipleship.
+- **Hypocrisy at home.** Children notice when faith is only for Sundays. Honesty about your failures teaches more than pretending.
+
+#### After they say yes: growing a young disciple
+
+- Give them a children's Bible they can read on their own and ask them what they read.
+- Teach them to pray for their friends by name — kids can have an [Oikos Map](https://www.oikosmap.com/blog/free-printable-oikos-map-template) too, and the School and Friends circles fill up fast.
+- Involve them in serving: baking for a neighbour, helping at church, giving to people in need.
+- Keep the conversation going for years. Teenagers need to own their faith, with room for real questions. [How to share your faith at school](https://www.oikosmap.com/blog/how-to-share-your-faith-at-school) is written for them.
+
+*"We will not hide them from their descendants; we will tell the next generation the praiseworthy deeds of the LORD, his power, and the wonders he has done"* (Psalm 78:4). For the wider picture of discipling anyone, read [What Is a Disciple?](https://www.oikosmap.com/blog/what-is-a-disciple)
+
+> Let the little children come to me, and do not hinder them, for the kingdom of God belongs to such as these. (Mark 10:14, NIV)
+
+---
+
+### How to Answer 5 Common Objections to Christianity (With Gentleness and Respect)
+https://www.oikosmap.com/blog/answering-common-objections-to-christianity · Daniel Ziedins · 2026-10-18
+
+Sooner or later, when you talk about Jesus with friends, someone will push back. "Why does God allow suffering?" "Aren't all religions basically the same?" "The church is full of hypocrites."
+
+These are not attacks to defeat. They are often real questions, sometimes carrying real pain. Here are five of the most common objections to Christianity, a short, honest way to respond to each, and — most importantly — the posture that keeps the conversation open.
+
+#### First, the posture
+
+Peter's famous verse about giving an answer has a second half most people skip: *"Always be prepared to give an answer to everyone who asks you to give the reason for the hope that you have. But do this with gentleness and respect"* (1 Peter 3:15).
+
+- **Listen first.** *"To answer before listening—that is folly and shame"* (Proverbs 18:13). Ask, "What makes you say that?" The question behind the question is often personal.
+- **Be merciful to doubt.** *"Be merciful to those who doubt"* (Jude 22).
+- **It is fine to say "I don't know."** Then add, "but I'd love to look into it with you."
+- **Point to Jesus.** Most objections are about God, the Bible or the church. Gently bring the conversation back to the person of Jesus.
+
+#### 1. "If God is good, why is there so much suffering?"
+
+This is the hardest one, and often the most personal. Before any answer, ask what has happened to them. Sometimes the right response is grief, not argument — even Jesus, standing at His friend's tomb, wept (John 11:35).
+
+When they want to talk it through, a few honest starting points: Christianity does not pretend suffering is fine; the Bible is full of laments and angry prayers. It also does not picture a distant God watching from afar — in Jesus, God entered suffering Himself and went to the cross. And it promises that suffering will not have the last word: *"'He will wipe every tear from their eyes. There will be no more death' or mourning or crying or pain, for the old order of things has passed away"* (Revelation 21:4).
+
+You will not resolve every question. But you can say honestly: "I do not understand all of it either. What I have found is that Jesus is with me in it."
+
+#### 2. "Aren't all religions basically the same?"
+
+Start with respect: many religions share good moral teaching, and people of other faiths often live with real devotion. But the claims of different faiths are genuinely different, and it is not respectful to pretend otherwise.
+
+The centre of Christianity is not a set of rules for reaching God but God reaching us — by grace, not effort: *"For it is by grace you have been saved, through faith—and this is not from yourselves, it is the gift of God—not by works, so that no one can boast"* (Ephesians 2:8–9). And Jesus made a claim no ordinary teacher makes: *"I am the way and the truth and the life. No one comes to the Father except through me"* (John 14:6).
+
+A good follow-up question: "Have you ever looked at what Jesus actually claimed about Himself?"
+
+#### 3. "The church is full of hypocrites."
+
+Agree honestly where it is true. Christians fail, and some churches have caused real harm. Jesus Himself saved His strongest words for religious hypocrisy (Matthew 23).
+
+Then gently reframe what the church claims to be: not a gathering of good people, but forgiven ones. Paul called himself the worst of sinners: *"Christ Jesus came into the world to save sinners—of whom I am the worst"* (1 Timothy 1:15). The question is not whether Christians are consistent, but whether Jesus is who He said He is.
+
+Try: "You're right that we often get it wrong. Can I tell you what Jesus has actually done in my life — including the things I'm not proud of?"
+
+#### 4. "I'm a good person. Why would I need Jesus?"
+
+Affirm what is true: they may well be kind, honest and generous — often more so than some Christians. The Gospel is not that good people are secretly terrible, but that everyone, good or not, falls short of God: *"for all have sinned and fall short of the glory of God"* (Romans 3:23).
+
+Jesus told a story about a religious man who thanked God he was better than others, and a tax collector who simply begged for mercy — and said it was the second who went home right with God (Luke 18:9–14). Christianity is not about being good enough; it is about receiving grace none of us earn.
+
+A gentle question: "If goodness were the test, how good would be good enough?"
+
+#### 5. "How can I trust the Bible?"
+
+Rather than starting with the whole Bible, start with the Gospels — the accounts of Jesus' life. Luke opens his by explaining he investigated carefully: *"since I myself have carefully investigated everything from the beginning, I decided to write an orderly account for you"* (Luke 1:3).
+
+Paul, writing within a generation of the events, listed eyewitnesses of the risen Jesus, including that He *"appeared to more than five hundred of the brothers and sisters at the same time, most of whom are still living"* (1 Corinthians 15:6) — in effect inviting readers to go and ask them.
+
+The best next step is usually not more argument but an invitation: "Would you read Mark's Gospel with me and decide for yourself?" [Here is how to do that well.](https://www.oikosmap.com/blog/how-to-start-a-bible-study-with-friends)
+
+#### When the conversation ends unresolved
+
+Most will. That is not failure. Thank them for being honest, keep the friendship going, and keep praying for them by name — [these verses](https://www.oikosmap.com/blog/bible-verses-to-pray-for-unsaved-loved-ones) help. Questions often come back months later, after something changes in their life.
+
+And remember: no one is argued into the kingdom. People come to faith when the Holy Spirit opens their eyes, often through the patient love of a friend. Your job is to be honest, gentle and present. For openings into deeper conversations, try [these 30 questions](https://www.oikosmap.com/blog/spiritual-conversation-starters).
+
+> Always be prepared to give an answer to everyone who asks you to give the reason for the hope that you have. But do this with gentleness and respect. (1 Peter 3:15, NIV)
 
 ## The wider Kingdom network
 

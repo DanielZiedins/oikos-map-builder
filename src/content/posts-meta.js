@@ -341,6 +341,45 @@ export const postsMeta = [
     excerpt:
       "Mission is not only a trip. Your street, your job and your group chat are the mission field.",
   },
+  {
+    slug: "what-is-a-disciple",
+    order: 28,
+    title: "What Is a Disciple? The Biblical Meaning (and Six Marks of a Follower of Jesus)",
+    description:
+      "What it means to be a disciple of Jesus, the six marks of a disciple in the Bible, how a disciple differs from simply believing, and how to start making disciples yourself.",
+    date: "2026-10-18",
+    readingTime: "4 min read",
+    tags: ["Disciple", "Foundations", "Scripture"],
+    kicker: "Step four · Disciple",
+    excerpt:
+      "The word Christian appears three times in the New Testament. The word disciple appears well over two hundred times.",
+  },
+  {
+    slug: "how-to-lead-your-child-to-jesus",
+    order: 29,
+    title: "How to Lead Your Child to Jesus: A Gentle Guide for Parents",
+    description:
+      "How to explain the Gospel to a child simply, signs a child is ready to follow Jesus, a prayer they can pray, what to avoid, and how to grow a young disciple at home.",
+    date: "2026-10-18",
+    readingTime: "5 min read",
+    tags: ["Disciple", "Family", "Practical"],
+    kicker: "Step four · Disciple",
+    excerpt:
+      "Few things matter more to Christian parents — and few feel more intimidating to talk about. Here is a gentle way in.",
+  },
+  {
+    slug: "answering-common-objections-to-christianity",
+    order: 30,
+    title: "How to Answer 5 Common Objections to Christianity (With Gentleness and Respect)",
+    description:
+      "Honest, gentle starting points for five common objections — suffering, other religions, hypocrites, being a good person, and trusting the Bible — and the posture that keeps the conversation open.",
+    date: "2026-10-18",
+    readingTime: "6 min read",
+    tags: ["Share", "Evangelism", "Scripture"],
+    kicker: "Step three · Share",
+    excerpt:
+      "These are not attacks to defeat. They are often real questions, sometimes carrying real pain.",
+  },
 ];
 
 export const sortedPostsMeta = [...postsMeta].sort((a, b) => a.order - b.order);
@@ -404,13 +443,13 @@ export const readingPath = [
     id: 'share',
     label: 'Share',
     note: 'Your story, a simple invitation, and faith where you already spend your days.',
-    slugs: ['spiritual-conversation-starters', 'bible-verses-about-evangelism', 'how-to-share-your-testimony', 'how-to-lead-someone-to-jesus', 'how-to-invite-someone-to-church', 'talking-about-jesus-with-family-at-the-holidays', 'faith-at-work-your-coworkers-are-your-oikos', 'how-to-share-your-faith-at-school'],
+    slugs: ['spiritual-conversation-starters', 'bible-verses-about-evangelism', 'how-to-share-your-testimony', 'how-to-lead-someone-to-jesus', 'answering-common-objections-to-christianity', 'how-to-invite-someone-to-church', 'talking-about-jesus-with-family-at-the-holidays', 'faith-at-work-your-coworkers-are-your-oikos', 'how-to-share-your-faith-at-school'],
   },
   {
     id: 'disciple',
     label: 'Disciple',
     note: 'Walk with someone until they can do it for someone else.',
-    slugs: ['how-to-disciple-someone', 'how-to-start-a-bible-study-with-friends'],
+    slugs: ['what-is-a-disciple', 'how-to-disciple-someone', 'how-to-start-a-bible-study-with-friends', 'how-to-lead-your-child-to-jesus'],
   },
   {
     id: 'send',

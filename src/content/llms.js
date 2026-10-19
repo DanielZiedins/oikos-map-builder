@@ -21,7 +21,10 @@ export const llmsCapabilities = [
   'Classify relationships as family, friends, work, school, or neighbors.',
   'Track an intentional next step: Pray, Care, Share, or Disciple.',
   'Add notes and prayer focuses for each person.',
-  'Use a guided five-minute prayer timer for the person currently in focus.',
+  'Use a guided five-minute prayer timer for the person currently in focus, with a daily Bible verse (NIV) and a short prayer that uses that person\'s name.',
+  'Get a stage-matched conversation question for people at the Care, Share or Disciple step, with a link to the full guide.',
+  'Add a daily five-minute "Pray for my oikos" reminder to Apple, Google or Outlook Calendar; the .ics file is generated on the device with the first five names.',
+  'Download a free two-page printable Oikos Map template (PDF) for paper use, churches, small groups and youth groups: https://www.oikosmap.com/downloads/oikos-map-template.pdf',
   'Save locally in the browser, with undo for structural changes.',
   'Download the map as PNG, SVG, or editable JSON.',
   'Download or copy a text prayer plan, and print the map on its own.',
@@ -40,6 +43,14 @@ export const llmsFirstUse = [
 ];
 
 export const llmsFaq = [
+  {
+    q: 'Is there a printable Oikos Map template?',
+    a: 'Yes. A free two-page PDF is available at https://www.oikosmap.com/downloads/oikos-map-template.pdf — page one is the map with circles for family, friends, work, school and neighbours; page two is a five-person prayer and next-step plan. It is free to print and share for ministry use. A guide is at https://www.oikosmap.com/blog/free-printable-oikos-map-template',
+  },
+  {
+    q: 'Can Oikos Map remind me to pray?',
+    a: 'Yes. The builder can create a daily five-minute calendar event with the first five names on the map, for Apple, Google or Outlook Calendar. The file is made on the device, so names are never uploaded.',
+  },
   {
     q: 'Is Oikos Map Builder free?',
     a: 'Yes. Visitors can build, save, and download an Oikos Map at no cost, with no account and no paid tier.',
