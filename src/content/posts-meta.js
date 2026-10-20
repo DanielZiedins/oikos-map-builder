@@ -380,6 +380,45 @@ export const postsMeta = [
     excerpt:
       "These are not attacks to defeat. They are often real questions, sometimes carrying real pain.",
   },
+  {
+    slug: "oikos-evangelism-guide",
+    order: 31,
+    title: "The Complete Guide to Oikos Evangelism: Pray, Care, Share, Disciple, Send",
+    description:
+      "What oikos evangelism is, why it is how the Gospel has always spread, and a five-step rhythm for reaching the people already around you — with a practical guide for every step.",
+    date: "2026-10-20",
+    readingTime: "8 min read",
+    tags: ["Oikos", "Foundations", "Evangelism"],
+    kicker: "Start here",
+    excerpt:
+      "Most people who meet Jesus meet Him through someone they already know. Here is the whole journey, step by step.",
+  },
+  {
+    slug: "how-to-start-a-street-outreach-group",
+    order: 32,
+    title: "How to Start a Street Outreach Group in Your City",
+    description:
+      "How to start a street outreach ministry with two or three believers: five steps, what an outreach night looks like, meeting practical needs, staying safe, and free coaching from Love on The World.",
+    date: "2026-10-20",
+    readingTime: "5 min read",
+    tags: ["Send", "Evangelism", "Practical"],
+    kicker: "Beyond your oikos · Send",
+    excerpt:
+      "Some of the most fruitful ministry in any city happens on a street corner on a Thursday night.",
+  },
+  {
+    slug: "how-to-follow-up-after-a-gospel-conversation",
+    order: 33,
+    title: "How to Follow Up After a Gospel Conversation",
+    description:
+      "What to do in the first 48 hours after sharing the Gospel, how to respond to yes, not yet and no, simple messages you can send, and how to keep following up without being pushy.",
+    date: "2026-10-20",
+    readingTime: "5 min read",
+    tags: ["Disciple", "Evangelism", "Practical"],
+    kicker: "Step four · Disciple",
+    excerpt:
+      "Most of the fruit in evangelism comes after the conversation, not during it.",
+  },
 ];
 
 export const sortedPostsMeta = [...postsMeta].sort((a, b) => a.order - b.order);
@@ -425,7 +464,7 @@ export const readingPath = [
     id: 'start',
     label: 'Start here',
     note: 'What an oikos is, and why households have always carried the Gospel.',
-    slugs: ['what-is-an-oikos', 'free-printable-oikos-map-template', 'what-is-evangelism', 'oikos-evangelism-early-church', 'what-is-a-person-of-peace'],
+    slugs: ['oikos-evangelism-guide', 'what-is-an-oikos', 'free-printable-oikos-map-template', 'what-is-evangelism', 'oikos-evangelism-early-church', 'what-is-a-person-of-peace'],
   },
   {
     id: 'pray',
@@ -449,12 +488,12 @@ export const readingPath = [
     id: 'disciple',
     label: 'Disciple',
     note: 'Walk with someone until they can do it for someone else.',
-    slugs: ['what-is-a-disciple', 'how-to-disciple-someone', 'how-to-start-a-bible-study-with-friends', 'how-to-lead-your-child-to-jesus'],
+    slugs: ['what-is-a-disciple', 'how-to-follow-up-after-a-gospel-conversation', 'how-to-disciple-someone', 'how-to-start-a-bible-study-with-friends', 'how-to-lead-your-child-to-jesus'],
   },
   {
     id: 'send',
     label: 'Send',
     note: 'Beyond your own street: how ordinary believers go, pray and give so the Gospel reaches the nations.',
-    slugs: ['what-is-the-great-commission', 'what-is-missional-living', 'plunder-hell-populate-heaven', 'from-hamilton-to-the-nations'],
+    slugs: ['what-is-the-great-commission', 'what-is-missional-living', 'how-to-start-a-street-outreach-group', 'plunder-hell-populate-heaven', 'from-hamilton-to-the-nations'],
   },
 ];

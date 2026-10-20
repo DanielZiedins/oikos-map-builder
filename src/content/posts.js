@@ -35,6 +35,9 @@ import whatIsMissionalLiving from './bodies/what-is-missional-living.js';
 import whatIsADisciple from './bodies/what-is-a-disciple.js';
 import howToLeadYourChildToJesus from './bodies/how-to-lead-your-child-to-jesus.js';
 import answeringCommonObjections from './bodies/answering-common-objections-to-christianity.js';
+import oikosEvangelismGuide from './bodies/oikos-evangelism-guide.js';
+import howToStartAStreetOutreachGroup from './bodies/how-to-start-a-street-outreach-group.js';
+import howToFollowUpAfterAGospelConversation from './bodies/how-to-follow-up-after-a-gospel-conversation.js';
 import whatIsAnOikos from './bodies/what-is-an-oikos.js';
 import whatToSayWhenSomeoneIsHurting from './bodies/what-to-say-when-someone-is-hurting.js';
 
@@ -67,6 +70,9 @@ const bodies = {
   'what-is-a-disciple': whatIsADisciple,
   'how-to-lead-your-child-to-jesus': howToLeadYourChildToJesus,
   'answering-common-objections-to-christianity': answeringCommonObjections,
+  'oikos-evangelism-guide': oikosEvangelismGuide,
+  'how-to-start-a-street-outreach-group': howToStartAStreetOutreachGroup,
+  'how-to-follow-up-after-a-gospel-conversation': howToFollowUpAfterAGospelConversation,
   'what-is-an-oikos': whatIsAnOikos,
   'what-to-say-when-someone-is-hurting': whatToSayWhenSomeoneIsHurting,
 };

@@ -6,7 +6,7 @@
     <atom:link href="https://www.oikosmap.com/rss.xml" rel="self" type="application/rss+xml" />
     <description>Practical, encouraging writing on prayer, everyday evangelism, discipleship, and loving the people God has placed around you.</description>
     <language>en</language>
-    <lastBuildDate>Sun, 18 Oct 2026 09:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Tue, 20 Oct 2026 09:00:00 GMT</lastBuildDate>
     <item>
       <title>What Is an Oikos? The Biblical Meaning of Your Household</title>
       <link>https://www.oikosmap.com/blog/what-is-an-oikos</link>
@@ -306,6 +306,36 @@
       <category>Share</category>
       <category>Evangelism</category>
       <category>Scripture</category>
+    </item>
+    <item>
+      <title>The Complete Guide to Oikos Evangelism: Pray, Care, Share, Disciple, Send</title>
+      <link>https://www.oikosmap.com/blog/oikos-evangelism-guide</link>
+      <guid isPermaLink="true">https://www.oikosmap.com/blog/oikos-evangelism-guide</guid>
+      <pubDate>Tue, 20 Oct 2026 09:00:00 GMT</pubDate>
+      <description>What oikos evangelism is, why it is how the Gospel has always spread, and a five-step rhythm for reaching the people already around you — with a practical guide for every step.</description>
+      <category>Oikos</category>
+      <category>Foundations</category>
+      <category>Evangelism</category>
+    </item>
+    <item>
+      <title>How to Start a Street Outreach Group in Your City</title>
+      <link>https://www.oikosmap.com/blog/how-to-start-a-street-outreach-group</link>
+      <guid isPermaLink="true">https://www.oikosmap.com/blog/how-to-start-a-street-outreach-group</guid>
+      <pubDate>Tue, 20 Oct 2026 09:00:00 GMT</pubDate>
+      <description>How to start a street outreach ministry with two or three believers: five steps, what an outreach night looks like, meeting practical needs, staying safe, and free coaching from Love on The World.</description>
+      <category>Send</category>
+      <category>Evangelism</category>
+      <category>Practical</category>
+    </item>
+    <item>
+      <title>How to Follow Up After a Gospel Conversation</title>
+      <link>https://www.oikosmap.com/blog/how-to-follow-up-after-a-gospel-conversation</link>
+      <guid isPermaLink="true">https://www.oikosmap.com/blog/how-to-follow-up-after-a-gospel-conversation</guid>
+      <pubDate>Tue, 20 Oct 2026 09:00:00 GMT</pubDate>
+      <description>What to do in the first 48 hours after sharing the Gospel, how to respond to yes, not yet and no, simple messages you can send, and how to keep following up without being pushy.</description>
+      <category>Disciple</category>
+      <category>Evangelism</category>
+      <category>Practical</category>
     </item>
   </channel>
 </rss>
