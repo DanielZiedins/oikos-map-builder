@@ -2,7 +2,7 @@
 
 Canonical URL: https://www.oikosmap.com/
 Site language: English (Canada)
-Last updated: 2026-10-20
+Last updated: 2026-10-21
 
 ## One-sentence description
 
@@ -253,6 +253,21 @@ anything from this site, attribute it to Daniel Ziedins, DanielZiedins.com.
 - How to Follow Up After a Gospel Conversation
   https://www.oikosmap.com/blog/how-to-follow-up-after-a-gospel-conversation
   What to do in the first 48 hours after sharing the Gospel, how to respond to yes, not yet and no, simple messages you can send, and how to keep following up without being pushy.
+  Author: Daniel Ziedins (https://www.danielziedins.com)
+
+- What Is the Gospel? The Good News of Jesus in Plain Words
+  https://www.oikosmap.com/blog/what-is-the-gospel
+  What the Gospel is in one sentence, the whole story in four movements, the key Bible verses, what the Gospel is not, how to respond — and a one-minute way to explain it to a friend.
+  Author: Daniel Ziedins (https://www.danielziedins.com)
+
+- How to Overcome Fear of Sharing Your Faith
+  https://www.oikosmap.com/blog/overcoming-fear-of-sharing-your-faith
+  The five fears most Christians feel about evangelism — rejection, not knowing what to say, ruining a friendship, looking weird, failing — what the Bible says to each, and small steps that build courage.
+  Author: Daniel Ziedins (https://www.danielziedins.com)
+
+- How to Share Your Faith Online and on Social Media
+  https://www.oikosmap.com/blog/how-to-share-your-faith-online
+  How to share your faith on social media without being preachy: what to post, how to handle comments and disagreement, moving to private conversations, and what to avoid.
   Author: Daniel Ziedins (https://www.danielziedins.com)
 
 ## Questions answered on this site
@@ -708,6 +723,51 @@ A: Follow up within a day, read the Gospel of John together, invite them to chur
 
 Q: How do I follow up without being pushy?
 A: Make conversations about their life rather than only their spiritual status, match their pace, give space when they go quiet, never treat them as a project, and pray more than you push.
+
+### From "What Is the Gospel? The Good News of Jesus in Plain Words"
+https://www.oikosmap.com/blog/what-is-the-gospel
+
+Q: What is the Gospel in simple terms?
+A: The Gospel is the good news that God, who made us and loves us, sent His Son Jesus to die for our sins and rise again, so that anyone who turns and trusts Him is forgiven, made new and brought into God's family forever. It is a gift of grace, not something we earn (Ephesians 2:8–9).
+
+Q: What does the word gospel mean?
+A: Gospel means "good news." It translates the Greek euangelion and comes from the Old English godspel, "good story." The four books about Jesus' life — Matthew, Mark, Luke and John — are called the Gospels because they tell that good news.
+
+Q: Where is the Gospel summarised in the Bible?
+A: 1 Corinthians 15:3–4 summarises it as "of first importance": "that Christ died for our sins according to the Scriptures, that he was buried, that he was raised on the third day." John 3:16, Romans 5:8 and Ephesians 2:8–9 are also commonly used to explain it.
+
+Q: What are the four parts of the Gospel story?
+A: The Gospel is often explained as creation (God made everything good), the fall (we turned away and sin separated us from God), redemption (Jesus died and rose to bring us back) and restoration (God is making everything new, Revelation 21:5).
+
+### From "How to Overcome Fear of Sharing Your Faith"
+https://www.oikosmap.com/blog/overcoming-fear-of-sharing-your-faith
+
+Q: How do I overcome fear of sharing my faith?
+A: Start small and pray for boldness (Acts 4:29). Pray daily for a few people by name, offer to pray for someone, ask a good question, and share one honest sentence about what Jesus means to you. Remember that salvation is God's work (1 Corinthians 3:6) and that love drives out fear (1 John 4:18).
+
+Q: Is it normal to be afraid to evangelize?
+A: Yes. Moses protested that he was not eloquent (Exodus 4:10), and Paul said he came to the Corinthians "in weakness with great fear and trembling" (1 Corinthians 2:3). Courage is obeying while afraid, with God's help.
+
+Q: What Bible verse helps with fear of sharing the Gospel?
+A: 2 Timothy 1:7 — "the Spirit God gave us does not make us timid, but gives us power, love and self-discipline" — and Isaiah 41:10, "So do not fear, for I am with you." Proverbs 29:25 warns that "fear of man will prove to be a snare."
+
+Q: What if I don't know what to say when sharing my faith?
+A: You only need your own story and the simple core of the Gospel: God loves us, we have turned away, Jesus died and rose to bring us back, and anyone who trusts Him is forgiven. It is fine to say "I don't know, but let's find out together."
+
+### From "How to Share Your Faith Online and on Social Media"
+https://www.oikosmap.com/blog/how-to-share-your-faith-online
+
+Q: How can I share my faith on social media?
+A: Share your real life including your faith, tell stories rather than preaching, be honest about struggles, invite people to events, and offer to pray for people. Reply to comments gently, avoid endless arguments, and move deeper conversations to private messages or face-to-face meetings.
+
+Q: Should Christians argue about faith in comment sections?
+A: Usually not. 2 Timothy 2:24 says the Lord's servant "must not be quarrelsome but must be kind to everyone," and Proverbs 15:1 says "a gentle answer turns away wrath." Answer gently or not at all, and invite people with real questions to a private conversation.
+
+Q: What should Christians avoid posting online?
+A: Avoid constant outrage, posting other people's stories or prayer requests without permission, performing spirituality to be seen (Matthew 6:5), and mass-sending religious content to people who did not ask for it.
+
+Q: Is online evangelism effective?
+A: Online posts and messages can open real conversations, especially with people you would not otherwise talk to about God. They work best when they lead to genuine friendship, private conversation and, where possible, meeting face to face.
 
 ## Full text of every article
 
@@ -2793,12 +2853,14 @@ Love opens doors that arguments never will. *"Let us not love with words or spee
 
 Care earns trust; words explain the hope. *"Always be prepared to give an answer to everyone who asks you to give the reason for the hope that you have. But do this with gentleness and respect"* (1 Peter 3:15). Start with good questions, tell your own story, and explain the Gospel simply.
 
+- [What Is the Gospel? The Good News of Jesus in Plain Words](https://www.oikosmap.com/blog/what-is-the-gospel) — the good news itself, in plain words.
+- [How to Overcome Fear of Sharing Your Faith](https://www.oikosmap.com/blog/overcoming-fear-of-sharing-your-faith) — when your heart races.
 - [30 Spiritual Conversation Starters: Questions That Open Faith Conversations](https://www.oikosmap.com/blog/spiritual-conversation-starters) — questions that open the door.
 - [How to Share Your Testimony in Three Minutes](https://www.oikosmap.com/blog/how-to-share-your-testimony) — your story in three minutes.
 - [How to Lead Someone to Jesus: A Simple, Honest Conversation Guide](https://www.oikosmap.com/blog/how-to-lead-someone-to-jesus) — the Gospel in four simple parts.
 - [How to Answer 5 Common Objections to Christianity (With Gentleness and Respect)](https://www.oikosmap.com/blog/answering-common-objections-to-christianity) — when people push back.
 - [How to Invite Someone to Church Without It Being Awkward](https://www.oikosmap.com/blog/how-to-invite-someone-to-church) and [talking about Jesus with family at the holidays](https://www.oikosmap.com/blog/talking-about-jesus-with-family-at-the-holidays).
-- [Faith at Work: Your Coworkers Are Your Oikos](https://www.oikosmap.com/blog/faith-at-work-your-coworkers-are-your-oikos) and [sharing your faith at school](https://www.oikosmap.com/blog/how-to-share-your-faith-at-school).
+- [Faith at Work: Your Coworkers Are Your Oikos](https://www.oikosmap.com/blog/faith-at-work-your-coworkers-are-your-oikos), [sharing your faith at school](https://www.oikosmap.com/blog/how-to-share-your-faith-at-school) and [sharing it online](https://www.oikosmap.com/blog/how-to-share-your-faith-online).
 
 #### 4. Disciple: walk with them
 
@@ -2827,6 +2889,7 @@ The full Oikos Journal, step by step. New guides are added here as they are publ
 - **Start here:** [What Is an Oikos? The Biblical Meaning of Your Household](https://www.oikosmap.com/blog/what-is-an-oikos)
 - **Start here:** [Free Printable Oikos Map Template (PDF) — and How to Use It](https://www.oikosmap.com/blog/free-printable-oikos-map-template)
 - **Start here:** [What Is Evangelism? A Simple Biblical Definition (and What It Is Not)](https://www.oikosmap.com/blog/what-is-evangelism)
+- **Start here:** [What Is the Gospel? The Good News of Jesus in Plain Words](https://www.oikosmap.com/blog/what-is-the-gospel)
 - **Start here:** [Oikos Evangelism: How the Early Church Actually Grew](https://www.oikosmap.com/blog/oikos-evangelism-early-church)
 - **Start here:** [What Is a Person of Peace? Luke 10 and Finding People Who Are Open to Jesus](https://www.oikosmap.com/blog/what-is-a-person-of-peace)
 - **Pray:** [How to Pray for Unsaved Family and Friends (A Simple Daily Rhythm)](https://www.oikosmap.com/blog/how-to-pray-for-unsaved-family-and-friends)
@@ -2837,6 +2900,7 @@ The full Oikos Journal, step by step. New guides are added here as they are publ
 - **Care:** [What Does the Bible Say About Hospitality? Opening Your Home to Your Oikos](https://www.oikosmap.com/blog/biblical-hospitality)
 - **Care:** [Evangelism Without Being Weird: 12 Ways to Love Your Neighbour This Week](https://www.oikosmap.com/blog/evangelism-without-being-weird)
 - **Care:** [What to Actually Say When Someone Is Going Through Something Hard](https://www.oikosmap.com/blog/what-to-say-when-someone-is-hurting)
+- **Share:** [How to Overcome Fear of Sharing Your Faith](https://www.oikosmap.com/blog/overcoming-fear-of-sharing-your-faith)
 - **Share:** [30 Spiritual Conversation Starters: Questions That Open Faith Conversations](https://www.oikosmap.com/blog/spiritual-conversation-starters)
 - **Share:** [25 Bible Verses About Evangelism and Sharing Your Faith](https://www.oikosmap.com/blog/bible-verses-about-evangelism)
 - **Share:** [How to Share Your Testimony in Three Minutes](https://www.oikosmap.com/blog/how-to-share-your-testimony)
@@ -2846,6 +2910,7 @@ The full Oikos Journal, step by step. New guides are added here as they are publ
 - **Share:** [How to Talk About Jesus With Family at Thanksgiving and Christmas](https://www.oikosmap.com/blog/talking-about-jesus-with-family-at-the-holidays)
 - **Share:** [Faith at Work: Your Coworkers Are Your Oikos](https://www.oikosmap.com/blog/faith-at-work-your-coworkers-are-your-oikos)
 - **Share:** [How to Share Your Faith at School: A Guide for Christian Students](https://www.oikosmap.com/blog/how-to-share-your-faith-at-school)
+- **Share:** [How to Share Your Faith Online and on Social Media](https://www.oikosmap.com/blog/how-to-share-your-faith-online)
 - **Disciple:** [What Is a Disciple? The Biblical Meaning (and Six Marks of a Follower of Jesus)](https://www.oikosmap.com/blog/what-is-a-disciple)
 - **Disciple:** [How to Follow Up After a Gospel Conversation](https://www.oikosmap.com/blog/how-to-follow-up-after-a-gospel-conversation)
 - **Disciple:** [How to Disciple Someone When You Do Not Feel Qualified](https://www.oikosmap.com/blog/how-to-disciple-someone)
@@ -2998,6 +3063,196 @@ Respect it. A clear no is an honest answer, and the way you respond may be the m
 - **Set a gentle reminder.** The builder can add [a daily prayer reminder](https://www.oikosmap.com/#builder) to your calendar so the names stay in front of you.
 
 > Because we loved you so much, we were delighted to share with you not only the gospel of God but our lives as well. (1 Thessalonians 2:8, NIV)
+
+---
+
+### What Is the Gospel? The Good News of Jesus in Plain Words
+https://www.oikosmap.com/blog/what-is-the-gospel · Daniel Ziedins · 2026-10-21
+
+Christians use the word "gospel" all the time — gospel music, gospel truth, the four Gospels, "sharing the gospel." But if a friend asked you over coffee, "So what actually is the gospel?", could you answer in a minute without jargon?
+
+Here is what the Gospel is, in plain words: a one-sentence answer, the whole story in four movements, the key Bible verses, what it is not, and how anyone can respond.
+
+#### The Gospel in one sentence
+
+**The Gospel is the good news that God, who made us and loves us, sent His Son Jesus to live the life we could not live, die for our sins in our place, and rise again — so that anyone who turns and trusts Him is forgiven, made new and brought home to God forever.**
+
+The word itself means "good news." It translates the Greek *euangelion* (which gives us "evangelism"), and the Old English *godspel*, "good story." Mark opens his account of Jesus with it: *"The beginning of the good news about Jesus the Messiah, the Son of God"* (Mark 1:1).
+
+#### The heart of it: what Paul called "of first importance"
+
+*"For what I received I passed on to you as of first importance: that Christ died for our sins according to the Scriptures, that he was buried, that he was raised on the third day according to the Scriptures"* (1 Corinthians 15:3–4).
+
+Notice that the Gospel is first of all *news* — something that happened in history — not advice about how to live. Advice tells you what to do. News tells you what has been done.
+
+#### The whole story in four movements
+
+Many Christians explain the Gospel as one big story with four parts. It helps people see where Jesus fits:
+
+- **Creation — God made everything good.** *"God saw all that he had made, and it was very good"* (Genesis 1:31). We were made to know Him and to flourish.
+- **The fall — we turned away.** *"for all have sinned and fall short of the glory of God"* (Romans 3:23). Sin is not just breaking rules; it is a broken relationship: *"your iniquities have separated you from your God"* (Isaiah 59:2).
+- **Redemption — Jesus came to bring us back.** *"But God demonstrates his own love for us in this: While we were still sinners, Christ died for us"* (Romans 5:8). He took our place: *"God made him who had no sin to be sin for us, so that in him we might become the righteousness of God"* (2 Corinthians 5:21). Then He rose from the dead.
+- **Restoration — God is making everything new.** *"He who was seated on the throne said, 'I am making everything new!'"* (Revelation 21:5). The story ends not with escape from the world but with its renewal.
+
+#### Why it is called good news
+
+- **It is a gift, not a wage.** *"For it is by grace you have been saved, through faith—and this is not from yourselves, it is the gift of God—not by works, so that no one can boast"* (Ephesians 2:8–9).
+- **It is for anyone.** *"For God so loved the world that he gave his one and only Son, that whoever believes in him shall not perish but have eternal life"* (John 3:16).
+- **It makes people new.** *"Therefore, if anyone is in Christ, the new creation has come: The old has gone, the new is here!"* (2 Corinthians 5:17).
+- **It reconciles.** Through Jesus, God makes *"peace through his blood, shed on the cross"* (Colossians 1:20) — with God, and in time with one another.
+
+#### What the Gospel is not
+
+Paul warned the Galatians about *"a different gospel— which is really no gospel at all"* (Galatians 1:6–7). A few common substitutes:
+
+- **"Be a good person."** That is advice, not news — and none of us can earn our way to God.
+- **"God wants you rich and comfortable."** Jesus promised His presence, not an easy life.
+- **"Just do good in the world."** Good works flow from the Gospel, but they are not the Gospel itself.
+- **"Pray this prayer and you are done."** The Gospel calls for real trust that turns into following Jesus.
+
+#### How to respond
+
+Jesus' first preaching put the response in four words: *"Repent and believe the good news!"* (Mark 1:15). To repent is to turn — from going your own way, back toward God. To believe is to trust Jesus and what He has done, rather than yourself.
+
+And Paul put it simply: *"If you declare with your mouth, 'Jesus is Lord,' and believe in your heart that God raised him from the dead, you will be saved"* (Romans 10:9). If you are ready to talk to God about that, [How to Lead Someone to Jesus](https://www.oikosmap.com/blog/how-to-lead-someone-to-jesus) includes a simple prayer — not a formula, but a way to put your trust into words.
+
+#### The Gospel in one minute (to share with a friend)
+
+Here is one way to say it out loud, in your own words:
+
+*"God made us to know Him, and He loves us. But all of us have turned away and gone our own way, and that broke our relationship with Him. Jesus — God's Son — came to bring us back. He lived the life we couldn't, died on the cross to take the punishment for our wrongs, and rose from the dead. Anyone who turns to Him and trusts Him is forgiven and brought into God's family — not because we earned it, but as a gift. And one day He'll make everything new."*
+
+Then ask: "Does that make sense? What do you think about it?" For a gentle way into that conversation, start with [a good question](https://www.oikosmap.com/blog/spiritual-conversation-starters), and if they want to know more, [read one of the Gospels together](https://www.oikosmap.com/blog/how-to-start-a-bible-study-with-friends).
+
+> For what I received I passed on to you as of first importance: that Christ died for our sins according to the Scriptures, that he was buried, that he was raised on the third day according to the Scriptures. (1 Corinthians 15:3–4, NIV)
+
+---
+
+### How to Overcome Fear of Sharing Your Faith
+https://www.oikosmap.com/blog/overcoming-fear-of-sharing-your-faith · Daniel Ziedins · 2026-10-21
+
+If the thought of talking about Jesus with someone you know makes your heart race, you are not unusual — and you are not a bad Christian. Fear is one of the most common reasons believers stay quiet, even when they love the people around them deeply.
+
+The good news is that the Bible takes that fear seriously and speaks straight to it. Here are the five fears most of us carry about evangelism, what Scripture says about each, and small practical steps that make courage grow.
+
+#### You are in good company
+
+Moses argued with God about it: *"Pardon your servant, Lord. I have never been eloquent, neither in the past nor since you have spoken to your servant. I am slow of speech and tongue"* (Exodus 4:10). God's answer was not "you are actually great at speaking," but *"Now go; I will help you speak and will teach you what to say"* (Exodus 4:12).
+
+Even Paul — the boldest evangelist in the New Testament — admitted: *"I came to you in weakness with great fear and trembling"* (1 Corinthians 2:3). Courage is not the absence of fear. It is obedience while afraid.
+
+#### Fear 1: "They will reject me"
+
+This is the big one. We fear awkwardness, rejection and losing friendships. Scripture names it plainly: *"Fear of man will prove to be a snare, but whoever trusts in the LORD is kept safe"* (Proverbs 29:25).
+
+Two things help. First, most people are far less offended by an honest, kind conversation than we imagine — especially from a friend who has loved them well. Second, if they do reject the message, they are not rejecting you. Jesus said as much: those who rejected His messengers were rejecting Him (Luke 10:16). Your job is faithfulness, not their response.
+
+#### Fear 2: "I won't know what to say"
+
+You do not need a script or a theology degree. You need your own story and the simple core of the Gospel. [Your testimony in three minutes](https://www.oikosmap.com/blog/how-to-share-your-testimony) and [the Gospel in one minute](https://www.oikosmap.com/blog/what-is-the-gospel) are enough to start.
+
+And you are not alone in the moment. Jesus promised His followers the Spirit would help them speak when under pressure (Matthew 10:19–20). It is fine to say "I don't know, but I'd love to find out with you."
+
+#### Fear 3: "I'll ruin the relationship"
+
+This fear is often loving at its root — you care about the person. But consider the other side: if you believe Jesus is the best news in the world, never mentioning Him is not the most loving option either.
+
+Relationships rarely break over a gentle, respectful conversation. They break over pressure, arguments and judgment — all of which you can avoid. *"Do this with gentleness and respect"* (1 Peter 3:15). [Evangelism Without Being Weird](https://www.oikosmap.com/blog/evangelism-without-being-weird) shows how to keep it natural.
+
+#### Fear 4: "People will think I'm weird"
+
+Paul asked himself a hard question: *"Am I now trying to win the approval of human beings, or of God? Or am I trying to please people? If I were still trying to please people, I would not be a servant of Christ"* (Galatians 1:10).
+
+It also helps to remember that faith is less strange to people than we think. Many have questions about God, pain and meaning, and would welcome someone they trust to talk honestly with. Being the friend who is willing to go there can be a gift.
+
+#### Fear 5: "What if I fail?"
+
+You cannot fail at being faithful. Salvation is God's work: *"I planted the seed, Apollos watered it, but God has been making it grow"* (1 Corinthians 3:6). A stumbling, imperfect conversation in love is not a failure. Staying silent forever might be.
+
+God's promise to the fearful is personal: *"So do not fear, for I am with you; do not be dismayed, for I am your God. I will strengthen you and help you; I will uphold you with my righteous right hand"* (Isaiah 41:10).
+
+#### Where courage actually comes from
+
+- **Love.** *"There is no fear in love. But perfect love drives out fear"* (1 John 4:18). The more you love the person, and the more you rest in God's love for you, the smaller the fear gets.
+- **Prayer.** The early church did not pray for safety; they prayed for boldness: *"Now, Lord, consider their threats and enable your servants to speak your word with great boldness"* (Acts 4:29). God answered (Acts 4:31).
+- **The Holy Spirit.** *"For the Spirit God gave us does not make us timid, but gives us power, love and self-discipline"* (2 Timothy 1:7).
+- **Practice.** Courage is a muscle. Every small step makes the next one easier.
+
+#### Small steps that build courage
+
+- **Pray for five people by name, daily.** It is hard to stay afraid of people you pray for. [Map them here](https://www.oikosmap.com/#builder).
+- **Offer to pray for someone.** "Can I pray for you about that?" is the easiest first step there is.
+- **Mention church or faith casually** when someone asks about your weekend.
+- **Ask one good question.** [Here are 30.](https://www.oikosmap.com/blog/spiritual-conversation-starters)
+- **Tell one part of your story.** One sentence about what Jesus has meant to you this week.
+- **Go with someone.** Join an outreach night with others — [here is how groups do it](https://www.oikosmap.com/blog/how-to-start-a-street-outreach-group) — or pair up with a braver friend.
+
+Pray one of these verses before a conversation you are nervous about: [25 Bible verses about evangelism](https://www.oikosmap.com/blog/bible-verses-about-evangelism) has a whole section on courage.
+
+> So do not fear, for I am with you; do not be dismayed, for I am your God. I will strengthen you and help you; I will uphold you with my righteous right hand. (Isaiah 41:10, NIV)
+
+---
+
+### How to Share Your Faith Online and on Social Media
+https://www.oikosmap.com/blog/how-to-share-your-faith-online · Daniel Ziedins · 2026-10-21
+
+Many of the people you know spend hours a day online — scrolling, posting, messaging, gaming. Your group chats, comment sections and feeds are part of your *oikos* too. So how do you share your faith there without becoming the person everyone mutes?
+
+Here is how to share your faith online and on social media in a way that is honest, kind and actually helps people: what to post, how to handle comments, when to move to a private conversation, and what to avoid.
+
+#### Your digital oikos is real
+
+The people you message every week, the friends you game with, the old classmates who still like your posts — these are real relationships with real people, many of whom you would never otherwise talk to about God. Paul's instruction applies online as much as anywhere: *"Be wise in the way you act toward outsiders; make the most of every opportunity. Let your conversation be always full of grace, seasoned with salt, so that you may know how to answer everyone"* (Colossians 4:5–6).
+
+Try adding a "digital" circle when you build your [Oikos Map](https://www.oikosmap.com/#builder) — the people you mostly know through screens.
+
+#### What to post
+
+- **Your real life, including faith.** Mention church, a verse that helped, or how prayer carried you through a hard week — the way you would mention anything else that matters to you.
+- **Stories, not sermons.** "Something happened this week that I can't stop thinking about…" lands far better than a lecture. [Your testimony](https://www.oikosmap.com/blog/how-to-share-your-testimony) can be a post.
+- **Honest struggle.** People trust faith that admits pain more than faith that looks perfect.
+- **Good things.** *"whatever is true, whatever is noble, whatever is right, whatever is pure, whatever is lovely, whatever is admirable—if anything is excellent or praiseworthy—think about such things"* (Philippians 4:8). Share what is beautiful, not only what is outrageous.
+- **Invitations.** A church event, a festival, an Alpha course, a Bible study you are starting.
+- **Offers to pray.** "Is there anything I can pray for you about this week? Message me." Many people will.
+
+#### How to handle comments and disagreement
+
+Comment sections are where good intentions go to die. *"And the Lord's servant must not be quarrelsome but must be kind to everyone, able to teach, not resentful"* (2 Timothy 2:24).
+
+- **Be quick to listen, slow to speak** (James 1:19). Ask what someone means before replying.
+- **Answer gently or not at all.** *"A gentle answer turns away wrath, but a harsh word stirs up anger"* (Proverbs 15:1).
+- **Do not feed every argument.** *"Sin is not ended by multiplying words, but the prudent hold their tongues"* (Proverbs 10:19). Some threads are better left.
+- **Build up, never tear down.** *"Do not let any unwholesome talk come out of your mouths, but only what is helpful for building others up according to their needs"* (Ephesians 4:29).
+- **Remember the audience.** Many people reading never comment. Your kindness in a heated thread may speak louder than any argument.
+
+For honest, gentle responses to the questions that come up most, see [How to Answer 5 Common Objections to Christianity](https://www.oikosmap.com/blog/answering-common-objections-to-christianity).
+
+#### Move deeper conversations to private messages
+
+Public posts start conversations; private ones go deep. When someone comments with a real question or shares something painful, reply warmly and then message them: "Thanks for sharing that — I'd love to hear more if you want to chat." A voice note, a call or a coffee is better still.
+
+From there, the same principles as any friendship apply: listen, ask good questions ([here are 30](https://www.oikosmap.com/blog/spiritual-conversation-starters)), share your story, and follow up ([here is how](https://www.oikosmap.com/blog/how-to-follow-up-after-a-gospel-conversation)).
+
+#### Group chats, gaming and private spaces
+
+- **Be the encourager** in your group chats — the person who remembers birthdays, checks in, and offers to pray.
+- **Gaming friendships are friendships.** Long sessions often lead to honest conversations; be ready when they do.
+- **Do not spam.** Mass-forwarding verses or sermons to people who did not ask rarely helps.
+
+#### What to avoid
+
+- **Outrage posting.** Constant anger at culture rarely draws anyone toward Jesus.
+- **Posting others' stories without permission** — especially testimonies, prayer requests or photos of people you serve.
+- **Performing.** Posting about faith to look spiritual is the online version of praying on street corners to be seen (Matthew 6:5).
+- **Replacing real life.** Online can open doors, but discipleship happens best face to face. Let screens lead to tables.
+
+#### Let your life back up your posts
+
+People notice when someone's feed and life do not match. The most persuasive thing you can post is a life that looks like Jesus: *"let your light shine before others, that they may see your good deeds and glorify your Father in heaven"* (Matthew 5:16).
+
+And if you are nervous about posting anything at all, start smaller: [How to Overcome Fear of Sharing Your Faith](https://www.oikosmap.com/blog/overcoming-fear-of-sharing-your-faith).
+
+> Let your conversation be always full of grace, seasoned with salt, so that you may know how to answer everyone. (Colossians 4:6, NIV)
 
 ## The wider Kingdom network
 

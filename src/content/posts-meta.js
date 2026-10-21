@@ -419,6 +419,45 @@ export const postsMeta = [
     excerpt:
       "Most of the fruit in evangelism comes after the conversation, not during it.",
   },
+  {
+    slug: "what-is-the-gospel",
+    order: 34,
+    title: "What Is the Gospel? The Good News of Jesus in Plain Words",
+    description:
+      "What the Gospel is in one sentence, the whole story in four movements, the key Bible verses, what the Gospel is not, how to respond — and a one-minute way to explain it to a friend.",
+    date: "2026-10-21",
+    readingTime: "5 min read",
+    tags: ["Foundations", "Evangelism", "Scripture"],
+    kicker: "Start here",
+    excerpt:
+      "Christians say the word all the time. Could you explain it to a friend over coffee in one minute, without jargon?",
+  },
+  {
+    slug: "overcoming-fear-of-sharing-your-faith",
+    order: 35,
+    title: "How to Overcome Fear of Sharing Your Faith",
+    description:
+      "The five fears most Christians feel about evangelism — rejection, not knowing what to say, ruining a friendship, looking weird, failing — what the Bible says to each, and small steps that build courage.",
+    date: "2026-10-21",
+    readingTime: "5 min read",
+    tags: ["Share", "Evangelism", "Scripture"],
+    kicker: "Step three · Share",
+    excerpt:
+      "If talking about Jesus makes your heart race, you are not a bad Christian. Even Paul came in fear and trembling.",
+  },
+  {
+    slug: "how-to-share-your-faith-online",
+    order: 36,
+    title: "How to Share Your Faith Online and on Social Media",
+    description:
+      "How to share your faith on social media without being preachy: what to post, how to handle comments and disagreement, moving to private conversations, and what to avoid.",
+    date: "2026-10-21",
+    readingTime: "4 min read",
+    tags: ["Share", "Evangelism", "Practical"],
+    kicker: "Step three · Share",
+    excerpt:
+      "Your group chats and feeds are part of your oikos too. Here is how to be a light there without getting muted.",
+  },
 ];
 
 export const sortedPostsMeta = [...postsMeta].sort((a, b) => a.order - b.order);
@@ -464,7 +503,7 @@ export const readingPath = [
     id: 'start',
     label: 'Start here',
     note: 'What an oikos is, and why households have always carried the Gospel.',
-    slugs: ['oikos-evangelism-guide', 'what-is-an-oikos', 'free-printable-oikos-map-template', 'what-is-evangelism', 'oikos-evangelism-early-church', 'what-is-a-person-of-peace'],
+    slugs: ['oikos-evangelism-guide', 'what-is-an-oikos', 'free-printable-oikos-map-template', 'what-is-evangelism', 'what-is-the-gospel', 'oikos-evangelism-early-church', 'what-is-a-person-of-peace'],
   },
   {
     id: 'pray',
@@ -482,7 +521,7 @@ export const readingPath = [
     id: 'share',
     label: 'Share',
     note: 'Your story, a simple invitation, and faith where you already spend your days.',
-    slugs: ['spiritual-conversation-starters', 'bible-verses-about-evangelism', 'how-to-share-your-testimony', 'how-to-lead-someone-to-jesus', 'answering-common-objections-to-christianity', 'how-to-invite-someone-to-church', 'talking-about-jesus-with-family-at-the-holidays', 'faith-at-work-your-coworkers-are-your-oikos', 'how-to-share-your-faith-at-school'],
+    slugs: ['overcoming-fear-of-sharing-your-faith', 'spiritual-conversation-starters', 'bible-verses-about-evangelism', 'how-to-share-your-testimony', 'how-to-lead-someone-to-jesus', 'answering-common-objections-to-christianity', 'how-to-invite-someone-to-church', 'talking-about-jesus-with-family-at-the-holidays', 'faith-at-work-your-coworkers-are-your-oikos', 'how-to-share-your-faith-at-school', 'how-to-share-your-faith-online'],
   },
   {
     id: 'disciple',

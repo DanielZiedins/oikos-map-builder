@@ -6,7 +6,7 @@
     <atom:link href="https://www.oikosmap.com/rss.xml" rel="self" type="application/rss+xml" />
     <description>Practical, encouraging writing on prayer, everyday evangelism, discipleship, and loving the people God has placed around you.</description>
     <language>en</language>
-    <lastBuildDate>Tue, 20 Oct 2026 09:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Wed, 21 Oct 2026 09:00:00 GMT</lastBuildDate>
     <item>
       <title>What Is an Oikos? The Biblical Meaning of Your Household</title>
       <link>https://www.oikosmap.com/blog/what-is-an-oikos</link>
@@ -334,6 +334,36 @@
       <pubDate>Tue, 20 Oct 2026 09:00:00 GMT</pubDate>
       <description>What to do in the first 48 hours after sharing the Gospel, how to respond to yes, not yet and no, simple messages you can send, and how to keep following up without being pushy.</description>
       <category>Disciple</category>
+      <category>Evangelism</category>
+      <category>Practical</category>
+    </item>
+    <item>
+      <title>What Is the Gospel? The Good News of Jesus in Plain Words</title>
+      <link>https://www.oikosmap.com/blog/what-is-the-gospel</link>
+      <guid isPermaLink="true">https://www.oikosmap.com/blog/what-is-the-gospel</guid>
+      <pubDate>Wed, 21 Oct 2026 09:00:00 GMT</pubDate>
+      <description>What the Gospel is in one sentence, the whole story in four movements, the key Bible verses, what the Gospel is not, how to respond — and a one-minute way to explain it to a friend.</description>
+      <category>Foundations</category>
+      <category>Evangelism</category>
+      <category>Scripture</category>
+    </item>
+    <item>
+      <title>How to Overcome Fear of Sharing Your Faith</title>
+      <link>https://www.oikosmap.com/blog/overcoming-fear-of-sharing-your-faith</link>
+      <guid isPermaLink="true">https://www.oikosmap.com/blog/overcoming-fear-of-sharing-your-faith</guid>
+      <pubDate>Wed, 21 Oct 2026 09:00:00 GMT</pubDate>
+      <description>The five fears most Christians feel about evangelism — rejection, not knowing what to say, ruining a friendship, looking weird, failing — what the Bible says to each, and small steps that build courage.</description>
+      <category>Share</category>
+      <category>Evangelism</category>
+      <category>Scripture</category>
+    </item>
+    <item>
+      <title>How to Share Your Faith Online and on Social Media</title>
+      <link>https://www.oikosmap.com/blog/how-to-share-your-faith-online</link>
+      <guid isPermaLink="true">https://www.oikosmap.com/blog/how-to-share-your-faith-online</guid>
+      <pubDate>Wed, 21 Oct 2026 09:00:00 GMT</pubDate>
+      <description>How to share your faith on social media without being preachy: what to post, how to handle comments and disagreement, moving to private conversations, and what to avoid.</description>
+      <category>Share</category>
       <category>Evangelism</category>
       <category>Practical</category>
     </item>

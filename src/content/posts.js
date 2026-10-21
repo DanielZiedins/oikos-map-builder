@@ -38,6 +38,9 @@ import answeringCommonObjections from './bodies/answering-common-objections-to-c
 import oikosEvangelismGuide from './bodies/oikos-evangelism-guide.js';
 import howToStartAStreetOutreachGroup from './bodies/how-to-start-a-street-outreach-group.js';
 import howToFollowUpAfterAGospelConversation from './bodies/how-to-follow-up-after-a-gospel-conversation.js';
+import whatIsTheGospel from './bodies/what-is-the-gospel.js';
+import overcomingFearOfSharingYourFaith from './bodies/overcoming-fear-of-sharing-your-faith.js';
+import howToShareYourFaithOnline from './bodies/how-to-share-your-faith-online.js';
 import whatIsAnOikos from './bodies/what-is-an-oikos.js';
 import whatToSayWhenSomeoneIsHurting from './bodies/what-to-say-when-someone-is-hurting.js';
 
@@ -73,6 +76,9 @@ const bodies = {
   'oikos-evangelism-guide': oikosEvangelismGuide,
   'how-to-start-a-street-outreach-group': howToStartAStreetOutreachGroup,
   'how-to-follow-up-after-a-gospel-conversation': howToFollowUpAfterAGospelConversation,
+  'what-is-the-gospel': whatIsTheGospel,
+  'overcoming-fear-of-sharing-your-faith': overcomingFearOfSharingYourFaith,
+  'how-to-share-your-faith-online': howToShareYourFaithOnline,
   'what-is-an-oikos': whatIsAnOikos,
   'what-to-say-when-someone-is-hurting': whatToSayWhenSomeoneIsHurting,
 };

@@ -68,12 +68,14 @@ export default {
         'Care earns trust; words explain the hope. <em>"Always be prepared to give an answer to everyone who asks you to give the reason for the hope that you have. But do this with gentleness and respect"</em> (1 Peter 3:15). Start with good questions, tell your own story, and explain the Gospel simply.',
       ],
       list: [
+        link('what-is-the-gospel') + ' — the good news itself, in plain words.',
+        link('overcoming-fear-of-sharing-your-faith') + ' — when your heart races.',
         link('spiritual-conversation-starters') + ' — questions that open the door.',
         link('how-to-share-your-testimony') + ' — your story in three minutes.',
         link('how-to-lead-someone-to-jesus') + ' — the Gospel in four simple parts.',
         link('answering-common-objections-to-christianity') + ' — when people push back.',
         link('how-to-invite-someone-to-church') + ' and ' + link('talking-about-jesus-with-family-at-the-holidays', 'talking about Jesus with family at the holidays') + '.',
-        link('faith-at-work-your-coworkers-are-your-oikos') + ' and ' + link('how-to-share-your-faith-at-school', 'sharing your faith at school') + '.',
+        link('faith-at-work-your-coworkers-are-your-oikos') + ', ' + link('how-to-share-your-faith-at-school', 'sharing your faith at school') + ' and ' + link('how-to-share-your-faith-online', 'sharing it online') + '.',
       ],
     },
     {

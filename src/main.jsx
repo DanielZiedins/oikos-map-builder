@@ -981,6 +981,18 @@ const faqItems = [
   },
 ];
 
+// The homepage is where most readers enter the journal, so besides the first
+// three articles it points at the pillar guide and the most practical guides.
+const guidePost = sortedPostsMeta.find((post) => post.slug === 'oikos-evangelism-guide');
+const popularGuides = [
+  ['bible-verses-to-pray-for-unsaved-loved-ones', '23 verses to pray for loved ones'],
+  ['how-to-lead-someone-to-jesus', 'How to lead someone to Jesus'],
+  ['spiritual-conversation-starters', '30 conversation starters'],
+  ['free-printable-oikos-map-template', 'Free printable Oikos Map'],
+  ['what-is-the-great-commission', 'The Great Commission explained'],
+  ['who-is-my-neighbour', 'Who is my neighbour?'],
+];
+
 function LatestArticles() {
   return (
     <section className="latest-articles" id="journal" aria-labelledby="journal-title" data-reveal>
@@ -997,6 +1009,16 @@ function LatestArticles() {
           Read the journal
         </a>
       </div>
+      {guidePost ? (
+        <a className="latest-guide" href={`/blog/${guidePost.slug}`}>
+          <span className="latest-guide-kicker">Start here · the complete guide</span>
+          <strong>{guidePost.title}</strong>
+          <span>{guidePost.excerpt}</span>
+          <span className="latest-guide-cta">
+            Read the guide <ArrowRight size={16} aria-hidden="true" />
+          </span>
+        </a>
+      ) : null}
       <div className="latest-grid">
         {sortedPostsMeta.slice(0, 3).map((post) => (
           <article key={post.slug}>
@@ -1011,6 +1033,16 @@ function LatestArticles() {
           </article>
         ))}
       </div>
+      <nav className="latest-more" aria-label="Popular guides">
+        <span>Popular guides:</span>
+        {popularGuides
+          .filter(([slug]) => sortedPostsMeta.some((post) => post.slug === slug))
+          .map(([slug, label]) => (
+            <a key={slug} href={`/blog/${slug}`}>
+              {label}
+            </a>
+          ))}
+      </nav>
     </section>
   );
 }
