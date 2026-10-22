@@ -7,6 +7,9 @@ Canonical site: https://www.oikosmap.com/
 Key pages:
 - https://www.oikosmap.com/ - Free Oikos Map Builder and outreach guide
 - https://www.oikosmap.com/blog - The Oikos Journal: prayer, evangelism, and discipleship writing
+- https://www.oikosmap.com/about - Why an Oikos Map: the rhythm, vision, mission, next steps, and how to begin following Jesus
+- https://www.oikosmap.com/faq - Frequently asked questions about the tool, privacy, downloads, printables and group use
+- https://www.oikosmap.com/network - The Kingdom network: the free tools, communities and initiatives behind the map
 - https://www.oikosmap.com/growth - Kingdom personal growth for spirit, mind, body, and purpose
 - https://www.oikosmap.com/connect - Kingdom communities, e3 Canada collaboration, and founder/ministry links
 

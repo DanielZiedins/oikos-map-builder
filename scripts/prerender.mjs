@@ -34,13 +34,55 @@ await build({
 });
 
 const { renderToString } = await import('react-dom/server');
-const { routes, growthFaq } = await import(pathToFileURL(resolve(ssrOut, 'main.mjs')).href);
+const { routes, growthFaq, faqItems } = await import(pathToFileURL(resolve(ssrOut, 'main.mjs')).href);
+const { networkSites } = await import(pathToFileURL(resolve(root, 'src/content/network.js')).href);
 const blog = await import(pathToFileURL(resolve(ssrOut, 'blog.mjs')).href);
 
 // Minimum words a crawler must see on each page, so a regression (an empty
 // render, content moved behind an effect) fails the build instead of shipping.
 const pages = [
-  { path: '/', file: 'index.html', minWords: 1500, render: routes['/'] },
+  // The homepage got lighter on 2026-10-22: the vision, mission, next-steps and
+  // Jesus sections moved to /about, the full FAQ to /faq and the directory to
+  // /network, each with its own schema below.
+  { path: '/', file: 'index.html', minWords: 800, render: routes['/'] },
+  { path: '/about', file: 'about.html', minWords: 600, render: routes['/about'] },
+  {
+    path: '/faq',
+    file: 'faq.html',
+    minWords: 300,
+    render: routes['/faq'],
+    jsonLd: {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      '@id': 'https://www.oikosmap.com/faq#faq',
+      mainEntity: faqItems.map((item) => ({
+        '@type': 'Question',
+        name: item.question,
+        acceptedAnswer: { '@type': 'Answer', text: item.answer },
+      })),
+    },
+  },
+  {
+    path: '/network',
+    file: 'network.html',
+    minWords: 300,
+    render: routes['/network'],
+    jsonLd: {
+      '@context': 'https://schema.org',
+      '@type': 'ItemList',
+      '@id': 'https://www.oikosmap.com/network#sites',
+      name: 'The Kingdom network behind Oikos Map',
+      itemListElement: networkSites
+        .filter((site) => !site.isSelf)
+        .map((site, index) => ({
+          '@type': 'ListItem',
+          position: index + 1,
+          name: site.name,
+          description: site.blurb,
+          url: site.url,
+        })),
+    },
+  },
   {
     path: '/growth',
     file: 'growth.html',

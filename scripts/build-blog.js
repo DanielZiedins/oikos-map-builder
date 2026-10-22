@@ -419,6 +419,9 @@ const urls = [
     ],
   },
   { loc: `${SITE}/blog`, priority: '0.9', changefreq: 'weekly', lastmod: today },
+  { loc: `${SITE}/about`, priority: '0.8', changefreq: 'monthly', lastmod: today },
+  { loc: `${SITE}/faq`, priority: '0.8', changefreq: 'monthly', lastmod: today },
+  { loc: `${SITE}/network`, priority: '0.7', changefreq: 'monthly', lastmod: today },
   { loc: `${SITE}/connect`, priority: '0.8', changefreq: 'monthly', lastmod: today },
   { loc: `${SITE}/growth`, priority: '0.7', changefreq: 'monthly', lastmod: today },
   ...sortedPosts.map((post) => ({
@@ -552,6 +555,9 @@ Canonical site: ${SITE}/
 Key pages:
 - ${SITE}/ - Free Oikos Map Builder and outreach guide
 - ${SITE}/blog - The Oikos Journal: prayer, evangelism, and discipleship writing
+- ${SITE}/about - Why an Oikos Map: the rhythm, vision, mission, next steps, and how to begin following Jesus
+- ${SITE}/faq - Frequently asked questions about the tool, privacy, downloads, printables and group use
+- ${SITE}/network - The Kingdom network: the free tools, communities and initiatives behind the map
 - ${SITE}/growth - Kingdom personal growth for spirit, mind, body, and purpose
 - ${SITE}/connect - Kingdom communities, e3 Canada collaboration, and founder/ministry links
 
@@ -653,6 +659,9 @@ ${networkSites
 
 - Main tool: ${SITE}/
 - The Oikos Journal: ${SITE}/blog
+- About the map: ${SITE}/about
+- FAQ: ${SITE}/faq
+- The network: ${SITE}/network
 - Personal growth: ${SITE}/growth
 - Community and connection: ${SITE}/connect
 - Article feed: ${SITE}/rss.xml

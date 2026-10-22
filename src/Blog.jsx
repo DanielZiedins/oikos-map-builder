@@ -139,6 +139,8 @@ export function BlogHeader({ current }) {
         <a href="/blog" aria-current={current === 'blog' ? 'page' : undefined}>
           Journal
         </a>
+        <a href="/about">About</a>
+        <a href="/faq">FAQ</a>
         <a href="/growth">Growth</a>
         <a href="/connect">Connect</a>
         <a href="/#resources">Free journey</a>
@@ -296,8 +298,8 @@ export function BlogIndex() {
             The Oikos Journal
           </p>
           <h1>
-            <span>Practical help</span>
-            <span>for loving the people</span>
+            <span>Practical help</span>{' '}
+            <span>for loving the people</span>{' '}
             <span>already around you.</span>
           </h1>
           <p className="hero-lede">

@@ -3297,6 +3297,9 @@ And if you are nervous about posting anything at all, start smaller: [How to Ove
 
 - Main tool: https://www.oikosmap.com/
 - The Oikos Journal: https://www.oikosmap.com/blog
+- About the map: https://www.oikosmap.com/about
+- FAQ: https://www.oikosmap.com/faq
+- The network: https://www.oikosmap.com/network
 - Personal growth: https://www.oikosmap.com/growth
 - Community and connection: https://www.oikosmap.com/connect
 - Article feed: https://www.oikosmap.com/rss.xml

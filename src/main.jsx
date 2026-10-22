@@ -47,7 +47,7 @@ import { sortedPostsMeta } from './content/posts-meta.js';
 import { prayerVerses, verseIndexFor, versePrayer } from './content/prayer-verses.js';
 import { conversationGuides, starterFor } from './content/conversation-starters.js';
 import { buildPrayerReminderIcs } from './reminder.js';
-import { networkGroups, sitesInGroup } from './content/network.js';
+import { networkGroups, networkSites, sitesInGroup } from './content/network.js';
 import {
   INVITE_DISMISSED_KEY,
   JOURNEY_EVENT,
@@ -509,6 +509,9 @@ function SiteFooter() {
           <span className="footer-network-title">Oikos Map</span>
           <a href="/">Map Builder</a>
           <a href="/blog">The Oikos Journal</a>
+          <a href="/about">About the map</a>
+          <a href="/faq">FAQ</a>
+          <a href="/network">The network</a>
           <a href="/growth">Growth</a>
           <a href="/connect">Connect</a>
         </div>
@@ -938,7 +941,7 @@ function PrayerReminder({ mapData }) {
   );
 }
 
-const faqItems = [
+export const faqItems = [
   {
     question: 'What is an Oikos Map?',
     answer:
@@ -1066,7 +1069,7 @@ function KingdomNetwork() {
           const sites = sitesInGroup(group.id);
           if (!sites.length) return null;
           return (
-            <div className="network-group" key={group.id}>
+            <div className="network-group" key={group.id} id={`group-${group.id}`}>
               <div className="network-group-head">
                 <h3>{group.label}</h3>
                 <small>{group.note}</small>
@@ -1205,8 +1208,8 @@ function GrowthPage() {
             Spirit, mind, body, purpose
           </p>
           <h1>
-            <span>Become the kind</span>
-            <span>of person who can</span>
+            <span>Become the kind</span>{' '}
+            <span>of person who can</span>{' '}
             <span>carry the mission.</span>
           </h1>
           <p className="hero-lede">
@@ -1360,8 +1363,8 @@ function ConnectPage() {
             Connect beyond the map
           </p>
           <h1>
-            <span>Find people</span>
-            <span>running toward</span>
+            <span>Find people</span>{' '}
+            <span>running toward</span>{' '}
             <span>the Kingdom.</span>
           </h1>
           <p className="hero-lede">
@@ -1566,16 +1569,23 @@ function parseNameList(text) {
   return names;
 }
 
-function computeLayout(people) {
+function computeLayout(people, compact = false) {
   const roots = people.filter((person) => !person.parentId);
   // Grow the canvas once a single ring can no longer hold the first circle
   // without overlapping. Small maps keep the original 1100x820 exactly.
-  const baseRadius = roots.length > 7 ? 286 : 248;
-  const radius = Math.max(baseRadius, Math.round((Math.max(roots.length, 1) * 152) / (2 * Math.PI)));
-  const span = (radius + 162) * 2;
-  const width = Math.max(1100, span);
-  const height = Math.max(820, span);
-  const center = { x: width / 2, y: height / 2 };
+  // Compact (phones): a tighter ring on a canvas no wider than it needs to be,
+  // so a 390px screen shows the whole map with names still readable instead of
+  // a third of a 1100-unit canvas.
+  const baseRadius = compact ? (roots.length > 7 ? 236 : 196) : roots.length > 7 ? 286 : 248;
+  const perPerson = compact ? 176 : 152;
+  const radius = Math.max(baseRadius, Math.round((Math.max(roots.length, 1) * perPerson) / (2 * Math.PI)));
+  const pad = compact ? 150 : 162;
+  const span = (radius + pad) * 2;
+  const top = compact ? 96 : 0;
+  const width = compact ? span : Math.max(1100, span);
+  const height = compact ? span + top : Math.max(820, span);
+  const center = { x: width / 2, y: top + span / 2 };
+  const childOffset = compact ? 118 : 158;
   const childrenByParent = people.reduce((acc, person) => {
     if (person.parentId) {
       acc[person.parentId] = acc[person.parentId] || [];
@@ -1600,8 +1610,8 @@ function computeLayout(people) {
       const childAngle =
         angle - spread / 2 + (children.length === 1 ? 0 : (childIndex * spread) / (children.length - 1));
       positions[child.id] = {
-        x: parentPosition.x + Math.cos(childAngle) * 158,
-        y: parentPosition.y + Math.sin(childAngle) * 158,
+        x: parentPosition.x + Math.cos(childAngle) * childOffset,
+        y: parentPosition.y + Math.sin(childAngle) * childOffset,
         angle: childAngle,
       };
     });
@@ -1610,8 +1620,563 @@ function computeLayout(people) {
   return { width, height, center, positions, childrenByParent };
 }
 
+
+const PRIMARY_NAV = [
+  ['/#builder', 'Create'],
+  ['/blog', 'Journal'],
+  ['/about', 'About'],
+  ['/faq', 'FAQ'],
+  ['/network', 'Network'],
+  ['/growth', 'Growth'],
+  ['/connect', 'Connect'],
+];
+
+function SiteHeader({ current }) {
+  return (
+    <header className="site-header">
+      <a className="brand" href="/" aria-label="Oikos Map Builder home">
+        <LogoMark />
+        <span>Oikos Map Builder</span>
+      </a>
+      <nav aria-label="Primary navigation">
+        {PRIMARY_NAV.map(([href, label]) => (
+          <a key={href} href={href} aria-current={current && href === current ? 'page' : undefined}>
+            {label}
+          </a>
+        ))}
+      </nav>
+    </header>
+  );
+}
+
+// The hero's animated map: you in the centre, the five circles around you, and
+// the people each of them knows. Pure SVG + CSS so it paints with the headline;
+// motion is switched off under prefers-reduced-motion.
+const HERO_RING = [
+  ['Family', '#f45d48'],
+  ['Friends', '#14b8a6'],
+  ['Work', '#f59e0b'],
+  ['School', '#516cf0'],
+  ['Neighbours', '#8b5cf6'],
+];
+
+function HeroConstellation() {
+  const cx = 320;
+  const cy = 320;
+  const ring = 178;
+  const nodes = HERO_RING.map(([label, color], index) => {
+    const angle = -Math.PI / 2 + (index * Math.PI * 2) / HERO_RING.length;
+    const x = cx + Math.cos(angle) * ring;
+    const y = cy + Math.sin(angle) * ring;
+    const outer = [-0.5, 0.5].map((spread) => {
+      const a = angle + spread * 0.52;
+      return { x: cx + Math.cos(a) * (ring + 108), y: cy + Math.sin(a) * (ring + 108) };
+    });
+    return { label, color, x, y, outer };
+  });
+
+  return (
+    <div className="hero-visual" aria-hidden="true">
+      <svg className="constellation" viewBox="0 0 640 640" focusable="false">
+        <defs>
+          <radialGradient id="heroGlow" cx="50%" cy="50%" r="50%">
+            <stop offset="0" stopColor="#f3cf74" stopOpacity="0.55" />
+            <stop offset="0.55" stopColor="#f3cf74" stopOpacity="0.12" />
+            <stop offset="1" stopColor="#f3cf74" stopOpacity="0" />
+          </radialGradient>
+        </defs>
+        <circle className="c-glow" cx={cx} cy={cy} r="300" fill="url(#heroGlow)" />
+        <g className="c-orbit" style={{ transformOrigin: `${cx}px ${cy}px` }}>
+          <circle cx={cx} cy={cy} r={ring} fill="none" stroke="#26201c" strokeOpacity="0.14" strokeWidth="1.5" strokeDasharray="4 9" />
+          <circle cx={cx} cy={cy} r={ring + 108} fill="none" stroke="#26201c" strokeOpacity="0.08" strokeWidth="1.5" strokeDasharray="3 11" />
+        </g>
+        {nodes.map((node) => (
+          <g key={node.label}>
+            <line className="c-line" x1={cx} y1={cy} x2={node.x} y2={node.y} stroke={node.color} strokeWidth="3" strokeLinecap="round" />
+            {node.outer.map((pt, i) => (
+              <line key={i} className="c-line c-line-outer" x1={node.x} y1={node.y} x2={pt.x} y2={pt.y} stroke={node.color} strokeWidth="2" strokeLinecap="round" />
+            ))}
+          </g>
+        ))}
+        {nodes.map((node, index) => (
+          <g key={node.label} className="c-node" style={{ '--i': index, transformOrigin: `${node.x}px ${node.y}px` }}>
+            {node.outer.map((pt, i) => (
+              <g key={i} className="c-outer" style={{ '--i': index * 2 + i, transformOrigin: `${pt.x}px ${pt.y}px` }}>
+                <circle cx={pt.x} cy={pt.y} r="16" fill="#fffdf7" stroke={node.color} strokeWidth="3" />
+                <circle cx={pt.x} cy={pt.y} r="5" fill={node.color} opacity="0.7" />
+              </g>
+            ))}
+            <circle cx={node.x} cy={node.y} r="46" fill="#fffdf7" stroke={node.color} strokeWidth="5" />
+            <circle cx={node.x} cy={node.y} r="36" fill={node.color} opacity="0.12" />
+            <text x={node.x} y={node.y + 5} textAnchor="middle" className="c-label">
+              {node.label}
+            </text>
+          </g>
+        ))}
+        <g className="c-center" style={{ transformOrigin: `${cx}px ${cy}px` }}>
+          <circle cx={cx} cy={cy} r="74" fill="#26201c" />
+          <circle cx={cx} cy={cy} r="62" fill="#fffdf7" />
+          <text x={cx} y={cy - 2} textAnchor="middle" className="c-you">
+            You
+          </text>
+          <text x={cx} y={cy + 20} textAnchor="middle" className="c-you-sub">
+            my oikos
+          </text>
+        </g>
+      </svg>
+      <div className="hero-map-note">
+        <span><Compass size={16} aria-hidden="true" /> Your mission field</span>
+        <strong>Closer than you think.</strong>
+        <small>Start with one name, one prayer, one next step.</small>
+      </div>
+    </div>
+  );
+}
+
+// ---- Homepage teasers. The full sections live on /about, /network and /faq. ----
+
+function RhythmStrip() {
+  return (
+    <section className="rhythm-strip" id="rhythm" aria-labelledby="rhythm-title" data-reveal>
+      <div className="rhythm-head">
+        <p className="section-kicker">
+          <WandSparkles size={18} aria-hidden="true" />
+          A simple rhythm
+        </p>
+        <h2 id="rhythm-title">From a name on a page to a life touched by love.</h2>
+      </div>
+      <ol className="rhythm-steps">
+        {stages.map((stage, index) => (
+          <li key={stage.id} className={`rhythm-step rhythm-${stage.id}`}>
+            <span className="rhythm-number">0{index + 1}</span>
+            <strong>{stage.label}</strong>
+            <p>{stage.prompt}</p>
+          </li>
+        ))}
+      </ol>
+      <a className="secondary-action rhythm-link" href="/about">
+        <ArrowRight size={18} aria-hidden="true" />
+        Why the map works
+      </a>
+    </section>
+  );
+}
+
+function WhyTeaser() {
+  return (
+    <section className="why-teaser" id="why" aria-labelledby="why-title" data-reveal>
+      <div className="why-copy">
+        <p className="section-kicker">
+          <Globe2 size={18} aria-hidden="true" />
+          Why this matters
+        </p>
+        <h2 id="why-title">A name on your map can become an encounter.</h2>
+        <p>
+          The Gospel is spreading, but the mission is still unfinished. An Oikos Map helps ordinary believers turn
+          compassion into prayer, friendship, testimony, and discipleship — starting with the people already around them.
+        </p>
+        <div className="why-actions">
+          <a className="primary-action" href="/about">
+            <ArrowRight size={18} aria-hidden="true" />
+            The heart behind the map
+          </a>
+          <a className="secondary-action" href="/about#jesus">
+            <HeartHandshake size={18} aria-hidden="true" />
+            New to Jesus? Start here
+          </a>
+        </div>
+      </div>
+      <div className="why-stats">
+        {missionStats.slice(0, 2).map((stat) => (
+          <article key={stat.label}>
+            <strong>{stat.value}</strong>
+            <span>{stat.label}</span>
+          </article>
+        ))}
+        <a className="stat-source" href="https://www.loveonmission.world/" target="_blank" rel="noopener">
+          Stats via Love on Mission
+        </a>
+      </div>
+    </section>
+  );
+}
+
+function NetworkTeaser() {
+  // Counts the map itself: it is one of the family, not outside it.
+  const total = networkSites.length;
+  return (
+    <section className="network-teaser" id="network" aria-labelledby="network-teaser-title" data-reveal>
+      <div>
+        <p className="section-kicker">
+          <Globe2 size={18} aria-hidden="true" />
+          One family, many doors
+        </p>
+        <h2 id="network-teaser-title">You are not doing this alone.</h2>
+        <p>
+          This map is one small piece of a family of {total} free tools, communities, and initiatives — all aimed at the
+          same thing. Wherever your next step is, there is probably a door here for it.
+        </p>
+      </div>
+      <nav className="network-chips" aria-label="Network groups">
+        {networkGroups.map((group) => (
+          <a key={group.id} href={`/network#group-${group.id}`}>
+            <strong>{group.label}</strong>
+            <span>{sitesInGroup(group.id).length} sites</span>
+          </a>
+        ))}
+        <a className="network-all" href="/network">
+          Explore the whole network <ArrowRight size={16} aria-hidden="true" />
+        </a>
+      </nav>
+    </section>
+  );
+}
+
+function FaqTeaser() {
+  return (
+    <section className="faq-teaser" id="faq" aria-labelledby="faq-teaser-title" data-reveal>
+      <div>
+        <p className="section-kicker">
+          <BookOpen size={18} aria-hidden="true" />
+          Common questions
+        </p>
+        <h2 id="faq-teaser-title">Three things people ask first.</h2>
+        <a className="secondary-action" href="/faq">
+          <ArrowRight size={18} aria-hidden="true" />
+          All {faqItems.length} questions
+        </a>
+      </div>
+      <div className="faq-list">
+        {faqItems.slice(0, 3).map((item, index) => (
+          <details key={item.question} open={index === 0}>
+            <summary>{item.question}</summary>
+            <p>{item.answer}</p>
+          </details>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+// ---- Sections moved from the homepage to /about, verbatim. ----
+
+function MapMethod() {
+  return (
+    <section className="map-method" aria-labelledby="method-title" data-reveal>
+      <div className="method-heading">
+        <p className="section-kicker"><WandSparkles size={18} aria-hidden="true" /> A simple rhythm for everyday mission</p>
+        <h2 id="method-title">From a name on a page to a life touched by love.</h2>
+        <p>There is no pressure to have every answer. The map simply helps you notice, pray, and take the next faithful step.</p>
+      </div>
+      <div className="method-path" aria-label="The Oikos mission pathway">
+        {stages.map((stage, index) => (
+          <article key={stage.id}>
+            <span className="method-number">0{index + 1}</span>
+            <div className="method-dot" aria-hidden="true" />
+            <h3>{stage.label}</h3>
+            <p>{stage.prompt}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function VisionSection() {
+  return (
+    <section className="vision" id="vision" aria-labelledby="vision-title" data-reveal>
+      <div>
+        <p className="section-kicker">The heart</p>
+        <h2 id="vision-title">An Oikos Map helps love become specific.</h2>
+      </div>
+      <div className="vision-grid">
+        <article>
+          <span>01</span>
+          <h3>Name your household</h3>
+          <p>
+            Oikos means household: the family, friends, classmates, coworkers, neighbors, and teammates already within
+            your sphere of influence.
+          </p>
+        </article>
+        <article>
+          <span>02</span>
+          <h3>Pray with intention</h3>
+          <p>
+            When the names are visible, prayer becomes personal. You can notice open doors, follow up faithfully, and
+            carry people before God by name.
+          </p>
+        </article>
+        <article>
+          <span>03</span>
+          <h3>See multiplication</h3>
+          <p>
+            Each person has their own relationships. A map reveals how one transformed life can become a branching
+            movement of hope.
+          </p>
+        </article>
+      </div>
+    </section>
+  );
+}
+
+function MissionSection() {
+  return (
+    <section className="mission-pulse" id="mission" aria-labelledby="mission-title" data-reveal>
+      <div className="mission-copy">
+        <p className="section-kicker">
+          <Globe2 size={18} aria-hidden="true" />
+          Why this matters
+        </p>
+        <h2 id="mission-title">A name on your map can become an encounter.</h2>
+        <p>
+          Love on Mission says the Gospel is spreading, but the mission is still unfinished. Jesus' heart is that no
+          one perish, and an Oikos Map helps ordinary believers turn compassion into prayer, friendship, testimony,
+          and discipleship.
+        </p>
+        <a className="secondary-action" href="https://www.loveonmission.world/" target="_blank" rel="noopener">
+          <ArrowDownToLine size={18} aria-hidden="true" />
+          View Love on Mission
+        </a>
+      </div>
+      <div className="mission-stats">
+        {missionStats.map((stat) => (
+          <article key={stat.label}>
+            <strong>{stat.value}</strong>
+            <span>{stat.label}</span>
+            <p>{stat.note}</p>
+          </article>
+        ))}
+        <a className="stat-source" href="https://www.loveonmission.world/" target="_blank" rel="noopener">
+          Stats via Love on Mission dashboard
+        </a>
+      </div>
+    </section>
+  );
+}
+
+function NextStepsSection() {
+  return (
+    <section className="next-steps" id="next-steps" aria-labelledby="next-steps-title" data-reveal>
+      <div className="next-steps-heading">
+        <p className="section-kicker">
+          <Flame size={18} aria-hidden="true" />
+          Take the next step
+        </p>
+        <h2 id="next-steps-title">Do not just map your oikos. Move toward them in love.</h2>
+      </div>
+      <div className="next-step-grid">
+        <article>
+          <Rocket size={28} aria-hidden="true" />
+          <h3>Start an outreach group</h3>
+          <p>
+            Love on The World exists to help believers live on mission, reach their cities, and multiply disciples.
+            Gather a few friends, pray over your map, and begin loving your city together.
+          </p>
+          <a href="https://www.loveontheworld.com" target="_blank" rel="noopener">
+            Start at LoveonTheWorld.com <ArrowRight size={16} aria-hidden="true" />
+          </a>
+        </article>
+        <article>
+          <Crown size={28} aria-hidden="true" />
+          <h3>Impact culture with faith</h3>
+          <p>
+            Your oikos includes workplaces, classrooms, art, media, family, business, and civic life. Seek First World
+            exists to call believers to seek the Kingdom first and help culture reflect God's glory.
+          </p>
+          <a href="https://www.seekfirst.world" target="_blank" rel="noopener">
+            Explore SeekFirst.World <ArrowRight size={16} aria-hidden="true" />
+          </a>
+        </article>
+        <article>
+          <BookOpen size={28} aria-hidden="true" />
+          <h3>Grow for God's glory</h3>
+          <p>
+            Personal growth strengthens the messenger. Build your spirit, mind, body, and purpose so your life carries
+            the love, discipline, and clarity of Jesus into every room you enter.
+          </p>
+          <a href="/growth">
+            Visit the growth page <ArrowRight size={16} aria-hidden="true" />
+          </a>
+        </article>
+        <article>
+          <Globe2 size={28} aria-hidden="true" />
+          <h3>Connect in community</h3>
+          <p>
+            Mission grows stronger in community. Join Kingdom Connect to find encouragement, online community, and
+            people who want to follow Jesus with courage and love.
+          </p>
+          <a href="/connect">
+            Visit the connect page <ArrowRight size={16} aria-hidden="true" />
+          </a>
+        </article>
+      </div>
+    </section>
+  );
+}
+
+function JesusSection() {
+  return (
+    <section className="jesus-section" id="jesus" aria-labelledby="jesus-title" data-reveal>
+      <div>
+        <p className="section-kicker">New to Jesus?</p>
+        <h2 id="jesus-title">Following Jesus starts with surrender, trust, and a new life.</h2>
+        <p>
+          Jesus is not only a teacher or moral example. He is the Son of God, the Savior who died for our sins and
+          rose again. To follow Him means turning from sin, trusting His grace, receiving His forgiveness, and learning
+          to live with Him as Lord.
+        </p>
+        <p>
+          You can begin right now: “Jesus, I believe You died and rose again. Forgive me, lead me, and make me new. I
+          surrender my life to You.”
+        </p>
+      </div>
+      <div className="jesus-card">
+        <span>Simple next steps</span>
+        <ul>
+          <li>Talk to Jesus honestly in prayer.</li>
+          <li>Read the Gospel of John and ask Him to reveal Himself.</li>
+          <li>Tell a Jesus-following friend or pastor about your decision.</li>
+          <li>Join a healthy local church and get baptized.</li>
+        </ul>
+      </div>
+    </section>
+  );
+}
+
+function AboutPage() {
+  return (
+    <main>
+      <ScrollEffects />
+      <SiteHeader current="/about" />
+      <section className="page-hero about-hero">
+        <p className="eyebrow">
+          <HeartHandshake size={18} aria-hidden="true" />
+          The heart behind the map
+        </p>
+        <h1>Why an Oikos Map?</h1>
+        <p className="hero-lede">
+          Oikos is the New Testament word for household — the family, friends, coworkers, classmates, and neighbours
+          already in your everyday world. This page is the why: the rhythm the map is built on, the vision behind it,
+          the bigger mission it serves, and the next steps when you are ready to move toward people in love.
+        </p>
+        <div className="hero-actions">
+          <a className="primary-action" href="/#builder">
+            <Sparkles size={18} aria-hidden="true" />
+            Create your map
+          </a>
+          <a className="secondary-action" href="/blog/oikos-evangelism-guide">
+            <BookOpen size={18} aria-hidden="true" />
+            Read the complete guide
+          </a>
+        </div>
+      </section>
+      <MapMethod />
+      <VisionSection />
+      <MissionSection />
+      <NextStepsSection />
+      <JesusSection />
+      <section className="closing-band" data-reveal>
+        <div>
+          <p>Free to use. Easy to save. Share it with everyone you know so we can change the world together, for God's glory.</p>
+          <span><PoweredBy /> · <CollaborationCredit /></span>
+        </div>
+        <a className="primary-action" href="/#builder">
+          <Sparkles size={18} aria-hidden="true" />
+          Build your map
+        </a>
+      </section>
+      <SiteFooter />
+    </main>
+  );
+}
+
+function FaqPage() {
+  return (
+    <main>
+      <ScrollEffects />
+      <SiteHeader current="/faq" />
+      <section className="page-hero">
+        <p className="eyebrow">
+          <BookOpen size={18} aria-hidden="true" />
+          Frequently asked questions
+        </p>
+        <h1>Oikos Map, explained.</h1>
+        <p className="hero-lede">
+          Short, honest answers about the tool, your privacy, and how to use the map with your church or group. For the
+          words behind the map — oikos, person of peace, the Great Commission — see the{' '}
+          <a href="/blog#key-terms">key terms</a> in the journal.
+        </p>
+      </section>
+      <FaqSection
+        items={faqItems}
+        id="faq"
+        title="Everything you need to know before you begin."
+        lede="If your question is not here, the complete guide to oikos evangelism covers the why and the how in depth."
+      />
+      <section className="closing-band" data-reveal>
+        <div>
+          <p>Still wondering? The Oikos Journal has {sortedPostsMeta.length} practical guides, from praying for one person to reaching a city.</p>
+          <span><PoweredBy /> · <CollaborationCredit /></span>
+        </div>
+        <a className="primary-action" href="/blog/oikos-evangelism-guide">
+          <BookOpen size={18} aria-hidden="true" />
+          Read the complete guide
+        </a>
+      </section>
+      <SiteFooter />
+    </main>
+  );
+}
+
+function NetworkPage() {
+  // Counts the map itself: it is one of the family, not outside it.
+  const total = networkSites.length;
+  return (
+    <main>
+      <ScrollEffects />
+      <SiteHeader current="/network" />
+      <section className="page-hero">
+        <p className="eyebrow">
+          <Globe2 size={18} aria-hidden="true" />
+          One family, many doors
+        </p>
+        <h1>The Kingdom network behind Oikos Map.</h1>
+        <p className="hero-lede">
+          Oikos Map is one of {total} free tools, communities, and initiatives built and given away by the same family,
+          all aimed at one thing: His Kingdom come. Wherever your next step is — going on mission, growing deeper,
+          gathering people, or shaping culture — there is a door here for it.
+        </p>
+      </section>
+      <KingdomNetwork />
+      <section className="closing-band" data-reveal>
+        <div>
+          <p>Every door starts in the same place: the people already around you.</p>
+          <span><PoweredBy /> · <CollaborationCredit /></span>
+        </div>
+        <a className="primary-action" href="/#builder">
+          <Sparkles size={18} aria-hidden="true" />
+          Map your oikos
+        </a>
+      </section>
+      <SiteFooter />
+    </main>
+  );
+}
+
 function App() {
   const [mapData, setMapData] = useState(loadSavedMap);
+  // Phone layout for the SVG (tighter ring, larger type). Read after mount: the
+  // prerendered HTML is the desktop layout and must match on first render.
+  const [compact, setCompact] = useState(false);
+  const [zoomed, setZoomed] = useState(false);
+
+  useEffect(() => {
+    const query = window.matchMedia('(max-width: 860px)');
+    const update = () => setCompact(query.matches);
+    update();
+    query.addEventListener('change', update);
+    return () => query.removeEventListener('change', update);
+  }, []);
   const [selectedId, setSelectedId] = useState(mapData.people[0]?.id ?? null);
   const [saveState, setSaveState] = useState('Saved locally');
   const [searchTerm, setSearchTerm] = useState('');
@@ -1641,7 +2206,7 @@ function App() {
     window.history.replaceState(null, '', window.location.pathname + window.location.search);
   }, []);
 
-  const layout = useMemo(() => computeLayout(mapData.people), [mapData.people]);
+  const layout = useMemo(() => computeLayout(mapData.people, compact), [mapData.people, compact]);
   const selectedPerson = mapData.people.find((person) => person.id === selectedId) || null;
   const selectedStage = selectedPerson ? getStage(selectedPerson.stage) : null;
   const filteredPeople = mapData.people.filter((person) =>
@@ -1974,23 +2539,7 @@ function App() {
   return (
     <main>
       <ScrollEffects />
-      <header className="site-header">
-        <a className="brand" href="#top" aria-label="Oikos Map Builder home">
-          <LogoMark />
-          <span>Oikos Map Builder</span>
-        </a>
-        <nav aria-label="Primary navigation">
-          <a href="#vision">Vision</a>
-          <a href="#mission">Why it matters</a>
-          <a href="#next-steps">Next steps</a>
-          <a href="#builder">Create</a>
-          <a href="/blog">Journal</a>
-          <a href="#network">Network</a>
-          <a href="#faq">FAQ</a>
-          <a href="/growth">Growth</a>
-          <a href="/connect">Connect</a>
-        </nav>
-      </header>
+      <SiteHeader />
 
       <section className="hero" id="top">
         <div className="hero-copy">
@@ -1999,9 +2548,9 @@ function App() {
             Free for every believer, church, youth ministry, and disciple-maker
           </p>
           <h1>
-            <span>See the people</span>
-            <span>God has placed</span>
-            <span>around you.</span>
+            <span>See the people</span>{' '}
+            <span>God has placed</span>{' '}
+            <span className="hero-accent">around you.</span>
           </h1>
           <p className="hero-lede">
             Build a simple, prayerful Oikos Map that turns names into intentional love, conversations, and disciple-making
@@ -2016,226 +2565,23 @@ function App() {
               <Sparkles size={18} aria-hidden="true" />
               Create your map
             </a>
-            <a className="secondary-action" href="#vision">
+            <a className="secondary-action" href="/about">
               <ArrowDownToLine size={18} aria-hidden="true" />
               Read the heart
             </a>
           </div>
+          <ul className="hero-proof" aria-label="What you get">
+            <li><ShieldCheck size={16} aria-hidden="true" /> Free, no account</li>
+            <li><Save size={16} aria-hidden="true" /> Saved on your device</li>
+            <li><BookOpen size={16} aria-hidden="true" /> {sortedPostsMeta.length} practical guides</li>
+            <li><FileText size={16} aria-hidden="true" /> Printable &amp; calendar reminder</li>
+          </ul>
           <p className="powered">
             <PoweredBy /> · <CollaborationCredit />
           </p>
         </div>
 
-        <div className="hero-visual" aria-label="Example Oikos Map preview">
-          <div className="mini-map">
-            <div className="mini-node mini-center">You</div>
-            {['Family', 'Friend', 'Neighbor', 'Coworker', 'Classmate'].map((label, index) => (
-              <div className={`mini-node mini-${index + 1}`} key={label}>
-                {label}
-              </div>
-            ))}
-            <span className="mini-line line-1" />
-            <span className="mini-line line-2" />
-            <span className="mini-line line-3" />
-            <span className="mini-line line-4" />
-            <span className="mini-line line-5" />
-            <div className="hero-map-note">
-              <span><Compass size={16} aria-hidden="true" /> Your mission field</span>
-              <strong>Closer than you think.</strong>
-              <small>Start with one name, one prayer, one next step.</small>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="map-method" aria-labelledby="method-title" data-reveal>
-        <div className="method-heading">
-          <p className="section-kicker"><WandSparkles size={18} aria-hidden="true" /> A simple rhythm for everyday mission</p>
-          <h2 id="method-title">From a name on a page to a life touched by love.</h2>
-          <p>There is no pressure to have every answer. The map simply helps you notice, pray, and take the next faithful step.</p>
-        </div>
-        <div className="method-path" aria-label="The Oikos mission pathway">
-          {stages.map((stage, index) => (
-            <article key={stage.id}>
-              <span className="method-number">0{index + 1}</span>
-              <div className="method-dot" aria-hidden="true" />
-              <h3>{stage.label}</h3>
-              <p>{stage.prompt}</p>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className="vision" id="vision" aria-labelledby="vision-title" data-reveal>
-        <div>
-          <p className="section-kicker">The heart</p>
-          <h2 id="vision-title">An Oikos Map helps love become specific.</h2>
-        </div>
-        <div className="vision-grid">
-          <article>
-            <span>01</span>
-            <h3>Name your household</h3>
-            <p>
-              Oikos means household: the family, friends, classmates, coworkers, neighbors, and teammates already within
-              your sphere of influence.
-            </p>
-          </article>
-          <article>
-            <span>02</span>
-            <h3>Pray with intention</h3>
-            <p>
-              When the names are visible, prayer becomes personal. You can notice open doors, follow up faithfully, and
-              carry people before God by name.
-            </p>
-          </article>
-          <article>
-            <span>03</span>
-            <h3>See multiplication</h3>
-            <p>
-              Each person has their own relationships. A map reveals how one transformed life can become a branching
-              movement of hope.
-            </p>
-          </article>
-        </div>
-      </section>
-
-      <section className="mission-pulse" id="mission" aria-labelledby="mission-title" data-reveal>
-        <div className="mission-copy">
-          <p className="section-kicker">
-            <Globe2 size={18} aria-hidden="true" />
-            Why this matters
-          </p>
-          <h2 id="mission-title">A name on your map can become an encounter.</h2>
-          <p>
-            Love on Mission says the Gospel is spreading, but the mission is still unfinished. Jesus' heart is that no
-            one perish, and an Oikos Map helps ordinary believers turn compassion into prayer, friendship, testimony,
-            and discipleship.
-          </p>
-          <a className="secondary-action" href="https://www.loveonmission.world/" target="_blank" rel="noopener">
-            <ArrowDownToLine size={18} aria-hidden="true" />
-            View Love on Mission
-          </a>
-        </div>
-        <div className="mission-stats">
-          {missionStats.map((stat) => (
-            <article key={stat.label}>
-              <strong>{stat.value}</strong>
-              <span>{stat.label}</span>
-              <p>{stat.note}</p>
-            </article>
-          ))}
-          <a className="stat-source" href="https://www.loveonmission.world/" target="_blank" rel="noopener">
-            Stats via Love on Mission dashboard
-          </a>
-        </div>
-      </section>
-
-      <section className="next-steps" id="next-steps" aria-labelledby="next-steps-title" data-reveal>
-        <div className="next-steps-heading">
-          <p className="section-kicker">
-            <Flame size={18} aria-hidden="true" />
-            Take the next step
-          </p>
-          <h2 id="next-steps-title">Do not just map your oikos. Move toward them in love.</h2>
-        </div>
-        <div className="next-step-grid">
-          <article>
-            <Rocket size={28} aria-hidden="true" />
-            <h3>Start an outreach group</h3>
-            <p>
-              Love on The World exists to help believers live on mission, reach their cities, and multiply disciples.
-              Gather a few friends, pray over your map, and begin loving your city together.
-            </p>
-            <a href="https://www.loveontheworld.com" target="_blank" rel="noopener">
-              Start at LoveonTheWorld.com <ArrowRight size={16} aria-hidden="true" />
-            </a>
-          </article>
-          <article>
-            <Crown size={28} aria-hidden="true" />
-            <h3>Impact culture with faith</h3>
-            <p>
-              Your oikos includes workplaces, classrooms, art, media, family, business, and civic life. Seek First World
-              exists to call believers to seek the Kingdom first and help culture reflect God's glory.
-            </p>
-            <a href="https://www.seekfirst.world" target="_blank" rel="noopener">
-              Explore SeekFirst.World <ArrowRight size={16} aria-hidden="true" />
-            </a>
-          </article>
-          <article>
-            <BookOpen size={28} aria-hidden="true" />
-            <h3>Grow for God's glory</h3>
-            <p>
-              Personal growth strengthens the messenger. Build your spirit, mind, body, and purpose so your life carries
-              the love, discipline, and clarity of Jesus into every room you enter.
-            </p>
-            <a href="/growth">
-              Visit the growth page <ArrowRight size={16} aria-hidden="true" />
-            </a>
-          </article>
-          <article>
-            <Globe2 size={28} aria-hidden="true" />
-            <h3>Connect in community</h3>
-            <p>
-              Mission grows stronger in community. Join Kingdom Connect to find encouragement, online community, and
-              people who want to follow Jesus with courage and love.
-            </p>
-            <a href="/connect">
-              Visit the connect page <ArrowRight size={16} aria-hidden="true" />
-            </a>
-          </article>
-        </div>
-      </section>
-
-      <section className="jesus-section" id="jesus" aria-labelledby="jesus-title" data-reveal>
-        <div>
-          <p className="section-kicker">New to Jesus?</p>
-          <h2 id="jesus-title">Following Jesus starts with surrender, trust, and a new life.</h2>
-          <p>
-            Jesus is not only a teacher or moral example. He is the Son of God, the Savior who died for our sins and
-            rose again. To follow Him means turning from sin, trusting His grace, receiving His forgiveness, and learning
-            to live with Him as Lord.
-          </p>
-          <p>
-            You can begin right now: “Jesus, I believe You died and rose again. Forgive me, lead me, and make me new. I
-            surrender my life to You.”
-          </p>
-        </div>
-        <div className="jesus-card">
-          <span>Simple next steps</span>
-          <ul>
-            <li>Talk to Jesus honestly in prayer.</li>
-            <li>Read the Gospel of John and ask Him to reveal Himself.</li>
-            <li>Tell a Jesus-following friend or pastor about your decision.</li>
-            <li>Join a healthy local church and get baptized.</li>
-          </ul>
-        </div>
-      </section>
-
-      <LatestArticles />
-
-      <KingdomNetwork />
-
-      <FaqSection />
-
-      <section className="lead-section" id="resources" aria-labelledby="resources-title" data-reveal>
-        <div className="lead-pitch">
-          <p className="section-kicker">
-            <Mail size={18} aria-hidden="true" />
-            The Oikos Journey · free
-          </p>
-          <h2 id="resources-title">A map is a good start. Then comes the walk.</h2>
-          <p className="lead-lede">
-            Most of us do not need more information — we need someone walking beside us. So over two weeks we will send you
-            six short emails through the rhythm this whole map is built on: <strong>pray, care, share, disciple</strong>.
-          </p>
-          <p className="lead-lede">
-            No guilt, no pressure, no fundraising. Just encouragement, honest next steps, and the reminder that keeps all of
-            this in proportion: <strong>one plants, another waters, God makes it grow.</strong> You are not carrying the
-            mission — you are playing your part in it.
-          </p>
-          <JourneyTimeline />
-        </div>
-        <LeadCapture mapData={mapData} />
+        <HeroConstellation />
       </section>
 
       <section className="builder-section" id="builder" aria-labelledby="builder-title" data-reveal>
@@ -2252,7 +2598,13 @@ function App() {
         </div>
 
         <div className="builder-shell">
-          <aside className="control-panel" aria-label="Oikos Map controls">
+          <div className="control-panel setup-panel" aria-label="Set up your map">
+            <details className="panel-fold" open={!compact}>
+              <summary>
+                <WandSparkles size={16} aria-hidden="true" />
+                Map title, centre name &amp; templates
+              </summary>
+              <div className="fold-body">
             <label>
               Map title
               <input value={mapData.mapTitle} onChange={(event) => updateMap({ mapTitle: event.target.value })} />
@@ -2280,6 +2632,9 @@ function App() {
                 })}
               </div>
             </div>
+
+              </div>
+            </details>
 
             <div className="bulk-add">
               <div className="panel-title">
@@ -2359,6 +2714,9 @@ function App() {
               </div>
             </div>
 
+          </div>
+
+          <div className="control-panel editor-panel" aria-label="Selected person">
             <div className="person-editor">
               <div className="panel-title">
                 <UserRound size={18} aria-hidden="true" />
@@ -2452,6 +2810,9 @@ function App() {
               )}
             </div>
 
+          </div>
+
+          <div className="control-panel coach-panel" aria-label="Map coach">
             <div className="map-coach" aria-live="polite">
               <div className="coach-heading">
                 <span><Compass size={18} aria-hidden="true" /> Map coach</span>
@@ -2514,6 +2875,15 @@ function App() {
               )}
             </div>
 
+          </div>
+
+          <div className="control-panel tools-panel" aria-label="Save, download and remind">
+            <details className="panel-fold" open={!compact}>
+              <summary>
+                <Download size={16} aria-hidden="true" />
+                Save, download, print &amp; remind
+              </summary>
+              <div className="fold-body">
             <div className="download-actions" aria-label="Save and download actions">
               <button type="button" onClick={saveNow} title="Save in this browser">
                 <Save size={18} aria-hidden="true" />
@@ -2579,7 +2949,9 @@ function App() {
                 <a href="/blog/free-printable-oikos-map-template">how to use it</a>
               </span>
             </p>
-          </aside>
+              </div>
+            </details>
+          </div>
 
           <div className="map-stage">
             <div className="map-journey" aria-label="Oikos map progress">
@@ -2595,17 +2967,67 @@ function App() {
                 ))}
               </div>
             </div>
-            <OikosSvg
-              mapData={mapData}
-              layout={layout}
-              selectedId={selectedId}
-              setSelectedId={setSelectedId}
-              svgRef={svgRef}
-            />
+            <div className="map-toolbar">
+              <button type="button" onClick={() => addPerson(null)}>
+                <Plus size={16} aria-hidden="true" />
+                Add a name
+              </button>
+              <button
+                type="button"
+                className="map-zoom"
+                onClick={() => setZoomed((value) => !value)}
+                aria-pressed={zoomed}
+              >
+                <Search size={16} aria-hidden="true" />
+                {zoomed ? 'Fit to screen' : 'Larger map'}
+              </button>
+              <span className="map-hint">Tap a name to edit it</span>
+            </div>
+            <div className={zoomed ? 'map-canvas zoomed' : 'map-canvas'}>
+              <OikosSvg
+                mapData={mapData}
+                layout={layout}
+                selectedId={selectedId}
+                setSelectedId={setSelectedId}
+                svgRef={svgRef}
+                compact={compact}
+              />
+            </div>
           </div>
         </div>
 
         <BuilderInvite mapData={mapData} />
+      </section>
+
+      <RhythmStrip />
+
+      <LatestArticles />
+
+      <WhyTeaser />
+
+      <NetworkTeaser />
+
+      <FaqTeaser />
+
+      <section className="lead-section" id="resources" aria-labelledby="resources-title" data-reveal>
+        <div className="lead-pitch">
+          <p className="section-kicker">
+            <Mail size={18} aria-hidden="true" />
+            The Oikos Journey · free
+          </p>
+          <h2 id="resources-title">A map is a good start. Then comes the walk.</h2>
+          <p className="lead-lede">
+            Most of us do not need more information — we need someone walking beside us. So over two weeks we will send you
+            six short emails through the rhythm this whole map is built on: <strong>pray, care, share, disciple</strong>.
+          </p>
+          <p className="lead-lede">
+            No guilt, no pressure, no fundraising. Just encouragement, honest next steps, and the reminder that keeps all of
+            this in proportion: <strong>one plants, another waters, God makes it grow.</strong> You are not carrying the
+            mission — you are playing your part in it.
+          </p>
+          <JourneyTimeline />
+        </div>
+        <LeadCapture mapData={mapData} />
       </section>
 
       <section className="closing-band" data-reveal>
@@ -2625,17 +3047,26 @@ function App() {
   );
 }
 
-function OikosSvg({ mapData, layout, selectedId, setSelectedId, svgRef }) {
+function OikosSvg({ mapData, layout, selectedId, setSelectedId, svgRef, compact = false }) {
   const { width, height, center, positions } = layout;
+  // Inline so the PNG/SVG exports carry the same type as the screen.
+  const titleSize = compact ? 30 : 42;
+  const subtitleSize = compact ? 15 : 20;
 
   return (
-    <svg ref={svgRef} viewBox={`0 0 ${width} ${height}`} role="img" aria-label={`${mapData.mapTitle} Oikos Map`}>
+    <svg
+      ref={svgRef}
+      viewBox={`0 0 ${width} ${height}`}
+      className={compact ? 'compact' : undefined}
+      role="img"
+      aria-label={`${mapData.mapTitle} Oikos Map`}
+    >
       <defs>
         <style>{`
-          .svg-title { fill: #26201c; font: 950 42px Inter, Arial, sans-serif; }
-          .svg-subtitle { fill: #5c5047; font: 800 20px Inter, Arial, sans-serif; }
-          .svg-center-label, .svg-person-name { fill: #26201c; font: 950 22px Inter, Arial, sans-serif; }
-          .svg-center-caption, .svg-person-stage { fill: #6a5d52; font: 850 18px Inter, Arial, sans-serif; }
+          .svg-title { fill: #26201c; font: 950 ${titleSize}px Inter, Arial, sans-serif; }
+          .svg-subtitle { fill: #5c5047; font: 800 ${subtitleSize}px Inter, Arial, sans-serif; }
+          .svg-center-label, .svg-person-name { fill: #26201c; font: 950 ${compact ? 26 : 22}px Inter, Arial, sans-serif; }
+          .svg-center-caption, .svg-person-stage { fill: #6a5d52; font: 850 ${compact ? 20 : 18}px Inter, Arial, sans-serif; }
         `}</style>
         <filter id="softShadow" x="-30%" y="-30%" width="160%" height="160%">
           <feDropShadow dx="0" dy="16" stdDeviation="14" floodColor="#2b2118" floodOpacity="0.16" />
@@ -2658,10 +3089,10 @@ function OikosSvg({ mapData, layout, selectedId, setSelectedId, svgRef }) {
         strokeLinecap="round"
         opacity="0.65"
       />
-      <text x="56" y="76" className="svg-title">
+      <text x={compact ? 28 : 56} y={compact ? 48 : 76} className="svg-title">
         {mapData.mapTitle}
       </text>
-      <text x="56" y="112" className="svg-subtitle">
+      <text x={compact ? 28 : 56} y={compact ? 76 : 112} className="svg-subtitle">
         Powered by Love on The World & Thy Kingdom Network
       </text>
 
@@ -2700,7 +3131,9 @@ function OikosSvg({ mapData, layout, selectedId, setSelectedId, svgRef }) {
         if (!position) return null;
         const group = getGroup(person.group);
         const isSelected = selectedId === person.id;
-        const radius = person.parentId ? 52 : 64;
+        // Larger on phones: the compact canvas is scaled to ~50%, so 76 units
+        // renders at about 38px — a comfortable tap target with readable names.
+        const radius = compact ? (person.parentId ? 58 : 76) : person.parentId ? 52 : 64;
         const stageLabel = stages.find((stage) => stage.id === person.stage)?.label || 'Pray';
         return (
           <g
@@ -2743,15 +3176,30 @@ function OikosSvg({ mapData, layout, selectedId, setSelectedId, svgRef }) {
 export const routes = {
   '/connect': () => <ConnectPage />,
   '/growth': () => <GrowthPage />,
+  '/about': () => <AboutPage />,
+  '/faq': () => <FaqPage />,
+  '/network': () => <NetworkPage />,
   '/': () => <App />,
 };
 
-export { App, ConnectPage, GrowthPage };
+// Sections that used to be homepage anchors and now live on their own pages,
+// so old links (/#vision, /#mission …) still land on the content.
+const MOVED_ANCHORS = {
+  '#vision': '/about#vision',
+  '#mission': '/about#mission',
+  '#next-steps': '/about#next-steps',
+  '#jesus': '/about#jesus',
+};
+
+export { App, ConnectPage, GrowthPage, AboutPage, FaqPage, NetworkPage };
 
 // Mount only in the browser; scripts/prerender.mjs imports this module in Node
 // to render the same tree to HTML at build time.
 if (typeof document !== 'undefined') {
   const routePath = window.location.pathname.replace(/\.html$/, '').replace(/\/+$/, '') || '/';
+  if (routePath === '/' && MOVED_ANCHORS[window.location.hash]) {
+    window.location.replace(MOVED_ANCHORS[window.location.hash]);
+  }
   const container = document.getElementById('root');
   const page = (routes[routePath] || routes['/'])();
 

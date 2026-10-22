@@ -24,6 +24,27 @@
 
   </url>
   <url>
+    <loc>https://www.oikosmap.com/about</loc>
+    <lastmod>2026-10-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+
+  </url>
+  <url>
+    <loc>https://www.oikosmap.com/faq</loc>
+    <lastmod>2026-10-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+
+  </url>
+  <url>
+    <loc>https://www.oikosmap.com/network</loc>
+    <lastmod>2026-10-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+
+  </url>
+  <url>
     <loc>https://www.oikosmap.com/connect</loc>
     <lastmod>2026-10-21</lastmod>
     <changefreq>monthly</changefreq>

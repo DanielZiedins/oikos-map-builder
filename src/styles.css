@@ -4442,3 +4442,665 @@ textarea:focus-visible,
     grid-template-columns: 1fr;
   }
 }
+
+/* ======================================================================
+   2026-10-22: lighter homepage, animated hero, phone-first builder.
+   Later rules win over the earlier ones at equal specificity, so the
+   overrides below are deliberate and the older rules are left in place.
+   ====================================================================== */
+
+/* ---------- Hero ---------- */
+.hero {
+  grid-template-columns: minmax(0, 1.05fr) minmax(340px, 0.95fr);
+  min-height: calc(100vh - 78px);
+}
+
+.hero::before {
+  background:
+    radial-gradient(circle at 10% 16%, rgba(243, 207, 116, 0.55), transparent 34%),
+    radial-gradient(circle at 92% 10%, rgba(20, 184, 166, 0.2), transparent 30%),
+    radial-gradient(circle at 74% 94%, rgba(244, 93, 72, 0.16), transparent 34%),
+    radial-gradient(rgba(38, 32, 28, 0.085) 1px, transparent 1.4px) 0 0 / 26px 26px,
+    #fff8ec;
+}
+
+.hero h1 {
+  font-size: clamp(3.1rem, 7vw, 6.3rem);
+  line-height: 0.94;
+  letter-spacing: -2.2px;
+}
+
+.hero h1 span {
+  display: block;
+}
+
+.hero-accent {
+  color: #9c3327;
+}
+
+.hero-proof {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 22px 0 18px;
+  padding: 0;
+  list-style: none;
+}
+
+.hero-proof li {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 34px;
+  padding: 5px 13px;
+  border: 1px solid rgba(72, 57, 43, 0.16);
+  border-radius: 999px;
+  background: rgba(255, 253, 247, 0.8);
+  color: #3b322c;
+  font-size: 0.84rem;
+  font-weight: 800;
+}
+
+.hero-proof svg {
+  color: #0e7268;
+}
+
+.hero-visual {
+  position: relative;
+  min-height: 0;
+}
+
+.constellation {
+  display: block;
+  width: 100%;
+  max-width: 640px;
+  height: auto;
+  margin: 0 auto;
+  overflow: visible;
+}
+
+.c-label {
+  fill: #26201c;
+  font: 900 17px InterVariable, Inter, Arial, sans-serif;
+}
+
+.c-you {
+  fill: #26201c;
+  font: 950 22px InterVariable, Inter, Arial, sans-serif;
+}
+
+.c-you-sub {
+  fill: #6a5d52;
+  font: 800 12px InterVariable, Inter, Arial, sans-serif;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.c-line {
+  stroke-dasharray: 7 11;
+  animation: dashFlow 3.2s linear infinite;
+}
+
+.c-line-outer {
+  stroke-dasharray: 4 9;
+  opacity: 0.7;
+}
+
+.c-node {
+  animation: nodeFloat 7s ease-in-out infinite;
+  animation-delay: calc(var(--i) * -1.4s);
+}
+
+.c-outer {
+  animation: nodeFloat 9s ease-in-out infinite;
+  animation-delay: calc(var(--i) * -0.9s);
+}
+
+.c-center {
+  animation: centerBreathe 6s ease-in-out infinite;
+}
+
+.c-glow {
+  animation: glowPulse 7s ease-in-out infinite;
+  transform-origin: 320px 320px;
+}
+
+.c-orbit {
+  animation: orbitSpin 90s linear infinite;
+}
+
+.hero-visual .hero-map-note {
+  position: absolute;
+  left: 0;
+  bottom: 4%;
+  margin: 0;
+  animation: noteFloat 8s ease-in-out infinite;
+}
+
+@keyframes nodeFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-9px);
+  }
+}
+
+@keyframes centerBreathe {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.045);
+  }
+}
+
+@keyframes glowPulse {
+  0%,
+  100% {
+    transform: scale(0.92);
+    opacity: 0.8;
+  }
+
+  50% {
+    transform: scale(1.08);
+    opacity: 1;
+  }
+}
+
+@keyframes orbitSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes dashFlow {
+  to {
+    stroke-dashoffset: -36;
+  }
+}
+
+/* ---------- Sub-page heroes (/about, /faq, /network) ---------- */
+.page-hero {
+  max-width: 1000px;
+  padding: clamp(54px, 8vw, 100px) clamp(18px, 4vw, 56px) clamp(30px, 5vw, 56px);
+}
+
+.page-hero h1 {
+  margin: 12px 0 18px;
+  font-size: clamp(2.6rem, 5.6vw, 4.8rem);
+  line-height: 0.98;
+  letter-spacing: -1.5px;
+}
+
+.page-hero .hero-lede {
+  max-width: 760px;
+}
+
+.page-hero .hero-lede a {
+  color: #0e7268;
+  font-weight: 800;
+}
+
+.page-hero .hero-actions {
+  margin-top: 26px;
+}
+
+/* ---------- Rhythm strip ---------- */
+.rhythm-strip {
+  padding: clamp(46px, 7vw, 84px) clamp(18px, 4vw, 56px);
+  background: #fffdf7;
+}
+
+.rhythm-head {
+  max-width: 760px;
+  margin-bottom: 26px;
+}
+
+.rhythm-head h2 {
+  font-size: clamp(1.9rem, 3.6vw, 3rem);
+  line-height: 1.1;
+}
+
+.rhythm-steps {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.rhythm-step {
+  padding: 20px 20px 18px;
+  border: 1px solid rgba(72, 57, 43, 0.13);
+  border-top: 4px solid var(--stage, #f3cf74);
+  border-radius: 10px;
+  background: #fff8ec;
+}
+
+.rhythm-pray {
+  --stage: #14b8a6;
+}
+
+.rhythm-care {
+  --stage: #f3cf74;
+}
+
+.rhythm-share {
+  --stage: #f45d48;
+}
+
+.rhythm-disciple {
+  --stage: #516cf0;
+}
+
+.rhythm-number {
+  color: #9c3327;
+  font-size: 0.76rem;
+  font-weight: 950;
+  letter-spacing: 0.12em;
+}
+
+.rhythm-step strong {
+  display: block;
+  margin: 6px 0 4px;
+  font-size: 1.25rem;
+}
+
+.rhythm-step p {
+  margin: 0;
+  color: #62564e;
+  line-height: 1.55;
+}
+
+.rhythm-link {
+  margin-top: 18px;
+}
+
+/* ---------- Why teaser ---------- */
+.why-teaser {
+  display: grid;
+  grid-template-columns: minmax(280px, 1.25fr) minmax(260px, 0.75fr);
+  gap: clamp(26px, 5vw, 70px);
+  align-items: center;
+  padding: clamp(54px, 8vw, 100px) clamp(18px, 4vw, 56px);
+  color: #fff8ec;
+  background:
+    radial-gradient(circle at 88% 20%, rgba(243, 207, 116, 0.16), transparent 36%),
+    #26201c;
+}
+
+.why-teaser .section-kicker {
+  color: #f3cf74;
+}
+
+.why-copy h2 {
+  color: #fff8ec;
+  font-size: clamp(2rem, 4vw, 3.3rem);
+  line-height: 1.06;
+}
+
+.why-copy > p:not(.section-kicker) {
+  max-width: 640px;
+  margin: 18px 0 24px;
+  color: rgba(255, 248, 236, 0.78);
+  font-size: 1.08rem;
+  line-height: 1.65;
+}
+
+.why-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.why-actions .primary-action {
+  color: #171310;
+  background: #f3cf74;
+}
+
+.why-actions .secondary-action {
+  color: #fff8ec;
+  border-color: rgba(255, 248, 236, 0.24);
+  background: rgba(255, 248, 236, 0.06);
+}
+
+.why-stats {
+  display: grid;
+  gap: 12px;
+}
+
+.why-stats article {
+  padding: 20px 22px;
+  border: 1px solid rgba(255, 248, 236, 0.14);
+  border-radius: 10px;
+  background: rgba(255, 248, 236, 0.05);
+}
+
+.why-stats strong {
+  display: block;
+  color: #f3cf74;
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  line-height: 1;
+}
+
+.why-stats span {
+  color: rgba(255, 248, 236, 0.8);
+  font-weight: 700;
+}
+
+.why-stats .stat-source {
+  color: rgba(255, 248, 236, 0.6);
+  font-size: 0.8rem;
+}
+
+/* ---------- Network teaser ---------- */
+.network-teaser {
+  display: grid;
+  grid-template-columns: minmax(280px, 0.8fr) minmax(300px, 1.2fr);
+  gap: clamp(26px, 5vw, 70px);
+  align-items: start;
+  padding: clamp(54px, 8vw, 100px) clamp(18px, 4vw, 56px);
+  background: #fff8ec;
+}
+
+.network-teaser h2 {
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  line-height: 1.06;
+}
+
+.network-teaser > div > p:not(.section-kicker) {
+  margin: 16px 0 0;
+  color: #62564e;
+  font-size: 1.06rem;
+  line-height: 1.65;
+}
+
+.network-chips {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 10px;
+}
+
+.network-chips a {
+  display: grid;
+  gap: 2px;
+  min-height: 64px;
+  padding: 12px 16px;
+  border: 1px solid rgba(72, 57, 43, 0.14);
+  border-radius: 10px;
+  background: #fffdf7;
+  color: #26201c;
+  text-decoration: none;
+  transition: transform 160ms ease, border-color 160ms ease;
+}
+
+.network-chips a:hover {
+  transform: translateY(-2px);
+  border-color: #0e7268;
+}
+
+.network-chips a span {
+  color: #6a5d52;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.network-chips .network-all {
+  grid-column: 1 / -1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 48px;
+  color: #fff8ec;
+  background: #26201c;
+  font-weight: 900;
+}
+
+/* ---------- FAQ teaser ---------- */
+.faq-teaser {
+  display: grid;
+  grid-template-columns: minmax(280px, 0.72fr) minmax(320px, 1.28fr);
+  gap: clamp(28px, 5vw, 80px);
+  align-items: start;
+  padding: clamp(54px, 8vw, 100px) clamp(18px, 4vw, 56px);
+  background:
+    linear-gradient(120deg, rgba(243, 207, 116, 0.22), transparent 38%),
+    #fff8ec;
+}
+
+.faq-teaser h2 {
+  margin-bottom: 18px;
+  font-size: clamp(1.9rem, 3.6vw, 3rem);
+  line-height: 1.1;
+}
+
+/* ---------- Builder: panels, folds, toolbar, phone map ---------- */
+.builder-shell {
+  grid-template-columns: minmax(300px, 390px) minmax(0, 1fr);
+  grid-template-areas:
+    "setup map"
+    "editor map"
+    "coach map"
+    "tools map";
+}
+
+.setup-panel {
+  grid-area: setup;
+}
+
+.editor-panel {
+  grid-area: editor;
+}
+
+.coach-panel {
+  grid-area: coach;
+}
+
+.tools-panel {
+  grid-area: tools;
+}
+
+.map-stage {
+  grid-area: map;
+  position: sticky;
+  top: 86px;
+  align-self: start;
+}
+
+.panel-fold {
+  border: 0;
+}
+
+.panel-fold summary {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 40px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: rgba(255, 248, 236, 0.06);
+  color: #f3cf74;
+  font-size: 0.76rem;
+  font-weight: 950;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  list-style: none;
+  cursor: pointer;
+}
+
+.panel-fold summary::-webkit-details-marker {
+  display: none;
+}
+
+.panel-fold summary::after {
+  content: "+";
+  margin-left: auto;
+  font-size: 1.1rem;
+}
+
+.panel-fold[open] summary::after {
+  content: "–";
+}
+
+.fold-body {
+  display: grid;
+  gap: 16px;
+  padding-top: 14px;
+}
+
+.map-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin: 0 4px 10px;
+}
+
+.map-toolbar button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 38px;
+  padding: 6px 13px;
+  border-radius: 8px;
+  color: #171310;
+  background: #f3cf74;
+  font-size: 0.8rem;
+  font-weight: 900;
+}
+
+.map-toolbar .map-zoom {
+  display: none;
+  color: rgba(255, 248, 236, 0.9);
+  background: rgba(255, 248, 236, 0.1);
+}
+
+.map-hint {
+  margin-left: auto;
+  color: rgba(255, 248, 236, 0.6);
+  font-size: 0.78rem;
+}
+
+/* Lucide icons inside the toolbar must not inherit the map canvas sizing. */
+.map-stage .map-toolbar svg {
+  width: 16px;
+  height: 16px;
+  min-width: 0;
+  min-height: 0;
+}
+
+.map-canvas svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+@media (max-width: 860px) {
+  .builder-shell {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "map"
+      "editor"
+      "coach"
+      "setup"
+      "tools";
+  }
+
+  .map-stage {
+    position: static;
+    overflow: visible;
+  }
+
+  /* A fixed aspect box: the desktop layout prerendered into the HTML and the
+     compact layout React swaps in after mount both fit it, so nothing below
+     the map moves when the swap happens. */
+  .map-canvas {
+    aspect-ratio: 6 / 7;
+  }
+
+  .map-canvas svg,
+  .map-stage svg {
+    width: 100%;
+    height: 100%;
+    min-width: 0;
+    min-height: 0;
+  }
+
+  .map-canvas.zoomed {
+    aspect-ratio: auto;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .map-canvas.zoomed svg {
+    width: 185%;
+    height: auto;
+  }
+
+  .map-toolbar .map-zoom {
+    display: inline-flex;
+  }
+
+  .map-hint {
+    flex-basis: 100%;
+    margin-left: 0;
+  }
+
+  .hero {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+
+  .hero-visual {
+    min-height: 0;
+  }
+
+  .constellation {
+    max-width: 440px;
+  }
+
+  .hero-visual .hero-map-note {
+    position: static;
+    margin: 12px auto 0;
+  }
+
+  .rhythm-steps {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .why-teaser,
+  .network-teaser,
+  .faq-teaser {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 620px) {
+  .rhythm-steps {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-proof li {
+    font-size: 0.78rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .c-node,
+  .c-outer,
+  .c-center,
+  .c-glow,
+  .c-orbit,
+  .c-line,
+  .hero-visual .hero-map-note {
+    animation: none;
+  }
+}
