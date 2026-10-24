@@ -2599,6 +2599,41 @@ function App() {
 
         <div className="builder-shell">
           <div className="control-panel setup-panel" aria-label="Set up your map">
+            <div className="bulk-add">
+              <div className="panel-title">
+                <Users size={18} aria-hidden="true" />
+                <span>Add several at once</span>
+              </div>
+              <label className="bulk-label">
+                Paste or type names, one per line or comma separated
+                <textarea
+                  rows="3"
+                  value={bulkText}
+                  onChange={(event) => setBulkText(event.target.value)}
+                  placeholder={'Mum\nJordan, Sam\nLeah'}
+                />
+              </label>
+              <div className="bulk-row">
+                <label>
+                  Circle
+                  <select value={bulkGroup} onChange={(event) => setBulkGroup(event.target.value)}>
+                    {groups.map((group) => (
+                      <option value={group.id} key={group.id}>
+                        {group.label}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+                <button type="button" onClick={addManyPeople} disabled={!parseNameList(bulkText).length}>
+                  <UserPlus size={17} aria-hidden="true" />
+                  {(() => {
+                    const count = parseNameList(bulkText).length;
+                    return count ? `Add ${count}` : 'Add names';
+                  })()}
+                </button>
+              </div>
+            </div>
+
             <details className="panel-fold" open={!compact}>
               <summary>
                 <WandSparkles size={16} aria-hidden="true" />
@@ -2635,41 +2670,6 @@ function App() {
 
               </div>
             </details>
-
-            <div className="bulk-add">
-              <div className="panel-title">
-                <Users size={18} aria-hidden="true" />
-                <span>Add several at once</span>
-              </div>
-              <label className="bulk-label">
-                Paste or type names, one per line or comma separated
-                <textarea
-                  rows="3"
-                  value={bulkText}
-                  onChange={(event) => setBulkText(event.target.value)}
-                  placeholder={'Mum\nJordan, Sam\nLeah'}
-                />
-              </label>
-              <div className="bulk-row">
-                <label>
-                  Circle
-                  <select value={bulkGroup} onChange={(event) => setBulkGroup(event.target.value)}>
-                    {groups.map((group) => (
-                      <option value={group.id} key={group.id}>
-                        {group.label}
-                      </option>
-                    ))}
-                  </select>
-                </label>
-                <button type="button" onClick={addManyPeople} disabled={!parseNameList(bulkText).length}>
-                  <UserPlus size={17} aria-hidden="true" />
-                  {(() => {
-                    const count = parseNameList(bulkText).length;
-                    return count ? `Add ${count}` : 'Add names';
-                  })()}
-                </button>
-              </div>
-            </div>
 
             <div className="button-row">
               <button type="button" onClick={() => addPerson(null)} title="Add first-circle person">

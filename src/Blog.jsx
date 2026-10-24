@@ -179,8 +179,14 @@ function NetworkMentions({ hosts }) {
 
 // The journal laid out along Pray → Care → Share → Disciple. Organises a growing
 // library without hiding anything: the full filterable list still follows.
+// On phones each stage shows its first PATH_PREVIEW titles (CSS, so the
+// prerendered page is already short and nothing jumps); "Show all" opens the
+// rest. Every link stays in the HTML, so crawlers still see the whole path.
+const PATH_PREVIEW = 2;
+
 function ReadingPath() {
   const bySlug = Object.fromEntries(sortedPostsMeta.map((post) => [post.slug, post]));
+  const [openStages, setOpenStages] = useState({});
   return (
     <section className="reading-path" aria-labelledby="reading-path-title">
       <div className="reading-path-head">
@@ -195,7 +201,10 @@ function ReadingPath() {
       </div>
       <ol className="reading-path-steps">
         {readingPath.map((stage, index) => (
-          <li key={stage.id} className={`reading-step step-${stage.id}`}>
+          <li
+            key={stage.id}
+            className={`reading-step step-${stage.id}${openStages[stage.id] ? ' expanded' : ''}`}
+          >
             <span className="reading-step-number" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
             <h3>{stage.label}</h3>
             <p>{stage.note}</p>
@@ -211,6 +220,16 @@ function ReadingPath() {
                 ) : null,
               )}
             </ul>
+            {stage.slugs.length > PATH_PREVIEW ? (
+              <button
+                type="button"
+                className="reading-step-more"
+                aria-expanded={Boolean(openStages[stage.id])}
+                onClick={() => setOpenStages((open) => ({ ...open, [stage.id]: !open[stage.id] }))}
+              >
+                {openStages[stage.id] ? 'Show fewer' : `Show all ${stage.slugs.length}`}
+              </button>
+            ) : null}
           </li>
         ))}
       </ol>
@@ -255,6 +274,8 @@ function tagCounts() {
   return [...counts.entries()].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
 }
 
+const LIST_PREVIEW = 12;
+
 export function BlogIndex() {
   // Read the tag from the hash so a filtered view can be linked and the back
   // button behaves. Filtering stays client-side: with eight posts, per-tag URLs
@@ -286,6 +307,11 @@ export function BlogIndex() {
 
   const tags = tagCounts();
   const visible = activeTag ? sortedPostsMeta.filter((post) => (post.tags || []).includes(activeTag)) : sortedPostsMeta;
+  // The first LIST_PREVIEW cards show by default; the rest are in the HTML (for
+  // crawlers and no-JS readers) but hidden by CSS until "Show all". A topic
+  // filter always shows every match.
+  const [showAll, setShowAll] = useState(false);
+  const collapsed = !activeTag && !showAll && visible.length > LIST_PREVIEW;
 
   return (
     <main>
@@ -339,7 +365,7 @@ export function BlogIndex() {
           : `All ${sortedPostsMeta.length} articles`}
       </p>
 
-      <section className="blog-list" aria-label="Articles">
+      <section className={collapsed ? 'blog-list collapsed' : 'blog-list'} id="articles" aria-label="Articles">
         {visible.map((post, index) => (
           <article key={post.slug} className={index === 0 ? 'blog-card featured' : 'blog-card'}>
             <p className="blog-card-kicker">{post.kicker}</p>
@@ -366,6 +392,18 @@ export function BlogIndex() {
           </article>
         ))}
       </section>
+
+      {collapsed ? (
+        <div className="blog-list-more">
+          <button type="button" className="secondary-action" onClick={() => setShowAll(true)}>
+            <BookOpen size={18} aria-hidden="true" />
+            Show all {visible.length} articles
+          </button>
+          <span>
+            or start with <a href="/blog/oikos-evangelism-guide">the complete guide</a>, which links every one in order
+          </span>
+        </div>
+      ) : null}
 
       <KeyTerms />
 
