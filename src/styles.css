@@ -4465,9 +4465,13 @@ textarea:focus-visible,
 }
 
 .hero h1 {
-  font-size: clamp(3.1rem, 7vw, 6.3rem);
+  /* Sized so each of the three lines ("See the people / God has placed /
+     around you.") fits its column with room to spare. At 7vw the lines sat
+     within a pixel or two of the column edge, so desktop rendered five ragged
+     lines and the font swap flipped the wraps (CLS 0.035). */
+  font-size: clamp(3.1rem, 5.9vw, 5.7rem);
   line-height: 0.94;
-  letter-spacing: -2.2px;
+  letter-spacing: -2px;
 }
 
 .hero h1 span {
@@ -4570,9 +4574,12 @@ textarea:focus-visible,
 }
 
 .hero-visual .hero-map-note {
+  /* Top-left is the one corner of the constellation with no nodes in it. */
   position: absolute;
-  left: 0;
-  bottom: 4%;
+  left: -7%;
+  top: 2%;
+  right: auto;
+  bottom: auto;
   margin: 0;
   animation: noteFloat 8s ease-in-out infinite;
 }
@@ -5061,6 +5068,11 @@ textarea:focus-visible,
     min-height: auto;
   }
 
+  /* Single column on tablets: let the headline use the width it now has. */
+  .hero h1 {
+    font-size: clamp(3.1rem, 9vw, 4.8rem);
+  }
+
   .hero-visual {
     min-height: 0;
   }
@@ -5201,5 +5213,13 @@ textarea:focus-visible,
 
   .key-term dd {
     font-size: 0.9rem;
+  }
+}
+
+/* Small Android phones (360px): keep the hero to its three designed lines. */
+@media (max-width: 380px) {
+  .hero h1 {
+    font-size: 2.85rem;
+    letter-spacing: -1.4px;
   }
 }
