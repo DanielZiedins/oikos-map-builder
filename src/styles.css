@@ -5223,3 +5223,25 @@ textarea:focus-visible,
     letter-spacing: -1.4px;
   }
 }
+
+/* The hero eyebrow sat on the same knife-edge as the headline: one line in
+   Inter, two in the system fallback, so the font swap moved the hero 17px. */
+.hero .eyebrow {
+  flex-wrap: nowrap;
+  align-items: flex-start;
+  letter-spacing: 0.07em;
+  line-height: 1.35;
+}
+
+.hero .eyebrow svg {
+  flex: none;
+  margin-top: 0.05em;
+}
+
+/* Two lines reserved on desktop: whichever font is showing, the box is the
+   same height, so the swap cannot move anything below it. */
+@media (min-width: 861px) {
+  .hero .eyebrow {
+    min-height: 2.7em;
+  }
+}
