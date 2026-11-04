@@ -20,13 +20,13 @@ function utcStamp(date) {
 }
 
 // TEXT values escape backslash, semicolon, comma and newlines (RFC 5545 3.3.11).
-function escapeText(value) {
+export function escapeText(value) {
   return String(value).replace(/\\/g, '\\\\').replace(/;/g, '\\;').replace(/,/g, '\\,').replace(/\r?\n/g, '\\n');
 }
 
 // Lines longer than 75 octets are folded with CRLF + space (RFC 5545 3.1),
 // counting UTF-8 bytes so accented names and emoji are not split mid-character.
-function fold(line) {
+export function fold(line) {
   const encoder = new TextEncoder();
   if (encoder.encode(line).length <= 75) return line;
   const parts = [];

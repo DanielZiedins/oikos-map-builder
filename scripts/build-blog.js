@@ -28,6 +28,8 @@ const { posts, sortedPosts, readingMinutes } = await import(resolve(root, 'src/c
 }
 const { relatedMap, readingPath } = await import(resolve(root, 'src/content/posts-meta.js'));
 const { glossary } = await import(resolve(root, 'src/content/glossary.js'));
+const { adventDays } = await import(resolve(root, 'src/content/advent.js'));
+const { escapeText, fold } = await import(resolve(root, 'src/reminder.js'));
 
 // Every article needs its own social preview (npm run og writes them).
 {
@@ -396,7 +398,7 @@ posts.forEach((post) => {
 // Bump CONTENT_UPDATED when the hub pages themselves change; article dates come
 // from posts-meta. The journal index changes whenever an article is added, so
 // it takes whichever is newer.
-const CONTENT_UPDATED = '2026-10-21';
+const CONTENT_UPDATED = '2026-11-04';
 const latestPost = posts.map((post) => post.date).sort().at(-1);
 const today = [CONTENT_UPDATED, latestPost].sort().at(-1);
 const urls = [
@@ -671,6 +673,40 @@ ${networkSites
 ${llms.llmsAttribution}
 `,
 );
+
+// The Advent prayer calendar: 25 all-day events, Dec 1–25, repeating yearly so
+// the file never goes stale. Text comes from src/content/advent.js, the same
+// module the article renders.
+{
+  const pad = (n) => String(n).padStart(2, '0');
+  const lines = [
+    'BEGIN:VCALENDAR',
+    'VERSION:2.0',
+    'PRODID:-//Oikos Map//Advent prayer calendar//EN',
+    'CALSCALE:GREGORIAN',
+    'METHOD:PUBLISH',
+    `X-WR-CALNAME:${escapeText('Advent prayer for my oikos')}`,
+  ];
+  for (const d of adventDays) {
+    const next = d.day === 25 ? '20261226' : `202612${pad(d.day + 1)}`;
+    lines.push(
+      'BEGIN:VEVENT',
+      `UID:advent-${pad(d.day)}@oikosmap.com`,
+      'DTSTAMP:20261104T120000Z',
+      `DTSTART;VALUE=DATE:202612${pad(d.day)}`,
+      `DTEND;VALUE=DATE:${next}`,
+      'RRULE:FREQ=YEARLY',
+      `SUMMARY:${escapeText(`Advent ${d.day}: pray for your oikos (${d.ref})`)}`,
+      `DESCRIPTION:${escapeText(`"${d.text}" (${d.ref}, NIV)\n\nPray over each person on your map by name: ${d.prayer}\n\nAll 25 days: ${SITE}/blog/advent-prayer-calendar-for-your-oikos`)}`,
+      `URL:${SITE}/blog/advent-prayer-calendar-for-your-oikos`,
+      'TRANSP:TRANSPARENT',
+      'END:VEVENT',
+    );
+  }
+  lines.push('END:VCALENDAR');
+  mkdirSync(resolve(root, 'public/downloads'), { recursive: true });
+  writeFileSync(resolve(root, 'public/downloads/advent-prayer-calendar.ics'), `${lines.map(fold).join('\r\n')}\r\n`);
+}
 
 console.log(
   `build-blog: generated blog.html + ${posts.length} posts + sitemap (${urls.length} urls) + rss (${sortedPosts.length} items) + llms.txt/llms-full.txt`,

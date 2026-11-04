@@ -1,0 +1,389 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Oikos Map//Advent prayer calendar//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Advent prayer for my oikos
+BEGIN:VEVENT
+UID:advent-01@oikosmap.com
+DTSTAMP:20261104T120000Z
+DTSTART;VALUE=DATE:20261201
+DTEND;VALUE=DATE:20261202
+RRULE:FREQ=YEARLY
+SUMMARY:Advent 1: pray for your oikos (Isaiah 9:2)
+DESCRIPTION:"The people walking in darkness have seen a great light\; on th
+ ose living in the land of deep darkness a light has dawned." (Isaiah 9:2\,
+  NIV)\n\nPray over each person on your map by name: Light of the world\, d
+ awn on each person on my map this Christmas.\n\nAll 25 days: https://www.o
+ ikosmap.com/blog/advent-prayer-calendar-for-your-oikos
+URL:https://www.oikosmap.com/blog/advent-prayer-calendar-for-your-oikos
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:advent-02@oikosmap.com
+DTSTAMP:20261104T120000Z
+DTSTART;VALUE=DATE:20261202
+DTEND;VALUE=DATE:20261203
+RRULE:FREQ=YEARLY
+SUMMARY:Advent 2: pray for your oikos (2 Corinthians 4:4)
+DESCRIPTION:"The god of this age has blinded the minds of unbelievers\, so 
+ that they cannot see the light of the gospel that displays the glory of Ch
+ rist\, who is the image of God." (2 Corinthians 4:4\, NIV)\n\nPray over ea
+ ch person on your map by name: Lift the blindness. Let them see the glory 
+ of Christ\, not just the decorations.\n\nAll 25 days: https://www.oikosmap
+ .com/blog/advent-prayer-calendar-for-your-oikos
+URL:https://www.oikosmap.com/blog/advent-prayer-calendar-for-your-oikos
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:advent-03@oikosmap.com
+DTSTAMP:20261104T120000Z
+DTSTART;VALUE=DATE:20261203
+DTEND;VALUE=DATE:20261204
+RRULE:FREQ=YEARLY
+SUMMARY:Advent 3: pray for your oikos (John 1:5)
+DESCRIPTION:"The light shines in the darkness\, and the darkness has not ov
+ ercome it." (John 1:5\, NIV)\n\nPray over each person on your map by name:
+  Shine into the darkest place in each of their lives this month.\n\nAll 25
+  days: https://www.oikosmap.com/blog/advent-prayer-calendar-for-your-oikos
+URL:https://www.oikosmap.com/blog/advent-prayer-calendar-for-your-oikos
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:advent-04@oikosmap.com
+DTSTAMP:20261104T120000Z
+DTSTART;VALUE=DATE:20261204
+DTEND;VALUE=DATE:20261205
+RRULE:FREQ=YEARLY
+SUMMARY:Advent 4: pray for your oikos (Ezekiel 36:26)
+DESCRIPTION:"I will give you a new heart and put a new spirit in you\; I wi
+ ll remove from you your heart of stone and give you a heart of flesh." (Ez
+ ekiel 36:26\, NIV)\n\nPray over each person on your map by name: Soften ev
+ ery hard heart on my map. Begin with mine.\n\nAll 25 days: https://www.oik
+ osmap.com/blog/advent-prayer-calendar-for-your-oikos
+URL:https://www.oikosmap.com/blog/advent-prayer-calendar-for-your-oikos
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:advent-05@oikosmap.com
+DTSTAMP:20261104T120000Z
+DTSTART;VALUE=DATE:20261205
+DTEND;VALUE=DATE:20261206
+RRULE:FREQ=YEARLY
+SUMMARY:Advent 5: pray for your oikos (John 6:44)
+DESCRIPTION:"No one can come to me unless the Father who sent me draws them
+ \, and I will raise them up at the last day." (John 6:44\, NIV)\n\nPray ov
+ er each person on your map by name: Father\, draw them to Jesus in a way o
+ nly You can.\n\nAll 25 days: https://www.oikosmap.com/blog/advent-prayer-c
+ alendar-for-your-oikos
+URL:https://www.oikosmap.com/blog/advent-prayer-calendar-for-your-oikos
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:advent-06@oikosmap.com
+DTSTAMP:20261104T120000Z
+DTSTART;VALUE=DATE:20261206
+DTEND;VALUE=DATE:20261207
+RRULE:FREQ=YEARLY
+SUMMARY:Advent 6: pray for your oikos (Romans 15:13)
+DESCRIPTION:"May the God of hope fill you with all joy and peace as you tru
+ st in him\, so that you may overflow with hope by the power of the Holy Sp
+ irit." (Romans 15:13\, NIV)\n\nPray over each person on your map by name: 
+ For the ones who feel hopeless this season: fill them with real hope.\n\nA
+ ll 25 days: https://www.oikosmap.com/blog/advent-prayer-calendar-for-your-
+ oikos
+URL:https://www.oikosmap.com/blog/advent-prayer-calendar-for-your-oikos
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:advent-07@oikosmap.com
+DTSTAMP:20261104T120000Z
+DTSTART;VALUE=DATE:20261207
+DTEND;VALUE=DATE:20261208
+RRULE:FREQ=YEARLY
+SUMMARY:Advent 7: pray for your oikos (1 Timothy 2:3–4)
+DESCRIPTION:"This is good\, and pleases God our Savior\, who wants all peop
+ le to be saved and to come to a knowledge of the truth." (1 Timothy 2:3–
+ 4\, NIV)\n\nPray over each person on your map by name: You want them saved
+  more than I do. I am agreeing with You.\n\nAll 25 days: https://www.oikos
+ map.com/blog/advent-prayer-calendar-for-your-oikos
+URL:https://www.oikosmap.com/blog/advent-prayer-calendar-for-your-oikos
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:advent-08@oikosmap.com
+DTSTAMP:20261104T120000Z
+DTSTART;VALUE=DATE:20261208
+DTEND;VALUE=DATE:20261209
+RRULE:FREQ=YEARLY
+SUMMARY:Advent 8: pray for your oikos (Isaiah 9:6)
+DESCRIPTION:"For to us a child is born\, to us a son is given\, and the gov
+ ernment will be on his shoulders. And he will be called Wonderful Counselo
+ r\, Mighty God\, Everlasting Father\, Prince of Peace." (Isaiah 9:6\, NIV)
+ \n\nPray over each person on your map by name: Prince of Peace\, be the pe
+ ace they have been looking for.\n\nAll 25 days: https://www.oikosmap.com/b
+ log/advent-prayer-calendar-for-your-oikos
+URL:https://www.oikosmap.com/blog/advent-prayer-calendar-for-your-oikos
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:advent-09@oikosmap.com
+DTSTAMP:20261104T120000Z
+DTSTART;VALUE=DATE:20261209
+DTEND;VALUE=DATE:20261210
+RRULE:FREQ=YEARLY
+SUMMARY:Advent 9: pray for your oikos (John 14:27)
+DESCRIPTION:"Peace I leave with you\; my peace I give you. I do not give to
+  you as the world gives. Do not let your hearts be troubled and do not be 
+ afraid." (John 14:27\, NIV)\n\nPray over each person on your map by name: 
+ For the anxious ones on my map: give the peace the world cannot.\n\nAll 25
+  days: https://www.oikosmap.com/blog/advent-prayer-calendar-for-your-oikos
+URL:https://www.oikosmap.com/blog/advent-prayer-calendar-for-your-oikos
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:advent-10@oikosmap.com
+DTSTAMP:20261104T120000Z
+DTSTART;VALUE=DATE:20261210
+DTEND;VALUE=DATE:20261211
+RRULE:FREQ=YEARLY
+SUMMARY:Advent 10: pray for your oikos (Colossians 1:13)
+DESCRIPTION:"For he has rescued us from the dominion of darkness and brough
+ t us into the kingdom of the Son he loves." (Colossians 1:13\, NIV)\n\nPra
+ y over each person on your map by name: Rescue them the way You rescued me
+ .\n\nAll 25 days: https://www.oikosmap.com/blog/advent-prayer-calendar-for
+ -your-oikos
+URL:https://www.oikosmap.com/blog/advent-prayer-calendar-for-your-oikos
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:advent-11@oikosmap.com
+DTSTAMP:20261104T120000Z
+DTSTART;VALUE=DATE:20261211
+DTEND;VALUE=DATE:20261212
+RRULE:FREQ=YEARLY
+SUMMARY:Advent 11: pray for your oikos (Romans 5:1)
+DESCRIPTION:"Therefore\, since we have been justified through faith\, we ha
+ ve peace with God through our Lord Jesus Christ\," (Romans 5:1\, NIV)\n\nP
+ ray over each person on your map by name: Bring them peace with You — no
+ t just a quiet holiday.\n\nAll 25 days: https://www.oikosmap.com/blog/adve
+ nt-prayer-calendar-for-your-oikos
+URL:https://www.oikosmap.com/blog/advent-prayer-calendar-for-your-oikos
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:advent-12@oikosmap.com
+DTSTAMP:20261104T120000Z
+DTSTART;VALUE=DATE:20261212
+DTEND;VALUE=DATE:20261213
+RRULE:FREQ=YEARLY
+SUMMARY:Advent 12: pray for your oikos (Matthew 11:28)
+DESCRIPTION:"Come to me\, all you who are weary and burdened\, and I will g
+ ive you rest." (Matthew 11:28\, NIV)\n\nPray over each person on your map 
+ by name: For the exhausted and the grieving this December: give them rest 
+ in You.\n\nAll 25 days: https://www.oikosmap.com/blog/advent-prayer-calend
+ ar-for-your-oikos
+URL:https://www.oikosmap.com/blog/advent-prayer-calendar-for-your-oikos
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:advent-13@oikosmap.com
+DTSTAMP:20261104T120000Z
+DTSTART;VALUE=DATE:20261213
+DTEND;VALUE=DATE:20261214
+RRULE:FREQ=YEARLY
+SUMMARY:Advent 13: pray for your oikos (Philippians 4:7)
+DESCRIPTION:"And the peace of God\, which transcends all understanding\, wi
+ ll guard your hearts and your minds in Christ Jesus." (Philippians 4:7\, N
+ IV)\n\nPray over each person on your map by name: Guard the hearts of the 
+ families on my map through a hard season.\n\nAll 25 days: https://www.oiko
+ smap.com/blog/advent-prayer-calendar-for-your-oikos
+URL:https://www.oikosmap.com/blog/advent-prayer-calendar-for-your-oikos
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:advent-14@oikosmap.com
+DTSTAMP:20261104T120000Z
+DTSTART;VALUE=DATE:20261214
+DTEND;VALUE=DATE:20261215
+RRULE:FREQ=YEARLY
+SUMMARY:Advent 14: pray for your oikos (Colossians 4:3)
+DESCRIPTION:"And pray for us\, too\, that God may open a door for our messa
+ ge\, so that we may proclaim the mystery of Christ\, for which I am in cha
+ ins." (Colossians 4:3\, NIV)\n\nPray over each person on your map by name:
+  Open one door this week — a question\, an invitation\, a quiet moment.\
+ n\nAll 25 days: https://www.oikosmap.com/blog/advent-prayer-calendar-for-y
+ our-oikos
+URL:https://www.oikosmap.com/blog/advent-prayer-calendar-for-your-oikos
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:advent-15@oikosmap.com
+DTSTAMP:20261104T120000Z
+DTSTART;VALUE=DATE:20261215
+DTEND;VALUE=DATE:20261216
+RRULE:FREQ=YEARLY
+SUMMARY:Advent 15: pray for your oikos (Luke 2:10)
+DESCRIPTION:"But the angel said to them\, “Do not be afraid. I bring you 
+ good news that will cause great joy for all the people.”" (Luke 2:10\, N
+ IV)\n\nPray over each person on your map by name: Let the good news reach 
+ them as good news\, not as pressure.\n\nAll 25 days: https://www.oikosmap.
+ com/blog/advent-prayer-calendar-for-your-oikos
+URL:https://www.oikosmap.com/blog/advent-prayer-calendar-for-your-oikos
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:advent-16@oikosmap.com
+DTSTAMP:20261104T120000Z
+DTSTART;VALUE=DATE:20261216
+DTEND;VALUE=DATE:20261217
+RRULE:FREQ=YEARLY
+SUMMARY:Advent 16: pray for your oikos (Luke 15:7)
+DESCRIPTION:"I tell you that in the same way there will be more rejoicing i
+ n heaven over one sinner who repents than over ninety-nine righteous perso
+ ns who do not need to repent." (Luke 15:7\, NIV)\n\nPray over each person 
+ on your map by name: May heaven rejoice over someone on my map.\n\nAll 25 
+ days: https://www.oikosmap.com/blog/advent-prayer-calendar-for-your-oikos
+URL:https://www.oikosmap.com/blog/advent-prayer-calendar-for-your-oikos
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:advent-17@oikosmap.com
+DTSTAMP:20261104T120000Z
+DTSTART;VALUE=DATE:20261217
+DTEND;VALUE=DATE:20261218
+RRULE:FREQ=YEARLY
+SUMMARY:Advent 17: pray for your oikos (Romans 2:4)
+DESCRIPTION:"Or do you show contempt for the riches of his kindness\, forbe
+ arance and patience\, not realizing that God’s kindness is intended to l
+ ead you to repentance?" (Romans 2:4\, NIV)\n\nPray over each person on you
+ r map by name: Let them notice Your kindness — and let some of it come t
+ hrough me.\n\nAll 25 days: https://www.oikosmap.com/blog/advent-prayer-cal
+ endar-for-your-oikos
+URL:https://www.oikosmap.com/blog/advent-prayer-calendar-for-your-oikos
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:advent-18@oikosmap.com
+DTSTAMP:20261104T120000Z
+DTSTART;VALUE=DATE:20261218
+DTEND;VALUE=DATE:20261219
+RRULE:FREQ=YEARLY
+SUMMARY:Advent 18: pray for your oikos (Luke 15:20)
+DESCRIPTION:"But while he was still a long way off\, his father saw him and
+  was filled with compassion for him\; he ran to his son\, threw his arms a
+ round him and kissed him." (Luke 15:20\, NIV)\n\nPray over each person on 
+ your map by name: For the ones far from home and far from You: run to them
+ \, Father.\n\nAll 25 days: https://www.oikosmap.com/blog/advent-prayer-cal
+ endar-for-your-oikos
+URL:https://www.oikosmap.com/blog/advent-prayer-calendar-for-your-oikos
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:advent-19@oikosmap.com
+DTSTAMP:20261104T120000Z
+DTSTART;VALUE=DATE:20261219
+DTEND;VALUE=DATE:20261220
+RRULE:FREQ=YEARLY
+SUMMARY:Advent 19: pray for your oikos (Matthew 9:38)
+DESCRIPTION:"Ask the Lord of the harvest\, therefore\, to send out workers 
+ into his harvest field." (Matthew 9:38\, NIV)\n\nPray over each person on 
+ your map by name: Send someone to each of them this Christmas — and make
+  me willing.\n\nAll 25 days: https://www.oikosmap.com/blog/advent-prayer-c
+ alendar-for-your-oikos
+URL:https://www.oikosmap.com/blog/advent-prayer-calendar-for-your-oikos
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:advent-20@oikosmap.com
+DTSTAMP:20261104T120000Z
+DTSTART;VALUE=DATE:20261220
+DTEND;VALUE=DATE:20261221
+RRULE:FREQ=YEARLY
+SUMMARY:Advent 20: pray for your oikos (Psalm 16:11)
+DESCRIPTION:"You make known to me the path of life\; you will fill me with 
+ joy in your presence\, with eternal pleasures at your right hand." (Psalm 
+ 16:11\, NIV)\n\nPray over each person on your map by name: Show them the p
+ ath of life\, and the joy that lasts past December.\n\nAll 25 days: https:
+ //www.oikosmap.com/blog/advent-prayer-calendar-for-your-oikos
+URL:https://www.oikosmap.com/blog/advent-prayer-calendar-for-your-oikos
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:advent-21@oikosmap.com
+DTSTAMP:20261104T120000Z
+DTSTART;VALUE=DATE:20261221
+DTEND;VALUE=DATE:20261222
+RRULE:FREQ=YEARLY
+SUMMARY:Advent 21: pray for your oikos (2 Timothy 2:25–26)
+DESCRIPTION:"Opponents must be gently instructed\, in the hope that God wil
+ l grant them repentance leading them to a knowledge of the truth\, and tha
+ t they will come to their senses and escape from the trap of the devil\, w
+ ho has taken them captive to do his will." (2 Timothy 2:25–26\, NIV)\n\n
+ Pray over each person on your map by name: Free them from every trap. Give
+  me gentleness when we talk.\n\nAll 25 days: https://www.oikosmap.com/blog
+ /advent-prayer-calendar-for-your-oikos
+URL:https://www.oikosmap.com/blog/advent-prayer-calendar-for-your-oikos
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:advent-22@oikosmap.com
+DTSTAMP:20261104T120000Z
+DTSTART;VALUE=DATE:20261222
+DTEND;VALUE=DATE:20261223
+RRULE:FREQ=YEARLY
+SUMMARY:Advent 22: pray for your oikos (John 3:16)
+DESCRIPTION:"For God so loved the world that he gave his one and only Son\,
+  that whoever believes in him shall not perish but have eternal life." (Jo
+ hn 3:16\, NIV)\n\nPray over each person on your map by name: Let each of t
+ hem know: the gift was for them.\n\nAll 25 days: https://www.oikosmap.com/
+ blog/advent-prayer-calendar-for-your-oikos
+URL:https://www.oikosmap.com/blog/advent-prayer-calendar-for-your-oikos
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:advent-23@oikosmap.com
+DTSTAMP:20261104T120000Z
+DTSTART;VALUE=DATE:20261223
+DTEND;VALUE=DATE:20261224
+RRULE:FREQ=YEARLY
+SUMMARY:Advent 23: pray for your oikos (Romans 5:8)
+DESCRIPTION:"But God demonstrates his own love for us in this: While we wer
+ e still sinners\, Christ died for us." (Romans 5:8\, NIV)\n\nPray over eac
+ h person on your map by name: Show them a love they did not have to earn.\
+ n\nAll 25 days: https://www.oikosmap.com/blog/advent-prayer-calendar-for-y
+ our-oikos
+URL:https://www.oikosmap.com/blog/advent-prayer-calendar-for-your-oikos
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:advent-24@oikosmap.com
+DTSTAMP:20261104T120000Z
+DTSTART;VALUE=DATE:20261224
+DTEND;VALUE=DATE:20261225
+RRULE:FREQ=YEARLY
+SUMMARY:Advent 24: pray for your oikos (1 John 4:9)
+DESCRIPTION:"This is how God showed his love among us: He sent his one and 
+ only Son into the world that we might live through him." (1 John 4:9\, NIV
+ )\n\nPray over each person on your map by name: On Christmas Eve\, draw th
+ em to the One who was sent for them.\n\nAll 25 days: https://www.oikosmap.
+ com/blog/advent-prayer-calendar-for-your-oikos
+URL:https://www.oikosmap.com/blog/advent-prayer-calendar-for-your-oikos
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:advent-25@oikosmap.com
+DTSTAMP:20261104T120000Z
+DTSTART;VALUE=DATE:20261225
+DTEND;VALUE=DATE:20261226
+RRULE:FREQ=YEARLY
+SUMMARY:Advent 25: pray for your oikos (Luke 2:11)
+DESCRIPTION:"Today in the town of David a Savior has been born to you\; he 
+ is the Messiah\, the Lord." (Luke 2:11\, NIV)\n\nPray over each person on 
+ your map by name: A Savior has been born to them too. Let this be the year
+  they know Him.\n\nAll 25 days: https://www.oikosmap.com/blog/advent-praye
+ r-calendar-for-your-oikos
+URL:https://www.oikosmap.com/blog/advent-prayer-calendar-for-your-oikos
+TRANSP:TRANSPARENT
+END:VEVENT
+END:VCALENDAR

@@ -62,6 +62,9 @@ export function trackOutboundClicks() {
       // the download came from shows what is sending people to it.
       if (url.host === window.location.host) {
         if (url.pathname.startsWith('/downloads/')) track('download_template');
+        // Any link into the builder, counted against the page it was clicked on,
+        // so we can see which articles actually send people to make a map.
+        else if (url.hash === '#builder') track('builder_cta');
         return;
       }
       track('outbound', url.host.replace(/^www\./, ''));

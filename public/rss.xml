@@ -6,7 +6,7 @@
     <atom:link href="https://www.oikosmap.com/rss.xml" rel="self" type="application/rss+xml" />
     <description>Practical, encouraging writing on prayer, everyday evangelism, discipleship, and loving the people God has placed around you.</description>
     <language>en</language>
-    <lastBuildDate>Wed, 21 Oct 2026 09:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Wed, 04 Nov 2026 09:00:00 GMT</lastBuildDate>
     <item>
       <title>What Is an Oikos? The Biblical Meaning of Your Household</title>
       <link>https://www.oikosmap.com/blog/what-is-an-oikos</link>
@@ -366,6 +366,16 @@
       <category>Share</category>
       <category>Evangelism</category>
       <category>Practical</category>
+    </item>
+    <item>
+      <title>25 Days of Advent Prayer for the People You Love (Free Calendar)</title>
+      <link>https://www.oikosmap.com/blog/advent-prayer-calendar-for-your-oikos</link>
+      <guid isPermaLink="true">https://www.oikosmap.com/blog/advent-prayer-calendar-for-your-oikos</guid>
+      <pubDate>Wed, 04 Nov 2026 09:00:00 GMT</pubDate>
+      <description>An Advent prayer calendar for December 1 to Christmas Day: one verse and one short prayer a day for the people on your map, following hope, peace, joy and love — with a free calendar file for your phone.</description>
+      <category>Prayer</category>
+      <category>Scripture</category>
+      <category>Family</category>
     </item>
   </channel>
 </rss>

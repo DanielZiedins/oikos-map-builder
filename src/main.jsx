@@ -533,19 +533,15 @@ function SiteFooter() {
           })}
       </nav>
       <div className="footer-links">
-        <span>
-          Made with ❤️ by{' '}
-          <a href="https://www.danielziedins.com" target="_blank" rel="noopener">
-            Daniel Ziedins
-          </a>
-        </span>
+        {/* No maker credit here: Daniel's name lives on /connect (founder),
+            in article bylines and in the authorship schema, not on every page. */}
         <span><PoweredBy /></span>
         <span><CollaborationCredit /></span>
       </div>
       <p className="footer-disclaimer">
-        Disclaimer: Daniel did not create the original Oikos Map tool. His heart is to share this powerful resource with
-        the world, honor the ministries carrying it, and help more people use it to pray, love, and reach their oikos. We
-        pray it blesses you, and we would be grateful if you shared it with everyone you know.
+        Disclaimer: Oikos Map did not create the original Oikos Map concept. Our heart is to share this powerful resource
+        with the world, honor the ministries carrying it, and help more people use it to pray, love, and reach their
+        oikos. We pray it blesses you, and we would be grateful if you shared it with everyone you know.
       </p>
     </footer>
   );
@@ -3226,6 +3222,9 @@ if (typeof document !== 'undefined') {
   if (!container.__oikosTracking) {
     container.__oikosTracking = true;
     trackOutboundClicks();
+    // Article pages count article_view; these pages had no view count at all,
+    // so a quiet builder could not be told apart from an unvisited homepage.
+    track('page_view', routePath);
   }
 
   if (import.meta.env.PROD && 'serviceWorker' in navigator) {

@@ -41,6 +41,7 @@ import howToFollowUpAfterAGospelConversation from './bodies/how-to-follow-up-aft
 import whatIsTheGospel from './bodies/what-is-the-gospel.js';
 import overcomingFearOfSharingYourFaith from './bodies/overcoming-fear-of-sharing-your-faith.js';
 import howToShareYourFaithOnline from './bodies/how-to-share-your-faith-online.js';
+import adventPrayerCalendar from './bodies/advent-prayer-calendar-for-your-oikos.js';
 import whatIsAnOikos from './bodies/what-is-an-oikos.js';
 import whatToSayWhenSomeoneIsHurting from './bodies/what-to-say-when-someone-is-hurting.js';
 
@@ -79,6 +80,7 @@ const bodies = {
   'what-is-the-gospel': whatIsTheGospel,
   'overcoming-fear-of-sharing-your-faith': overcomingFearOfSharingYourFaith,
   'how-to-share-your-faith-online': howToShareYourFaithOnline,
+  'advent-prayer-calendar-for-your-oikos': adventPrayerCalendar,
   'what-is-an-oikos': whatIsAnOikos,
   'what-to-say-when-someone-is-hurting': whatToSayWhenSomeoneIsHurting,
 };

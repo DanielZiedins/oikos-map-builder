@@ -458,6 +458,19 @@ export const postsMeta = [
     excerpt:
       "Your group chats and feeds are part of your oikos too. Here is how to be a light there without getting muted.",
   },
+  {
+    slug: "advent-prayer-calendar-for-your-oikos",
+    order: 37,
+    title: "25 Days of Advent Prayer for the People You Love (Free Calendar)",
+    description:
+      "An Advent prayer calendar for December 1 to Christmas Day: one verse and one short prayer a day for the people on your map, following hope, peace, joy and love — with a free calendar file for your phone.",
+    date: "2026-11-04",
+    readingTime: "8 min read",
+    tags: ["Prayer", "Scripture", "Family"],
+    kicker: "Step one · Pray",
+    excerpt:
+      "December is the one month the world hums songs about Jesus without thinking about Him. Spend it praying for the people around you by name.",
+  },
 ];
 
 export const sortedPostsMeta = [...postsMeta].sort((a, b) => a.order - b.order);
@@ -509,7 +522,7 @@ export const readingPath = [
     id: 'pray',
     label: 'Pray',
     note: 'Name people before God, daily — then widen it to your street and city.',
-    slugs: ['how-to-pray-for-unsaved-family-and-friends', 'bible-verses-to-pray-for-unsaved-loved-ones', 'how-to-prayer-walk', 'praying-for-your-city'],
+    slugs: ['how-to-pray-for-unsaved-family-and-friends', 'bible-verses-to-pray-for-unsaved-loved-ones', 'advent-prayer-calendar-for-your-oikos', 'how-to-prayer-walk', 'praying-for-your-city'],
   },
   {
     id: 'care',
