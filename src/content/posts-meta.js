@@ -471,6 +471,45 @@ export const postsMeta = [
     excerpt:
       "December is the one month the world hums songs about Jesus without thinking about Him. Spend it praying for the people around you by name.",
   },
+  {
+    slug: "bible-verses-about-loving-your-neighbour",
+    order: 38,
+    title: "25 Bible Verses About Loving Your Neighbour",
+    description:
+      "Twenty-five Bible verses about loving your neighbour as yourself — the command, who counts as your neighbour, what love looks like and love in action — each with one way to live it this week.",
+    date: "2026-11-05",
+    readingTime: "6 min read",
+    tags: ["Care", "Scripture", "Practical"],
+    kicker: "Step two · Care",
+    excerpt:
+      "It is one of the best-known lines in the Bible, and one of the hardest to live. Here it is, verse by verse.",
+  },
+  {
+    slug: "bible-verses-about-discipleship",
+    order: 39,
+    title: "25 Bible Verses About Discipleship and Making Disciples",
+    description:
+      "Twenty-five Bible verses about discipleship — the call to follow, the cost, the marks of a disciple, being transformed, growing together and making disciples — each with a one-line takeaway.",
+    date: "2026-11-05",
+    readingTime: "6 min read",
+    tags: ["Disciple", "Scripture", "Foundations"],
+    kicker: "Step four · Disciple",
+    excerpt:
+      "Jesus did not call people to attend something. He called them to follow Him — and help others do the same.",
+  },
+  {
+    slug: "christmas-bible-verses-to-share",
+    order: 40,
+    title: "25 Christmas Bible Verses to Share With Friends and Family",
+    description:
+      "The best Christmas Bible verses for cards, texts, captions and conversations — the promise, the announcement, the birth and what it means — with a tap-to-copy button for each.",
+    date: "2026-11-05",
+    readingTime: "6 min read",
+    tags: ["Share", "Scripture", "Family"],
+    kicker: "Step three · Share",
+    excerpt:
+      "December is full of small moments where one verse says more than a paragraph of your own words.",
+  },
 ];
 
 export const sortedPostsMeta = [...postsMeta].sort((a, b) => a.order - b.order);
@@ -528,19 +567,19 @@ export const readingPath = [
     id: 'care',
     label: 'Care',
     note: 'Love that shows up, especially when life gets hard.',
-    slugs: ['who-is-my-neighbour', 'biblical-hospitality', 'evangelism-without-being-weird', 'what-to-say-when-someone-is-hurting'],
+    slugs: ['who-is-my-neighbour', 'bible-verses-about-loving-your-neighbour', 'biblical-hospitality', 'evangelism-without-being-weird', 'what-to-say-when-someone-is-hurting'],
   },
   {
     id: 'share',
     label: 'Share',
     note: 'Your story, a simple invitation, and faith where you already spend your days.',
-    slugs: ['overcoming-fear-of-sharing-your-faith', 'spiritual-conversation-starters', 'bible-verses-about-evangelism', 'how-to-share-your-testimony', 'how-to-lead-someone-to-jesus', 'answering-common-objections-to-christianity', 'how-to-invite-someone-to-church', 'talking-about-jesus-with-family-at-the-holidays', 'faith-at-work-your-coworkers-are-your-oikos', 'how-to-share-your-faith-at-school', 'how-to-share-your-faith-online'],
+    slugs: ['overcoming-fear-of-sharing-your-faith', 'spiritual-conversation-starters', 'bible-verses-about-evangelism', 'christmas-bible-verses-to-share', 'how-to-share-your-testimony', 'how-to-lead-someone-to-jesus', 'answering-common-objections-to-christianity', 'how-to-invite-someone-to-church', 'talking-about-jesus-with-family-at-the-holidays', 'faith-at-work-your-coworkers-are-your-oikos', 'how-to-share-your-faith-at-school', 'how-to-share-your-faith-online'],
   },
   {
     id: 'disciple',
     label: 'Disciple',
     note: 'Walk with someone until they can do it for someone else.',
-    slugs: ['what-is-a-disciple', 'how-to-follow-up-after-a-gospel-conversation', 'how-to-disciple-someone', 'how-to-start-a-bible-study-with-friends', 'how-to-lead-your-child-to-jesus'],
+    slugs: ['what-is-a-disciple', 'bible-verses-about-discipleship', 'how-to-follow-up-after-a-gospel-conversation', 'how-to-disciple-someone', 'how-to-start-a-bible-study-with-friends', 'how-to-lead-your-child-to-jesus'],
   },
   {
     id: 'send',

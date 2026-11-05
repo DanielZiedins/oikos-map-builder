@@ -5344,3 +5344,33 @@ textarea:focus-visible,
     width: auto;
   }
 }
+
+/* ---------- Copy verse (journal verse lists) ---------- */
+.verse-copy {
+  display: inline-flex;
+  align-items: center;
+  min-height: 30px;
+  margin-left: 6px;
+  padding: 2px 11px;
+  border: 1px solid rgba(14, 114, 104, 0.35);
+  border-radius: 999px;
+  color: #0e7268;
+  background: #fffdf7;
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 800;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+.verse-copy:hover,
+.verse-copy:focus-visible {
+  border-color: #0e7268;
+  background: rgba(14, 114, 104, 0.08);
+}
+
+.verse-copy.copied {
+  color: #fffdf7;
+  background: #0e7268;
+  border-color: #0e7268;
+}

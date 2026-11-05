@@ -42,6 +42,9 @@ import whatIsTheGospel from './bodies/what-is-the-gospel.js';
 import overcomingFearOfSharingYourFaith from './bodies/overcoming-fear-of-sharing-your-faith.js';
 import howToShareYourFaithOnline from './bodies/how-to-share-your-faith-online.js';
 import adventPrayerCalendar from './bodies/advent-prayer-calendar-for-your-oikos.js';
+import bibleVersesLovingNeighbour from './bodies/bible-verses-about-loving-your-neighbour.js';
+import bibleVersesDiscipleship from './bodies/bible-verses-about-discipleship.js';
+import christmasBibleVerses from './bodies/christmas-bible-verses-to-share.js';
 import whatIsAnOikos from './bodies/what-is-an-oikos.js';
 import whatToSayWhenSomeoneIsHurting from './bodies/what-to-say-when-someone-is-hurting.js';
 
@@ -81,6 +84,9 @@ const bodies = {
   'overcoming-fear-of-sharing-your-faith': overcomingFearOfSharingYourFaith,
   'how-to-share-your-faith-online': howToShareYourFaithOnline,
   'advent-prayer-calendar-for-your-oikos': adventPrayerCalendar,
+  'bible-verses-about-loving-your-neighbour': bibleVersesLovingNeighbour,
+  'bible-verses-about-discipleship': bibleVersesDiscipleship,
+  'christmas-bible-verses-to-share': christmasBibleVerses,
   'what-is-an-oikos': whatIsAnOikos,
   'what-to-say-when-someone-is-hurting': whatToSayWhenSomeoneIsHurting,
 };

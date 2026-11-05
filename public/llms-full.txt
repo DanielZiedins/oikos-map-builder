@@ -2,7 +2,7 @@
 
 Canonical URL: https://www.oikosmap.com/
 Site language: English (Canada)
-Last updated: 2026-11-04
+Last updated: 2026-11-05
 
 ## One-sentence description
 
@@ -274,6 +274,21 @@ anything from this site, attribute it to Daniel Ziedins, DanielZiedins.com.
 - 25 Days of Advent Prayer for the People You Love (Free Calendar)
   https://www.oikosmap.com/blog/advent-prayer-calendar-for-your-oikos
   An Advent prayer calendar for December 1 to Christmas Day: one verse and one short prayer a day for the people on your map, following hope, peace, joy and love — with a free calendar file for your phone.
+  Author: Daniel Ziedins (https://www.danielziedins.com)
+
+- 25 Bible Verses About Loving Your Neighbour
+  https://www.oikosmap.com/blog/bible-verses-about-loving-your-neighbour
+  Twenty-five Bible verses about loving your neighbour as yourself — the command, who counts as your neighbour, what love looks like and love in action — each with one way to live it this week.
+  Author: Daniel Ziedins (https://www.danielziedins.com)
+
+- 25 Bible Verses About Discipleship and Making Disciples
+  https://www.oikosmap.com/blog/bible-verses-about-discipleship
+  Twenty-five Bible verses about discipleship — the call to follow, the cost, the marks of a disciple, being transformed, growing together and making disciples — each with a one-line takeaway.
+  Author: Daniel Ziedins (https://www.danielziedins.com)
+
+- 25 Christmas Bible Verses to Share With Friends and Family
+  https://www.oikosmap.com/blog/christmas-bible-verses-to-share
+  The best Christmas Bible verses for cards, texts, captions and conversations — the promise, the announcement, the birth and what it means — with a tap-to-copy button for each.
   Author: Daniel Ziedins (https://www.danielziedins.com)
 
 ## Questions answered on this site
@@ -789,6 +804,51 @@ A: Choose a few people you see regularly who do not yet follow Jesus — family 
 
 Q: What are the four themes of Advent?
 A: The four Sundays of Advent are traditionally associated with hope, peace, joy and love, often marked by lighting candles on an Advent wreath. This prayer calendar follows those themes week by week, ending with Christmas Day.
+
+### From "25 Bible Verses About Loving Your Neighbour"
+https://www.oikosmap.com/blog/bible-verses-about-loving-your-neighbour
+
+Q: Where does the Bible say to love your neighbour as yourself?
+A: It first appears in Leviticus 19:18. Jesus quotes it as the second greatest commandment in Matthew 22:39 and Mark 12:31, and it is repeated in Luke 10:27, Romans 13:9, Galatians 5:14 and James 2:8.
+
+Q: What is the best Bible verse about loving others?
+A: Many people point to John 13:34–35, where Jesus says "As I have loved you, so you must love one another," and to 1 Corinthians 13:4–5, which describes what love looks like: patient, kind and keeping no record of wrongs.
+
+Q: Who is my neighbour according to the Bible?
+A: In the parable of the Good Samaritan (Luke 10:25–37), Jesus shows that your neighbour is anyone in need whom God puts in your path, and turns the question into "who will I be a neighbour to?"
+
+Q: What verse says to love with actions, not words?
+A: 1 John 3:18: "Dear children, let us not love with words or speech but with actions and in truth."
+
+### From "25 Bible Verses About Discipleship and Making Disciples"
+https://www.oikosmap.com/blog/bible-verses-about-discipleship
+
+Q: What does the Bible say about discipleship?
+A: The Bible describes discipleship as following Jesus (Matthew 4:19), denying yourself daily (Luke 9:23), holding to His teaching (John 8:31), loving one another (John 13:35) and bearing fruit (John 15:8) — and it calls every disciple to make disciples (Matthew 28:19–20; 2 Timothy 2:2).
+
+Q: What is the key verse for making disciples?
+A: Matthew 28:19–20, the Great Commission: "go and make disciples of all nations… teaching them to obey everything I have commanded you." 2 Timothy 2:2 shows how it multiplies from one person to the next.
+
+Q: What are the costs of discipleship in the Bible?
+A: Jesus said disciples must deny themselves and take up their cross daily (Luke 9:23), carry their cross (Luke 14:27) and hold nothing back (Luke 14:33). Galatians 2:20 frames the cost in light of Jesus’ own love: He "loved me and gave himself for me."
+
+Q: What Bible verses are good for a discipleship small group?
+A: Acts 2:42 (the habits of the early church), Hebrews 10:24–25 (spurring one another on), Proverbs 27:17 (iron sharpens iron), James 1:22 (doing what the word says) and John 15:5 (remaining in Jesus) all work well for discussion.
+
+### From "25 Christmas Bible Verses to Share With Friends and Family"
+https://www.oikosmap.com/blog/christmas-bible-verses-to-share
+
+Q: What is a good Bible verse for a Christmas card?
+A: Isaiah 9:6 ("For to us a child is born… Prince of Peace"), Luke 2:10–11 ("good news that will cause great joy… a Savior has been born to you") and 2 Corinthians 9:15 ("Thanks be to God for his indescribable gift!") are among the most loved Christmas card verses.
+
+Q: What is the Christmas story verse in the Bible?
+A: The Christmas story is told in Luke 2:1–20 (the birth, the shepherds and the angels) and Matthew 1:18–2:12 (Joseph, the meaning of Jesus’ name and the visit of the Magi). Luke 2:11 summarises it: "Today in the town of David a Savior has been born to you; he is the Messiah, the Lord."
+
+Q: What does Immanuel mean?
+A: Immanuel means "God with us." Isaiah 7:14 promised a son called Immanuel, and Matthew 1:23 quotes that promise about Jesus, adding "(which means “God with us”)."
+
+Q: What Bible verse explains the meaning of Christmas?
+A: John 1:14 ("The Word became flesh and made his dwelling among us") and 1 John 4:9 ("He sent his one and only Son into the world that we might live through him") both explain why Christmas matters: God came to us in Jesus.
 
 ## Full text of every article
 
@@ -2919,12 +2979,14 @@ The full Oikos Journal, step by step. New guides are added here as they are publ
 - **Pray:** [How to Prayer Walk Your Neighbourhood: A Simple Guide](https://www.oikosmap.com/blog/how-to-prayer-walk)
 - **Pray:** [How to Pray for Your City (Without It Feeling Abstract)](https://www.oikosmap.com/blog/praying-for-your-city)
 - **Care:** [Who Is My Neighbour? What Jesus Meant by "Love Your Neighbour"](https://www.oikosmap.com/blog/who-is-my-neighbour)
+- **Care:** [25 Bible Verses About Loving Your Neighbour](https://www.oikosmap.com/blog/bible-verses-about-loving-your-neighbour)
 - **Care:** [What Does the Bible Say About Hospitality? Opening Your Home to Your Oikos](https://www.oikosmap.com/blog/biblical-hospitality)
 - **Care:** [Evangelism Without Being Weird: 12 Ways to Love Your Neighbour This Week](https://www.oikosmap.com/blog/evangelism-without-being-weird)
 - **Care:** [What to Actually Say When Someone Is Going Through Something Hard](https://www.oikosmap.com/blog/what-to-say-when-someone-is-hurting)
 - **Share:** [How to Overcome Fear of Sharing Your Faith](https://www.oikosmap.com/blog/overcoming-fear-of-sharing-your-faith)
 - **Share:** [30 Spiritual Conversation Starters: Questions That Open Faith Conversations](https://www.oikosmap.com/blog/spiritual-conversation-starters)
 - **Share:** [25 Bible Verses About Evangelism and Sharing Your Faith](https://www.oikosmap.com/blog/bible-verses-about-evangelism)
+- **Share:** [25 Christmas Bible Verses to Share With Friends and Family](https://www.oikosmap.com/blog/christmas-bible-verses-to-share)
 - **Share:** [How to Share Your Testimony in Three Minutes](https://www.oikosmap.com/blog/how-to-share-your-testimony)
 - **Share:** [How to Lead Someone to Jesus: A Simple, Honest Conversation Guide](https://www.oikosmap.com/blog/how-to-lead-someone-to-jesus)
 - **Share:** [How to Answer 5 Common Objections to Christianity (With Gentleness and Respect)](https://www.oikosmap.com/blog/answering-common-objections-to-christianity)
@@ -2934,6 +2996,7 @@ The full Oikos Journal, step by step. New guides are added here as they are publ
 - **Share:** [How to Share Your Faith at School: A Guide for Christian Students](https://www.oikosmap.com/blog/how-to-share-your-faith-at-school)
 - **Share:** [How to Share Your Faith Online and on Social Media](https://www.oikosmap.com/blog/how-to-share-your-faith-online)
 - **Disciple:** [What Is a Disciple? The Biblical Meaning (and Six Marks of a Follower of Jesus)](https://www.oikosmap.com/blog/what-is-a-disciple)
+- **Disciple:** [25 Bible Verses About Discipleship and Making Disciples](https://www.oikosmap.com/blog/bible-verses-about-discipleship)
 - **Disciple:** [How to Follow Up After a Gospel Conversation](https://www.oikosmap.com/blog/how-to-follow-up-after-a-gospel-conversation)
 - **Disciple:** [How to Disciple Someone When You Do Not Feel Qualified](https://www.oikosmap.com/blog/how-to-disciple-someone)
 - **Disciple:** [How to Start a Bible Study With Friends Who Do Not Believe (Yet)](https://www.oikosmap.com/blog/how-to-start-a-bible-study-with-friends)
@@ -3347,6 +3410,182 @@ Prayer often comes first, and then God opens a door. Here are a few natural ways
 - **Keep going in January.** The fruit of December prayer often shows up later. The builder can add [a daily prayer reminder](https://www.oikosmap.com/#builder) to your calendar for the rest of the year.
 
 > But the angel said to them, “Do not be afraid. I bring you good news that will cause great joy for all the people.” (Luke 2:10, NIV)
+
+---
+
+### 25 Bible Verses About Loving Your Neighbour
+https://www.oikosmap.com/blog/bible-verses-about-loving-your-neighbour · Daniel Ziedins · 2026-11-05
+
+"Love your neighbour as yourself" is one of the best-known lines in the Bible — and one of the hardest to live. It shows up in the law of Moses, in the teaching of Jesus, and again and again in the letters of the early church.
+
+Here are 25 Bible verses about loving your neighbour, grouped by theme, each with one simple way to live it this week. Copy any verse to share it, or pray through one a day.
+
+#### The command itself
+
+- **Leviticus 19:18** — *"Do not seek revenge or bear a grudge against anyone among your people, but love your neighbor as yourself. I am the LORD."* Live it: Let go of one grudge, out loud in prayer, today.
+- **Matthew 22:37–39** — *"Jesus replied: ‘Love the Lord your God with all your heart and with all your soul and with all your mind.’ This is the first and greatest commandment. And the second is like it: ‘Love your neighbor as yourself.’"* Live it: Love for God and love for people are meant to grow together.
+- **Mark 12:31** — *"The second is this: ‘Love your neighbor as yourself.’ There is no commandment greater than these."* Live it: Nothing on your to-do list outranks this.
+- **Galatians 5:14** — *"For the entire law is fulfilled in keeping this one command: ‘Love your neighbor as yourself.’"* Live it: When you are unsure what to do, ask what love would do.
+- **James 2:8** — *"If you really keep the royal law found in Scripture, ‘Love your neighbor as yourself,’ you are doing right."* Live it: Call it what Scripture calls it: royal. It is a high calling.
+
+#### Who counts as my neighbour?
+
+- **Luke 10:36–37** — *"‘Which of these three do you think was a neighbor to the man who fell into the hands of robbers?’ The expert in the law replied, ‘The one who had mercy on him.’ Jesus told him, ‘Go and do likewise.’"* Live it: Stop asking who qualifies and start crossing the road.
+- **Matthew 5:43–44** — *"You have heard that it was said, ‘Love your neighbor and hate your enemy.’ But I tell you, love your enemies and pray for those who persecute you,"* Live it: Pray by name for someone who has hurt you.
+- **Matthew 25:40** — *"The King will reply, ‘Truly I tell you, whatever you did for one of the least of these brothers and sisters of mine, you did for me.’"* Live it: Look for the person others overlook.
+- **Hebrews 13:2** — *"Do not forget to show hospitality to strangers, for by so doing some people have shown hospitality to angels without knowing it."* Live it: Welcome someone new to your street, school or church.
+
+More on this in [Who Is My Neighbour? What Jesus Meant by "Love Your Neighbour"](https://www.oikosmap.com/blog/who-is-my-neighbour).
+
+#### What love actually looks like
+
+- **1 Corinthians 13:4–5** — *"Love is patient, love is kind. It does not envy, it does not boast, it is not proud. It does not dishonor others, it is not self-seeking, it is not easily angered, it keeps no record of wrongs."* Live it: Pick one phrase and practise it with one person.
+- **Romans 13:10** — *"Love does no harm to a neighbor. Therefore love is the fulfillment of the law."* Live it: Ask: is there any way I am making life harder for someone nearby?
+- **Luke 6:31** — *"Do to others as you would have them do to you."* Live it: Do one thing you would love someone to do for you.
+- **Romans 12:10** — *"Be devoted to one another in love. Honor one another above yourselves."* Live it: Honour someone publicly this week.
+- **Philippians 2:3–4** — *"Do nothing out of selfish ambition or vain conceit. Rather, in humility value others above yourselves, not looking to your own interests but each of you to the interests of the others."* Live it: Ask a neighbour what they are carrying right now.
+- **1 Peter 4:8** — *"Above all, love each other deeply, because love covers over a multitude of sins."* Live it: Choose not to repeat the story that makes someone look bad.
+
+#### Love in action, not just words
+
+- **1 John 3:18** — *"Dear children, let us not love with words or speech but with actions and in truth."* Live it: Turn one kind thought into one kind action today.
+- **Galatians 6:2** — *"Carry each other’s burdens, and in this way you will fulfill the law of Christ."* Live it: Offer to carry something practical: a meal, a lift, an errand.
+- **Galatians 6:10** — *"Therefore, as we have opportunity, let us do good to all people, especially to those who belong to the family of believers."* Live it: Notice the opportunities already in your week.
+- **Proverbs 3:27–28** — *"Do not withhold good from those to whom it is due, when it is in your power to act. Do not say to your neighbor, ‘Come back tomorrow and I’ll give it to you’—when you already have it with you."* Live it: Do today the good thing you have been putting off.
+- **Romans 12:13** — *"Share with the Lord’s people who are in need. Practice hospitality."* Live it: Open your table. [Here is how.](https://www.oikosmap.com/blog/biblical-hospitality)
+- **Micah 6:8** — *"He has shown you, O mortal, what is good. And what does the LORD require of you? To act justly and to love mercy and to walk humbly with your God."* Live it: Justice, mercy and humility: one each this week.
+- **Zechariah 7:9–10** — *"This is what the LORD Almighty said: ‘Administer true justice; show mercy and compassion to one another. Do not oppress the widow or the fatherless, the foreigner or the poor. Do not plot evil against each other.’"* Live it: Who in your area is a widow, a newcomer, or struggling? Start there.
+
+#### Where love comes from
+
+- **1 John 4:7** — *"Dear friends, let us love one another, for love comes from God. Everyone who loves has been born of God and knows God."* Live it: Ask God for love you do not have on your own.
+- **John 13:34–35** — *"A new command I give you: Love one another. As I have loved you, so you must love one another. By this everyone will know that you are my disciples, if you love one another."* Live it: Remember how Jesus has loved you, then pass it on.
+- **1 John 4:20** — *"Whoever claims to love God yet hates a brother or sister is a liar. For whoever does not love their fellow believer, whom they have seen, cannot love God, whom they have not seen."* Live it: Make peace with one person before Sunday.
+
+#### Put names to it
+
+Loving "my neighbours" in general is easy. Loving the actual people next door, at work and in your family is where it gets real. Write their names down on a [free Oikos Map](https://www.oikosmap.com/#builder) and pray for them by name — then use the "Live it" lines above, one at a time.
+
+For ideas that do not feel forced, read [Evangelism Without Being Weird: 12 Ways to Love Your Neighbour This Week](https://www.oikosmap.com/blog/evangelism-without-being-weird).
+
+> Dear children, let us not love with words or speech but with actions and in truth. (1 John 3:18, NIV)
+
+---
+
+### 25 Bible Verses About Discipleship and Making Disciples
+https://www.oikosmap.com/blog/bible-verses-about-discipleship · Daniel Ziedins · 2026-11-05
+
+Jesus did not call people to attend something. He called them to follow Him — and then to help others do the same. The New Testament is full of what that looks like: the cost, the rhythm, the relationships and the promise.
+
+Here are 25 Bible verses about discipleship and making disciples, grouped by theme, each with a one-line takeaway. Copy any verse to share it, or use them for a small-group study one week at a time.
+
+#### The call to follow
+
+- **Matthew 4:19** — *"‘Come, follow me,’ Jesus said, ‘and I will send you out to fish for people.’"* Takeaway: Following comes first; Jesus does the making.
+- **Mark 3:14** — *"He appointed twelve that they might be with him and that he might send them out to preach"* Takeaway: Discipleship is being with Jesus before being sent by Him.
+- **Matthew 11:29** — *"Take my yoke upon you and learn from me, for I am gentle and humble in heart, and you will find rest for your souls."* Takeaway: It is a gentle apprenticeship, not a heavy programme.
+- **Luke 9:23** — *"Then he said to them all: ‘Whoever wants to be my disciple must deny themselves and take up their cross daily and follow me.’"* Takeaway: Daily, not once.
+
+#### The cost
+
+- **Luke 14:27** — *"And whoever does not carry their cross and follow me cannot be my disciple."* Takeaway: Following Jesus will cost something real.
+- **Luke 14:33** — *"In the same way, those of you who do not give up everything you have cannot be my disciples."* Takeaway: Hold everything with open hands.
+- **Galatians 2:20** — *"I have been crucified with Christ and I no longer live, but Christ lives in me. The life I now live in the body, I live by faith in the Son of God, who loved me and gave himself for me."* Takeaway: The cost is met by a love that gave everything first.
+
+#### Marks of a disciple
+
+- **John 8:31–32** — *"To the Jews who had believed him, Jesus said, ‘If you hold to my teaching, you are really my disciples. Then you will know the truth, and the truth will set you free.’"* Takeaway: Disciples stay in Jesus’ words.
+- **John 13:35** — *"By this everyone will know that you are my disciples, if you love one another."* Takeaway: Love is the visible sign.
+- **John 15:8** — *"This is to my Father’s glory, that you bear much fruit, showing yourselves to be my disciples."* Takeaway: Fruit shows what is growing underneath.
+- **John 15:5** — *"I am the vine; you are the branches. If you remain in me and I in you, you will bear much fruit; apart from me you can do nothing."* Takeaway: Remain first; the fruit follows.
+- **James 1:22** — *"Do not merely listen to the word, and so deceive yourselves. Do what it says."* Takeaway: Every study should end with one thing to do.
+
+#### Being transformed
+
+- **Romans 12:2** — *"Do not conform to the pattern of this world, but be transformed by the renewing of your mind. Then you will be able to test and approve what God’s will is—his good, pleasing and perfect will."* Takeaway: Discipleship changes how you think, not just what you do.
+- **2 Corinthians 3:18** — *"And we all, who with unveiled faces contemplate the Lord’s glory, are being transformed into his image with ever-increasing glory, which comes from the Lord, who is the Spirit."* Takeaway: We become like what we behold.
+- **Luke 6:40** — *"The student is not above the teacher, but everyone who is fully trained will be like their teacher."* Takeaway: The goal is to become like Jesus.
+- **Colossians 1:28** — *"He is the one we proclaim, admonishing and teaching everyone with all wisdom, so that we may present everyone fully mature in Christ."* Takeaway: Aim for maturity, not just attendance.
+
+#### Growing together
+
+- **Acts 2:42** — *"They devoted themselves to the apostles’ teaching and to fellowship, to the breaking of bread and to prayer."* Takeaway: Four habits of the first disciples: Scripture, friendship, meals, prayer.
+- **Hebrews 10:24–25** — *"And let us consider how we may spur one another on toward love and good deeds, not giving up meeting together, as some are in the habit of doing, but encouraging one another—and all the more as you see the Day approaching."* Takeaway: Nobody grows alone.
+- **Proverbs 27:17** — *"As iron sharpens iron, so one person sharpens another."* Takeaway: Find one person who will sharpen you.
+- **1 Thessalonians 2:8** — *"Because we loved you so much, we were delighted to share with you not only the gospel of God but our lives as well."* Takeaway: Share your life, not just your lessons.
+
+#### Making disciples
+
+- **Matthew 28:19–20** — *"Therefore go and make disciples of all nations, baptizing them in the name of the Father and of the Son and of the Holy Spirit, and teaching them to obey everything I have commanded you. And surely I am with you always, to the very end of the age."* Takeaway: Every disciple is called to make disciples.
+- **2 Timothy 2:2** — *"And the things you have heard me say in the presence of many witnesses entrust to reliable people who will also be qualified to teach others."* Takeaway: Four generations in one verse.
+- **1 Corinthians 11:1** — *"Follow my example, as I follow the example of Christ."* Takeaway: Discipleship is imitation as much as instruction.
+- **Philippians 4:9** — *"Whatever you have learned or received or heard from me, or seen in me—put it into practice. And the God of peace will be with you."* Takeaway: Let people see your faith, not just hear it.
+- **Ephesians 4:11–13** — *"So Christ himself gave the apostles, the prophets, the evangelists, the pastors and teachers, to equip his people for works of service, so that the body of Christ may be built up until we all reach unity in the faith and in the knowledge of the Son of God and become mature, attaining to the whole measure of the fullness of Christ."* Takeaway: Leaders equip; everyone serves.
+
+#### Start with one person
+
+You do not need a programme to begin. You need one person you are a step ahead of and a willingness to walk with them. [What Is a Disciple?](https://www.oikosmap.com/blog/what-is-a-disciple) explains the six marks above, and [How to Disciple Someone When You Do Not Feel Qualified](https://www.oikosmap.com/blog/how-to-disciple-someone) gives a simple weekly pattern.
+
+Put the person on your [Oikos Map](https://www.oikosmap.com/#builder) at the Disciple step, and the builder will suggest a question to explore together each week.
+
+> And the things you have heard me say in the presence of many witnesses entrust to reliable people who will also be qualified to teach others. (2 Timothy 2:2, NIV)
+
+---
+
+### 25 Christmas Bible Verses to Share With Friends and Family
+https://www.oikosmap.com/blog/christmas-bible-verses-to-share · Daniel Ziedins · 2026-11-05
+
+Christmas cards, group chats, captions, the note on a plate of cookies for the neighbours — December is full of small moments where a single verse can say more than a paragraph of your own words.
+
+Here are 25 Christmas Bible verses to share with friends, family and neighbours, from the prophecies to the manger to the meaning of it all. Each has a tap-to-copy button and a suggestion for where it fits.
+
+#### The promise: Christmas foretold
+
+- **Isaiah 7:14** — *"Therefore the Lord himself will give you a sign: The virgin will conceive and give birth to a son, and will call him Immanuel."* Share it: A thoughtful card for a friend who loves history.
+- **Isaiah 9:2** — *"The people walking in darkness have seen a great light; on those living in the land of deep darkness a light has dawned."* Share it: For someone going through a dark season.
+- **Isaiah 9:6** — *"For to us a child is born, to us a son is given, and the government will be on his shoulders. And he will be called Wonderful Counselor, Mighty God, Everlasting Father, Prince of Peace."* Share it: The classic Christmas card verse.
+- **Micah 5:2** — *"But you, Bethlehem Ephrathah, though you are small among the clans of Judah, out of you will come for me one who will be ruler over Israel, whose origins are from of old, from ancient times."* Share it: For anyone who feels small or overlooked.
+
+#### The announcement
+
+- **Luke 1:30–31** — *"But the angel said to her, ‘Do not be afraid, Mary; you have found favor with God. You will conceive and give birth to a son, and you are to call him Jesus.’"* Share it: For an expectant mum or a new parent.
+- **Luke 1:37** — *"For no word from God will ever fail."* Share it: For someone waiting on a promise.
+- **Matthew 1:21** — *"She will give birth to a son, and you are to give him the name Jesus, because he will save his people from their sins."* Share it: The meaning of the name, in one line.
+- **Matthew 1:23** — *"‘The virgin will conceive and give birth to a son, and they will call him Immanuel’ (which means ‘God with us’)."* Share it: For anyone who feels alone this Christmas.
+- **Luke 1:46–47** — *"And Mary said: ‘My soul glorifies the Lord and my spirit rejoices in God my Savior,"* Share it: A grateful caption for a family photo.
+
+#### The birth
+
+- **Luke 2:7** — *"and she gave birth to her firstborn, a son. She wrapped him in cloths and placed him in a manger, because there was no guest room available for them."* Share it: Beside a nativity scene, or a note to someone far from home.
+- **Luke 2:10** — *"But the angel said to them, ‘Do not be afraid. I bring you good news that will cause great joy for all the people."* Share it: The perfect group-chat Christmas greeting.
+- **Luke 2:11** — *"Today in the town of David a Savior has been born to you; he is the Messiah, the Lord."* Share it: Christmas morning, in one sentence.
+- **Luke 2:14** — *"Glory to God in the highest heaven, and on earth peace to those on whom his favor rests."* Share it: A blessing to end a card with.
+- **Luke 2:19** — *"But Mary treasured up all these things and pondered them in her heart."* Share it: For a quiet moment after the presents.
+- **Luke 2:20** — *"The shepherds returned, glorifying and praising God for all the things they had heard and seen, which were just as they had been told."* Share it: For the night shift workers and the overlooked.
+- **Matthew 2:10–11** — *"When they saw the star, they were overjoyed. On coming to the house, they saw the child with his mother Mary, and they bowed down and worshiped him."* Share it: For gift-givers and travellers.
+
+#### What it means
+
+- **John 1:9** — *"The true light that gives light to everyone was coming into the world."* Share it: With a candle or the Christmas lights.
+- **John 1:14** — *"The Word became flesh and made his dwelling among us. We have seen his glory, the glory of the one and only Son, who came from the Father, full of grace and truth."* Share it: For the friend who asks what Christmas is really about.
+- **John 3:16** — *"For God so loved the world that he gave his one and only Son, that whoever believes in him shall not perish but have eternal life."* Share it: The gift behind every gift.
+- **Galatians 4:4–5** — *"But when the set time had fully come, God sent his Son, born of a woman, born under the law, to redeem those under the law, that we might receive adoption to sonship."* Share it: For someone who has longed to belong.
+- **Philippians 2:6–7** — *"Who, being in very nature God, did not consider equality with God something to be used to his own advantage; rather, he made himself nothing by taking the very nature of a servant, being made in human likeness."* Share it: For a Christmas Eve reflection.
+- **1 John 4:9** — *"This is how God showed his love among us: He sent his one and only Son into the world that we might live through him."* Share it: A simple, clear Christmas message.
+- **Titus 2:11** — *"For the grace of God has appeared that offers salvation to all people."* Share it: For someone who thinks Christmas is not for them.
+- **Romans 6:23** — *"For the wages of sin is death, but the gift of God is eternal life in Christ Jesus our Lord."* Share it: For a conversation about the real gift.
+- **2 Corinthians 9:15** — *"Thanks be to God for his indescribable gift!"* Share it: The shortest Christmas card verse — and maybe the best.
+
+#### Share more than a verse
+
+A verse is a beautiful start. This season, consider taking one more step with the people on your heart:
+
+- **Pray for them through Advent.** [The 25-day Advent prayer calendar](https://www.oikosmap.com/blog/advent-prayer-calendar-for-your-oikos) gives you a verse and a prayer for each day, with a free calendar download.
+- **Invite them to a Christmas Eve service.** [How to invite someone without it being awkward.](https://www.oikosmap.com/blog/how-to-invite-someone-to-church)
+- **Talk about it at the table.** [How to talk about Jesus with family at Christmas.](https://www.oikosmap.com/blog/talking-about-jesus-with-family-at-the-holidays)
+- **Write their names down** on a [free Oikos Map](https://www.oikosmap.com/#builder), so they are not forgotten in January.
+
+> Thanks be to God for his indescribable gift! (2 Corinthians 9:15, NIV)
 
 ## The wider Kingdom network
 

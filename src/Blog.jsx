@@ -624,8 +624,57 @@ function relatedPosts(post) {
   return relatedMap[post.slug] || [];
 }
 
+// Verse-list items ("<strong>Ref 1:2</strong> — <em>"text"</em> …") get a
+// Copy verse button. Added while rendering (not after mount), so the
+// prerendered HTML already has it and nothing shifts. The body data stays
+// untouched, so llms-full.txt and the crawler text are unchanged.
+const VERSE_ITEM = /^<strong>(?:[^<·]*·\s*)?([^<]*\d+:\d+[^<]*)<\/strong>\s*—\s*<em>"([^"]+)"<\/em>/;
+
+function withCopyVerse(item) {
+  const match = item.match(VERSE_ITEM);
+  if (!match) return item;
+  const ref = match[1].trim();
+  return `${item} <button type="button" class="verse-copy" data-ref="${ref}" data-verse="${match[2]}" aria-label="Copy ${ref}">Copy verse</button>`;
+}
+
+function useCopyVerse(slug) {
+  useEffect(() => {
+    async function onClick(event) {
+      const button = event.target instanceof Element ? event.target.closest('.verse-copy') : null;
+      if (!button) return;
+      const text = `\u201c${button.dataset.verse}\u201d \u2014 ${button.dataset.ref} (NIV)\nhttps://www.oikosmap.com/blog/${slug}`;
+      let ok = false;
+      try {
+        await navigator.clipboard.writeText(text);
+        ok = true;
+      } catch {
+        const field = document.createElement('textarea');
+        field.value = text;
+        field.setAttribute('readonly', '');
+        field.style.position = 'fixed';
+        field.style.opacity = '0';
+        document.body.appendChild(field);
+        field.select();
+        ok = document.execCommand('copy');
+        field.remove();
+      }
+      if (!ok) return;
+      track('share_article', `/blog/${slug}#copy-verse`);
+      button.textContent = 'Copied';
+      button.classList.add('copied');
+      window.setTimeout(() => {
+        button.textContent = 'Copy verse';
+        button.classList.remove('copied');
+      }, 1800);
+    }
+    document.addEventListener('click', onClick);
+    return () => document.removeEventListener('click', onClick);
+  }, [slug]);
+}
+
 export function BlogPost({ post: meta, initialBody = null }) {
   useReadingProgress();
+  useCopyVerse(meta.slug);
   const others = relatedPosts(meta);
   // blog-entry.jsx loads the body before the first render (the prerendered shell
   // stays on screen meanwhile), so the page paints once in its final layout.
@@ -704,7 +753,7 @@ export function BlogPost({ post: meta, initialBody = null }) {
               {section.list?.length ? (
                 <ul>
                   {section.list.map((item) => (
-                    <li key={item.slice(0, 40)} dangerouslySetInnerHTML={{ __html: item }} />
+                    <li key={item.slice(0, 40)} dangerouslySetInnerHTML={{ __html: withCopyVerse(item) }} />
                   ))}
                 </ul>
               ) : null}
