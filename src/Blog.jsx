@@ -14,6 +14,7 @@ export function loadBody(slug) {
 }
 import { JourneyTimeline, LeadCapture } from './journey.jsx';
 import { track } from './track.js';
+import { QUICK_START_PROMPTS, quickStartLink } from './map-link.js';
 
 // Drives the progress bar already styled on body::before. The builder pages set
 // this from ScrollEffects; the journal had no equivalent, so on long articles the
@@ -546,6 +547,61 @@ function ShareArticle({ post }) {
   );
 }
 
+// "Who are your five?" — start an Oikos Map without leaving the article. Most
+// readers never reach the closing CTA, so this sits after the second section.
+// Names travel to the builder inside the link (#add=) and are added to any map
+// already saved on this device; nothing is sent to a server.
+function QuickStartMap({ slug }) {
+  const [names, setNames] = useState(() => QUICK_START_PROMPTS.map(() => ''));
+  const count = names.filter((name) => name.trim()).length;
+
+  function open(event) {
+    event.preventDefault();
+    track('builder_cta', `/blog/${slug}#quickstart`);
+    window.location.href = quickStartLink(names);
+  }
+
+  return (
+    <aside className="quick-start" aria-labelledby={`quick-start-${slug}`}>
+      <p className="quick-start-kicker">
+        <Sparkles size={16} aria-hidden="true" />
+        Make it personal
+      </p>
+      {/* A paragraph, not an h2: it repeats in every article and should not
+          enter each article's heading outline. */}
+      <p className="quick-start-title" id={`quick-start-${slug}`}>
+        Who are your five?
+      </p>
+      <p>
+        Write down five people you see regularly who do not yet follow Jesus. We will open your free Oikos Map with them
+        already on it — saved only on this device.
+      </p>
+      <form onSubmit={open} data-no-outbound>
+        <div className="quick-start-fields">
+          {QUICK_START_PROMPTS.map((prompt, index) => (
+            <label key={prompt.placeholder}>
+              <span className="visually-hidden">{prompt.placeholder}</span>
+              <input
+                value={names[index]}
+                onChange={(event) =>
+                  setNames((current) => current.map((name, i) => (i === index ? event.target.value : name)))
+                }
+                placeholder={prompt.placeholder}
+                autoComplete="off"
+                maxLength={80}
+              />
+            </label>
+          ))}
+        </div>
+        <button type="submit" className="primary-action">
+          {count ? `Open my map with ${count} ${count === 1 ? 'name' : 'names'}` : 'Open the free map builder'}
+          <ArrowRight size={18} aria-hidden="true" />
+        </button>
+      </form>
+    </aside>
+  );
+}
+
 function TableOfContents({ sections }) {
   if (sections.length < 3) return null;
   return (
@@ -637,8 +693,10 @@ export function BlogPost({ post: meta, initialBody = null }) {
 
           <TableOfContents sections={post.sections} />
 
-          {post.sections.map((section) => (
-            <section key={section.heading}>
+          {post.sections.map((section, index) => (
+            <React.Fragment key={section.heading}>
+            {index === 2 ? <QuickStartMap slug={post.slug} /> : null}
+            <section>
               <h2 id={headingId(section.heading)}>{section.heading}</h2>
               {(section.paragraphs || []).map((paragraph) => (
                 <p key={paragraph.slice(0, 40)} dangerouslySetInnerHTML={{ __html: paragraph }} />
@@ -654,6 +712,7 @@ export function BlogPost({ post: meta, initialBody = null }) {
                 <p key={paragraph.slice(0, 40)} dangerouslySetInnerHTML={{ __html: paragraph }} />
               ))}
             </section>
+            </React.Fragment>
           ))}
 
           {post.scripture ? (

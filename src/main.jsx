@@ -47,6 +47,7 @@ import { sortedPostsMeta } from './content/posts-meta.js';
 import { prayerVerses, verseIndexFor, versePrayer } from './content/prayer-verses.js';
 import { conversationGuides, starterFor } from './content/conversation-starters.js';
 import { buildPrayerReminderIcs } from './reminder.js';
+import { decodeHashPayload, encodeMapToHash } from './map-link.js';
 import { networkGroups, networkSites, sitesInGroup } from './content/network.js';
 import {
   INVITE_DISMISSED_KEY,
@@ -324,21 +325,8 @@ function sanitizeImportedMap(imported) {
   };
 }
 
-function encodeMapToHash(mapData) {
-  const bytes = new TextEncoder().encode(JSON.stringify(mapData));
-  let binary = '';
-  bytes.forEach((byte) => {
-    binary += String.fromCharCode(byte);
-  });
-  return btoa(binary).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
-}
-
 function decodeMapFromHash(encoded) {
-  const base64 = encoded.replace(/-/g, '+').replace(/_/g, '/');
-  const binary = atob(base64);
-  const bytes = new Uint8Array(binary.length);
-  for (let i = 0; i < binary.length; i += 1) bytes[i] = binary.charCodeAt(i);
-  return sanitizeImportedMap(JSON.parse(new TextDecoder().decode(bytes)));
+  return sanitizeImportedMap(decodeHashPayload(encoded));
 }
 
 function readSharedMapFromUrl() {
@@ -346,6 +334,30 @@ function readSharedMapFromUrl() {
     const match = window.location.hash.match(/^#map=([A-Za-z0-9\-_]+)/);
     if (!match) return null;
     return decodeMapFromHash(match[1]);
+  } catch {
+    return null;
+  }
+}
+
+// Names sent from a journal article's quick start (`#add=`). Only names and
+// circles travel; ids and stages are assigned here.
+function readQuickStartFromUrl() {
+  try {
+    const match = window.location.hash.match(/^#add=([A-Za-z0-9\-_]+)/);
+    if (!match) return null;
+    const payload = decodeHashPayload(match[1]);
+    const people = (Array.isArray(payload.people) ? payload.people : [])
+      .slice(0, 12)
+      .map((person) => ({
+        id: createId(),
+        name: String(person.name || '').trim().slice(0, 80),
+        group: groups.some((group) => group.id === person.group) ? person.group : 'friends',
+        stage: 'pray',
+        notes: '',
+        parentId: null,
+      }))
+      .filter((person) => person.name);
+    return people.length ? people : null;
   } catch {
     return null;
   }
@@ -2202,6 +2214,27 @@ function App() {
     window.history.replaceState(null, '', window.location.pathname + window.location.search);
   }, []);
 
+  // Quick start from an article: add the names (never replace a saved map),
+  // skip ones already on it, then take the visitor straight to the builder.
+  useEffect(() => {
+    const incoming = readQuickStartFromUrl();
+    if (!incoming) return;
+    const saved = readStoredMap();
+    const base = saved ? mapData : createFreshMap(true);
+    const existing = new Set(base.people.map((person) => person.name.trim().toLowerCase()));
+    const fresh = incoming.filter((person) => !existing.has(person.name.toLowerCase()));
+    const next = { ...base, people: [...base.people, ...fresh] };
+    setMapData(next);
+    setSelectedId((fresh[0] || next.people[0])?.id ?? null);
+    setSaveState(fresh.length ? `Added ${fresh.length} ${fresh.length === 1 ? 'name' : 'names'} from the journal` : 'Those names are already on your map');
+    if (fresh.length) track('bulk_add', '/#quickstart');
+    window.history.replaceState(null, '', window.location.pathname + window.location.search + '#builder');
+    window.setTimeout(() => {
+      document.getElementById('builder')?.scrollIntoView({ behavior: 'instant', block: 'start' });
+    }, 60);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const layout = useMemo(() => computeLayout(mapData.people, compact), [mapData.people, compact]);
   const selectedPerson = mapData.people.find((person) => person.id === selectedId) || null;
   const selectedStage = selectedPerson ? getStage(selectedPerson.stage) : null;
@@ -3207,7 +3240,9 @@ if (typeof document !== 'undefined') {
     // is what this visitor will see; a returning visitor's saved map (or a
     // shared #map= link) renders differently, so build fresh rather than
     // hydrate a tree that is bound to mismatch.
-    const personalised = routePath === '/' && (readStoredMap() || window.location.hash.startsWith('#map='));
+    const personalised =
+      routePath === '/' &&
+      (readStoredMap() || window.location.hash.startsWith('#map=') || window.location.hash.startsWith('#add='));
     const prerendered = container.firstElementChild && !personalised;
     container.__oikosRoot = prerendered
       ? hydrateRoot(container, page, {

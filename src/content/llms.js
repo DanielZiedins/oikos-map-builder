@@ -18,6 +18,7 @@ export const llmsWhoIsItFor =
 export const llmsCapabilities = [
   'Create a custom relationship map with a center person, first-circle relationships, and second-circle branches.',
   'Add many people at once by pasting a list of names.',
+  'Start a map from any Oikos Journal article: type up to five names in the article\'s "Who are your five?" card and the builder opens with them on the map (added to any map already saved on the device; the names travel only in the link).',
   'Classify relationships as family, friends, work, school, or neighbors.',
   'Track an intentional next step: Pray, Care, Share, or Disciple.',
   'Add notes and prayer focuses for each person.',

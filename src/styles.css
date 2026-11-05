@@ -5245,3 +5245,102 @@ textarea:focus-visible,
     min-height: 2.7em;
   }
 }
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ---------- Article quick start: "Who are your five?" ---------- */
+.quick-start {
+  margin: 34px 0;
+  padding: clamp(20px, 3vw, 28px);
+  border-radius: 14px;
+  color: #fff8ec;
+  background:
+    radial-gradient(circle at 92% 10%, rgba(243, 207, 116, 0.2), transparent 40%),
+    radial-gradient(circle at 6% 96%, rgba(20, 184, 166, 0.18), transparent 38%),
+    #26201c;
+  box-shadow: 0 24px 60px rgba(38, 32, 28, 0.22);
+}
+
+.quick-start .quick-start-kicker {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin: 0 0 6px;
+  color: #f3cf74;
+  font-size: 0.74rem;
+  font-weight: 950;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.quick-start .quick-start-title {
+  margin: 0 0 8px;
+  color: #fff8ec;
+  font-size: clamp(1.5rem, 3vw, 1.9rem);
+  font-weight: 900;
+  line-height: 1.15;
+}
+
+.quick-start > p:not(.quick-start-kicker):not(.quick-start-title) {
+  margin: 0 0 16px;
+  color: rgba(255, 248, 236, 0.8);
+  font-size: 0.98rem;
+  line-height: 1.6;
+}
+
+.quick-start-fields {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.quick-start-fields label {
+  display: block;
+  margin: 0;
+}
+
+.quick-start-fields input {
+  width: 100%;
+  min-height: 46px;
+  padding: 10px 12px;
+  border: 1px solid rgba(255, 248, 236, 0.22);
+  border-radius: 8px;
+  color: #fff8ec;
+  background: rgba(255, 248, 236, 0.08);
+  font: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.quick-start-fields input::placeholder {
+  color: rgba(255, 248, 236, 0.62);
+}
+
+.quick-start-fields input:focus {
+  outline: 2px solid #f3cf74;
+  outline-offset: 1px;
+}
+
+.quick-start .primary-action {
+  width: 100%;
+  justify-content: center;
+  color: #171310;
+  background: #f3cf74;
+}
+
+@media (min-width: 700px) {
+  .quick-start .primary-action {
+    width: auto;
+  }
+}
