@@ -5374,3 +5374,125 @@ textarea:focus-visible,
   background: #0e7268;
   border-color: #0e7268;
 }
+
+/* ---------- "Who are you praying for?" ---------- */
+.pray-for-name {
+  position: sticky;
+  top: 84px;
+  z-index: 5;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 6px 12px;
+  align-items: center;
+  margin: 26px 0 30px;
+  padding: 14px 16px;
+  border: 1px solid rgba(14, 114, 104, 0.3);
+  border-radius: 12px;
+  background: rgba(255, 253, 247, 0.96);
+  box-shadow: 0 14px 34px rgba(38, 32, 28, 0.1);
+  backdrop-filter: blur(8px);
+}
+
+.pray-for-name label {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin: 0;
+  color: #0e7268;
+  font-size: 0.86rem;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+.pray-for-name input {
+  width: 100%;
+  min-height: 42px;
+  padding: 8px 12px;
+  border: 1px solid rgba(72, 57, 43, 0.22);
+  border-radius: 8px;
+  color: #26201c;
+  background: #fff;
+  font: inherit;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.pray-for-name p {
+  grid-column: 1 / -1;
+  margin: 0;
+  color: #62564e;
+  font-size: 0.84rem;
+  line-height: 1.45;
+}
+
+.pray-for-name-add {
+  grid-column: 1 / -1;
+  justify-self: start;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #9c3327;
+  font-size: 0.88rem;
+  font-weight: 900;
+}
+
+.pray-name {
+  padding: 0 3px;
+  border-radius: 4px;
+  background: rgba(243, 207, 116, 0.45);
+  color: #26201c;
+  font-style: normal;
+  font-weight: 800;
+}
+
+/* Pinned while reading on wider screens; in the flow on phones, where a
+   pinned bar would cover a third of the screen. */
+@media (max-width: 860px) {
+  .pray-for-name {
+    position: static;
+  }
+}
+
+@media (max-width: 620px) {
+  .pray-for-name {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* The contents box sits inside .post-body, whose list bullets (absolute yellow
+   dots) and link styles were overriding it at equal specificity: each entry
+   showed a yellow pill over its first letter and teal underlined links.
+   Restore the intended numbered list (01, 02 …) with plain links. */
+.post-body .post-toc li {
+  position: static;
+  display: grid;
+  grid-template-columns: 30px minmax(0, 1fr);
+  align-items: baseline;
+  padding-left: 0;
+}
+
+.post-body .post-toc li::before {
+  position: static;
+  width: auto;
+  height: auto;
+  min-width: 26px;
+  content: counter(toc, decimal-leading-zero);
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+  color: rgba(98, 86, 78, 0.7);
+  font-size: 0.78rem;
+  font-weight: 900;
+}
+
+.post-body .post-toc a {
+  color: #3d342e;
+  font-weight: 700;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+
+.post-body .post-toc a:hover {
+  color: #9c3327;
+  border-bottom-color: currentColor;
+}

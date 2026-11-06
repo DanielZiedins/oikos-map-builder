@@ -602,6 +602,60 @@ function QuickStartMap({ slug }) {
   );
 }
 
+// "Who are you praying for?" — on articles whose prayers use a [name]
+// placeholder, every prayer rewrites itself with the name as it is typed. The
+// name stays on this page only (never stored or sent), and the prerendered
+// HTML keeps [name], so nothing changes until the reader types.
+function escapeHtml(value) {
+  return String(value).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
+}
+
+function personalize(html, name) {
+  if (!name) return html;
+  return html.replaceAll('[name]', `<span class="pray-name">${escapeHtml(name)}</span>`);
+}
+
+function PrayForName({ slug, name, setName }) {
+  const trimmed = name.trim();
+  const [counted, setCounted] = useState(false);
+  return (
+    <aside className="pray-for-name" aria-labelledby={`pray-for-${slug}`}>
+      <label id={`pray-for-${slug}`} htmlFor={`pray-for-input-${slug}`}>
+        <Sparkles size={16} aria-hidden="true" />
+        Who are you praying for?
+      </label>
+      <input
+        id={`pray-for-input-${slug}`}
+        value={name}
+        onChange={(event) => setName(event.target.value.slice(0, 40))}
+        onBlur={() => {
+          if (trimmed && !counted) {
+            setCounted(true);
+            track('pray_name', `/blog/${slug}`);
+          }
+        }}
+        placeholder="Type a first name"
+        autoComplete="off"
+      />
+      <p aria-live="polite">
+        {trimmed
+          ? `Every prayer below now uses ${trimmed}'s name. Pray them out loud if you can.`
+          : 'Type a name and every prayer on this page will use it. It stays on this page only.'}
+      </p>
+      {trimmed ? (
+        <a
+          className="pray-for-name-add"
+          href={quickStartLink(['', trimmed])}
+          onClick={() => track('builder_cta', `/blog/${slug}#pray-name`)}
+          data-no-outbound
+        >
+          Add {trimmed} to my Oikos Map <ArrowRight size={15} aria-hidden="true" />
+        </a>
+      ) : null}
+    </aside>
+  );
+}
+
 function TableOfContents({ sections }) {
   if (sections.length < 3) return null;
   return (
@@ -675,6 +729,7 @@ function useCopyVerse(slug) {
 export function BlogPost({ post: meta, initialBody = null }) {
   useReadingProgress();
   useCopyVerse(meta.slug);
+  const [prayName, setPrayName] = useState('');
   const others = relatedPosts(meta);
   // blog-entry.jsx loads the body before the first render (the prerendered shell
   // stays on screen meanwhile), so the page paints once in its final layout.
@@ -742,23 +797,27 @@ export function BlogPost({ post: meta, initialBody = null }) {
 
           <TableOfContents sections={post.sections} />
 
+          {JSON.stringify(post.sections).includes('[name]') ? (
+            <PrayForName slug={post.slug} name={prayName} setName={setPrayName} />
+          ) : null}
+
           {post.sections.map((section, index) => (
             <React.Fragment key={section.heading}>
             {index === 2 ? <QuickStartMap slug={post.slug} /> : null}
             <section>
               <h2 id={headingId(section.heading)}>{section.heading}</h2>
               {(section.paragraphs || []).map((paragraph) => (
-                <p key={paragraph.slice(0, 40)} dangerouslySetInnerHTML={{ __html: paragraph }} />
+                <p key={paragraph.slice(0, 40)} dangerouslySetInnerHTML={{ __html: personalize(paragraph, prayName.trim()) }} />
               ))}
               {section.list?.length ? (
                 <ul>
                   {section.list.map((item) => (
-                    <li key={item.slice(0, 40)} dangerouslySetInnerHTML={{ __html: withCopyVerse(item) }} />
+                    <li key={item.slice(0, 40)} dangerouslySetInnerHTML={{ __html: withCopyVerse(personalize(item, prayName.trim())) }} />
                   ))}
                 </ul>
               ) : null}
               {(section.after || []).map((paragraph) => (
-                <p key={paragraph.slice(0, 40)} dangerouslySetInnerHTML={{ __html: paragraph }} />
+                <p key={paragraph.slice(0, 40)} dangerouslySetInnerHTML={{ __html: personalize(paragraph, prayName.trim()) }} />
               ))}
             </section>
             </React.Fragment>
