@@ -3090,7 +3090,7 @@ function OikosSvg({ mapData, layout, selectedId, setSelectedId, svgRef, compact 
       // A group, not an image: role="img" hid the person buttons inside it
       // from screen readers (axe: nested-interactive).
       role="group"
-      aria-label={`${mapData.mapTitle} Oikos Map`}
+      aria-label={/oikos map\s*$/i.test(mapData.mapTitle || '') ? mapData.mapTitle : `${mapData.mapTitle || 'My'} Oikos Map`}
     >
       <defs>
         <style>{`
