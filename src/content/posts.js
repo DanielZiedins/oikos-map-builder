@@ -45,6 +45,7 @@ import adventPrayerCalendar from './bodies/advent-prayer-calendar-for-your-oikos
 import bibleVersesLovingNeighbour from './bodies/bible-verses-about-loving-your-neighbour.js';
 import bibleVersesDiscipleship from './bodies/bible-verses-about-discipleship.js';
 import christmasBibleVerses from './bodies/christmas-bible-verses-to-share.js';
+import thanksgivingBibleVerses from './bodies/thanksgiving-bible-verses-to-share.js';
 import whatIsAnOikos from './bodies/what-is-an-oikos.js';
 import whatToSayWhenSomeoneIsHurting from './bodies/what-to-say-when-someone-is-hurting.js';
 
@@ -87,6 +88,7 @@ const bodies = {
   'bible-verses-about-loving-your-neighbour': bibleVersesLovingNeighbour,
   'bible-verses-about-discipleship': bibleVersesDiscipleship,
   'christmas-bible-verses-to-share': christmasBibleVerses,
+  'thanksgiving-bible-verses-to-share': thanksgivingBibleVerses,
   'what-is-an-oikos': whatIsAnOikos,
   'what-to-say-when-someone-is-hurting': whatToSayWhenSomeoneIsHurting,
 };

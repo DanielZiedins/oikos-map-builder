@@ -510,6 +510,19 @@ export const postsMeta = [
     excerpt:
       "December is full of small moments where one verse says more than a paragraph of your own words.",
   },
+  {
+    slug: "thanksgiving-bible-verses-to-share",
+    order: 41,
+    title: "25 Thanksgiving Bible Verses to Share (Cards, Texts and Table Grace)",
+    description:
+      "The best Thanksgiving Bible verses on gratitude, for cards, texts and saying grace at the table, plus verses for hard seasons and for the people you are thankful for, each with a tap-to-copy button.",
+    date: "2026-11-08",
+    readingTime: "7 min read",
+    tags: ["Share", "Scripture", "Family"],
+    kicker: "Step three · Share",
+    excerpt:
+      "Almost everyone stops to say what they are grateful for. Fewer have been asked who they thank.",
+  },
 ];
 
 export const sortedPostsMeta = [...postsMeta].sort((a, b) => a.order - b.order);
@@ -573,7 +586,7 @@ export const readingPath = [
     id: 'share',
     label: 'Share',
     note: 'Your story, a simple invitation, and faith where you already spend your days.',
-    slugs: ['overcoming-fear-of-sharing-your-faith', 'spiritual-conversation-starters', 'bible-verses-about-evangelism', 'christmas-bible-verses-to-share', 'how-to-share-your-testimony', 'how-to-lead-someone-to-jesus', 'answering-common-objections-to-christianity', 'how-to-invite-someone-to-church', 'talking-about-jesus-with-family-at-the-holidays', 'faith-at-work-your-coworkers-are-your-oikos', 'how-to-share-your-faith-at-school', 'how-to-share-your-faith-online'],
+    slugs: ['overcoming-fear-of-sharing-your-faith', 'spiritual-conversation-starters', 'bible-verses-about-evangelism', 'christmas-bible-verses-to-share', 'thanksgiving-bible-verses-to-share', 'how-to-share-your-testimony', 'how-to-lead-someone-to-jesus', 'answering-common-objections-to-christianity', 'how-to-invite-someone-to-church', 'talking-about-jesus-with-family-at-the-holidays', 'faith-at-work-your-coworkers-are-your-oikos', 'how-to-share-your-faith-at-school', 'how-to-share-your-faith-online'],
   },
   {
     id: 'disciple',
