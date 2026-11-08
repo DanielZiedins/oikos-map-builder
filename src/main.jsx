@@ -3087,7 +3087,9 @@ function OikosSvg({ mapData, layout, selectedId, setSelectedId, svgRef, compact 
       ref={svgRef}
       viewBox={`0 0 ${width} ${height}`}
       className={compact ? 'compact' : undefined}
-      role="img"
+      // A group, not an image: role="img" hid the person buttons inside it
+      // from screen readers (axe: nested-interactive).
+      role="group"
       aria-label={`${mapData.mapTitle} Oikos Map`}
     >
       <defs>
@@ -3189,7 +3191,9 @@ function OikosSvg({ mapData, layout, selectedId, setSelectedId, svgRef, compact 
             <circle r={radius} fill={group.color} />
             <circle r={radius - 9} fill="#fffdf7" opacity="0.96" />
             <text y="-4" textAnchor="middle" className="svg-person-name">
-              {truncateLabel(person.name)}
+              {/* The trailing space keeps name and stage as separate words in
+                  the accessible text ("Aunt Maria Pray"); SVG does not draw it. */}
+              {truncateLabel(person.name)}{' '}
             </text>
             <text y="24" textAnchor="middle" className="svg-person-stage">
               {stageLabel}

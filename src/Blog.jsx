@@ -688,7 +688,7 @@ function withCopyVerse(item) {
   const match = item.match(VERSE_ITEM);
   if (!match) return item;
   const ref = match[1].trim();
-  return `${item} <button type="button" class="verse-copy" data-ref="${ref}" data-verse="${match[2]}" aria-label="Copy ${ref}">Copy verse</button>`;
+  return `${item} <button type="button" class="verse-copy" data-ref="${ref}" data-verse="${match[2]}" aria-label="Copy verse: ${ref}">Copy verse</button>`;
 }
 
 function useCopyVerse(slug) {
