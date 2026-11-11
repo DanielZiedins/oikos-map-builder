@@ -6125,3 +6125,14 @@ textarea:focus-visible,
   background: rgba(255, 248, 236, 0.08);
   border-color: rgba(255, 248, 236, 0.32);
 }
+
+/* Two-column hero on narrow laptops / tablets: the constellation is small
+   enough that the floating note covered the Family circle. Sit it underneath,
+   as on phones. */
+@media (min-width: 861px) and (max-width: 1180px) {
+  .hero-visual .hero-map-note {
+    position: static;
+    width: fit-content;
+    margin: 12px auto 0;
+  }
+}
