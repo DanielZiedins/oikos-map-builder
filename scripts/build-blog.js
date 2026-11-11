@@ -211,6 +211,11 @@ function postNoscript(post) {
 }
 
 function postSchema(post) {
+  const verses = (post.sections || [])
+    .flatMap((section) => section.list || [])
+    .map((item) => /^<strong>([^<]+)<\/strong> — <em>"(.+?)"<\/em>/.exec(item))
+    .filter(Boolean)
+    .map((match) => ({ ref: match[1], text: stripTags(match[2]) }));
   const url = `${SITE}/blog/${post.slug}`;
   return [
     {
@@ -272,6 +277,27 @@ function postSchema(post) {
               '@type': 'Question',
               name: item.q,
               acceptedAnswer: { '@type': 'Answer', text: item.a, author: AUTHOR },
+            })),
+          },
+        ]
+      : []),
+    // Verse-list articles: the verses themselves as an ordered list, so the
+    // list an answer engine quotes is the list on the page (reference + the
+    // NIV text exactly as shown). Only items in the visible verse shape count.
+    ...(verses.length >= 5
+      ? [
+          {
+            '@context': 'https://schema.org',
+            '@type': 'ItemList',
+            name: post.title,
+            url,
+            numberOfItems: verses.length,
+            itemListOrder: 'https://schema.org/ItemListUnordered',
+            itemListElement: verses.map((verse, index) => ({
+              '@type': 'ListItem',
+              position: index + 1,
+              name: verse.ref,
+              description: `${verse.text} (NIV)`,
             })),
           },
         ]
@@ -398,7 +424,7 @@ posts.forEach((post) => {
 // Bump CONTENT_UPDATED when the hub pages themselves change; article dates come
 // from posts-meta. The journal index changes whenever an article is added, so
 // it takes whichever is newer.
-const CONTENT_UPDATED = '2026-11-08';
+const CONTENT_UPDATED = '2026-11-11';
 const latestPost = posts.map((post) => post.date).sort().at(-1);
 const today = [CONTENT_UPDATED, latestPost].sort().at(-1);
 const urls = [

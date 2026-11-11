@@ -609,45 +609,64 @@ function ScrollEffects() {
       revealObserver?.disconnect();
     }, 2500);
 
+    // Where the browser can run the progress bar and hero drift itself (CSS
+    // scroll timelines), no custom property is written per frame: writing one
+    // on <html> re-styles the whole document on every scroll tick.
+    const cssScroll = typeof CSS !== 'undefined' && CSS.supports?.('animation-timeline: scroll()');
+
     function update() {
       frame = 0;
       revealInView();
+      if (cssScroll) return;
       const height = document.documentElement.scrollHeight - window.innerHeight;
       const progress = height > 0 ? window.scrollY / height : 0;
-      document.documentElement.style.setProperty('--scroll-progress', progress.toFixed(4));
-      document.documentElement.style.setProperty('--scroll-width', `${Math.min(100, Math.max(0, progress * 100)).toFixed(2)}%`);
-      document.documentElement.style.setProperty('--scroll-y', String(Math.round(window.scrollY)));
-      document.documentElement.style.setProperty('--parallax-y', `${Math.round(window.scrollY * -0.08)}px`);
+      document.documentElement.style.setProperty('--scroll-progress', Math.min(1, Math.max(0, progress)).toFixed(4));
     }
 
     function requestUpdate() {
       if (!frame) frame = window.requestAnimationFrame(update);
     }
 
-    const canUsePointerParallax =
+    // Card spotlight: one delegated listener, one write per frame, and only on
+    // the card under the pointer (never on <html>).
+    const canSpotlight =
       !window.matchMedia('(prefers-reduced-motion: reduce)').matches &&
       window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    let spotFrame = 0;
+    let spotEvent = null;
+
+    const heroBand = document.querySelector('.hero, .growth-hero, .connect-hero');
+
+    function paintSpot() {
+      spotFrame = 0;
+      if (!spotEvent) return;
+      // The hero halo leans toward the pointer; scoped to the hero itself.
+      if (heroBand && window.scrollY < window.innerHeight) {
+        heroBand.style.setProperty('--pointer-shift-x', `${((spotEvent.clientX / window.innerWidth - 0.5) * 22).toFixed(1)}px`);
+        heroBand.style.setProperty('--pointer-shift-y', `${((spotEvent.clientY / window.innerHeight - 0.5) * 22).toFixed(1)}px`);
+      }
+      const card = spotEvent.target?.closest?.('[data-spot]');
+      if (!card) return;
+      const rect = card.getBoundingClientRect();
+      card.style.setProperty('--mx', `${Math.round(spotEvent.clientX - rect.left)}px`);
+      card.style.setProperty('--my', `${Math.round(spotEvent.clientY - rect.top)}px`);
+    }
 
     function updatePointer(event) {
-      const x = (event.clientX / window.innerWidth - 0.5).toFixed(4);
-      const y = (event.clientY / window.innerHeight - 0.5).toFixed(4);
-      document.documentElement.style.setProperty('--pointer-x', x);
-      document.documentElement.style.setProperty('--pointer-y', y);
-      document.documentElement.style.setProperty('--pointer-shift-x', `${Number(x) * 22}px`);
-      document.documentElement.style.setProperty('--pointer-shift-y', `${Number(y) * 22}px`);
-      document.documentElement.style.setProperty('--pointer-shift-x-reverse', `${Number(x) * -7}px`);
-      document.documentElement.style.setProperty('--pointer-shift-y-reverse', `${Number(y) * -7}px`);
+      spotEvent = event;
+      if (!spotFrame) spotFrame = window.requestAnimationFrame(paintSpot);
     }
 
     update();
     window.addEventListener('scroll', requestUpdate, { passive: true });
     window.addEventListener('resize', requestUpdate);
-    if (canUsePointerParallax) window.addEventListener('pointermove', updatePointer, { passive: true });
+    if (canSpotlight) window.addEventListener('pointermove', updatePointer, { passive: true });
 
     return () => {
       window.removeEventListener('scroll', requestUpdate);
       window.removeEventListener('resize', requestUpdate);
-      if (canUsePointerParallax) window.removeEventListener('pointermove', updatePointer);
+      if (canSpotlight) window.removeEventListener('pointermove', updatePointer);
+      if (spotFrame) window.cancelAnimationFrame(spotFrame);
       revealObserver?.disconnect();
       window.clearTimeout(failSafe);
       if (frame) window.cancelAnimationFrame(frame);
@@ -868,6 +887,136 @@ function PrayerSprint({ person, stage, onComplete }) {
   );
 }
 
+// "I prayed today": a private, on-device record of the days you prayed, shown
+// as a week of dots and a running streak. Nothing leaves the browser except an
+// anonymous count that it happened. Read after mount (the prerendered HTML has
+// no visitor), and a failed storage read just means an empty week.
+const PRAYER_DAYS_KEY = 'oikos-prayer-days-v1';
+
+function dayKey(date) {
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  return `${date.getFullYear()}-${month}-${day}`;
+}
+
+function readPrayerDays() {
+  try {
+    const parsed = JSON.parse(window.localStorage.getItem(PRAYER_DAYS_KEY) || '[]');
+    return Array.isArray(parsed) ? parsed.filter((item) => /^\d{4}-\d{2}-\d{2}$/.test(item)) : [];
+  } catch {
+    return [];
+  }
+}
+
+function prayerStreak(days, today) {
+  const set = new Set(days);
+  const cursor = new Date(today);
+  // A streak survives until the end of today: yesterday still counts.
+  if (!set.has(dayKey(cursor))) cursor.setDate(cursor.getDate() - 1);
+  let streak = 0;
+  while (set.has(dayKey(cursor))) {
+    streak += 1;
+    cursor.setDate(cursor.getDate() - 1);
+  }
+  return streak;
+}
+
+function PrayerStreak() {
+  const [days, setDays] = useState([]);
+  const [today, setToday] = useState(null);
+
+  useEffect(() => {
+    setToday(new Date());
+    setDays(readPrayerDays());
+
+    function mark() {
+      const key = dayKey(new Date());
+      setToday(new Date());
+      const current = readPrayerDays();
+      if (current.includes(key)) {
+        setDays(current);
+        return;
+      }
+      const next = [...current, key].sort().slice(-400);
+      try {
+        window.localStorage.setItem(PRAYER_DAYS_KEY, JSON.stringify(next));
+      } catch {
+        // Private mode: the week still shows for this visit.
+      }
+      setDays(next);
+      track('prayer_day');
+    }
+
+    // Another tab praying should not be overwritten by this one's older list.
+    function onStorage(event) {
+      if (event.key === PRAYER_DAYS_KEY) setDays(readPrayerDays());
+    }
+
+    window.addEventListener('oikos:prayed', mark);
+    window.addEventListener('storage', onStorage);
+    return () => {
+      window.removeEventListener('oikos:prayed', mark);
+      window.removeEventListener('storage', onStorage);
+    };
+  }, []);
+
+  const week = [];
+  if (today) {
+    for (let back = 6; back >= 0; back -= 1) {
+      const date = new Date(today);
+      date.setDate(date.getDate() - back);
+      week.push({
+        key: dayKey(date),
+        letter: date.toLocaleDateString('en', { weekday: 'narrow' }),
+        name: date.toLocaleDateString('en', { weekday: 'long' }),
+        isToday: back === 0,
+      });
+    }
+  }
+  const prayedToday = today ? days.includes(dayKey(today)) : false;
+  const streak = today ? prayerStreak(days, today) : 0;
+
+  return (
+    <div className="prayer-streak">
+      <div className="prayer-streak-top">
+        <span>
+          <Flame size={15} aria-hidden="true" />
+          Days in prayer
+        </span>
+        <strong aria-live="polite">
+          {streak > 0 ? `${streak}-day streak` : 'Start today'}
+          {days.length > streak ? <small> · {days.length} days in all</small> : null}
+        </strong>
+      </div>
+      <ol className="prayer-week" aria-label="The last seven days">
+        {(week.length ? week : Array.from({ length: 7 }, (_, index) => ({ key: `empty-${index}`, letter: '', name: '', isToday: false }))).map((day) => {
+          const done = days.includes(day.key);
+          return (
+            <li
+              key={day.key}
+              className={`${done ? 'done' : ''}${day.isToday ? ' today' : ''}`}
+              aria-label={day.name ? `${day.name}: ${done ? 'prayed' : 'not yet'}` : undefined}
+            >
+              <i aria-hidden="true">{done ? <CheckCircle2 size={15} /> : null}</i>
+              <span aria-hidden="true">{day.letter}</span>
+            </li>
+          );
+        })}
+      </ol>
+      <button
+        type="button"
+        className="prayer-streak-button"
+        disabled={prayedToday}
+        onClick={() => window.dispatchEvent(new Event('oikos:prayed'))}
+      >
+        <CheckCircle2 size={16} aria-hidden="true" />
+        {prayedToday ? 'Prayed today. See you tomorrow' : 'I prayed today'}
+      </button>
+      <p>Kept only on this device. Miss a day? Grace. Just begin again.</p>
+    </div>
+  );
+}
+
 // A question to ask this person, for the stages where the next step is a
 // conversation. Same date-after-mount rule as the verse: the prerendered HTML
 // was built on another day.
@@ -1030,9 +1179,9 @@ function LatestArticles() {
           </span>
         </a>
       ) : null}
-      <div className="latest-grid">
+      <div className="latest-grid stagger">
         {sortedPostsMeta.slice(0, 3).map((post) => (
-          <article key={post.slug}>
+          <article key={post.slug} data-spot>
             <p className="blog-card-kicker">{post.kicker}</p>
             <h3>
               <a href={`/blog/${post.slug}`}>{post.title}</a>
@@ -1707,6 +1856,17 @@ function HeroConstellation() {
           </g>
         ))}
         {nodes.map((node, index) => (
+          <circle
+            key={`pulse-${node.label}`}
+            className="c-pulse"
+            cx={cx}
+            cy={cy}
+            r="6"
+            fill={node.color}
+            style={{ '--dx': `${(node.x - cx).toFixed(1)}px`, '--dy': `${(node.y - cy).toFixed(1)}px`, '--i': index }}
+          />
+        ))}
+        {nodes.map((node, index) => (
           <g key={node.label} className="c-node" style={{ '--i': index, transformOrigin: `${node.x}px ${node.y}px` }}>
             {node.outer.map((pt, i) => (
               <g key={i} className="c-outer" style={{ '--i': index * 2 + i, transformOrigin: `${pt.x}px ${pt.y}px` }}>
@@ -1741,6 +1901,40 @@ function HeroConstellation() {
   );
 }
 
+// A slow ticker of the rhythm and the five circles, between the hero and the
+// builder. Decorative: the words are drawn by CSS from data-w, so the ticker adds
+// no repeated text to the page for crawlers or screen readers.
+const BAND_WORDS = [
+  ['Pray', '#14b8a6'],
+  ['Family', '#f45d48'],
+  ['Care', '#f3cf74'],
+  ['Friends', '#14b8a6'],
+  ['Share', '#f45d48'],
+  ['Neighbours', '#8b5cf6'],
+  ['Disciple', '#516cf0'],
+  ['Work', '#f59e0b'],
+  ['One name at a time', '#f3cf74'],
+  ['School', '#516cf0'],
+];
+
+function KineticBand() {
+  return (
+    <div className="kinetic-band" aria-hidden="true">
+      <div className="kinetic-track">
+        {[0, 1].map((copy) => (
+          <div className="kinetic-row" key={copy}>
+            {BAND_WORDS.map(([word, color]) => (
+              <span key={word} data-w={word}>
+                <i style={{ background: color }} />
+              </span>
+            ))}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 // ---- Homepage teasers. The full sections live on /about, /network and /faq. ----
 
 function RhythmStrip() {
@@ -1753,9 +1947,9 @@ function RhythmStrip() {
         </p>
         <h2 id="rhythm-title">From a name on a page to a life touched by love.</h2>
       </div>
-      <ol className="rhythm-steps">
+      <ol className="rhythm-steps stagger">
         {stages.map((stage, index) => (
-          <li key={stage.id} className={`rhythm-step rhythm-${stage.id}`}>
+          <li key={stage.id} className={`rhythm-step rhythm-${stage.id}`} data-spot>
             <span className="rhythm-number">0{index + 1}</span>
             <strong>{stage.label}</strong>
             <p>{stage.prompt}</p>
@@ -1794,9 +1988,10 @@ function WhyTeaser() {
           </a>
         </div>
       </div>
-      <div className="why-stats">
+      <div className="why-stars" aria-hidden="true" />
+      <div className="why-stats stagger">
         {missionStats.slice(0, 2).map((stat) => (
-          <article key={stat.label}>
+          <article key={stat.label} data-spot>
             <strong>{stat.value}</strong>
             <span>{stat.label}</span>
           </article>
@@ -1825,9 +2020,9 @@ function NetworkTeaser() {
           same thing. Wherever your next step is, there is probably a door here for it.
         </p>
       </div>
-      <nav className="network-chips" aria-label="Network groups">
+      <nav className="network-chips stagger" aria-label="Network groups">
         {networkGroups.map((group) => (
-          <a key={group.id} href={`/network#group-${group.id}`}>
+          <a key={group.id} href={`/network#group-${group.id}`} data-spot>
             <strong>{group.label}</strong>
             <span>{sitesInGroup(group.id).length} sites</span>
           </a>
@@ -2571,6 +2766,11 @@ function App() {
       <SiteHeader />
 
       <section className="hero" id="top">
+        <div className="hero-aurora" aria-hidden="true">
+          <span />
+          <span />
+          <span />
+        </div>
         <div className="hero-copy">
           <p className="eyebrow">
             <HeartHandshake size={18} aria-hidden="true" />
@@ -2579,7 +2779,12 @@ function App() {
           <h1>
             <span>See the people</span>{' '}
             <span>God has placed</span>{' '}
-            <span className="hero-accent">around you.</span>
+            <span className="hero-accent">
+              around you.
+              <svg className="hero-underline" viewBox="0 0 300 18" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+                <path d="M4 12 C 60 2, 120 16, 180 8 S 270 4, 296 10" pathLength="1" />
+              </svg>
+            </span>
           </h1>
           <p className="hero-lede">
             Build a simple, prayerful Oikos Map that turns names into intentional love, conversations, and disciple-making
@@ -2612,6 +2817,8 @@ function App() {
 
         <HeroConstellation />
       </section>
+
+      <KineticBand />
 
       <section className="builder-section" id="builder" aria-labelledby="builder-title" data-reveal>
         <div className="builder-heading">
@@ -2895,8 +3102,12 @@ function App() {
                   <PrayerSprint
                     person={selectedPerson}
                     stage={selectedStage}
-                    onComplete={() => setSaveState(`Prayer time complete for ${selectedPerson.name}`)}
+                    onComplete={() => {
+                      setSaveState(`Prayer time complete for ${selectedPerson.name}`);
+                      window.dispatchEvent(new Event('oikos:prayed'));
+                    }}
                   />
+                  <PrayerStreak />
                   <ConversationCard person={selectedPerson} stage={selectedStage} />
                 </>
               ) : (

@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { ArrowLeft, ArrowRight, BookOpen, Compass, Mail, Sparkles } from 'lucide-react';
+import React, { useEffect, useRef, useState } from 'react';
+import { ArrowLeft, ArrowRight, BookOpen, Compass, Mail, Search, Sparkles } from 'lucide-react';
 import { readingPath, relatedMap, sortedPostsMeta } from './content/posts-meta.js';
 import { siteByHost } from './content/network.js';
 import { glossary } from './content/glossary.js';
@@ -22,14 +22,14 @@ import { QUICK_START_PROMPTS, quickStartLink } from './map-link.js';
 function useReadingProgress() {
   useEffect(() => {
     let frame = 0;
+    // CSS scroll timelines drive the bar where they exist; this is the fallback.
+    const cssScroll = typeof CSS !== 'undefined' && CSS.supports?.('animation-timeline: scroll()');
+    if (cssScroll) return undefined;
     function update() {
       frame = 0;
       const height = document.documentElement.scrollHeight - window.innerHeight;
       const progress = height > 0 ? window.scrollY / height : 0;
-      document.documentElement.style.setProperty(
-        '--scroll-width',
-        `${Math.min(100, Math.max(0, progress * 100)).toFixed(2)}%`,
-      );
+      document.documentElement.style.setProperty('--scroll-progress', Math.min(1, Math.max(0, progress)).toFixed(4));
     }
     function request() {
       if (!frame) frame = window.requestAnimationFrame(update);
@@ -307,12 +307,31 @@ export function BlogIndex() {
   }
 
   const tags = tagCounts();
-  const visible = activeTag ? sortedPostsMeta.filter((post) => (post.tags || []).includes(activeTag)) : sortedPostsMeta;
+  // Instant search over every article's title, summary and topics. Starts empty
+  // (matching the prerendered HTML); every word typed must appear somewhere.
+  const [query, setQuery] = useState('');
+  const searchTracked = useRef(false);
+  const words = query.toLowerCase().split(/\s+/).filter(Boolean);
+  const tagged = activeTag ? sortedPostsMeta.filter((post) => (post.tags || []).includes(activeTag)) : sortedPostsMeta;
+  const visible = words.length
+    ? tagged.filter((post) => {
+        const haystack = `${post.title} ${post.description} ${post.excerpt} ${post.kicker} ${(post.tags || []).join(' ')}`.toLowerCase();
+        return words.every((word) => haystack.includes(word));
+      })
+    : tagged;
+
+  function onSearch(event) {
+    setQuery(event.target.value);
+    if (!searchTracked.current && event.target.value.trim().length >= 3) {
+      searchTracked.current = true;
+      track('journal_filter', '/blog#search');
+    }
+  }
   // The first LIST_PREVIEW cards show by default; the rest are in the HTML (for
   // crawlers and no-JS readers) but hidden by CSS until "Show all". A topic
   // filter always shows every match.
   const [showAll, setShowAll] = useState(false);
-  const collapsed = !activeTag && !showAll && visible.length > LIST_PREVIEW;
+  const collapsed = !activeTag && !words.length && !showAll && visible.length > LIST_PREVIEW;
 
   return (
     <main>
@@ -338,6 +357,22 @@ export function BlogIndex() {
 
       <ReadingPath />
 
+      <div className="blog-search" role="search">
+        <label htmlFor="journal-search">Search the journal</label>
+        <div className="blog-search-field">
+          <Search size={18} aria-hidden="true" />
+          <input
+            id="journal-search"
+            type="search"
+            value={query}
+            onChange={onSearch}
+            placeholder="Try “prayer”, “neighbour”, “testimony”, “Christmas”…"
+            autoComplete="off"
+            enterKeyHint="search"
+          />
+        </div>
+      </div>
+
       <nav className="blog-filter" aria-label="Filter articles by topic">
         <button
           type="button"
@@ -361,9 +396,11 @@ export function BlogIndex() {
       </nav>
 
       <p className="blog-filter-status" aria-live="polite">
-        {activeTag
-          ? `${visible.length} ${visible.length === 1 ? 'article' : 'articles'} tagged ${activeTag}`
-          : `All ${sortedPostsMeta.length} articles`}
+        {words.length
+          ? `${visible.length} ${visible.length === 1 ? 'article' : 'articles'} matching “${query.trim()}”${activeTag ? ` in ${activeTag}` : ''}`
+          : activeTag
+            ? `${visible.length} ${visible.length === 1 ? 'article' : 'articles'} tagged ${activeTag}`
+            : `All ${sortedPostsMeta.length} articles`}
       </p>
 
       <section className={collapsed ? 'blog-list collapsed' : 'blog-list'} id="articles" aria-label="Articles">
@@ -393,6 +430,18 @@ export function BlogIndex() {
           </article>
         ))}
       </section>
+
+      {words.length && visible.length === 0 ? (
+        <div className="blog-search-empty">
+          <p>
+            Nothing matches “{query.trim()}” yet. Try a shorter word, or start with{' '}
+            <a href="/blog/oikos-evangelism-guide">the complete guide</a>.
+          </p>
+          <button type="button" className="secondary-action" onClick={() => setQuery('')}>
+            Clear search
+          </button>
+        </div>
+      ) : null}
 
       {collapsed ? (
         <div className="blog-list-more">

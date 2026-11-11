@@ -523,6 +523,19 @@ export const postsMeta = [
     excerpt:
       "Almost everyone stops to say what they are grateful for. Fewer have been asked who they thank.",
   },
+  {
+    slug: "bible-verses-for-a-friend-going-through-a-hard-time",
+    order: 42,
+    title: "25 Bible Verses for a Friend Going Through a Hard Time",
+    description:
+      "Comforting Bible verses to send a friend who is struggling, anxious, grieving or losing hope, grouped by what they are facing, with a tap-to-copy button and a note on when each one fits.",
+    date: "2026-11-11",
+    readingTime: "8 min read",
+    tags: ["Care", "Scripture", "Prayer"],
+    kicker: "Step two · Care",
+    excerpt:
+      "A verse is not a fix. Sent well, it says two things: God has not forgotten you, and neither have I.",
+  },
 ];
 
 export const sortedPostsMeta = [...postsMeta].sort((a, b) => a.order - b.order);
@@ -580,7 +593,7 @@ export const readingPath = [
     id: 'care',
     label: 'Care',
     note: 'Love that shows up, especially when life gets hard.',
-    slugs: ['who-is-my-neighbour', 'bible-verses-about-loving-your-neighbour', 'biblical-hospitality', 'evangelism-without-being-weird', 'what-to-say-when-someone-is-hurting'],
+    slugs: ['who-is-my-neighbour', 'bible-verses-about-loving-your-neighbour', 'biblical-hospitality', 'evangelism-without-being-weird', 'what-to-say-when-someone-is-hurting', 'bible-verses-for-a-friend-going-through-a-hard-time'],
   },
   {
     id: 'share',

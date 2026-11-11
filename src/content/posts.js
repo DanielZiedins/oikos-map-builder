@@ -46,6 +46,7 @@ import bibleVersesLovingNeighbour from './bodies/bible-verses-about-loving-your-
 import bibleVersesDiscipleship from './bodies/bible-verses-about-discipleship.js';
 import christmasBibleVerses from './bodies/christmas-bible-verses-to-share.js';
 import thanksgivingBibleVerses from './bodies/thanksgiving-bible-verses-to-share.js';
+import hardTimeVerses from './bodies/bible-verses-for-a-friend-going-through-a-hard-time.js';
 import whatIsAnOikos from './bodies/what-is-an-oikos.js';
 import whatToSayWhenSomeoneIsHurting from './bodies/what-to-say-when-someone-is-hurting.js';
 
@@ -89,6 +90,7 @@ const bodies = {
   'bible-verses-about-discipleship': bibleVersesDiscipleship,
   'christmas-bible-verses-to-share': christmasBibleVerses,
   'thanksgiving-bible-verses-to-share': thanksgivingBibleVerses,
+  'bible-verses-for-a-friend-going-through-a-hard-time': hardTimeVerses,
   'what-is-an-oikos': whatIsAnOikos,
   'what-to-say-when-someone-is-hurting': whatToSayWhenSomeoneIsHurting,
 };

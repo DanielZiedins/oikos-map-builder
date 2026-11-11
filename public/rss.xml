@@ -6,7 +6,7 @@
     <atom:link href="https://www.oikosmap.com/rss.xml" rel="self" type="application/rss+xml" />
     <description>Practical, encouraging writing on prayer, everyday evangelism, discipleship, and loving the people God has placed around you.</description>
     <language>en</language>
-    <lastBuildDate>Sun, 08 Nov 2026 09:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Wed, 11 Nov 2026 09:00:00 GMT</lastBuildDate>
     <item>
       <title>What Is an Oikos? The Biblical Meaning of Your Household</title>
       <link>https://www.oikosmap.com/blog/what-is-an-oikos</link>
@@ -416,6 +416,16 @@
       <category>Share</category>
       <category>Scripture</category>
       <category>Family</category>
+    </item>
+    <item>
+      <title>25 Bible Verses for a Friend Going Through a Hard Time</title>
+      <link>https://www.oikosmap.com/blog/bible-verses-for-a-friend-going-through-a-hard-time</link>
+      <guid isPermaLink="true">https://www.oikosmap.com/blog/bible-verses-for-a-friend-going-through-a-hard-time</guid>
+      <pubDate>Wed, 11 Nov 2026 09:00:00 GMT</pubDate>
+      <description>Comforting Bible verses to send a friend who is struggling, anxious, grieving or losing hope, grouped by what they are facing, with a tap-to-copy button and a note on when each one fits.</description>
+      <category>Care</category>
+      <category>Scripture</category>
+      <category>Prayer</category>
     </item>
   </channel>
 </rss>
