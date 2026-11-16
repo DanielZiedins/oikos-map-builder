@@ -640,3 +640,21 @@ export const readingPath = [
     slugs: ['what-is-the-great-commission', 'what-is-missional-living', 'how-to-start-a-street-outreach-group', 'plunder-hell-populate-heaven', 'from-hamilton-to-the-nations'],
   },
 ];
+
+// The verse-list articles, the most-read pages on the site, as one browsable
+// set with short labels. scripts/build-blog.js fails the build if a slug here
+// stops existing, so the rail can never link to a missing page.
+export const verseCollections = [
+  { slug: 'bible-verses-to-pray-for-unsaved-loved-ones', label: 'To pray for loved ones', color: '#14b8a6' },
+  { slug: 'bible-verses-for-a-friend-going-through-a-hard-time', label: 'For a friend in a hard time', color: '#8b5cf6' },
+  { slug: 'bible-verses-about-friendship', label: 'Friendship', color: '#f59e0b' },
+  { slug: 'bible-verses-about-loving-your-neighbour', label: 'Loving your neighbour', color: '#f45d48' },
+  { slug: 'bible-verses-about-evangelism', label: 'Sharing your faith', color: '#516cf0' },
+  { slug: 'bible-verses-about-discipleship', label: 'Discipleship', color: '#14b8a6' },
+  { slug: 'thanksgiving-bible-verses-to-share', label: 'Thanksgiving and gratitude', color: '#f59e0b' },
+  { slug: 'christmas-bible-verses-to-share', label: 'Christmas', color: '#f45d48' },
+  { slug: 'new-year-bible-verses', label: 'The New Year', color: '#516cf0' },
+].map((item) => {
+  const post = postsMeta.find((entry) => entry.slug === item.slug);
+  return { ...item, title: post?.title ?? '', count: Number(post?.title.match(/^\d+/)?.[0]) || null };
+});

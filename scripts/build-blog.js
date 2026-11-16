@@ -26,7 +26,11 @@ const { posts, sortedPosts, readingMinutes } = await import(resolve(root, 'src/c
     );
   }
 }
-const { relatedMap, readingPath } = await import(resolve(root, 'src/content/posts-meta.js'));
+const { relatedMap, readingPath, verseCollections } = await import(resolve(root, 'src/content/posts-meta.js'));
+{
+  const broken = verseCollections.filter((item) => !item.title).map((item) => item.slug);
+  if (broken.length) throw new Error(`verseCollections: unknown slug(s) ${broken.join(', ')}`);
+}
 const { glossary } = await import(resolve(root, 'src/content/glossary.js'));
 const { adventDays } = await import(resolve(root, 'src/content/advent.js'));
 const { escapeText, fold } = await import(resolve(root, 'src/reminder.js'));

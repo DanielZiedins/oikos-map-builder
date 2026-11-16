@@ -14,6 +14,7 @@ export function loadBody(slug) {
 }
 import { JourneyTimeline, LeadCapture } from './journey.jsx';
 import { track } from './track.js';
+import { VerseRail } from './VerseRail.jsx';
 import { QUICK_START_PROMPTS, quickStartLink } from './map-link.js';
 
 // Drives the progress bar already styled on body::before. The builder pages set
@@ -356,6 +357,8 @@ export function BlogIndex() {
       </section>
 
       <ReadingPath />
+
+      <VerseRail />
 
       <div className="blog-search" role="search">
         <label htmlFor="journal-search">Search the journal</label>

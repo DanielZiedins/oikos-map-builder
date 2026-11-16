@@ -25,6 +25,10 @@ The tool is free for individual believers, churches, small groups, youth ministr
 - Track an intentional next step: Pray, Care, Share, or Disciple.
 - Add notes and prayer focuses for each person.
 - Use a guided five-minute prayer timer for the person currently in focus, with a daily Bible verse (NIV) and a short prayer that uses that person's name.
+- Pray through the whole map in prayer mode: a full-screen view with one person at a time, a Bible verse (NIV) and a short prayer using their name; "Amen" moves to the next person.
+- Keep a private "Days in prayer" streak with a week view; it is stored only on the device.
+- Copy any verse in the journal's verse-list articles, or save it as a shareable image card (made on the device).
+- Search the Oikos Journal instantly by title, summary or topic, or browse the verse collections by theme.
 - Get a stage-matched conversation question for people at the Care, Share or Disciple step, with a link to the full guide.
 - Add a daily five-minute "Pray for my oikos" reminder to Apple, Google or Outlook Calendar; the .ics file is generated on the device with the first five names.
 - Download a free two-page printable Oikos Map template (PDF) for paper use, churches, small groups and youth groups: https://www.oikosmap.com/downloads/oikos-map-template.pdf

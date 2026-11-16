@@ -6675,3 +6675,198 @@ textarea:focus-visible,
     display: none;
   }
 }
+
+/* ---------- Verse collections rail ---------- */
+.verse-rail {
+  padding: clamp(40px, 6vw, 72px) 0 clamp(34px, 5vw, 56px);
+  background: #fffdf7;
+  border-block: 1px solid rgba(72, 57, 43, 0.1);
+}
+
+.verse-rail-head {
+  padding: 0 clamp(18px, 4vw, 56px);
+}
+
+.verse-rail-head h2,
+.verse-rail-head h3 {
+  margin: 10px 0 8px;
+  font-size: clamp(1.7rem, 3.4vw, 2.6rem);
+  line-height: 1.06;
+}
+
+.verse-rail-head > p:not(.section-kicker) {
+  margin: 0;
+  max-width: 620px;
+  color: #5c5047;
+}
+
+.verse-rail-track {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(210px, 240px);
+  gap: 14px;
+  margin: 24px 0 0;
+  padding: 6px clamp(18px, 4vw, 56px) 18px;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x proximity;
+  scroll-padding-inline: clamp(18px, 4vw, 56px);
+  list-style: none;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(72, 57, 43, 0.3) transparent;
+}
+
+.verse-rail-track li {
+  scroll-snap-align: start;
+}
+
+.verse-rail-track a {
+  position: relative;
+  display: grid;
+  align-content: space-between;
+  gap: 18px;
+  height: 100%;
+  min-height: 190px;
+  padding: 20px;
+  overflow: hidden;
+  border-radius: 18px;
+  color: #fff8ec;
+  background:
+    radial-gradient(120% 90% at 100% 0%, color-mix(in srgb, var(--tone) 55%, transparent), transparent 62%),
+    #1d1815;
+  text-decoration: none;
+  transition: transform 260ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 260ms ease;
+}
+
+.verse-rail-track a::after {
+  position: absolute;
+  right: -34px;
+  bottom: -34px;
+  width: 120px;
+  aspect-ratio: 1;
+  content: "";
+  border: 2px dashed color-mix(in srgb, var(--tone) 70%, transparent);
+  border-radius: 50%;
+  opacity: 0.6;
+  transition: transform 700ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.verse-rail-track a:hover,
+.verse-rail-track a:focus-visible {
+  transform: translateY(-6px);
+  box-shadow: 0 22px 44px rgba(38, 32, 28, 0.24);
+}
+
+.verse-rail-track a:hover::after,
+.verse-rail-track a:focus-visible::after {
+  transform: rotate(60deg) scale(1.2);
+}
+
+.verse-rail-count {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  color: #fff8ec;
+  font-size: 3rem;
+  font-weight: 950;
+  line-height: 0.9;
+  letter-spacing: -0.03em;
+}
+
+.verse-rail-count small {
+  color: rgba(255, 248, 236, 0.76);
+  font-size: 0.74rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.verse-rail-track strong {
+  font-size: 1.1rem;
+  line-height: 1.2;
+}
+
+.verse-rail-go {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #f3cf74;
+  font-size: 0.82rem;
+  font-weight: 900;
+}
+
+.verse-rail-dark {
+  color: #fff8ec;
+  background: #14100e;
+  border-block-color: rgba(255, 248, 236, 0.08);
+}
+
+.verse-rail-dark .section-kicker {
+  color: #f3cf74;
+}
+
+.verse-rail-dark .verse-rail-head h2 {
+  color: #fff8ec;
+}
+
+.verse-rail-dark .verse-rail-head > p:not(.section-kicker) {
+  color: rgba(255, 248, 236, 0.76);
+}
+
+.verse-rail-dark .verse-rail-track a {
+  border: 1px solid rgba(255, 248, 236, 0.1);
+  background:
+    radial-gradient(120% 90% at 100% 0%, color-mix(in srgb, var(--tone) 55%, transparent), transparent 62%),
+    #221c18;
+}
+
+.verse-rail-dark .verse-rail-track {
+  scrollbar-color: rgba(255, 248, 236, 0.3) transparent;
+}
+
+/* ---------- The map itself: names arrive, the chosen one breathes ---------- */
+.map-node > * {
+  transform-origin: 0 0;
+  animation: nodePop 560ms cubic-bezier(0.34, 1.4, 0.64, 1) backwards;
+}
+
+@keyframes nodePop {
+  from {
+    opacity: 0;
+    scale: 0.4;
+  }
+}
+
+.map-node > circle:nth-child(2) {
+  transition: scale 220ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@media (hover: hover) {
+  .map-node:hover > circle:nth-child(2) {
+    scale: 1.07;
+  }
+}
+
+.map-node[aria-pressed="true"] > circle:first-child {
+  animation: nodePop 560ms cubic-bezier(0.34, 1.4, 0.64, 1) backwards, selectedBreathe 2.6s ease-in-out 600ms infinite;
+}
+
+@keyframes selectedBreathe {
+  50% {
+    scale: 1.09;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .map-node > *,
+  .map-node[aria-pressed="true"] > circle:first-child {
+    animation: none;
+  }
+}
+
+@media print {
+  .map-node > *,
+  .map-node[aria-pressed="true"] > circle:first-child {
+    animation: none;
+  }
+}

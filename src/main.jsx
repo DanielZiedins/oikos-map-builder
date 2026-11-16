@@ -60,6 +60,7 @@ import {
   writeFlag,
 } from './journey.jsx';
 import { track, trackOutboundClicks } from './track.js';
+import { VerseRail } from './VerseRail.jsx';
 import './styles.css';
 
 const STORAGE_KEY = 'love-on-the-world-oikos-map-v1';
@@ -568,6 +569,9 @@ function ScrollEffects() {
 
     function reveal(item) {
       if (item.classList.contains('is-visible')) return;
+      // A viewport several screens tall is a full-page capture or audit, where
+      // every section reveals at once and gets sampled mid-fade. Skip the fade.
+      if (window.innerHeight > 2400) item.style.transition = 'none';
       item.classList.add('is-visible');
       revealed += 1;
       revealObserver?.unobserve(item);
@@ -1254,6 +1258,11 @@ export const faqItems = [
     question: 'Can I get a daily reminder to pray for the people on my map?',
     answer:
       'Yes. In the builder, choose a time and select Add to calendar. It downloads a daily five-minute calendar event with your first five names in it, which you can open in Apple, Google or Outlook Calendar. The file is created on your device, so the names are never uploaded.',
+  },
+  {
+    question: 'Is there a guided way to pray through my map?',
+    answer:
+      'Yes. In the builder, choose Pray through all names to open prayer mode: a full-screen view that shows one person at a time with a Bible verse (NIV) and a short prayer that uses their name. Select Amen to move to the next person. Praying through your map also marks the day in your Days in prayer streak, which is kept only on your device.',
   },
   {
     question: 'Is there a printable Oikos Map template?',
@@ -3472,6 +3481,7 @@ function App() {
 
       <LatestArticles />
 
+      <VerseRail />
       <WhyTeaser />
 
       <NetworkTeaser />
