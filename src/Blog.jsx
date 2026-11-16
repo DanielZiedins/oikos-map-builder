@@ -737,7 +737,7 @@ function withCopyVerse(item) {
   const match = item.match(VERSE_ITEM);
   if (!match) return item;
   const ref = match[1].trim();
-  return `${item} <button type="button" class="verse-copy" data-ref="${ref}" data-verse="${match[2]}" aria-label="Copy verse: ${ref}">Copy verse</button>`;
+  return `${item} <button type="button" class="verse-copy" data-ref="${ref}" data-verse="${match[2]}" aria-label="Copy verse: ${ref}">Copy verse</button> <button type="button" class="verse-copy verse-image" data-ref="${ref}" data-verse="${match[2]}" aria-label="Image card for ${ref}">Image</button>`;
 }
 
 function useCopyVerse(slug) {
@@ -745,6 +745,34 @@ function useCopyVerse(slug) {
     async function onClick(event) {
       const button = event.target instanceof Element ? event.target.closest('.verse-copy') : null;
       if (!button) return;
+      if (button.classList.contains('verse-image')) {
+        if (button.dataset.busy) return;
+        button.dataset.busy = '1';
+        button.textContent = 'Making…';
+        let label = 'Image';
+        try {
+          const { shareVerseCard } = await import('./verse-card.js');
+          const result = await shareVerseCard({
+            verse: button.dataset.verse,
+            reference: button.dataset.ref,
+            url: `https://www.oikosmap.com/blog/${slug}`,
+          });
+          if (result !== 'cancelled') {
+            track('share_article', `/blog/${slug}#verse-image`);
+            label = result === 'shared' ? 'Shared' : 'Saved';
+            button.classList.add('copied');
+          }
+        } catch {
+          label = 'Try again';
+        }
+        button.textContent = label;
+        delete button.dataset.busy;
+        window.setTimeout(() => {
+          button.textContent = 'Image';
+          button.classList.remove('copied');
+        }, 2200);
+        return;
+      }
       const text = `\u201c${button.dataset.verse}\u201d \u2014 ${button.dataset.ref} (NIV)\nhttps://www.oikosmap.com/blog/${slug}`;
       let ok = false;
       try {

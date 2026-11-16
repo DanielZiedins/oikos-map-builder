@@ -143,6 +143,18 @@ for (const page of pages) {
     html = html.replace('</head>', `  <script type="application/ld+json">${json}</script>\n  </head>`);
   }
   if (/<noscript>\s*<main>/.test(html)) throw new Error(`prerender: ${page.file} still has its <noscript> summary`);
+  // Vite appends the stylesheet link at the END of <head>, after all the
+  // JSON-LD (70 KB on /blog). That delays the CSS download, and the browser
+  // reaches its first rendering opportunity before it has seen the
+  // @view-transition opt-in, so page transitions were skipped in production.
+  // Hoist the link to the top and inline the opt-in right after it.
+  const sheets = html.match(/[ \t]*<link rel="stylesheet"[^>]*>\n?/g) || [];
+  if (sheets.length !== 1) throw new Error(`prerender: ${page.file} has ${sheets.length} stylesheet links (expected 1)`);
+  const viewport = /(<meta name="viewport"[^>]*>\n?)/;
+  if (!viewport.test(html)) throw new Error(`prerender: ${page.file} has no viewport meta to anchor the stylesheet`);
+  html = html
+    .replace(sheets[0], '')
+    .replace(viewport, `$1    ${sheets[0].trim()}\n    <style>@view-transition{navigation:auto}@media (prefers-reduced-motion:reduce){@view-transition{navigation:none}}</style>\n`);
   writeFileSync(file, html);
   console.log(`prerender: ${page.path} → ${page.file} (${words} words, ${(markup.length / 1024).toFixed(0)} KB)`);
 }

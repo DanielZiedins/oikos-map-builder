@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { createRoot, hydrateRoot } from 'react-dom/client';
+import { createPortal } from 'react-dom';
 import {
   ArrowDownToLine,
   ArrowRight,
@@ -884,6 +885,131 @@ function PrayerSprint({ person, stage, onComplete }) {
         </button>
       </div>
     </div>
+  );
+}
+
+// Prayer mode: the whole map, one name at a time, full screen. A verse and a
+// short prayer for each person, then "Amen" moves on. Rendered through a portal
+// because the builder section keeps a transform after its reveal, and a
+// transformed ancestor would trap a position:fixed overlay inside it.
+function PrayerWalk({ people, onClose }) {
+  const [index, setIndex] = useState(0);
+  const [today] = useState(() => new Date());
+  const primaryRef = useRef(null);
+  const done = index >= people.length;
+
+  useEffect(() => {
+    const previous = document.activeElement;
+    const { overflow } = document.body.style;
+    document.body.style.overflow = 'hidden';
+    track('prayer_start', '/#prayer-walk');
+    return () => {
+      document.body.style.overflow = overflow;
+      previous?.focus?.();
+    };
+  }, []);
+
+  useEffect(() => {
+    primaryRef.current?.focus();
+    if (done) window.dispatchEvent(new Event('oikos:prayed'));
+  }, [index, done]);
+
+  useEffect(() => {
+    function onKey(event) {
+      if (event.key === 'Escape') onClose();
+      if (event.key === 'ArrowRight') setIndex((value) => Math.min(people.length, value + 1));
+      if (event.key === 'ArrowLeft') setIndex((value) => Math.max(0, value - 1));
+      // Keep Tab inside the dialog.
+      if (event.key === 'Tab') {
+        const items = Array.from(document.querySelectorAll('.prayer-walk button'));
+        if (!items.length) return;
+        const first = items[0];
+        const last = items[items.length - 1];
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault();
+          last.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault();
+          first.focus();
+        }
+      }
+    }
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [onClose, people.length]);
+
+  const person = done ? null : people[index];
+  const group = person ? getGroup(person.group) : null;
+  const stage = person ? getStage(person.stage) : null;
+  const verse = person ? prayerVerses[verseIndexFor(person.id, 0, today)] : null;
+
+  return createPortal(
+    <div className="prayer-walk" role="dialog" aria-modal="true" aria-label="Pray through your map">
+      <div className="prayer-walk-sky" aria-hidden="true" />
+      <header className="prayer-walk-top">
+        <span>
+          <Flame size={16} aria-hidden="true" />
+          {done ? 'Amen' : `${index + 1} of ${people.length}`}
+        </span>
+        <button type="button" className="prayer-walk-close" onClick={onClose} aria-label="Close prayer mode">
+          <X size={20} aria-hidden="true" />
+        </button>
+      </header>
+      <div className="prayer-walk-bar" aria-hidden="true">
+        <i style={{ transform: `scaleX(${Math.min(1, index / people.length)})` }} />
+      </div>
+
+      {done ? (
+        <div className="prayer-walk-card prayer-walk-done" key="done">
+          <CheckCircle2 size={54} aria-hidden="true" />
+          <h2>You prayed for {people.length === 1 ? 'one person' : `${people.length} people`} by name.</h2>
+          <p>
+            Heaven heard every one. Keep listening today for how to love them, and come back tomorrow: this is how
+            names become stories.
+          </p>
+          <blockquote>
+            “The prayer of a righteous person is powerful and effective.”
+            <cite>James 5:16</cite>
+          </blockquote>
+          <div className="prayer-walk-actions">
+            <button type="button" className="prayer-walk-next" ref={primaryRef} onClick={onClose}>
+              <CheckCircle2 size={18} aria-hidden="true" />
+              Back to my map
+            </button>
+            <button type="button" className="prayer-walk-prev" onClick={() => setIndex(0)}>
+              <RotateCcw size={16} aria-hidden="true" />
+              Pray through again
+            </button>
+          </div>
+        </div>
+      ) : (
+        <div className="prayer-walk-card" key={person.id} style={{ '--person': group.color }}>
+          <p className="prayer-walk-group">
+            <i aria-hidden="true" />
+            {group.label} · {stage.label}
+          </p>
+          <h2 aria-live="polite">{person.name}</h2>
+          <p className="prayer-walk-prompt">{person.notes?.trim() ? person.notes.trim() : stage.prompt}</p>
+          <figure>
+            <blockquote>“{verse.text}”</blockquote>
+            <figcaption>{verse.ref}</figcaption>
+            <p>{versePrayer(verse, person.name)}</p>
+          </figure>
+          <div className="prayer-walk-actions">
+            <button type="button" className="prayer-walk-next" ref={primaryRef} onClick={() => setIndex(index + 1)}>
+              Amen{index + 1 < people.length ? ', next' : ''}
+              <ArrowRight size={18} aria-hidden="true" />
+            </button>
+            {index > 0 ? (
+              <button type="button" className="prayer-walk-prev" onClick={() => setIndex(index - 1)}>
+                Back
+              </button>
+            ) : null}
+          </div>
+        </div>
+      )}
+    </div>,
+    document.body,
   );
 }
 
@@ -1964,6 +2090,102 @@ function RhythmStrip() {
   );
 }
 
+// "One map, multiplied": you, your five, and the five each of them knows. The
+// rings draw in as the section scrolls through (CSS view timeline); without
+// that support, or with reduced motion, the whole picture is simply there.
+const RIPPLE_COLORS = ['#f45d48', '#14b8a6', '#f59e0b', '#516cf0', '#8b5cf6'];
+
+function RippleSection() {
+  const cx = 320;
+  const cy = 320;
+  const inner = RIPPLE_COLORS.map((color, index) => {
+    const angle = -Math.PI / 2 + (index * Math.PI * 2) / RIPPLE_COLORS.length;
+    const x = cx + Math.cos(angle) * 118;
+    const y = cy + Math.sin(angle) * 118;
+    const outer = [-2, -1, 0, 1, 2].map((step) => {
+      const a = angle + step * 0.235;
+      const radius = 262 + (Math.abs(step) % 2) * 22;
+      return { x: cx + Math.cos(a) * radius, y: cy + Math.sin(a) * radius };
+    });
+    return { color, x, y, outer };
+  });
+  const fixed = (value) => Number(value.toFixed(1));
+
+  return (
+    <section className="ripple" id="ripple" aria-labelledby="ripple-title" data-reveal>
+      <div className="ripple-copy">
+        <p className="section-kicker">
+          <Sparkles size={18} aria-hidden="true" />
+          One map, multiplied
+        </p>
+        <h2 id="ripple-title">It never stops at five names.</h2>
+        <p>
+          Every person on your map has a map of their own: a family, a street, a workplace you will never walk into.
+          When one of them meets Jesus and starts praying for their five, your one small map has quietly become a
+          movement.
+        </p>
+        <ol className="ripple-steps">
+          <li>
+            <strong>1</strong>
+            <span>You, praying by name</span>
+          </li>
+          <li>
+            <strong>5</strong>
+            <span>people you already know</span>
+          </li>
+          <li>
+            <strong>25</strong>
+            <span>people they already know</span>
+          </li>
+        </ol>
+        <p className="ripple-verse">
+          “And the things you have heard me say in the presence of many witnesses entrust to reliable people who will
+          also be qualified to teach others.” <cite>2 Timothy 2:2</cite>
+        </p>
+        <a className="primary-action" href="#builder" onClick={() => track('builder_cta', '/#ripple')}>
+          <Sparkles size={18} aria-hidden="true" />
+          Start with your five
+        </a>
+      </div>
+      <div className="ripple-visual" aria-hidden="true">
+        <svg viewBox="0 0 640 640" focusable="false">
+          <defs>
+            <radialGradient id="rippleGlow" cx="50%" cy="50%" r="50%">
+              <stop offset="0" stopColor="#f3cf74" stopOpacity="0.4" />
+              <stop offset="1" stopColor="#f3cf74" stopOpacity="0" />
+            </radialGradient>
+          </defs>
+          <circle cx={cx} cy={cy} r="310" fill="url(#rippleGlow)" />
+          <circle className="ripple-ring r1" cx={cx} cy={cy} r="118" />
+          <circle className="ripple-ring r2" cx={cx} cy={cy} r="272" />
+          {inner.map((node, index) => (
+            <g key={node.color}>
+              {node.outer.map((pt, i) => (
+                <g key={i} className="r2" style={{ '--i': index * 5 + i }}>
+                  <line x1={fixed(node.x)} y1={fixed(node.y)} x2={fixed(pt.x)} y2={fixed(pt.y)} stroke={node.color} strokeWidth="1.6" strokeOpacity="0.55" />
+                  <circle cx={fixed(pt.x)} cy={fixed(pt.y)} r="11" fill="#14100e" stroke={node.color} strokeWidth="2.5" />
+                  <circle cx={fixed(pt.x)} cy={fixed(pt.y)} r="3.5" fill={node.color} />
+                </g>
+              ))}
+              <g className="r1" style={{ '--i': index }}>
+                <line x1={cx} y1={cy} x2={fixed(node.x)} y2={fixed(node.y)} stroke={node.color} strokeWidth="3" />
+                <circle cx={fixed(node.x)} cy={fixed(node.y)} r="24" fill="#14100e" stroke={node.color} strokeWidth="4" />
+                <circle cx={fixed(node.x)} cy={fixed(node.y)} r="9" fill={node.color} />
+              </g>
+            </g>
+          ))}
+          <circle className="ripple-wave" cx={cx} cy={cy} r="40" />
+          <circle className="ripple-wave ripple-wave-late" cx={cx} cy={cy} r="40" />
+          <circle cx={cx} cy={cy} r="44" fill="#fff8ec" />
+          <text x={cx} y={cy + 7} textAnchor="middle" className="ripple-you">
+            You
+          </text>
+        </svg>
+      </div>
+    </section>
+  );
+}
+
 function WhyTeaser() {
   return (
     <section className="why-teaser" id="why" aria-labelledby="why-title" data-reveal>
@@ -2383,6 +2605,7 @@ function App() {
   const [selectedId, setSelectedId] = useState(mapData.people[0]?.id ?? null);
   const [saveState, setSaveState] = useState('Saved locally');
   const [searchTerm, setSearchTerm] = useState('');
+  const [prayerWalkOpen, setPrayerWalkOpen] = useState(false);
   const [shareState, setShareState] = useState('Share');
   const [mapLinkState, setMapLinkState] = useState('Link');
   const [planCopyState, setPlanCopyState] = useState('Plan');
@@ -3107,6 +3330,11 @@ function App() {
                       window.dispatchEvent(new Event('oikos:prayed'));
                     }}
                   />
+                  <button type="button" className="prayer-walk-launch" onClick={() => setPrayerWalkOpen(true)}>
+                    <Sparkles size={17} aria-hidden="true" />
+                    Pray through {mapData.people.length === 1 ? 'my map' : `all ${mapData.people.length} names`}
+                    <small>Full screen · one name at a time</small>
+                  </button>
                   <PrayerStreak />
                   <ConversationCard person={selectedPerson} stage={selectedStage} />
                 </>
@@ -3240,6 +3468,7 @@ function App() {
       </section>
 
       <RhythmStrip />
+      <RippleSection />
 
       <LatestArticles />
 
@@ -3282,6 +3511,9 @@ function App() {
       </section>
 
       <SiteFooter />
+      {prayerWalkOpen && mapData.people.length ? (
+        <PrayerWalk people={mapData.people} onClose={() => setPrayerWalkOpen(false)} />
+      ) : null}
       <StickyInvite />
     </main>
   );

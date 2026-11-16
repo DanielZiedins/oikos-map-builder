@@ -536,6 +536,32 @@ export const postsMeta = [
     excerpt:
       "A verse is not a fix. Sent well, it says two things: God has not forgotten you, and neither have I.",
   },
+  {
+    slug: "bible-verses-about-friendship",
+    order: 43,
+    title: "25 Bible Verses About Friendship",
+    description:
+      "Twenty-five Bible verses about friendship: what a true friend is, the honesty friendship needs, how to be a good friend, and friendship with God, each with one way to live it this week.",
+    date: "2026-11-16",
+    readingTime: "6 min read",
+    tags: ["Care", "Scripture", "Practical"],
+    kicker: "Step two · Care",
+    excerpt:
+      "The Bible celebrates friends who stay, warns about friends who flatter, and says God Himself calls people His friends.",
+  },
+  {
+    slug: "new-year-bible-verses",
+    order: 44,
+    title: "25 Bible Verses for the New Year (and One Resolution Worth Keeping)",
+    description:
+      "Bible verses for the New Year on fresh starts, plans, courage and making your days count, with a tap-to-copy button for each, plus one simple resolution: pray for five people by name.",
+    date: "2026-11-16",
+    readingTime: "7 min read",
+    tags: ["Prayer", "Scripture", "Practical"],
+    kicker: "Step one · Pray",
+    excerpt:
+      "Most resolutions are about us. Here is one about the people around you, and it takes five minutes a day.",
+  },
 ];
 
 export const sortedPostsMeta = [...postsMeta].sort((a, b) => a.order - b.order);
@@ -587,13 +613,13 @@ export const readingPath = [
     id: 'pray',
     label: 'Pray',
     note: 'Name people before God, daily — then widen it to your street and city.',
-    slugs: ['how-to-pray-for-unsaved-family-and-friends', 'bible-verses-to-pray-for-unsaved-loved-ones', 'advent-prayer-calendar-for-your-oikos', 'how-to-prayer-walk', 'praying-for-your-city'],
+    slugs: ['how-to-pray-for-unsaved-family-and-friends', 'bible-verses-to-pray-for-unsaved-loved-ones', 'advent-prayer-calendar-for-your-oikos', 'new-year-bible-verses', 'how-to-prayer-walk', 'praying-for-your-city'],
   },
   {
     id: 'care',
     label: 'Care',
     note: 'Love that shows up, especially when life gets hard.',
-    slugs: ['who-is-my-neighbour', 'bible-verses-about-loving-your-neighbour', 'biblical-hospitality', 'evangelism-without-being-weird', 'what-to-say-when-someone-is-hurting', 'bible-verses-for-a-friend-going-through-a-hard-time'],
+    slugs: ['who-is-my-neighbour', 'bible-verses-about-loving-your-neighbour', 'biblical-hospitality', 'evangelism-without-being-weird', 'what-to-say-when-someone-is-hurting', 'bible-verses-for-a-friend-going-through-a-hard-time', 'bible-verses-about-friendship'],
   },
   {
     id: 'share',

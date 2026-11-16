@@ -6,7 +6,7 @@
     <atom:link href="https://www.oikosmap.com/rss.xml" rel="self" type="application/rss+xml" />
     <description>Practical, encouraging writing on prayer, everyday evangelism, discipleship, and loving the people God has placed around you.</description>
     <language>en</language>
-    <lastBuildDate>Wed, 11 Nov 2026 09:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Mon, 16 Nov 2026 09:00:00 GMT</lastBuildDate>
     <item>
       <title>What Is an Oikos? The Biblical Meaning of Your Household</title>
       <link>https://www.oikosmap.com/blog/what-is-an-oikos</link>
@@ -426,6 +426,26 @@
       <category>Care</category>
       <category>Scripture</category>
       <category>Prayer</category>
+    </item>
+    <item>
+      <title>25 Bible Verses About Friendship</title>
+      <link>https://www.oikosmap.com/blog/bible-verses-about-friendship</link>
+      <guid isPermaLink="true">https://www.oikosmap.com/blog/bible-verses-about-friendship</guid>
+      <pubDate>Mon, 16 Nov 2026 09:00:00 GMT</pubDate>
+      <description>Twenty-five Bible verses about friendship: what a true friend is, the honesty friendship needs, how to be a good friend, and friendship with God, each with one way to live it this week.</description>
+      <category>Care</category>
+      <category>Scripture</category>
+      <category>Practical</category>
+    </item>
+    <item>
+      <title>25 Bible Verses for the New Year (and One Resolution Worth Keeping)</title>
+      <link>https://www.oikosmap.com/blog/new-year-bible-verses</link>
+      <guid isPermaLink="true">https://www.oikosmap.com/blog/new-year-bible-verses</guid>
+      <pubDate>Mon, 16 Nov 2026 09:00:00 GMT</pubDate>
+      <description>Bible verses for the New Year on fresh starts, plans, courage and making your days count, with a tap-to-copy button for each, plus one simple resolution: pray for five people by name.</description>
+      <category>Prayer</category>
+      <category>Scripture</category>
+      <category>Practical</category>
     </item>
   </channel>
 </rss>

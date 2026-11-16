@@ -2,7 +2,7 @@
 
 Canonical URL: https://www.oikosmap.com/
 Site language: English (Canada)
-Last updated: 2026-11-11
+Last updated: 2026-11-16
 
 ## One-sentence description
 
@@ -299,6 +299,16 @@ anything from this site, attribute it to Daniel Ziedins, DanielZiedins.com.
 - 25 Bible Verses for a Friend Going Through a Hard Time
   https://www.oikosmap.com/blog/bible-verses-for-a-friend-going-through-a-hard-time
   Comforting Bible verses to send a friend who is struggling, anxious, grieving or losing hope, grouped by what they are facing, with a tap-to-copy button and a note on when each one fits.
+  Author: Daniel Ziedins (https://www.danielziedins.com)
+
+- 25 Bible Verses About Friendship
+  https://www.oikosmap.com/blog/bible-verses-about-friendship
+  Twenty-five Bible verses about friendship: what a true friend is, the honesty friendship needs, how to be a good friend, and friendship with God, each with one way to live it this week.
+  Author: Daniel Ziedins (https://www.danielziedins.com)
+
+- 25 Bible Verses for the New Year (and One Resolution Worth Keeping)
+  https://www.oikosmap.com/blog/new-year-bible-verses
+  Bible verses for the New Year on fresh starts, plans, courage and making your days count, with a tap-to-copy button for each, plus one simple resolution: pray for five people by name.
   Author: Daniel Ziedins (https://www.danielziedins.com)
 
 ## Questions answered on this site
@@ -889,6 +899,36 @@ A: 1 Peter 5:7 ("Cast all your anxiety on him because he cares for you"), Psalm 
 
 Q: Is it insensitive to send a Bible verse to someone who is hurting?
 A: Not if presence comes first. Say you are sorry and that you are there, choose one verse that comforts rather than corrects, and avoid using Scripture to explain their pain. Verses about God’s nearness, such as Psalm 34:18, are usually received better than verses about God’s purposes.
+
+### From "25 Bible Verses About Friendship"
+https://www.oikosmap.com/blog/bible-verses-about-friendship
+
+Q: What is the best Bible verse about friendship?
+A: Proverbs 17:17 is the best known: "A friend loves at all times, and a brother is born for a time of adversity." John 15:13 ("Greater love has no one than this: to lay down one’s life for one’s friends") describes friendship at its highest.
+
+Q: What does the Bible say about true friends?
+A: The Bible describes a true friend as someone who loves at all times (Proverbs 17:17), sticks closer than a brother (Proverbs 18:24), tells the truth even when it hurts (Proverbs 27:6), sharpens you (Proverbs 27:17) and helps you up when you fall (Ecclesiastes 4:9–10).
+
+Q: Does the Bible say Jesus is our friend?
+A: Yes. In John 15:15 Jesus says, "I have called you friends, for everything that I learned from my Father I have made known to you." James 2:23 also records that Abraham "was called God’s friend."
+
+Q: What Bible verse is good for a friend’s birthday or a thank-you card?
+A: Proverbs 27:9 ("the pleasantness of a friend springs from their heartfelt advice"), Proverbs 27:17 ("As iron sharpens iron, so one person sharpens another") and Philippians 1:3 ("I thank my God every time I remember you") all suit a card for a friend.
+
+### From "25 Bible Verses for the New Year (and One Resolution Worth Keeping)"
+https://www.oikosmap.com/blog/new-year-bible-verses
+
+Q: What is a good Bible verse for the New Year?
+A: Isaiah 43:18–19 ("See, I am doing a new thing!"), 2 Corinthians 5:17 ("The old has gone, the new is here!") and Lamentations 3:22–23 ("his compassions never fail. They are new every morning") are three of the most loved New Year verses.
+
+Q: What Bible verse can I write in a New Year card?
+A: Jeremiah 29:11 ("plans to give you hope and a future"), Psalm 65:11 ("You crown the year with your bounty") and Proverbs 16:3 ("Commit to the LORD whatever you do, and he will establish your plans") all work well in a card.
+
+Q: What does the Bible say about making plans for the year?
+A: The Bible encourages planning and reminds us who directs the outcome: "In their hearts humans plan their course, but the LORD establishes their steps" (Proverbs 16:9). Proverbs 3:5–6 calls us to trust God in all our ways, and Matthew 6:33 to seek His kingdom first.
+
+Q: What is a good Christian New Year’s resolution?
+A: One simple, lasting resolution is to pray by name every day for five people who do not yet follow Jesus. 1 Timothy 2:1 urges that "petitions, prayers, intercession and thanksgiving be made for all people," and a free Oikos Map helps you keep the names in front of you.
 
 ## Full text of every article
 
@@ -3016,6 +3056,7 @@ The full Oikos Journal, step by step. New guides are added here as they are publ
 - **Pray:** [How to Pray for Unsaved Family and Friends (A Simple Daily Rhythm)](https://www.oikosmap.com/blog/how-to-pray-for-unsaved-family-and-friends)
 - **Pray:** [23 Bible Verses to Pray Over Unsaved Family and Friends (With a Prayer for Each)](https://www.oikosmap.com/blog/bible-verses-to-pray-for-unsaved-loved-ones)
 - **Pray:** [25 Days of Advent Prayer for the People You Love (Free Calendar)](https://www.oikosmap.com/blog/advent-prayer-calendar-for-your-oikos)
+- **Pray:** [25 Bible Verses for the New Year (and One Resolution Worth Keeping)](https://www.oikosmap.com/blog/new-year-bible-verses)
 - **Pray:** [How to Prayer Walk Your Neighbourhood: A Simple Guide](https://www.oikosmap.com/blog/how-to-prayer-walk)
 - **Pray:** [How to Pray for Your City (Without It Feeling Abstract)](https://www.oikosmap.com/blog/praying-for-your-city)
 - **Care:** [Who Is My Neighbour? What Jesus Meant by "Love Your Neighbour"](https://www.oikosmap.com/blog/who-is-my-neighbour)
@@ -3024,6 +3065,7 @@ The full Oikos Journal, step by step. New guides are added here as they are publ
 - **Care:** [Evangelism Without Being Weird: 12 Ways to Love Your Neighbour This Week](https://www.oikosmap.com/blog/evangelism-without-being-weird)
 - **Care:** [What to Actually Say When Someone Is Going Through Something Hard](https://www.oikosmap.com/blog/what-to-say-when-someone-is-hurting)
 - **Care:** [25 Bible Verses for a Friend Going Through a Hard Time](https://www.oikosmap.com/blog/bible-verses-for-a-friend-going-through-a-hard-time)
+- **Care:** [25 Bible Verses About Friendship](https://www.oikosmap.com/blog/bible-verses-about-friendship)
 - **Share:** [How to Overcome Fear of Sharing Your Faith](https://www.oikosmap.com/blog/overcoming-fear-of-sharing-your-faith)
 - **Share:** [30 Spiritual Conversation Starters: Questions That Open Faith Conversations](https://www.oikosmap.com/blog/spiritual-conversation-starters)
 - **Share:** [25 Bible Verses About Evangelism and Sharing Your Faith](https://www.oikosmap.com/blog/bible-verses-about-evangelism)
@@ -3761,6 +3803,121 @@ If your friend is on your [Oikos Map](https://www.oikosmap.com/#builder), move t
 And if someone tells you they are in danger or are thinking about ending their life, do not handle it alone or by text: stay with them and contact your local emergency services or crisis line straight away.
 
 > The LORD is close to the brokenhearted and saves those who are crushed in spirit. (Psalm 34:18, NIV)
+
+---
+
+### 25 Bible Verses About Friendship
+https://www.oikosmap.com/blog/bible-verses-about-friendship · Daniel Ziedins · 2026-11-16
+
+The Bible takes friendship seriously. It celebrates friends who stay, warns about friends who flatter, and makes the astonishing claim that God Himself calls people His friends.
+
+Here are 25 Bible verses about friendship, grouped by theme: what a true friend is, the honesty real friendship needs, how to be a good friend, and friendship with God. Each has a tap-to-copy button and one way to live it this week.
+
+#### What a true friend is
+
+- **Proverbs 17:17** — *"A friend loves at all times, and a brother is born for a time of adversity."* Live it: Text the friend who is having a hard week before they have to ask.
+- **Proverbs 18:24** — *"One who has unreliable friends soon comes to ruin, but there is a friend who sticks closer than a brother."* Live it: Be the one who stays when others drift.
+- **Ecclesiastes 4:9–10** — *"Two are better than one, because they have a good return for their labor: If either of them falls down, one can help the other up. But pity anyone who falls and has no one to help them up."* Live it: Ask one friend, “Who helps you up when you fall?” and listen.
+- **Ecclesiastes 4:12** — *"Though one may be overpowered, two can defend themselves. A cord of three strands is not quickly broken."* Live it: Invite God into a friendship by praying together, even briefly.
+- **Proverbs 27:9** — *"Perfume and incense bring joy to the heart, and the pleasantness of a friend springs from their heartfelt advice."* Live it: Give advice only after you have listened long enough to understand.
+- **Proverbs 27:17** — *"As iron sharpens iron, so one person sharpens another."* Live it: Thank a friend who has made you better, and tell them how.
+- **1 Samuel 18:1** — *"After David had finished talking with Saul, Jonathan became one in spirit with David, and he loved him as himself."* Live it: Jonathan loved David at great cost to himself. Celebrate a friend’s success out loud.
+
+#### The honesty friendship needs
+
+- **Proverbs 27:6** — *"Wounds from a friend can be trusted, but an enemy multiplies kisses."* Live it: A hard truth from someone who loves you is a gift. Receive one without defending yourself.
+- **Proverbs 13:20** — *"Walk with the wise and become wise, for a companion of fools suffers harm."* Live it: Notice who you are becoming like.
+- **Proverbs 12:26** — *"The righteous choose their friends carefully, but the way of the wicked leads them astray."* Live it: Be kind to everyone, and choose your closest voices with care.
+- **1 Corinthians 15:33** — *"Do not be misled: ‘Bad company corrupts good character.’"* Live it: Love people far from God without letting them set your direction.
+- **Proverbs 16:28** — *"A perverse person stirs up conflict, and a gossip separates close friends."* Live it: Refuse to pass on the story. Let it end with you.
+- **Proverbs 17:9** — *"Whoever would foster love covers over an offense, but whoever repeats the matter separates close friends."* Live it: Forgive one small offence this week without mentioning it to anyone else.
+
+#### How to be a good friend
+
+- **John 15:12–13** — *"My command is this: Love each other as I have loved you. Greater love has no one than this: to lay down one’s life for one’s friends."* Live it: Lay down something small today: your evening, your plans, your preference.
+- **Romans 12:15** — *"Rejoice with those who rejoice; mourn with those who mourn."* Live it: Match their moment. Do not hurry a grieving friend, or dampen a joyful one.
+- **Galatians 6:2** — *"Carry each other’s burdens, and in this way you will fulfill the law of Christ."* Live it: Offer something specific: a meal, a lift, an hour of childcare.
+- **Colossians 3:13** — *"Bear with each other and forgive one another if any of you has a grievance against someone. Forgive as the Lord forgave you."* Live it: Make the first move toward a friend you have fallen out with.
+- **1 Thessalonians 5:11** — *"Therefore encourage one another and build each other up, just as in fact you are doing."* Live it: Send one sentence of specific encouragement before the day ends.
+- **Ephesians 4:32** — *"Be kind and compassionate to one another, forgiving each other, just as in Christ God forgave you."* Live it: Kindness first, especially when you are tired.
+- **1 John 4:11** — *"Dear friends, since God so loved us, we also ought to love one another."* Live it: Remember how you have been loved, then pass it on.
+- **Job 6:14** — *"Anyone who withholds kindness from a friend forsakes the fear of the Almighty."* Live it: Job’s friends did best when they simply sat with him. Show up, and say less.
+
+When a friend is struggling, [these 25 verses for a friend going through a hard time](https://www.oikosmap.com/blog/bible-verses-for-a-friend-going-through-a-hard-time) will help you choose the right one.
+
+#### Friendship with God
+
+- **John 15:15** — *"I no longer call you servants, because a servant does not know his master’s business. Instead, I have called you friends, for everything that I learned from my Father I have made known to you."* Live it: Talk to Jesus today the way you would talk to a friend.
+- **James 2:23** — *"And the scripture was fulfilled that says, ‘Abraham believed God, and it was credited to him as righteousness,’ and he was called God’s friend."* Live it: Friendship with God begins with trusting Him.
+- **Proverbs 22:11** — *"One who loves a pure heart and who speaks with grace will have the king for a friend."* Live it: Let grace be what people remember about how you speak.
+- **Luke 5:20** — *"When Jesus saw their faith, he said, ‘Friend, your sins are forgiven.’"* Live it: Some men carried a paralysed man to Jesus, and Jesus responded to their faith. Who are you carrying?
+
+#### The best thing a friend can do
+
+In Luke 5, a paralysed man meets Jesus because the men who carried him refused to give up: when the crowd blocked the door, they went up on the roof and lowered him through it. He could not get there on his own. Most people who come to faith are carried the same way, by a friend who prayed, stayed and made a way.
+
+Write your friends’ names on a [free Oikos Map](https://www.oikosmap.com/#builder) and start carrying them to Jesus in prayer. If you are not sure how to bring faith up naturally, [these conversation starters](https://www.oikosmap.com/blog/spiritual-conversation-starters) and [Evangelism Without Being Weird](https://www.oikosmap.com/blog/evangelism-without-being-weird) will help.
+
+> A friend loves at all times, and a brother is born for a time of adversity. (Proverbs 17:17, NIV)
+
+---
+
+### 25 Bible Verses for the New Year (and One Resolution Worth Keeping)
+https://www.oikosmap.com/blog/new-year-bible-verses · Daniel Ziedins · 2026-11-16
+
+A new year is a clean page, and most of us want to write something better on it than last time. Scripture has a great deal to say about fresh starts, about plans, about courage, and about making our days count.
+
+Here are 25 Bible verses for the New Year, grouped by theme, each with a tap-to-copy button and a thought to carry into January. At the end is one resolution that will outlast every gym membership.
+
+#### New beginnings
+
+- **Isaiah 43:18–19** — *"Forget the former things; do not dwell on the past. See, I am doing a new thing! Now it springs up; do you not perceive it? I am making a way in the wilderness and streams in the wasteland."* Carry it: Name one thing from last year you need to stop replaying.
+- **2 Corinthians 5:17** — *"Therefore, if anyone is in Christ, the new creation has come: The old has gone, the new is here!"* Carry it: The deepest fresh start is not a date on the calendar. It is a Person.
+- **Lamentations 3:22–23** — *"Because of the LORD’s great love we are not consumed, for his compassions never fail. They are new every morning; great is your faithfulness."* Carry it: You do not need to wait for January. Mercy resets every morning.
+- **Revelation 21:5** — *"He who was seated on the throne said, ‘I am making everything new!’ Then he said, ‘Write this down, for these words are trustworthy and true.’"* Carry it: Whatever this year holds, the story ends with everything made new.
+- **Philippians 3:13–14** — *"Brothers and sisters, I do not consider myself yet to have taken hold of it. But one thing I do: Forgetting what is behind and straining toward what is ahead, I press on toward the goal to win the prize for which God has called me heavenward in Christ Jesus."* Carry it: Choose “one thing” for the year rather than ten.
+- **Ezekiel 36:26** — *"I will give you a new heart and put a new spirit in you; I will remove from you your heart of stone and give you a heart of flesh."* Carry it: Pray this for someone you love who seems closed to God.
+
+#### Trusting God with your plans
+
+- **Proverbs 3:5–6** — *"Trust in the LORD with all your heart and lean not on your own understanding; in all your ways submit to him, and he will make your paths straight."* Carry it: Before you set goals, hand over the year.
+- **Proverbs 16:3** — *"Commit to the LORD whatever you do, and he will establish your plans."* Carry it: Write your plans in pencil and pray over them in ink.
+- **Proverbs 16:9** — *"In their hearts humans plan their course, but the LORD establishes their steps."* Carry it: Plan well. Hold it loosely.
+- **Jeremiah 29:11** — *"‘For I know the plans I have for you,’ declares the LORD, ‘plans to prosper you and not to harm you, plans to give you hope and a future.’"* Carry it: Spoken to people in exile: God’s good plans do not depend on easy circumstances.
+- **Psalm 37:4** — *"Take delight in the LORD, and he will give you the desires of your heart."* Carry it: Delight first. It changes what you desire.
+- **Psalm 90:12** — *"Teach us to number our days, that we may gain a heart of wisdom."* Carry it: There are 365 days ahead. Decide what a wise one looks like.
+- **Matthew 6:33** — *"But seek first his kingdom and his righteousness, and all these things will be given to you as well."* Carry it: Put the first thing first on the first day.
+- **Psalm 32:8** — *"I will instruct you and teach you in the way you should go; I will counsel you with my loving eye on you."* Carry it: For anyone facing a big decision this year.
+
+#### Courage for what is ahead
+
+- **Joshua 1:9** — *"Have I not commanded you? Be strong and courageous. Do not be afraid; do not be discouraged, for the LORD your God will be with you wherever you go."* Carry it: For a new job, a new city, or a new season.
+- **Psalm 27:1** — *"The LORD is my light and my salvation—whom shall I fear? The LORD is the stronghold of my life—of whom shall I be afraid?"* Carry it: Name the fear you are carrying into the year, then read this over it.
+- **Philippians 4:13** — *"I can do all this through him who gives me strength."* Carry it: Written from prison, about contentment. Strength for whatever comes, not only for winning.
+- **2 Timothy 1:7** — *"For the Spirit God gave us does not make us timid, but gives us power, love and self-discipline."* Carry it: For the conversation you have been putting off.
+- **Philippians 1:6** — *"being confident of this, that he who began a good work in you will carry it on to completion until the day of Christ Jesus."* Carry it: God finishes what He starts, including you.
+- **Galatians 6:9** — *"Let us not become weary in doing good, for at the proper time we will reap a harvest if we do not give up."* Carry it: For the prayer you have prayed for years. Do not stop this year.
+
+#### A year that counts for others
+
+- **Ephesians 5:15–16** — *"Be very careful, then, how you live—not as unwise but as wise, making the most of every opportunity, because the days are evil."* Carry it: Look for one opportunity a week to love someone on purpose.
+- **Colossians 3:23** — *"Whatever you do, work at it with all your heart, as working for the Lord, not for human masters,"* Carry it: Your ordinary work is part of your worship, and part of your witness.
+- **Matthew 5:16** — *"In the same way, let your light shine before others, that they may see your good deeds and glorify your Father in heaven."* Carry it: Let someone see your faith this year, not just hear about it.
+- **1 Timothy 2:1** — *"I urge, then, first of all, that petitions, prayers, intercession and thanksgiving be made for all people—"* Carry it: “First of all.” Make prayer for people the first habit of the year.
+- **Psalm 65:11** — *"You crown the year with your bounty, and your carts overflow with abundance."* Carry it: A blessing to write in a New Year card.
+
+#### One resolution worth keeping
+
+Most resolutions are about us: eat better, spend less, exercise more. Here is one that is about the people around you, takes five minutes a day, and could change someone’s eternity: **pray for five people by name, every day this year.**
+
+- **Choose your five.** Family, friends, neighbours, coworkers or classmates who do not yet follow Jesus. Write them on a [free Oikos Map](https://www.oikosmap.com/#builder).
+- **Set a time.** Tie it to something you already do: the kettle, the commute, the school run. The map builder can add a daily reminder to your calendar.
+- **Use Scripture.** [These 23 verses to pray for loved ones](https://www.oikosmap.com/blog/bible-verses-to-pray-for-unsaved-loved-ones) give you words on the days you have none.
+- **Watch for open doors.** Prayer changes them, and it changes you. When a door opens, [this simple rhythm](https://www.oikosmap.com/blog/how-to-pray-for-unsaved-family-and-friends) shows you the next step.
+
+Want company for the first two weeks? [The free Oikos Journey](https://www.oikosmap.com/#resources) is six short emails that walk you through praying, caring, sharing and discipling.
+
+> See, I am doing a new thing! Now it springs up; do you not perceive it? (Isaiah 43:19, NIV)
 
 ## The wider Kingdom network
 
