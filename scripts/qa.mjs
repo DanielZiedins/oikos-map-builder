@@ -83,7 +83,53 @@ async function audit(page, label) {
   }));
   await page.evaluate(axeSource);
   const violations = await page.evaluate(async () => (await window.axe.run(document)).violations.map((v) => `${v.id}(${v.nodes.length}) ${v.nodes[0].target}`));
+  // axe files any element with a pseudo-element overlay (every button here has
+  // a shine sweep) under "incomplete", so it never judges their contrast. This
+  // does the arithmetic directly for text sitting on its own solid background.
+  const lowContrast = await page.evaluate(() => {
+    const parse = (value) => { const m = value.match(/[\d.]+/g)?.map(Number) || []; return { r: m[0], g: m[1], b: m[2], a: m[3] ?? 1 }; };
+    const lum = ({ r, g, b }) => { const f = (v) => { v /= 255; return v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4; }; return 0.2126 * f(r) + 0.7152 * f(g) + 0.0722 * f(b); };
+    // Self-test: a deliberately unreadable link must be caught on every run.
+    const probe = document.createElement('a');
+    probe.textContent = 'qa-probe';
+    probe.style.cssText = 'color:#5c5047;background:#26201c;display:inline-block';
+    document.body.appendChild(probe);
+    const found = [];
+    document.querySelectorAll('a, button, summary, label, p, span, li, small, strong, cite, figcaption, h1, h2, h3, h4, dt, dd').forEach((el) => {
+      if (!el.offsetParent || el.disabled || el.closest('[aria-hidden="true"]')) return;
+      const text = [...el.childNodes].filter((n) => n.nodeType === 3).map((n) => n.textContent.trim()).join('');
+      if (!text) return;
+      const style = getComputedStyle(el);
+      const fg = parse(style.color);
+      // Background: the element's own solid fill, else the nearest ancestor's
+      // base colour (a gradient section still declares one underneath, which
+      // is a fair stand-in for "is this text light-on-dark or dark-on-light").
+      let bg = null;
+      for (let node = el; node && node !== document.documentElement; node = node.parentElement) {
+        const nodeStyle = getComputedStyle(node);
+        const colour = parse(nodeStyle.backgroundColor);
+        if (colour.a === 1) { bg = colour; break; }
+        if (colour.a > 0 || (node === el && nodeStyle.backgroundImage !== 'none')) return;
+      }
+      if (!bg) bg = { r: 255, g: 248, b: 236, a: 1 };
+      if (fg.a < 0.99) {
+        // Translucent text: composite it over the background first.
+        fg.r = fg.r * fg.a + bg.r * (1 - fg.a); fg.g = fg.g * fg.a + bg.g * (1 - fg.a); fg.b = fg.b * fg.a + bg.b * (1 - fg.a);
+      }
+      if (Number(style.opacity) < 1) return;
+      const [hi, lo] = [lum(fg), lum(bg)].sort((x, y) => y - x);
+      const ratio = (hi + 0.05) / (lo + 0.05);
+      const large = parseFloat(style.fontSize) >= 24 || (parseFloat(style.fontSize) >= 18.66 && Number(style.fontWeight) >= 700);
+      if (ratio < (large ? 3 : 4.5)) found.push(`"${text.slice(0, 28)}" ${ratio.toFixed(2)}:1`);
+    });
+    probe.remove();
+    return [...new Set(found)];
+  });
   const bad = [];
+  const probeSeen = lowContrast.some((item) => item.includes('qa-probe'));
+  const realLow = lowContrast.filter((item) => !item.includes('qa-probe'));
+  if (!probeSeen) bad.push('contrast self-test did not fire');
+  if (realLow.length) bad.push(`low contrast: ${realLow.join(', ')}`);
   if (result.overflow > 0) bad.push(`overflows by ${result.overflow}px`);
   if (result.stranded) bad.push(`${result.stranded} reveal(s) stuck hidden`);
   if (result.h1 !== 1) bad.push(`${result.h1} h1s`);
@@ -97,7 +143,7 @@ async function audit(page, label) {
 const articles = readFileSync(join(DIST, 'sitemap.xml'), 'utf8').match(/\/blog\/[a-z0-9-]+/g) || [];
 const verseArticle = '/blog/bible-verses-to-pray-for-unsaved-loved-ones';
 const newest = articles[articles.length - 1];
-const pages = ['/', '/blog', verseArticle, newest, '/about', '/faq', '/network', '/growth', '/connect'];
+const pages = ['/', '/blog', verseArticle, newest, '/blog/oikos-evangelism-guide', '/blog/advent-prayer-calendar-for-your-oikos', '/blog/free-printable-oikos-map-template', '/about', '/faq', '/network', '/growth', '/connect'];
 
 console.log('Pages');
 for (const path of [...new Set(pages)]) {
@@ -151,6 +197,35 @@ for (const width of [390, 1366]) {
     const ok = first.name && first.fixed[0] === 0 && first.fixed[2] && first.fixed[3] && /prayer-walk-next/.test(first.focus || '') && first.overflow <= 0 && doneText && closed && !axe.length && !page.errors.length;
     if (!ok) fail(`prayer mode @${width}: ${JSON.stringify({ first, steps, doneText, closed, axe, errors: page.errors })}`);
     else console.log(`  ✓ prayer mode @${width} (${first.count}, ${steps} steps)`);
+  }
+  await page.close();
+
+  // Save image -> "what next" sheet -> prayer mode.
+  page = await open('/', width);
+  await scrollThrough(page);
+  {
+    const cdp = await page.createCDPSession();
+    await cdp.send('Browser.setDownloadBehavior', { behavior: 'allow', downloadPath: OUT });
+    await page.evaluate(() => document.querySelector('.map-save').click());
+    await sleep(2200);
+    const sheet = await page.evaluate(() => {
+      const el = document.querySelector('.after-export');
+      if (!el) return null;
+      const r = el.getBoundingClientRect();
+      return { inView: r.top >= 0 && r.bottom <= window.innerHeight + 1 && r.right <= window.innerWidth + 1, buttons: el.querySelectorAll('.after-export-actions button').length, focus: document.activeElement?.className };
+    });
+    await page.screenshot({ path: join(OUT, `after-export-${width}.png`) });
+    let axe = [];
+    if (sheet) {
+      await page.evaluate(axeSource);
+      axe = await page.evaluate(async () => (await window.axe.run(document.querySelector('.after-export'))).violations.map((v) => `${v.id} ${v.nodes[0].target}`));
+      await page.evaluate(() => document.querySelector('.after-export-primary').click());
+      await sleep(500);
+    }
+    const walk = !!(await page.$('.prayer-walk'));
+    const png = existsSync(join(OUT, 'my-oikos-map.png'));
+    if (!sheet || !sheet.inView || sheet.buttons !== 3 || !walk || !png || axe.length || page.errors.length) fail(`save image @${width}: ${JSON.stringify({ sheet, walk, png, axe, errors: page.errors })}`);
+    else console.log(`  ✓ save image + next step @${width}`);
   }
   await page.close();
 

@@ -892,6 +892,71 @@ function PrayerSprint({ person, stage, onComplete }) {
   );
 }
 
+// Shown once per visit, right after someone saves or prints their map: the
+// moment they have a finished map in hand and the best moment to turn it into a
+// habit. Non-blocking (the page stays usable behind it) and easy to dismiss.
+const AFTER_EXPORT_KEY = 'oikos-after-export-shown';
+
+function AfterExport({ count, subscribed, onPray, onRemind, onJourney, onClose }) {
+  const closeRef = useRef(null);
+  const onCloseRef = useRef(onClose);
+  onCloseRef.current = onClose;
+
+  // Mount only: the parent re-renders often, and re-running this would keep
+  // pulling focus back to the close button.
+  useEffect(() => {
+    closeRef.current?.focus({ preventScroll: true });
+    function onKey(event) {
+      if (event.key === 'Escape') onCloseRef.current();
+    }
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, []);
+
+  return createPortal(
+    <div className="after-export" role="dialog" aria-labelledby="after-export-title">
+      <button type="button" className="after-export-close" ref={closeRef} onClick={onClose} aria-label="Close">
+        <X size={18} aria-hidden="true" />
+      </button>
+      <p className="after-export-kicker">
+        <CheckCircle2 size={16} aria-hidden="true" />
+        Map saved
+      </p>
+      <h2 id="after-export-title">Now make it more than a picture.</h2>
+      <p>
+        {count === 1 ? 'The name on your map is a person' : `The ${count} names on your map are people`} God loves. Three
+        small ways to start today:
+      </p>
+      <div className="after-export-actions">
+        <button type="button" className="after-export-primary" onClick={onPray}>
+          <Sparkles size={18} aria-hidden="true" />
+          <span>
+            Pray through them now
+            <small>Two minutes, one name at a time</small>
+          </span>
+        </button>
+        <button type="button" onClick={onRemind}>
+          <CalendarPlus size={18} aria-hidden="true" />
+          <span>
+            Add a daily reminder
+            <small>Five minutes, in your own calendar</small>
+          </span>
+        </button>
+        {subscribed ? null : (
+          <button type="button" onClick={onJourney}>
+            <Mail size={18} aria-hidden="true" />
+            <span>
+              Get the free Oikos Journey
+              <small>Six short emails over two weeks</small>
+            </span>
+          </button>
+        )}
+      </div>
+    </div>,
+    document.body,
+  );
+}
+
 // Prayer mode: the whole map, one name at a time, full screen. A verse and a
 // short prayer for each person, then "Amen" moves on. Rendered through a portal
 // because the builder section keeps a transform after its reveal, and a
@@ -1873,9 +1938,12 @@ function computeLayout(people, compact = false) {
   const radius = Math.max(baseRadius, Math.round((Math.max(roots.length, 1) * perPerson) / (2 * Math.PI)));
   const pad = compact ? 150 : 162;
   const span = (radius + pad) * 2;
-  const top = compact ? 96 : 0;
+  // Room for the title block. Without it on the wide canvas, the person at
+  // twelve o'clock sat on top of the "Powered by" line (on screen and in
+  // every exported image).
+  const top = compact ? 96 : 56;
   const width = compact ? span : Math.max(1100, span);
-  const height = compact ? span + top : Math.max(820, span);
+  const height = compact ? span + top : Math.max(820, span) + top;
   const center = { x: width / 2, y: top + span / 2 };
   const childOffset = compact ? 118 : 158;
   const childrenByParent = people.reduce((acc, person) => {
@@ -2615,6 +2683,7 @@ function App() {
   const [saveState, setSaveState] = useState('Saved locally');
   const [searchTerm, setSearchTerm] = useState('');
   const [prayerWalkOpen, setPrayerWalkOpen] = useState(false);
+  const [afterExport, setAfterExport] = useState(false);
   const [shareState, setShareState] = useState('Share');
   const [mapLinkState, setMapLinkState] = useState('Link');
   const [planCopyState, setPlanCopyState] = useState('Plan');
@@ -2897,6 +2966,7 @@ function App() {
   function printMap() {
     track('print_map');
     window.print();
+    offerNextStep();
   }
 
   async function copyMapLink() {
@@ -2927,6 +2997,40 @@ function App() {
       return;
     }
     downloadBlob(new Blob([svgMarkup], { type: 'image/svg+xml;charset=utf-8' }), `${slugify(mapData.mapTitle)}.svg`);
+    offerNextStep();
+  }
+
+  // After a save or print, offer the next step, once per visit.
+  function offerNextStep() {
+    if (!mapData.people.length) return;
+    try {
+      if (window.sessionStorage.getItem(AFTER_EXPORT_KEY)) return;
+      window.sessionStorage.setItem(AFTER_EXPORT_KEY, '1');
+    } catch {
+      // No session storage: still show it this once.
+    }
+    window.setTimeout(() => setAfterExport(true), 700);
+  }
+
+  function closeAfterExport() {
+    setAfterExport(false);
+  }
+
+  function nextStepPray() {
+    track('builder_cta', '/#after-export-pray');
+    setAfterExport(false);
+    setPrayerWalkOpen(true);
+  }
+
+  function nextStepScroll(selector, label, focusSelector) {
+    track('builder_cta', `/#after-export-${label}`);
+    setAfterExport(false);
+    const target = document.querySelector(selector);
+    if (!target) return;
+    const fold = target.closest('details');
+    if (fold) fold.open = true;
+    target.scrollIntoView({ block: 'center' });
+    if (focusSelector) target.querySelector(focusSelector)?.focus({ preventScroll: true });
   }
 
   function downloadPng() {
@@ -2939,11 +3043,13 @@ function App() {
     const image = new Image();
     const svgBlob = new Blob([svgMarkup], { type: 'image/svg+xml;charset=utf-8' });
     const url = URL.createObjectURL(svgBlob);
+    // A slim footer under the map, so a shared image says where it came from.
+    const footer = 64;
 
     image.onload = () => {
       const canvas = document.createElement('canvas');
       canvas.width = layout.width * 2;
-      canvas.height = layout.height * 2;
+      canvas.height = (layout.height + footer) * 2;
       const context = canvas.getContext('2d');
       if (!context) {
         URL.revokeObjectURL(url);
@@ -2955,9 +3061,41 @@ function App() {
       context.scale(2, 2);
       context.drawImage(image, 0, 0);
       URL.revokeObjectURL(url);
-      canvas.toBlob((blob) => {
-        if (blob) downloadBlob(blob, `${slugify(mapData.mapTitle)}.png`);
-        else setSaveState('PNG export failed');
+
+      const pad = compact ? 28 : 56;
+      const baseline = layout.height + footer / 2 + 2;
+      context.textBaseline = 'middle';
+      context.fillStyle = '#6a5d52';
+      context.font = `800 ${compact ? 20 : 18}px Inter, Arial, sans-serif`;
+      context.fillText('Pray · Care · Share · Disciple', pad, baseline);
+      context.textAlign = 'right';
+      context.fillStyle = '#26201c';
+      context.font = `900 ${compact ? 22 : 20}px Inter, Arial, sans-serif`;
+      context.fillText('Make yours free at OikosMap.com', layout.width - pad, baseline);
+
+      canvas.toBlob(async (blob) => {
+        if (!blob) {
+          setSaveState('PNG export failed');
+          return;
+        }
+        const name = `${slugify(mapData.mapTitle)}.png`;
+        // On a phone the share sheet (Save Image, Messages, WhatsApp…) is far
+        // more useful than a file in Downloads. Anywhere else, download.
+        const touch = window.matchMedia?.('(pointer: coarse)').matches;
+        const file = typeof File === 'function' ? new File([blob], name, { type: 'image/png' }) : null;
+        let shared = false;
+        if (touch && file && navigator.canShare?.({ files: [file] })) {
+          try {
+            await navigator.share({ files: [file], title: mapData.mapTitle });
+            shared = true;
+          } catch (error) {
+            // Cancelled: do nothing more. Anything else: fall back to a download.
+            if (error?.name === 'AbortError') return;
+          }
+        }
+        if (!shared) downloadBlob(blob, name);
+        setSaveState('Image saved');
+        offerNextStep();
       }, 'image/png');
     };
 
@@ -3458,6 +3596,10 @@ function App() {
                 <Search size={16} aria-hidden="true" />
                 {zoomed ? 'Fit to screen' : 'Larger map'}
               </button>
+              <button type="button" className="map-save" onClick={downloadPng} disabled={!mapData.people.length}>
+                <Download size={16} aria-hidden="true" />
+                Save image
+              </button>
               <span className="map-hint">Tap a name to edit it</span>
             </div>
             <div className={zoomed ? 'map-canvas zoomed' : 'map-canvas'}>
@@ -3521,6 +3663,16 @@ function App() {
       </section>
 
       <SiteFooter />
+      {afterExport ? (
+        <AfterExport
+          count={mapData.people.length}
+          subscribed={readFlag(SUBSCRIBED_KEY)}
+          onPray={nextStepPray}
+          onRemind={() => nextStepScroll('.prayer-reminder', 'remind', 'input')}
+          onJourney={() => nextStepScroll('.builder-invite', 'journey', 'input[type="email"]')}
+          onClose={closeAfterExport}
+        />
+      ) : null}
       {prayerWalkOpen && mapData.people.length ? (
         <PrayerWalk people={mapData.people} onClose={() => setPrayerWalkOpen(false)} />
       ) : null}
